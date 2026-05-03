@@ -16,7 +16,7 @@ import { NO_STORE_CACHE_CONTROL } from '~/lib/http'
 export const Route = createFileRoute('/admin/projects/')({
   loader: async () => requireAdminSession(),
   pendingComponent: () => (
-    <AdminPagePending subtitle="Loading your project list." title="Projects" />
+    <AdminPagePending subtitle="Loading your case studies and drafts." title="Projects" />
   ),
   headers: () => ({
     'Cache-Control': NO_STORE_CACHE_CONTROL,
@@ -34,7 +34,7 @@ function AdminProjectsPage() {
 
   return (
     <AdminShell
-      subtitle="Create new case studies, revise drafts, and keep public work current."
+      subtitle="Create case studies, revise drafts, and keep the public portfolio current."
       title="Projects"
     >
       {projects.length ? (
@@ -76,7 +76,7 @@ function AdminProjectsPage() {
         <AdminEmptyState
           actionLabel="Create your first project"
           actionTo="/admin/projects/new"
-          description="Once you publish a project here, it will start feeding the public portfolio automatically."
+          description="Create a project draft here, then publish it when it is ready for the public portfolio."
           title="No projects yet"
         />
       )}

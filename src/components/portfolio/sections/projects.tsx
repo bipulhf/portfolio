@@ -69,16 +69,16 @@ export function Projects({ items }: Readonly<{ items: SerializedProject[] }>) {
                 className="type-link-hand group relative inline-flex items-center self-start no-underline"
                 href={`/projects/${project.slug}`}
               >
-                View case study <span className="motion-arrow">→</span>
+                Open case study <span className="motion-arrow">→</span>
                 <span className="absolute bottom-[-0.1875rem] left-0 h-[3px] w-full origin-left scale-x-0 rounded-full bg-ink transition-transform duration-300 ease-out-soft group-hover:scale-x-100" />
               </a>
             </div>
           </div>
         )) : (
           <div className={`${surfaceCardClass} reveal reveal-soft col-span-full rounded-[1.5rem] border-[2.5px] border-dashed border-ink px-6 py-10 text-center shadow-crayon-md`}>
-            <h3 className="type-display-card-lg mb-2">Projects coming soon</h3>
+            <h3 className="type-display-card-lg mb-2">No published projects yet</h3>
             <p className="type-copy mx-auto max-w-[60ch]">
-              Publish projects from the admin panel and they&apos;ll show up here automatically.
+              New case studies will appear here once they are published.
             </p>
           </div>
         )}

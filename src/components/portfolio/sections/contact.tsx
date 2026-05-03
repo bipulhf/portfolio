@@ -32,9 +32,7 @@ export function Contact() {
           <CornerBurst color="#b9dcf2" />
         </div>
 
-        <h2 className="type-display-page mb-3">
-          Drop me a line
-        </h2>
+        <h2 className="type-display-page mb-3">Start a conversation</h2>
         <p className="type-lead-hand mx-auto mb-8 max-w-[28ch] text-ink-soft">
           I&apos;m always happy to talk about engineering, design, or a good collaboration. The
           inbox is open.

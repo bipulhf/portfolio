@@ -64,7 +64,7 @@ export function Nav() {
                   Bipul
                 </span>
                 <span className="mt-0.5 hidden font-hand text-[0.92rem] leading-[1.1] tracking-[0.035em] text-ink-soft md:inline">
-                  software engineer portfolio
+                  software engineer, calm systems
                 </span>
               </span>
             </a>
@@ -95,7 +95,7 @@ export function Nav() {
               href="/#contact"
             >
               <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-[#7fd893] shadow-[0_0_0_0.15rem_rgba(127,216,147,0.18)]" />
-              Open to collaborate
+              Available for collaborations
             </a>
 
             <button
@@ -160,7 +160,7 @@ export function Nav() {
                 onClick={closeMenu}
               >
                 <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-[#7fd893]" />
-                Open to collaborate
+                Available for collaborations
               </a>
             </div>
           </div>

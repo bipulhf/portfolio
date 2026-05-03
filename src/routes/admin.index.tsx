@@ -41,7 +41,7 @@ function AdminDashboardPage() {
 
   return (
     <AdminShell
-      subtitle="A quick view of what is live, what is still in draft, and where to jump back in."
+      subtitle="See what is live, what is still in draft, and where to pick up next."
       title="Admin dashboard"
     >
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -64,18 +64,18 @@ function AdminDashboardPage() {
           </div>
         </AdminCard>
         <AdminCard>
-          <div className="font-hand text-lg text-ink-soft">Published work</div>
+          <div className="font-hand text-lg text-ink-soft">Projects on site</div>
           <div className="mt-3 font-display text-[3rem] font-bold text-ink">
             {projectsQuery.data?.filter((item) => item.status === 'published').length ?? '...'}
           </div>
-          <div className="mt-2 text-sm text-ink-soft">Projects visible on the public site.</div>
+          <div className="mt-2 text-sm text-ink-soft">Projects currently visible on the public site.</div>
         </AdminCard>
         <AdminCard>
-          <div className="font-hand text-lg text-ink-soft">Published writing</div>
+          <div className="font-hand text-lg text-ink-soft">Posts on site</div>
           <div className="mt-3 font-display text-[3rem] font-bold text-ink">
             {blogsQuery.data?.filter((item) => item.status === 'published').length ?? '...'}
           </div>
-          <div className="mt-2 text-sm text-ink-soft">Articles visible on the public site.</div>
+          <div className="mt-2 text-sm text-ink-soft">Posts currently visible on the public site.</div>
         </AdminCard>
       </div>
 
@@ -84,7 +84,7 @@ function AdminDashboardPage() {
           <AdminSectionHeading
             action={<AdminActionLink to="/admin/projects">See all</AdminActionLink>}
             eyebrow="recent work"
-            title="Latest projects"
+            title="Recent projects"
           />
           <div className="space-y-3">
             {recentProjects.map((project) => (
@@ -109,7 +109,7 @@ function AdminDashboardPage() {
           <AdminSectionHeading
             action={<AdminActionLink to="/admin/blogs">See all</AdminActionLink>}
             eyebrow="recent writing"
-            title="Latest posts"
+            title="Recent posts"
           />
           <div className="space-y-3">
             {recentBlogs.map((blog) => (

@@ -29,7 +29,7 @@ function AdminLoginPage() {
       await navigate({ to: '/admin' })
     },
     onError: (error) => {
-      toast.error(error instanceof Error ? error.message : 'Login failed.')
+      toast.error(error instanceof Error ? error.message : 'We couldn&apos;t sign you in.')
     },
   })
 
@@ -39,12 +39,12 @@ function AdminLoginPage() {
         className={`${surfaceCardClass} w-full max-w-xl rounded-[2rem] border-[2.5px] border-ink bg-[linear-gradient(180deg,rgba(255,255,255,0.75),rgba(244,250,249,0.96))] px-6 py-8 shadow-crayon-lg md:px-8 md:py-10`}
       >
         <div className="mb-6">
-          <div className="mb-3 font-hand text-lg text-ink-soft">single-owner admin</div>
+          <div className="mb-3 font-hand text-lg text-ink-soft">private workspace</div>
           <h1 className="font-display text-[clamp(2.8rem,8vw,4.5rem)] font-bold leading-[0.95] text-ink">
-            Sign in to Bipul CMS
+            Sign in to your CMS
           </h1>
           <p className="mt-4 text-ink-soft">
-            Manage projects, publish blog posts, and keep the public site current from one calm workspace.
+            Update projects, publish writing, and keep the public site current from one calm workspace.
           </p>
         </div>
 

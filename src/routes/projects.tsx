@@ -43,7 +43,7 @@ function ProjectsPage() {
             secondaryTo="/blog"
           />
         }
-        description="A fuller look at selected product work, engineering decisions, and the small details that shaped each build."
+        description="Selected case studies, engineering decisions, and the small details that shaped each build."
         eyebrow="Selected work"
         title="Projects and case studies"
       />

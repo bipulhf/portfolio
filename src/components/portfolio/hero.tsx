@@ -33,7 +33,7 @@ export function Hero() {
 
             <div className="hero-portrait-note absolute bottom-0 left-1 inline-flex min-h-10 max-w-[12rem] items-center gap-2 rounded-2xl border-2 border-ink bg-yellow px-3 py-2 font-hand text-sm text-ink shadow-crayon-sm rotate-[-4deg] sm:left-0 sm:max-w-none sm:px-4 sm:text-base">
               <span className="size-[0.9rem] shrink-0 rounded-full border-2 border-ink bg-peach shadow-[inset_-1px_-2px_0_rgba(46,61,58,0.18)]" />
-              <span>crayon mood, real me</span>
+              <span>illustrated, still me</span>
             </div>
 
             <div aria-hidden="true" className="hero-ornament-float absolute right-[0.35rem] top-0 rotate-[14deg]">
@@ -51,7 +51,7 @@ export function Hero() {
         <div className="order-1 relative flex max-w-[47.5rem] flex-col justify-center py-2 sm:py-4">
           <div className="hero-copy-item type-kicker mb-2 flex flex-wrap items-center gap-2.5" style={{ ['--hero-delay' as string]: '40ms' }}>
             <span className="hero-wave inline-block">👋</span>
-            <span>hello, I&apos;m</span>
+            <span>Hi, I&apos;m</span>
           </div>
 
           <h1 className="type-display-hero hero-copy-item relative mb-[1.125rem] mt-1 block" style={{ ['--hero-delay' as string]: '90ms' }}>
@@ -79,10 +79,10 @@ export function Hero() {
 
           <div className="hero-copy-item flex flex-wrap items-center gap-3.5" style={{ ['--hero-delay' as string]: '240ms' }}>
             <a className={crayonButtonClass('yellow', { className: 'w-full justify-center sm:w-auto' })} href="/#projects">
-              View my work →
+              See selected work →
             </a>
             <a className={crayonButtonClass('yellow', { className: 'w-full justify-center sm:w-auto', ghost: true })} href="/#contact">
-              Get in touch
+              Start a conversation
             </a>
           </div>
         </div>

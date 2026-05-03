@@ -21,7 +21,7 @@ export function ImagePathField({
       toast.success('Image uploaded.')
     },
     onError: (error) => {
-      toast.error(error instanceof Error ? error.message : 'Image upload failed.')
+      toast.error(error instanceof Error ? error.message : "We couldn't upload that image.")
     },
   })
 
@@ -30,7 +30,7 @@ export function ImagePathField({
       <div className="flex flex-col gap-3">
         <AdminInput
           onChange={(event) => onChange(event.target.value)}
-          placeholder="/media/your-image.png"
+          placeholder="/media/example-image.png"
           value={value}
         />
         <div className="flex flex-wrap items-center gap-3">
@@ -49,7 +49,7 @@ export function ImagePathField({
               }}
               type="file"
             />
-            {uploadMutation.isPending ? 'Uploading...' : 'Upload image'}
+            {uploadMutation.isPending ? 'Uploading...' : 'Upload from computer'}
           </label>
           {value ? (
             <a
@@ -58,7 +58,7 @@ export function ImagePathField({
               rel="noreferrer"
               target="_blank"
             >
-              Open asset ↗
+              Preview image ↗
             </a>
           ) : null}
         </div>

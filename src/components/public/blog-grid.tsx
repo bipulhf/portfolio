@@ -28,8 +28,8 @@ function formatPublishedDate(value: string | null) {
 }
 
 export function BlogGrid({
-  emptyTitle = 'No posts published yet',
-  emptyText = 'Publish writing from the admin panel and it will show up here automatically.',
+  emptyTitle = 'No published posts yet',
+  emptyText = 'New writing will appear here once it is published.',
   items,
 }: Readonly<{
   emptyText?: string
@@ -70,7 +70,7 @@ export function BlogGrid({
               </h2>
               <p className="type-copy flex-1 text-[0.98rem]">{post.excerpt}</p>
               <span className="type-link-hand mt-3 inline-flex items-center gap-1.5">
-                Read on <span className="motion-arrow">→</span>
+                Read article <span className="motion-arrow">→</span>
               </span>
             </div>
           </Link>

@@ -16,7 +16,7 @@ import { NO_STORE_CACHE_CONTROL } from '~/lib/http'
 export const Route = createFileRoute('/admin/blogs/')({
   loader: async () => requireAdminSession(),
   pendingComponent: () => (
-    <AdminPagePending subtitle="Loading your writing library." title="Blog posts" />
+    <AdminPagePending subtitle="Loading your drafts and published writing." title="Blog posts" />
   ),
   headers: () => ({
     'Cache-Control': NO_STORE_CACHE_CONTROL,
@@ -34,7 +34,7 @@ function AdminBlogsPage() {
 
   return (
     <AdminShell
-      subtitle="Draft and publish articles that feed the public writing section."
+      subtitle="Write, revise, and publish pieces for the public blog."
       title="Blog posts"
     >
       {blogs.length ? (
@@ -42,7 +42,7 @@ function AdminBlogsPage() {
           <AdminSectionHeading
             action={<AdminActionLink to="/admin/blogs/new">New post</AdminActionLink>}
             eyebrow="content"
-            title="All blog posts"
+            title="All posts"
           />
           <div className="space-y-3">
             {blogs.map((blog) => (
@@ -74,7 +74,7 @@ function AdminBlogsPage() {
         <AdminEmptyState
           actionLabel="Create your first post"
           actionTo="/admin/blogs/new"
-          description="Publish a post here and it will immediately feed the public blog."
+          description="Create a post draft here, then publish it when it is ready for the public blog."
           title="No posts yet"
         />
       )}

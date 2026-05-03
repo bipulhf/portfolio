@@ -10,7 +10,7 @@ export function Skills() {
     <SectionShell accent="skills" id="skills">
       <SectionHeader
         kicker="04 - toolkit"
-        title="Things I use"
+        title="Tools I reach for"
         underlineColor="var(--color-yellow)"
       />
       <div className="mt-12 grid gap-[1.375rem] md:grid-cols-2 lg:grid-cols-4" data-reveal-sequence>

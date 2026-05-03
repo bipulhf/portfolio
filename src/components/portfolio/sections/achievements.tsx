@@ -10,7 +10,7 @@ export function Achievements() {
     <SectionShell accent="achievements" id="achievements">
       <SectionHeader
         kicker="06 - wins"
-        title="A few proud moments"
+        title="Selected milestones"
         underlineColor="var(--color-mint)"
       />
       <div className="mt-12 grid gap-[1.375rem] md:grid-cols-2 lg:grid-cols-3" data-reveal-sequence>

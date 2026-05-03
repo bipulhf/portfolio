@@ -34,7 +34,7 @@ export function AdminShell({
                 <Link className="inline-flex font-display text-[1.65rem] font-bold text-ink no-underline sm:text-[1.9rem]" to="/">
                   Bipul CMS
                 </Link>
-                <div className="hidden text-sm text-ink-soft sm:block">simple content workspace</div>
+                <div className="hidden text-sm text-ink-soft sm:block">projects and writing, one calm workspace</div>
               </div>
 
               <nav className="order-3 flex w-full flex-wrap items-center gap-2 md:order-none md:ml-auto md:w-auto">
@@ -65,10 +65,10 @@ export function AdminShell({
                   onClick={async () => {
                     try {
                       await logoutMutation.mutateAsync()
-                      toast.success('Signed out.')
+                      toast.success("You're signed out.")
                       await navigate({ to: '/admin/login' })
                     } catch (error) {
-                      toast.error(error instanceof Error ? error.message : 'Failed to sign out.')
+                      toast.error(error instanceof Error ? error.message : "We couldn't sign you out.")
                     }
                   }}
                   type="button"
@@ -81,7 +81,7 @@ export function AdminShell({
 
           <main className="mx-auto mt-5 max-w-[70rem] space-y-5 md:mt-6 md:space-y-6">
             <header className="rounded-[1.35rem] border border-ink/10 bg-white px-5 py-5 shadow-[0_10px_28px_rgba(46,61,58,0.05)] sm:px-6 md:rounded-[1.5rem] md:px-7 md:py-7">
-              <div className="mb-2 font-hand text-base text-ink-soft">admin workspace</div>
+              <div className="mb-2 font-hand text-base text-ink-soft">private workspace</div>
               <h1 className="font-display text-[clamp(2.3rem,6vw,3.8rem)] font-bold leading-[0.95] text-ink">
                 {title}
               </h1>

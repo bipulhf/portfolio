@@ -61,7 +61,7 @@ export function ProjectEditorForm({
         : createProjectRequest(payload)
     },
     onSuccess: async (project) => {
-      toast.success(project.status === 'published' ? 'Project published.' : 'Draft saved.')
+      toast.success(project.status === 'published' ? 'Project is live.' : 'Draft saved.')
       await queryClient.invalidateQueries({ queryKey: queryKeys.projects })
       await queryClient.invalidateQueries({ queryKey: queryKeys.project(project.id) })
       const nextState = {
@@ -93,7 +93,7 @@ export function ProjectEditorForm({
       }
     },
     onError: (error) => {
-      toast.error(error instanceof Error ? error.message : 'Failed to save project.')
+      toast.error(error instanceof Error ? error.message : "We couldn't save this project.")
     },
   })
 
@@ -111,7 +111,7 @@ export function ProjectEditorForm({
       await navigate({ to: '/admin/projects' })
     },
     onError: (error) => {
-      toast.error(error instanceof Error ? error.message : 'Failed to delete project.')
+      toast.error(error instanceof Error ? error.message : "We couldn't delete this project.")
     },
   })
 
@@ -122,16 +122,16 @@ export function ProjectEditorForm({
     >
       <div className="space-y-6">
         <AdminCard>
-          <AdminSectionHeading eyebrow="Step 1" title="Project details" />
+          <AdminSectionHeading eyebrow="Step 1" title="Basics" />
           <div className="grid gap-4 md:grid-cols-2">
             <AdminField label="Title">
               <AdminInput
                 onChange={(event) => setValues((current) => ({ ...current, title: event.target.value }))}
-                placeholder="A calm but capable product title"
+                placeholder="Project title"
                 value={values.title}
               />
             </AdminField>
-            <AdminField help="Leave blank to generate from the title." label="Slug">
+            <AdminField help="Leave this blank to generate it from the title." label="Slug">
               <AdminInput
                 onChange={(event) => setValues((current) => ({ ...current, slug: event.target.value }))}
                 placeholder="my-project-slug"
@@ -143,19 +143,19 @@ export function ProjectEditorForm({
             <AdminField label="Summary">
               <AdminTextarea
                 onChange={(event) => setValues((current) => ({ ...current, summary: event.target.value }))}
-                placeholder="What this project is and why it matters."
+                placeholder="What the project is, who it helps, and why it matters."
                 value={values.summary}
               />
             </AdminField>
-            <AdminField help="Short version for cards and metadata." label="Excerpt">
+            <AdminField help="Shown on cards and in search previews." label="Excerpt">
               <AdminTextarea
                 className="min-h-24"
                 onChange={(event) => setValues((current) => ({ ...current, excerpt: event.target.value }))}
-                placeholder="Short supporting description."
+                placeholder="Short summary for cards and previews."
                 value={values.excerpt ?? ''}
               />
             </AdminField>
-            <AdminField help="Comma-separated values." label="Tech stack">
+            <AdminField help="Separate tools with commas." label="Tech stack">
               <AdminInput
                 onChange={(event) =>
                   setValues((current) => ({
@@ -182,10 +182,10 @@ export function ProjectEditorForm({
             }
             onUploadImage={async (file) => {
               const upload = await uploadImageRequest(file)
-              toast.success('Inline image added.')
+              toast.success('Image added to the case study.')
               return upload.publicPath
             }}
-            placeholder="Walk through the challenge, your process, tradeoffs, and outcomes..."
+            placeholder="Explain the challenge, your approach, the tradeoffs, and the outcome..."
             valueHtml={values.bodyHtml}
             valueJson={values.bodyJson}
           />
@@ -194,9 +194,9 @@ export function ProjectEditorForm({
 
       <div className="space-y-6 xl:sticky xl:top-24 xl:self-start">
         <AdminCard>
-          <AdminSectionHeading eyebrow="Step 3" title="Save and publish" />
+          <AdminSectionHeading eyebrow="Step 3" title="Review and publish" />
           <p className="mb-4 text-sm text-ink-soft">
-            Start with a draft while writing. Publish when the content and media are ready.
+            Keep this in draft while you write. Publish when the copy, images, and links are ready.
           </p>
           <div className="space-y-4">
             <AdminField label="Status">
@@ -213,7 +213,7 @@ export function ProjectEditorForm({
                 <option value="published">Published</option>
               </AdminSelect>
             </AdminField>
-            <AdminField help="Optional. Leave empty to use publish time." label="Published at">
+            <AdminField help="Optional. Leave blank to use the time you publish." label="Published at">
               <AdminInput
                 onChange={(event) => setValues((current) => ({ ...current, publishedAt: event.target.value }))}
                 type="datetime-local"
@@ -222,7 +222,7 @@ export function ProjectEditorForm({
             </AdminField>
             <AdminCheckbox
               checked={values.featured}
-              help="Featured projects are prioritized on the public site."
+              help="Featured projects can appear more prominently on the public site."
               label="Feature this project"
               onChange={(event) =>
                 setValues((current) => ({
@@ -247,7 +247,7 @@ export function ProjectEditorForm({
               onClick={() => saveMutation.mutate('published')}
               type="button"
             >
-              {saveMutation.isPending && values.status === 'published' ? 'Publishing...' : 'Publish now'}
+              {saveMutation.isPending && values.status === 'published' ? 'Publishing project...' : 'Publish project'}
             </button>
           </div>
           {projectId ? (
@@ -255,7 +255,7 @@ export function ProjectEditorForm({
               className="mt-4 inline-flex min-h-10 w-full items-center justify-center rounded-full border border-red-300 bg-red-50 px-4 py-2.5 text-sm font-medium text-red-700 transition-colors hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-70"
               disabled={deleteMutation.isPending || saveMutation.isPending}
               onClick={() => {
-                if (window.confirm('Delete this project? This cannot be undone.')) {
+                if (window.confirm("Delete this project permanently? This can't be undone.")) {
                   deleteMutation.mutate()
                 }
               }}
@@ -267,9 +267,9 @@ export function ProjectEditorForm({
         </AdminCard>
 
         <AdminCard>
-          <AdminSectionHeading eyebrow="Optional" title="Links and media" />
+          <AdminSectionHeading eyebrow="Optional" title="Links and images" />
           <div className="space-y-4">
-            <AdminField label="Live URL">
+            <AdminField label="Live site URL">
               <AdminInput
                 onChange={(event) => setValues((current) => ({ ...current, liveUrl: event.target.value }))}
                 placeholder="https://example.com"
@@ -284,13 +284,13 @@ export function ProjectEditorForm({
               />
             </AdminField>
             <ImagePathField
-              help="Shown in cards and detail page hero."
+              help="Shown on project cards and at the top of the project page."
               label="Cover image"
               onChange={(value) => setValues((current) => ({ ...current, coverImagePath: value }))}
               value={values.coverImagePath ?? ''}
             />
             <ImagePathField
-              help="Optional social preview override."
+              help="Optional. Use this if you want a different social preview image."
               label="Open Graph image"
               onChange={(value) => setValues((current) => ({ ...current, ogImagePath: value }))}
               value={values.ogImagePath ?? ''}
@@ -299,22 +299,22 @@ export function ProjectEditorForm({
         </AdminCard>
 
         <AdminCard>
-          <AdminSectionHeading eyebrow="Optional" title="SEO metadata" />
+          <AdminSectionHeading eyebrow="Optional" title="Search preview" />
           <div className="space-y-4">
-            <AdminField label="SEO title">
+            <AdminField label="Search title">
               <AdminInput
                 onChange={(event) => setValues((current) => ({ ...current, seoTitle: event.target.value }))}
-                placeholder="Optional override"
+                placeholder="Optional. Leave blank to use the project title."
                 value={values.seoTitle ?? ''}
               />
             </AdminField>
-            <AdminField label="SEO description">
+            <AdminField label="Search description">
               <AdminTextarea
                 className="min-h-24"
                 onChange={(event) =>
                   setValues((current) => ({ ...current, seoDescription: event.target.value }))
                 }
-                placeholder="Optional override for search snippets."
+                placeholder="Optional. Leave blank to use the excerpt."
                 value={values.seoDescription ?? ''}
               />
             </AdminField>

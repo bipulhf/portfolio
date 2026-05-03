@@ -43,7 +43,7 @@ function BlogPage() {
             secondaryTo="/projects"
           />
         }
-        description="Notes from the build process, ideas worth keeping, and the quieter thinking behind the work."
+        description="Writing about product engineering, frontend craft, and the thinking behind the work."
         eyebrow="Writing"
         title="Blog and essays"
       />

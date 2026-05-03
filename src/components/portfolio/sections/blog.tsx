@@ -33,7 +33,7 @@ export function Blog({ items }: Readonly<{ items: SerializedBlog[] }>) {
     <SectionShell accent="blog" id="blog">
       <SectionHeader
         kicker="07 - words"
-        title="From the blog"
+        title="Notes from the work"
         underlineColor="var(--color-sky)"
       />
       <div className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3" data-reveal-sequence>
@@ -66,15 +66,15 @@ export function Blog({ items }: Readonly<{ items: SerializedBlog[] }>) {
               </h3>
               <p className="type-copy flex-1 text-[0.98rem]">{post.excerpt}</p>
               <span className="type-link-hand mt-3 inline-flex items-center gap-1.5">
-                Read on <span className="motion-arrow">→</span>
+                Read article <span className="motion-arrow">→</span>
               </span>
             </div>
           </a>
         )) : (
           <div className={`${surfaceCardClass} reveal reveal-soft col-span-full rounded-[1.5rem] border-[2.5px] border-dashed border-ink px-6 py-10 text-center shadow-crayon-md`}>
-            <h3 className="type-display-card-lg mb-2">No posts published yet</h3>
+            <h3 className="type-display-card-lg mb-2">No published posts yet</h3>
             <p className="type-copy mx-auto max-w-[60ch]">
-              The blog section will light up as soon as posts are published from the admin panel.
+              New writing will appear here once it is published.
             </p>
           </div>
         )}

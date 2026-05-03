@@ -9,7 +9,7 @@ export function About() {
     <SectionShell accent="about" id="about">
       <SectionHeader
         kicker="01 - about"
-        title="A little about me"
+        title="The person behind the work"
         underlineColor="var(--color-peach)"
       />
 
