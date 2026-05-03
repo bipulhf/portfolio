@@ -47,20 +47,20 @@ function AdminProjectsPage() {
           <div className="space-y-3">
             {projects.map((project) => (
               <Link
-                className="flex flex-wrap items-center justify-between gap-4 rounded-[1.2rem] border border-ink/12 bg-white/60 px-4 py-4 text-ink no-underline transition-colors hover:bg-white"
+                className="flex flex-col items-start gap-3 rounded-[1.2rem] border border-ink/12 bg-white/60 px-4 py-4 text-ink no-underline transition-colors hover:bg-white sm:flex-row sm:items-center sm:justify-between sm:gap-4"
                 key={project.id}
                 preload="intent"
                 to="/admin/projects/$id/edit"
                 params={{ id: project.id }}
               >
-                <div className="min-w-0">
+                <div className="min-w-0 w-full sm:w-auto">
                   <div className="font-hand text-[1.25rem] text-ink">{project.title}</div>
                   <div className="mt-1 text-sm text-ink-soft">{project.slug}</div>
                   <div className="mt-2 line-clamp-2 max-w-3xl text-sm text-ink-soft">
                     {project.summary}
                   </div>
                 </div>
-                <div className="flex flex-wrap items-center gap-3">
+                <div className="flex w-full flex-wrap items-center justify-between gap-3 sm:w-auto sm:justify-start">
                   {project.featured ? (
                     <span className="inline-flex rounded-full border border-ink bg-peach px-3 py-1 font-hand text-sm text-ink">
                       featured

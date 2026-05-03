@@ -28,7 +28,7 @@ export function AdminShell({
     <div className="min-h-screen bg-[linear-gradient(180deg,#f8fcfb_0%,#f1f8f7_100%)] pb-14">
       <div className={pageContainerClass}>
         <div className="py-5 md:py-6">
-          <div className="sticky top-3 z-40 rounded-[1.2rem] border border-ink/10 bg-white/88 px-3.5 py-3.5 shadow-[0_10px_30px_rgba(46,61,58,0.08)] backdrop-blur-sm sm:px-4 md:px-5 md:py-4">
+          <div className="sticky top-2 z-40 rounded-[1.2rem] border border-ink/10 bg-white/88 px-3.5 py-3.5 shadow-[0_10px_30px_rgba(46,61,58,0.08)] backdrop-blur-sm sm:top-3 sm:px-4 md:px-5 md:py-4">
             <div className="flex flex-wrap items-start gap-3 md:items-center">
               <div className="min-w-0">
                 <Link className="inline-flex font-display text-[1.65rem] font-bold text-ink no-underline sm:text-[1.9rem]" to="/">
@@ -37,7 +37,7 @@ export function AdminShell({
                 <div className="hidden text-sm text-ink-soft sm:block">projects and writing, one calm workspace</div>
               </div>
 
-              <nav className="order-3 flex w-full flex-wrap items-center gap-2 md:order-none md:ml-auto md:w-auto">
+              <nav className="order-3 grid w-full grid-cols-3 gap-2 md:order-none md:ml-auto md:flex md:w-auto md:flex-wrap md:items-center" role="navigation">
                 {links.map((link) => {
                   const active =
                     location.pathname === link.to ||
@@ -45,7 +45,7 @@ export function AdminShell({
 
                   return (
                     <Link
-                      className={`inline-flex min-h-10 items-center rounded-full px-4 py-2 font-hand text-[1.02rem] no-underline transition-colors ${active ? 'bg-ink text-paper' : 'bg-paper text-ink-soft hover:bg-paper-shadow/55 hover:text-ink'}`}
+                      className={`inline-flex min-h-11 items-center justify-center rounded-full px-3 py-2 text-center font-hand text-[0.98rem] no-underline transition-colors md:min-h-10 md:px-4 md:text-[1.02rem] ${active ? 'bg-ink text-paper' : 'bg-paper text-ink-soft hover:bg-paper-shadow/55 hover:text-ink'}`}
                       key={link.to}
                       to={link.to}
                     >
@@ -55,12 +55,12 @@ export function AdminShell({
                 })}
               </nav>
 
-              <div className="flex w-full flex-wrap items-center justify-between gap-3 border-t border-ink/8 pt-3 sm:justify-between md:w-auto md:border-t-0 md:pt-0">
-                <div className="text-sm text-ink-soft">
+              <div className="flex w-full flex-col gap-3 border-t border-ink/8 pt-3 sm:flex-row sm:items-center sm:justify-between md:w-auto md:border-t-0 md:pt-0">
+                <div className="min-w-0 text-sm text-ink-soft">
                   {session.data?.email ?? 'Loading session...'}
                 </div>
                 <button
-                  className="inline-flex min-h-10 items-center justify-center rounded-full border border-ink/15 bg-white px-4 py-2 font-hand text-[1rem] text-ink transition-colors hover:bg-peach/25"
+                  className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-ink/15 bg-white px-4 py-2 font-hand text-[1rem] text-ink transition-colors hover:bg-peach/25 sm:min-h-10 sm:w-auto"
                   disabled={logoutMutation.isPending}
                   onClick={async () => {
                     try {

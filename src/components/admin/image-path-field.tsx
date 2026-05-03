@@ -33,8 +33,8 @@ export function ImagePathField({
           placeholder="/media/example-image.png"
           value={value}
         />
-        <div className="flex flex-wrap items-center gap-3">
-          <label className="inline-flex cursor-pointer items-center justify-center rounded-[0.95rem] border-2 border-dashed border-ink bg-white/65 px-4 py-2 font-hand text-lg text-ink transition-colors hover:bg-mint/45">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          <label className="inline-flex min-h-11 w-full cursor-pointer items-center justify-center rounded-[0.95rem] border-2 border-dashed border-ink bg-white/65 px-4 py-2 text-center font-hand text-lg text-ink transition-colors hover:bg-mint/45 sm:w-auto">
             <input
               accept="image/*"
               className="hidden"
@@ -53,7 +53,7 @@ export function ImagePathField({
           </label>
           {value ? (
             <a
-              className="font-hand text-lg text-ink-soft transition-colors hover:text-ink"
+              className="inline-flex min-h-11 items-center font-hand text-lg text-ink-soft transition-colors hover:text-ink"
               href={value}
               rel="noreferrer"
               target="_blank"

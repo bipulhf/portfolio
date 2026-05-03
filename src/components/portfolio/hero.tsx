@@ -11,9 +11,9 @@ export function Hero() {
         <HeroBackdrop />
       </div>
 
-      <div className={cx(pageContainerClass, 'relative z-[1] grid gap-6 md:grid-cols-[minmax(0,1.1fr)_minmax(18rem,24rem)] md:items-center lg:grid-cols-[minmax(0,1fr)_minmax(22rem,26rem)] lg:gap-12')}>
-        <div className="hero-portrait-intro order-2 flex justify-center md:justify-end">
-          <div className="relative w-full max-w-[21rem] px-1 pb-5 pt-2 sm:max-w-96 sm:px-2.5 sm:pb-6 sm:pt-3 md:max-w-[26rem]">
+      <div className={cx(pageContainerClass, 'relative z-[1] grid gap-7 md:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,26rem)] lg:items-center lg:gap-12')}>
+        <div className="hero-portrait-intro order-2 flex justify-center lg:justify-end">
+          <div className="relative w-full max-w-[19.5rem] px-1 pb-5 pt-2 sm:max-w-[22rem] sm:px-2.5 sm:pb-6 sm:pt-3 md:max-w-[24rem] lg:max-w-[26rem]">
             <div
               className={cx(
                 surfaceCardClass,
@@ -48,7 +48,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="order-1 relative flex max-w-[47.5rem] flex-col justify-center py-2 sm:py-4">
+        <div className="order-1 relative flex max-w-[42rem] flex-col justify-center py-2 sm:py-4 md:max-w-[46rem] lg:max-w-[47.5rem]">
           <div className="hero-copy-item type-kicker mb-2 flex flex-wrap items-center gap-2.5" style={{ ['--hero-delay' as string]: '40ms' }}>
             <span className="hero-wave inline-block">👋</span>
             <span>Hi, I&apos;m</span>

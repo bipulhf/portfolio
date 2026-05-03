@@ -15,7 +15,7 @@ const items = [
 
 export function BackgroundDoodles() {
   return (
-    <div aria-hidden="true" className="bg-doodles pointer-events-none absolute inset-0 z-0">
+    <div aria-hidden="true" className="bg-doodles pointer-events-none absolute inset-0 z-0 overflow-x-clip">
       {items.map(({ Component, color, duration, rotation, size, x, y }, index) => (
         <div
           key={`${x}-${y}-${index}`}

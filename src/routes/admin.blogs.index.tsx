@@ -47,20 +47,20 @@ function AdminBlogsPage() {
           <div className="space-y-3">
             {blogs.map((blog) => (
               <Link
-                className="flex flex-wrap items-center justify-between gap-4 rounded-[1.2rem] border border-ink/12 bg-white/60 px-4 py-4 text-ink no-underline transition-colors hover:bg-white"
+                className="flex flex-col items-start gap-3 rounded-[1.2rem] border border-ink/12 bg-white/60 px-4 py-4 text-ink no-underline transition-colors hover:bg-white sm:flex-row sm:items-center sm:justify-between sm:gap-4"
                 key={blog.id}
                 preload="intent"
                 to="/admin/blogs/$id/edit"
                 params={{ id: blog.id }}
               >
-                <div className="min-w-0">
+                <div className="min-w-0 w-full sm:w-auto">
                   <div className="font-hand text-[1.25rem] text-ink">{blog.title}</div>
                   <div className="mt-1 text-sm text-ink-soft">{blog.slug}</div>
                   <div className="mt-2 line-clamp-2 max-w-3xl text-sm text-ink-soft">
                     {blog.excerpt}
                   </div>
                 </div>
-                <div className="flex flex-wrap items-center gap-3">
+                <div className="flex w-full flex-wrap items-center justify-between gap-3 sm:w-auto sm:justify-start">
                   <span className="inline-flex rounded-full border border-ink/15 bg-white/70 px-3 py-1 font-hand text-sm text-ink-soft">
                     {blog.readingTimeMinutes} min
                   </span>

@@ -8,7 +8,7 @@ export function SiteShell({ children }: Readonly<{ children: ReactNode }>) {
   useReveal()
 
   return (
-    <div className="relative isolate z-[1]">
+    <div className="relative isolate z-[1] overflow-x-clip">
       <BackgroundDoodles />
       <Nav />
       {children}

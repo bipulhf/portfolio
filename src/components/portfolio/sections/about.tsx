@@ -34,7 +34,7 @@ export function About() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:gap-4" data-reveal-sequence>
+        <div className="grid grid-cols-1 gap-3 min-[30rem]:grid-cols-2 sm:gap-4" data-reveal-sequence>
           {[
             ['10+', 'hackathons won'],
             ['4+', 'years coding'],

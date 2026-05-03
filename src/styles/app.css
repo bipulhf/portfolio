@@ -44,10 +44,11 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   body {
-    @apply m-0 min-w-80 overflow-x-hidden bg-paper font-body text-base leading-[1.65] tracking-[0.01em] text-ink antialiased;
+    @apply m-0 overflow-x-clip bg-paper font-body text-base leading-[1.65] tracking-[0.01em] text-ink antialiased;
     font-kerning: normal;
     text-rendering: optimizeLegibility;
     background-image:

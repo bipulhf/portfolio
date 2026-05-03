@@ -31,7 +31,7 @@ export function TimelineList({ items }: Readonly<{ items: readonly TimelineItem[
           <div
             className={`${surfaceCardClass} rounded-[1.125rem_1.375rem_1rem_1.5rem/1.375rem_1rem_1.5rem_1.125rem] border-2 border-ink px-4 pb-4 pt-4 shadow-[4px_4px_0_var(--color-ink)] hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)] sm:px-5 sm:pb-5 sm:pt-5`}
           >
-            <div className="mb-1.5 flex flex-wrap items-baseline justify-between gap-2">
+            <div className="mb-1.5 flex flex-col items-start gap-2 sm:flex-row sm:flex-wrap sm:items-baseline sm:justify-between">
               <div className="type-display-card-lg">
                 {item.role}
               </div>

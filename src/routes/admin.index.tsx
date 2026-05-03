@@ -44,7 +44,7 @@ function AdminDashboardPage() {
       subtitle="See what is live, what is still in draft, and where to pick up next."
       title="Admin dashboard"
     >
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
         <AdminCard>
           <div className="font-hand text-lg text-ink-soft">Projects</div>
           <div className="mt-3 font-display text-[3rem] font-bold text-ink">
@@ -89,13 +89,13 @@ function AdminDashboardPage() {
           <div className="space-y-3">
             {recentProjects.map((project) => (
               <Link
-                className="flex items-center justify-between gap-4 rounded-[1.1rem] border border-ink/12 bg-white/60 px-4 py-3 text-ink no-underline transition-colors hover:bg-white"
+                className="flex flex-col items-start gap-3 rounded-[1.1rem] border border-ink/12 bg-white/60 px-4 py-3 text-ink no-underline transition-colors hover:bg-white sm:flex-row sm:items-center sm:justify-between sm:gap-4"
                 key={project.id}
                 preload="intent"
                 to="/admin/projects/$id/edit"
                 params={{ id: project.id }}
               >
-                <div>
+                <div className="min-w-0">
                   <div className="font-hand text-[1.15rem] text-ink">{project.title}</div>
                   <div className="text-sm text-ink-soft">{project.slug}</div>
                 </div>
@@ -114,13 +114,13 @@ function AdminDashboardPage() {
           <div className="space-y-3">
             {recentBlogs.map((blog) => (
               <Link
-                className="flex items-center justify-between gap-4 rounded-[1.1rem] border border-ink/12 bg-white/60 px-4 py-3 text-ink no-underline transition-colors hover:bg-white"
+                className="flex flex-col items-start gap-3 rounded-[1.1rem] border border-ink/12 bg-white/60 px-4 py-3 text-ink no-underline transition-colors hover:bg-white sm:flex-row sm:items-center sm:justify-between sm:gap-4"
                 key={blog.id}
                 preload="intent"
                 to="/admin/blogs/$id/edit"
                 params={{ id: blog.id }}
               >
-                <div>
+                <div className="min-w-0">
                   <div className="font-hand text-[1.15rem] text-ink">{blog.title}</div>
                   <div className="text-sm text-ink-soft">{blog.slug}</div>
                 </div>
