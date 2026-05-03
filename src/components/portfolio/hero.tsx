@@ -1,4 +1,4 @@
-import { HeroBackdrop, HeroScribble } from './doodles'
+import { Heart, HeroBackdrop, HeroScribble, Star, Squiggle } from './doodles'
 
 export function Hero() {
   return (
@@ -7,6 +7,33 @@ export function Hero() {
         <HeroBackdrop />
       </div>
       <div className="hero-inner container">
+        <div className="hero-portrait reveal">
+          <div className="hero-portrait-stack">
+            <div className="hero-portrait-card">
+              <div className="hero-portrait-shape">
+                <img
+                  alt="Portrait of Shahiduzzaman Bipul in a crayon illustration style"
+                  className="hero-portrait-image"
+                  loading="eager"
+                  src="/my-image.png"
+                />
+              </div>
+            </div>
+            <div className="hero-portrait-note">
+              <span className="hero-portrait-pin" />
+              <span>crayon mood, real me</span>
+            </div>
+            <div aria-hidden="true" className="hero-portrait-doodle hero-portrait-doodle-star">
+              <Star color="var(--yellow)" size={34} />
+            </div>
+            <div aria-hidden="true" className="hero-portrait-doodle hero-portrait-doodle-heart">
+              <Heart color="var(--pink)" size={30} />
+            </div>
+            <div aria-hidden="true" className="hero-portrait-doodle hero-portrait-doodle-squiggle">
+              <Squiggle color="var(--mint)" size={34} />
+            </div>
+          </div>
+        </div>
         <div className="hero-text">
           <div className="hero-greet">
             <span className="hero-wave">👋</span>

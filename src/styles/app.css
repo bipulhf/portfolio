@@ -225,6 +225,8 @@ section {
 .hero-inner {
   position: relative;
   z-index: 1;
+  display: grid;
+  gap: 2rem;
 }
 
 .hero-text {
@@ -234,6 +236,113 @@ section {
   justify-content: center;
   padding-block: 1rem;
   position: relative;
+}
+
+.hero-portrait {
+  order: -1;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-portrait-stack {
+  position: relative;
+  width: min(100%, 24rem);
+  padding: 0.75rem 0.625rem 1.5rem;
+}
+
+.hero-portrait-card {
+  position: relative;
+  padding: 0.875rem;
+  border: 2.5px solid var(--ink);
+  border-radius: 2rem 1.625rem 2.375rem 1.75rem / 1.75rem 2.125rem 1.75rem 2.375rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(244, 250, 249, 0.94)),
+    var(--paper);
+  box-shadow: 6px 6px 0 var(--ink);
+  transform: rotate(1.4deg);
+}
+
+.hero-portrait-card::before {
+  content: '';
+  position: absolute;
+  inset: 0.55rem;
+  border: 2px dashed rgba(46, 61, 58, 0.26);
+  border-radius: 1.75rem 1.25rem 2rem 1.375rem / 1.5rem 1.875rem 1.375rem 2rem;
+  pointer-events: none;
+}
+
+.hero-portrait-shape {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1.06;
+  border: 2px solid var(--ink);
+  border-radius: 42% 58% 52% 48% / 34% 40% 60% 66%;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255, 229, 122, 0.25), transparent 18%),
+    radial-gradient(circle at 82% 20%, rgba(169, 212, 236, 0.24), transparent 20%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.32), transparent 28%);
+  box-shadow: inset 0 -0.375rem 0 rgba(46, 61, 58, 0.08);
+}
+
+.hero-portrait-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.02);
+}
+
+.hero-portrait-note {
+  position: absolute;
+  left: -0.25rem;
+  bottom: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.9rem;
+  border: 2px solid var(--ink);
+  border-radius: 1rem;
+  background: var(--yellow);
+  box-shadow: 3px 3px 0 var(--ink);
+  color: var(--ink);
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1rem;
+  transform: rotate(-4deg);
+}
+
+.hero-portrait-pin {
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--peach);
+  box-shadow: inset -1px -2px 0 rgba(46, 61, 58, 0.18);
+  flex-shrink: 0;
+}
+
+.hero-portrait-doodle {
+  position: absolute;
+  pointer-events: none;
+}
+
+.hero-portrait-doodle-star {
+  top: 0;
+  right: 0.35rem;
+  transform: rotate(14deg);
+}
+
+.hero-portrait-doodle-heart {
+  top: 4.5rem;
+  left: -0.2rem;
+  transform: rotate(-12deg);
+}
+
+.hero-portrait-doodle-squiggle {
+  right: -0.25rem;
+  bottom: 4.25rem;
+  transform: rotate(18deg);
 }
 
 .hero-greet,
@@ -1155,6 +1264,16 @@ section {
     padding-block: 2rem 4rem;
   }
 
+  .hero-inner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 24rem);
+    align-items: center;
+  }
+
+  .hero-portrait {
+    order: 2;
+    justify-content: flex-end;
+  }
+
   .nav-links {
     display: flex;
   }
@@ -1193,6 +1312,11 @@ section {
     padding-block: 3.5rem 5.5rem;
   }
 
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 26rem);
+    gap: 3rem;
+  }
+
   .hero-role {
     max-width: 32.5rem;
     line-height: 1.6;
@@ -1200,6 +1324,10 @@ section {
 
   .hero-blurb {
     max-width: 32.5rem;
+  }
+
+  .hero-portrait-stack {
+    width: min(100%, 26rem);
   }
 
   .projects-grid {
