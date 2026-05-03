@@ -30,10 +30,14 @@ body {
   background-image:
     radial-gradient(var(--paper-noise) 1px, transparent 1.2px),
     radial-gradient(var(--paper-noise-soft) 1px, transparent 1.2px);
-  background-position: 0 0, 0.6875rem 0.6875rem;
-  background-size: 1.375rem 1.375rem, 3.3125rem 3.3125rem;
+  background-position:
+    0 0,
+    0.6875rem 0.6875rem;
+  background-size:
+    1.375rem 1.375rem,
+    3.3125rem 3.3125rem;
   color: var(--ink);
-  font-family: 'Nunito', system-ui, sans-serif;
+  font-family: "Nunito", system-ui, sans-serif;
   font-size: 1rem;
   line-height: 1.65;
   letter-spacing: 0.01em;
@@ -42,14 +46,30 @@ body {
 }
 
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at 12% 8%, rgba(255, 200, 184, 0.18), transparent 30%),
-    radial-gradient(circle at 88% 22%, rgba(169, 212, 236, 0.18), transparent 35%),
-    radial-gradient(circle at 78% 86%, rgba(174, 228, 214, 0.18), transparent 32%),
-    radial-gradient(circle at 18% 78%, rgba(253, 233, 138, 0.18), transparent 32%);
+    radial-gradient(
+      circle at 12% 8%,
+      rgba(255, 200, 184, 0.18),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 88% 22%,
+      rgba(169, 212, 236, 0.18),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 78% 86%,
+      rgba(174, 228, 214, 0.18),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 18% 78%,
+      rgba(253, 233, 138, 0.18),
+      transparent 32%
+    );
   pointer-events: none;
   z-index: 0;
 }
@@ -77,7 +97,7 @@ h3 {
 
 h1,
 h2 {
-  font-family: 'Caveat', cursive;
+  font-family: "Caveat", cursive;
 }
 
 h1 {
@@ -90,7 +110,7 @@ h2 {
 }
 
 h3 {
-  font-family: 'Patrick Hand', cursive;
+  font-family: "Patrick Hand", cursive;
   font-size: 1.375rem;
   font-weight: 400;
 }
@@ -131,59 +151,190 @@ section {
 
 .nav {
   position: sticky;
-  top: 0;
+  top: 0.875rem;
   z-index: 50;
-  background: rgba(244, 250, 249, 0.85);
-  border-bottom: 1.5px dashed rgba(46, 61, 58, 0.18);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  padding-inline: 0.75rem;
+  background: transparent;
+  border: 0;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding-top: 10px;
 }
 
 .nav-inner {
+  padding-inline: 0;
+}
+
+.nav-shell {
+  position: relative;
+  padding: 0.875rem 1rem 1rem;
+  border: 1px solid var(--ink);
+  border-radius: 1.75rem 1.375rem 1.875rem 1.5rem / 1.5rem 1.875rem 1.5rem 2rem;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.72),
+      rgba(244, 250, 249, 0.94)
+    ),
+    var(--paper);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-shell::before,
+.nav-shell::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.nav-shell::before {
+  top: -0.625rem;
+  right: 1.5rem;
+  width: 4.5rem;
+  height: 1.125rem;
+  border: 2px solid rgba(46, 61, 58, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 200, 184, 0.68);
+  transform: rotate(7deg);
+}
+
+.nav-shell::after {
+  inset: 0.5rem;
+  border-radius: 1.375rem 1.125rem 1.5rem 1.25rem / 1.25rem 1.5rem 1.25rem
+    1.625rem;
+}
+
+.nav-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding-block: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .nav-logo {
   display: inline-flex;
   align-items: center;
-  gap: 0.625rem;
-  font-family: 'Caveat', cursive;
-  font-size: 2rem;
-  font-weight: 700;
+  gap: 0.875rem;
+  min-width: 0;
   text-decoration: none;
 }
 
+.nav-logo-mark {
+  width: 2.875rem;
+  height: 2.875rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ink);
+  border-radius: 1.1rem 1.35rem 1rem 1.25rem / 1.3rem 1rem 1.35rem 1rem;
+  background: linear-gradient(145deg, var(--peach), #ffe8dc);
+  box-shadow: 0.1875rem 0.1875rem 0 var(--ink);
+  transform: rotate(-4deg);
+}
+
 .nav-logo .dot {
-  width: 0.875rem;
-  height: 0.875rem;
+  width: 0.95rem;
+  height: 0.95rem;
   border-radius: 999px;
-  background: var(--peach);
-  box-shadow: 2px 2px 0 var(--ink);
+  background: var(--yellow);
+  box-shadow: 0.125rem 0.125rem 0 var(--ink);
+}
+
+.nav-logo-copy {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  min-width: 0;
+}
+
+.nav-logo-name {
+  font-family: "Caveat", cursive;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.nav-logo-tag {
+  margin-top: 0.15rem;
+  color: var(--ink-soft);
+  font-family: "Patrick Hand", cursive;
+  font-size: 0.92rem;
 }
 
 .nav-links {
   display: none;
-  gap: 1.75rem;
-  font-family: 'Patrick Hand', cursive;
-  font-size: 1.1875rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem;
+  border: 2px solid rgba(46, 61, 58, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.42);
 }
 
-.nav-links a {
+.nav-link,
+.nav-mobile-link {
   position: relative;
-  padding: 0.25rem 0.125rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  color: var(--ink);
+  font-family: "Patrick Hand", cursive;
+  font-size: 1.02rem;
   text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.nav-link:hover,
+.nav-mobile-link:hover {
+  transform: translateY(-1px) rotate(-1deg);
+}
+
+.nav-link-1:hover,
+.nav-mobile-link-1:hover {
+  background: rgba(255, 229, 122, 0.44);
+}
+
+.nav-link-2:hover,
+.nav-mobile-link-2:hover {
+  background: rgba(174, 228, 214, 0.44);
+}
+
+.nav-link-3:hover,
+.nav-mobile-link-3:hover {
+  background: rgba(255, 200, 184, 0.42);
+}
+
+.nav-link-4:hover,
+.nav-mobile-link-4:hover {
+  background: rgba(169, 212, 236, 0.42);
+}
+
+.nav-link-5:hover,
+.nav-mobile-link-5:hover {
+  background: rgba(244, 197, 207, 0.4);
+}
+
+.nav-link-6:hover,
+.nav-mobile-link-6:hover {
+  background: rgba(200, 212, 236, 0.46);
 }
 
 .nav-links .underline {
   position: absolute;
-  inset-inline: 0;
-  bottom: -0.125rem;
-  width: 100%;
-  height: 0.375rem;
+  left: 0.55rem;
+  right: 0.55rem;
+  bottom: 0.3rem;
+  width: auto;
+  height: 0.35rem;
   opacity: 0;
   transform: scaleX(0);
   transform-origin: left center;
@@ -195,6 +346,176 @@ section {
 .nav-links a:hover .underline {
   opacity: 1;
   transform: scaleX(1);
+}
+
+.nav-status {
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.65rem 1rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: linear-gradient(
+    135deg,
+    rgba(174, 228, 214, 0.86),
+    rgba(255, 255, 255, 0.7)
+  );
+  box-shadow: 0.1875rem 0.1875rem 0 var(--ink);
+  color: var(--ink);
+  font-family: "Patrick Hand", cursive;
+  font-size: 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+  margin-left: auto;
+}
+
+.nav-status:hover {
+  transform: translateY(-1px) rotate(1deg);
+  box-shadow: 0.25rem 0.25rem 0 var(--ink);
+}
+
+.nav-status-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  flex-shrink: 0;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: #7fd893;
+  box-shadow: 0 0 0 0.15rem rgba(127, 216, 147, 0.18);
+}
+
+.nav-mobile-rail {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 0.65rem;
+  margin-top: 0.9rem;
+  padding-bottom: 0.1rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-mobile-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-mobile-link {
+  flex: 0 0 auto;
+  min-height: 2.5rem;
+  padding-inline: 1rem;
+  border: 2px solid rgba(46, 61, 58, 0.16);
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0.12rem 0.12rem 0 rgba(46, 61, 58, 0.18);
+}
+
+.nav-doodle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.95;
+}
+
+.nav-doodle-star {
+  top: -0.55rem;
+  left: 8.5rem;
+  transform: rotate(-12deg);
+}
+
+.nav-doodle-squiggle {
+  right: 8.25rem;
+  bottom: -0.45rem;
+  transform: rotate(9deg);
+}
+
+@media (max-width: 29.998rem) {
+  .nav {
+    top: 0.5rem;
+    padding-inline: 0.45rem;
+  }
+
+  .nav-shell {
+    padding: 0.75rem 0.8rem 0.9rem;
+    border-radius: 1.4rem 1.15rem 1.5rem 1.2rem / 1.2rem 1.55rem 1.2rem 1.6rem;
+  }
+
+  .nav-shell::before {
+    width: 3.1rem;
+    right: 1rem;
+  }
+
+  .nav-shell::after {
+    inset: 0.4rem;
+  }
+
+  .nav-row {
+    gap: 0.75rem;
+  }
+
+  .nav-logo {
+    gap: 0.65rem;
+  }
+
+  .nav-logo-mark {
+    width: 2.45rem;
+    height: 2.45rem;
+  }
+
+  .nav-logo-name {
+    font-size: 1.85rem;
+  }
+
+  .nav-logo-tag {
+    display: none;
+  }
+
+  .nav-status {
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+    font-size: 0.95rem;
+    padding-inline: 0.9rem;
+  }
+
+  .nav-mobile-rail {
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .nav-mobile-link {
+    min-height: 2.35rem;
+    padding-inline: 0.8rem;
+    font-size: 0.94rem;
+  }
+
+  .nav-doodle-star {
+    left: auto;
+    right: 4rem;
+    top: -0.45rem;
+  }
+
+  .nav-doodle-squiggle {
+    display: none;
+  }
+}
+
+@media (min-width: 30rem) and (max-width: 47.998rem) {
+  .nav-row {
+    gap: 0.9rem;
+  }
+
+  .nav-status {
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+  }
+
+  .nav-mobile-link {
+    font-size: 0.98rem;
+  }
 }
 
 .hero-backdrop {
@@ -254,16 +575,21 @@ section {
   position: relative;
   padding: 0.875rem;
   border: 2.5px solid var(--ink);
-  border-radius: 2rem 1.625rem 2.375rem 1.75rem / 1.75rem 2.125rem 1.75rem 2.375rem;
+  border-radius: 2rem 1.625rem 2.375rem 1.75rem / 1.75rem 2.125rem 1.75rem
+    2.375rem;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(244, 250, 249, 0.94)),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.86),
+      rgba(244, 250, 249, 0.94)
+    ),
     var(--paper);
   box-shadow: 6px 6px 0 var(--ink);
   transform: rotate(1.4deg);
 }
 
 .hero-portrait-card::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0.55rem;
   border: 2px dashed rgba(46, 61, 58, 0.26);
@@ -278,8 +604,16 @@ section {
   border: 2px solid var(--ink);
   border-radius: 42% 58% 52% 48% / 34% 40% 60% 66%;
   background:
-    radial-gradient(circle at 20% 18%, rgba(255, 229, 122, 0.25), transparent 18%),
-    radial-gradient(circle at 82% 20%, rgba(169, 212, 236, 0.24), transparent 20%),
+    radial-gradient(
+      circle at 20% 18%,
+      rgba(255, 229, 122, 0.25),
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 82% 20%,
+      rgba(169, 212, 236, 0.24),
+      transparent 20%
+    ),
     linear-gradient(180deg, rgba(255, 255, 255, 0.32), transparent 28%);
   box-shadow: inset 0 -0.375rem 0 rgba(46, 61, 58, 0.08);
 }
@@ -307,7 +641,7 @@ section {
   background: var(--yellow);
   box-shadow: 3px 3px 0 var(--ink);
   color: var(--ink);
-  font-family: 'Patrick Hand', cursive;
+  font-family: "Patrick Hand", cursive;
   font-size: 1rem;
   transform: rotate(-4deg);
 }
@@ -357,7 +691,7 @@ section {
 .blog-readmore,
 .contact-blurb,
 .footer {
-  font-family: 'Patrick Hand', cursive;
+  font-family: "Patrick Hand", cursive;
 }
 
 .hero-greet {
@@ -451,7 +785,7 @@ section {
   box-shadow: 3px 3px 0 var(--ink);
   color: var(--ink);
   cursor: pointer;
-  font-family: 'Patrick Hand', cursive;
+  font-family: "Patrick Hand", cursive;
   font-size: 1.1875rem;
   text-decoration: none;
   transition:
@@ -504,7 +838,7 @@ section {
 }
 
 .section-kicker::before {
-  content: '';
+  content: "";
   width: 2.375rem;
   height: 2px;
   border-radius: 999px;
@@ -553,7 +887,8 @@ section {
   position: relative;
   padding: 2rem 1.5rem;
   border: 2.5px solid var(--ink);
-  border-radius: 1.375rem 1.625rem 1.25rem 1.75rem / 1.625rem 1.25rem 1.75rem 1.375rem;
+  border-radius: 1.375rem 1.625rem 1.25rem 1.75rem / 1.625rem 1.25rem 1.75rem
+    1.375rem;
   box-shadow: 5px 5px 0 var(--ink);
   transform: rotate(-1deg);
 }
@@ -604,7 +939,7 @@ section {
 }
 
 .stat .num {
-  font-family: 'Caveat', cursive;
+  font-family: "Caveat", cursive;
   font-size: 3rem;
   font-weight: 700;
   line-height: 1;
@@ -622,14 +957,18 @@ section {
 }
 
 .timeline::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0.75rem;
   bottom: 0.75rem;
   left: 0.5rem;
   width: 3px;
   border-radius: 999px;
-  background: repeating-linear-gradient(to bottom, var(--ink) 0 8px, transparent 8px 16px);
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--ink) 0 8px,
+    transparent 8px 16px
+  );
 }
 
 .timeline-item {
@@ -642,7 +981,7 @@ section {
 }
 
 .timeline-item::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0.5rem;
   left: -2.25rem;
@@ -687,7 +1026,7 @@ section {
 .project h3,
 .medal h3,
 .blog-card h3 {
-  font-family: 'Caveat', cursive;
+  font-family: "Caveat", cursive;
   font-weight: 700;
 }
 
@@ -783,7 +1122,7 @@ section {
 }
 
 .skill-tag {
-  font-family: 'Patrick Hand', cursive;
+  font-family: "Patrick Hand", cursive;
   font-size: 0.9375rem;
 }
 
@@ -798,7 +1137,8 @@ section {
   display: flex;
   flex-direction: column;
   border: 2.5px solid var(--ink);
-  border-radius: 1.25rem 1.5rem 1.125rem 1.625rem / 1.5rem 1.125rem 1.625rem 1.25rem;
+  border-radius: 1.25rem 1.5rem 1.125rem 1.625rem / 1.5rem 1.125rem 1.625rem
+    1.25rem;
   box-shadow: 5px 5px 0 var(--ink);
 }
 
@@ -890,7 +1230,7 @@ section {
 }
 
 .project-link::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: -0.1875rem;
@@ -941,7 +1281,7 @@ section {
   border-radius: 999px;
   background: var(--yellow);
   box-shadow: 2px 2px 0 var(--ink);
-  font-family: 'Caveat', cursive;
+  font-family: "Caveat", cursive;
   font-size: 1.875rem;
   font-weight: 700;
 }
@@ -975,7 +1315,7 @@ section {
 .medal-meta {
   color: var(--ink-soft);
   font-size: 0.9375rem;
-  font-family: 'Patrick Hand', cursive;
+  font-family: "Patrick Hand", cursive;
 }
 
 .blog-card {
@@ -1274,8 +1614,12 @@ section {
     justify-content: flex-end;
   }
 
-  .nav-links {
-    display: flex;
+  .nav {
+    padding-inline: 1rem;
+  }
+
+  .nav-inner {
+    padding-inline: 2rem;
   }
 
   .about {
@@ -1302,6 +1646,26 @@ section {
   }
 }
 
+@media (min-width: 48rem) and (max-width: 71.998rem) {
+  .nav-links {
+    display: none;
+  }
+
+  .nav-mobile-rail {
+    display: flex;
+    margin-top: 0.85rem;
+  }
+
+  .nav-status {
+    font-size: 0.96rem;
+    padding-inline: 0.9rem;
+  }
+
+  .nav-doodle-squiggle {
+    right: 6.5rem;
+  }
+}
+
 @media (min-width: 64rem) {
   section {
     padding-block: 10rem 8.125rem;
@@ -1310,6 +1674,14 @@ section {
   .hero {
     min-height: 40rem;
     padding-block: 3.5rem 5.5rem;
+  }
+
+  .nav-shell {
+    padding-inline: 1.2rem;
+  }
+
+  .nav-mobile-rail {
+    display: none;
   }
 
   .hero-inner {
@@ -1345,5 +1717,11 @@ section {
 
   .achievements-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 72rem) {
+  .nav-links {
+    display: flex;
   }
 }
