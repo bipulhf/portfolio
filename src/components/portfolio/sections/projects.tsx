@@ -31,7 +31,7 @@ export function Projects() {
       <div className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3 lg:gap-8" data-reveal-sequence>
         {PROJECT_ITEMS.map((project, index) => (
           <div
-            className={`${cardRotations[index % cardRotations.length]} ${surfaceCardClass} overflow-hidden rounded-[1.25rem_1.5rem_1.125rem_1.625rem/1.5rem_1.125rem_1.625rem_1.25rem] border-[2.5px] border-ink shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]`}
+            className={`${cardRotations[index % cardRotations.length]} ${surfaceCardClass} ${index % 3 === 0 ? 'reveal-left' : index % 3 === 1 ? 'reveal-pop' : 'reveal-right'} overflow-hidden rounded-[1.25rem_1.5rem_1.125rem_1.625rem/1.5rem_1.125rem_1.625rem_1.25rem] border-[2.5px] border-ink shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]`}
             data-reveal-item
             key={project.title}
           >

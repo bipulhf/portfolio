@@ -27,7 +27,7 @@ export function Blog() {
       <div className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3" data-reveal-sequence>
         {BLOG_ITEMS.map((post, index) => (
           <a
-            className={`${surfaceCardClass} overflow-hidden rounded-[1.375rem] border-[2.5px] border-ink text-ink no-underline shadow-crayon-md transition-[transform,box-shadow] duration-200 ease-out-soft hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_var(--color-ink)]`}
+            className={`${surfaceCardClass} ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'} overflow-hidden rounded-[1.375rem] border-[2.5px] border-ink text-ink no-underline shadow-crayon-md hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_var(--color-ink)]`}
             data-reveal-item
             href="#"
             key={post.title}

@@ -6,8 +6,7 @@ export const pageContainerClass = 'mx-auto w-full max-w-[73.75rem] px-4 md:px-6 
 
 export const sectionShellClass = `${pageContainerClass} relative scroll-mt-28 py-[4.5rem] md:py-[5.625rem] lg:py-[8.125rem]`
 
-export const surfaceCardClass =
-  'bg-paper transition-[translate,box-shadow,filter] duration-[720ms] ease-out-soft'
+export const surfaceCardClass = 'crayon-surface bg-paper'
 
 const buttonToneClasses = {
   yellow: 'bg-yellow',

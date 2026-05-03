@@ -12,7 +12,7 @@ export function Hero() {
       </div>
 
       <div className={cx(pageContainerClass, 'relative z-[1] grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(18rem,24rem)] md:items-center lg:grid-cols-[minmax(0,1fr)_minmax(22rem,26rem)] lg:gap-12')}>
-        <div className="order-first flex justify-center md:order-2 md:justify-end page-enter motion-delay-4">
+        <div className="page-enter enter-from-right motion-delay-4 order-first flex justify-center md:order-2 md:justify-end">
           <div className="relative w-full max-w-96 px-2.5 pb-6 pt-3 md:max-w-[26rem]">
             <div
               className={cx(
@@ -49,12 +49,12 @@ export function Hero() {
         </div>
 
         <div className="relative flex max-w-[47.5rem] flex-col justify-center py-4">
-          <div className="page-enter motion-delay-2 mb-2 flex items-center gap-2.5 whitespace-nowrap font-hand text-xl text-ink-soft md:text-[1.25rem]">
+          <div className="page-enter enter-soft motion-delay-2 mb-2 flex items-center gap-2.5 whitespace-nowrap font-hand text-xl text-ink-soft md:text-[1.25rem]">
             <span className="hero-wave inline-block">👋</span>
             <span>hello, I&apos;m</span>
           </div>
 
-          <h1 className="page-enter motion-delay-3 relative mb-[1.125rem] mt-1 block font-display text-[clamp(3.5rem,14vw,6.75rem)] font-bold leading-none tracking-[-0.01em] text-ink">
+          <h1 className="page-enter enter-soft motion-delay-3 relative mb-[1.125rem] mt-1 block font-display text-[clamp(3.5rem,14vw,6.75rem)] font-bold leading-none tracking-[-0.01em] text-ink">
             <span className="relative inline-block">Shahiduzzaman</span>{' '}
             <span className="relative inline-block">
               Bipul.
@@ -64,7 +64,7 @@ export function Hero() {
             </span>
           </h1>
 
-          <div className="page-enter motion-delay-4 mb-[1.125rem] max-w-[35rem] font-hand text-[1.375rem] leading-[1.55] text-ink lg:max-w-[32.5rem] lg:leading-[1.6]">
+          <div className="page-enter enter-soft motion-delay-4 mb-[1.125rem] max-w-[35rem] font-hand text-[1.375rem] leading-[1.55] text-ink lg:max-w-[32.5rem] lg:leading-[1.6]">
             A{' '}
             <span className="mx-0.5 inline-block whitespace-nowrap rounded-[1.25rem] border-[1.5px] border-ink bg-mint px-3 py-px shadow-[2px_2px_0_var(--color-ink)] rotate-[-1.2deg]">
               software engineer
@@ -72,12 +72,12 @@ export function Hero() {
             crafting calm, considered software one careful detail at a time.
           </div>
 
-          <p className="page-enter motion-delay-5 mb-7 max-w-[35rem] text-base leading-[1.7] text-ink-soft lg:max-w-[32.5rem]">
+          <p className="page-enter enter-soft motion-delay-5 mb-7 max-w-[35rem] text-base leading-[1.7] text-ink-soft lg:max-w-[32.5rem]">
             Currently at <strong>InfancyIT Ltd.</strong> &middot; Computer Science,{' '}
             <strong>Shahjalal University of Science and Technology</strong>.
           </p>
 
-          <div className="page-enter motion-delay-6 flex flex-wrap items-center gap-3.5">
+          <div className="page-enter enter-soft motion-delay-6 flex flex-wrap items-center gap-3.5">
             <a className={crayonButtonClass('yellow')} href="#projects">
               View my work →
             </a>

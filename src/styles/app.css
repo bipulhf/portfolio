@@ -25,6 +25,7 @@
   --shadow-crayon-md: 5px 5px 0 var(--color-ink);
   --shadow-crayon-lg: 7px 7px 0 var(--color-ink);
 
+  --ease-awwwards-enter: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-soft: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -131,65 +132,118 @@
     @apply border-2 border-dashed border-ink bg-transparent shadow-none hover:bg-yellow/40 hover:shadow-none;
   }
 
+  .crayon-surface {
+    background: var(--color-paper);
+    transition:
+      opacity 560ms var(--ease-awwwards-enter),
+      translate 560ms var(--ease-awwwards-enter),
+      scale 560ms var(--ease-awwwards-enter),
+      box-shadow 280ms var(--ease-out-soft),
+      filter 280ms var(--ease-out-soft),
+      background-color 220ms var(--ease-out-soft);
+  }
+
   .page-enter {
     opacity: 0;
-    translate: 0 1rem;
+    translate: var(--enter-x, 0) var(--enter-y, 0.875rem);
+    scale: var(--enter-scale, 0.988);
     transition:
-      opacity 1100ms var(--ease-out-soft),
-      translate 1100ms var(--ease-out-soft);
+      opacity 680ms var(--ease-awwwards-enter),
+      translate 680ms var(--ease-awwwards-enter),
+      scale 680ms var(--ease-awwwards-enter);
     transition-delay: var(--enter-delay, 0ms);
   }
 
   .motion-ready .page-enter {
     opacity: 1;
     translate: 0 0;
+    scale: 1;
   }
 
   .motion-delay-1 {
-    --enter-delay: 70ms;
+    --enter-delay: 45ms;
   }
 
   .motion-delay-2 {
-    --enter-delay: 140ms;
+    --enter-delay: 90ms;
   }
 
   .motion-delay-3 {
-    --enter-delay: 230ms;
+    --enter-delay: 140ms;
   }
 
   .motion-delay-4 {
-    --enter-delay: 320ms;
+    --enter-delay: 190ms;
   }
 
   .motion-delay-5 {
-    --enter-delay: 430ms;
+    --enter-delay: 240ms;
   }
 
   .motion-delay-6 {
-    --enter-delay: 540ms;
+    --enter-delay: 290ms;
+  }
+
+  .enter-from-top {
+    --enter-y: -0.75rem;
+    --enter-scale: 1;
+  }
+
+  .enter-from-right {
+    --enter-x: 1rem;
+    --enter-y: 0;
+  }
+
+  .enter-soft {
+    --enter-y: 0.625rem;
+    --enter-scale: 0.992;
   }
 
   .reveal,
   [data-reveal-item] {
     opacity: 0;
+    translate: var(--reveal-x, 0) var(--reveal-y, 0.875rem);
+    scale: var(--reveal-scale, 0.992);
     transition:
-      opacity 720ms var(--ease-out-soft),
-      translate 720ms var(--ease-out-soft);
+      opacity 560ms var(--ease-awwwards-enter),
+      translate 560ms var(--ease-awwwards-enter),
+      scale 560ms var(--ease-awwwards-enter);
   }
 
   .reveal {
-    translate: 0 1.5rem;
+    --reveal-y: 1rem;
   }
 
   [data-reveal-item] {
-    translate: 0 1.25rem;
+    --reveal-y: 0.875rem;
     transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal-soft {
+    --reveal-y: 0.625rem;
+    --reveal-scale: 0.994;
+  }
+
+  .reveal-pop {
+    --reveal-y: 0.5rem;
+    --reveal-scale: 0.972;
+  }
+
+  .reveal-left {
+    --reveal-x: -0.9rem;
+    --reveal-y: 0.125rem;
+  }
+
+  .reveal-right {
+    --reveal-x: 0.9rem;
+    --reveal-y: 0.125rem;
   }
 
   .reveal.in,
   [data-reveal-item].in {
     opacity: 1;
     translate: 0 0;
+    scale: 1;
   }
 
   .section-accent-item {
@@ -199,7 +253,7 @@
 
   .bg-doodles {
     opacity: 0;
-    transition: opacity 1100ms var(--ease-out-soft) 220ms;
+    transition: opacity 720ms var(--ease-awwwards-enter) 120ms;
   }
 
   .motion-ready .bg-doodles {
@@ -270,19 +324,19 @@
   }
 
   .motion-ready .hero-scribble path {
-    animation: scribbleDraw 1.15s var(--ease-out-soft) forwards;
+    animation: scribbleDraw 820ms var(--ease-awwwards-enter) forwards;
   }
 
   .motion-ready .hero-scribble path:nth-child(2) {
-    animation-delay: 120ms;
+    animation-delay: 80ms;
   }
 
   .section-scribble.in path {
-    animation: scribbleDraw 1s var(--ease-out-soft) forwards;
+    animation: scribbleDraw 720ms var(--ease-awwwards-enter) forwards;
   }
 
   .section-scribble.in path:nth-child(2) {
-    animation-delay: 100ms;
+    animation-delay: 70ms;
   }
 }
 

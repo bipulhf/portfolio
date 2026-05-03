@@ -21,7 +21,7 @@ export function useReveal() {
             target.classList.add('in')
 
             items.forEach((item, index) => {
-              item.style.setProperty('--reveal-delay', `${index * 90}ms`)
+              item.style.setProperty('--reveal-delay', `${index * 70}ms`)
               item.classList.add('in')
             })
           } else {
@@ -31,7 +31,10 @@ export function useReveal() {
           observer.unobserve(entry.target)
         })
       },
-      { threshold: 0.12 },
+      {
+        threshold: 0.08,
+        rootMargin: '0px 0px -10% 0px',
+      },
     )
 
     elements.forEach((element) => observer.observe(element))

@@ -16,7 +16,7 @@ export function Achievements() {
       <div className="mt-12 grid gap-[1.375rem] md:grid-cols-2 lg:grid-cols-3" data-reveal-sequence>
         {ACHIEVEMENT_ITEMS.map((item, index) => (
           <div
-            className={`${surfaceCardClass} flex items-start gap-4 rounded-[1.375rem] border-[2.5px] border-ink p-6 shadow-crayon-md ${index % 2 === 0 ? 'rotate-[-0.8deg]' : 'rotate-[0.8deg]'} hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]`}
+            className={`${surfaceCardClass} ${index % 3 === 0 ? 'reveal-left' : index % 3 === 1 ? 'reveal-pop' : 'reveal-right'} flex items-start gap-4 rounded-[1.375rem] border-[2.5px] border-ink p-6 shadow-crayon-md ${index % 2 === 0 ? 'rotate-[-0.8deg]' : 'rotate-[0.8deg]'} hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]`}
             data-reveal-item
             key={`${item.title}-${item.meta}`}
           >

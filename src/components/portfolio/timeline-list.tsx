@@ -18,7 +18,11 @@ export function TimelineList({ items }: Readonly<{ items: readonly TimelineItem[
       />
 
       {items.map((item, index) => (
-        <div className="relative mb-9 last:mb-0" data-reveal-item key={`${item.role}-${item.place}-${item.when}`}>
+        <div
+          className={index % 2 === 0 ? 'reveal-left relative mb-9 last:mb-0' : 'reveal-right relative mb-9 last:mb-0'}
+          data-reveal-item
+          key={`${item.role}-${item.place}-${item.when}`}
+        >
           <span
             aria-hidden="true"
             className={`${markerTones[index] ?? 'bg-yellow'} absolute left-[-2.25rem] top-2 inline-block size-[1.375rem] rounded-full border-[2.5px] border-ink shadow-[2px_2px_0_var(--color-ink)]`}

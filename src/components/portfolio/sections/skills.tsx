@@ -16,7 +16,7 @@ export function Skills() {
       <div className="mt-12 grid gap-[1.375rem] md:grid-cols-2 lg:grid-cols-4" data-reveal-sequence>
         {SKILL_CATEGORIES.map((category, index) => (
           <div
-            className={`${skillTones[index] ?? skillTones[0]} ${surfaceCardClass} rounded-[1.25rem] border-2 border-ink p-[1.375rem] shadow-[4px_4px_0_var(--color-ink)] hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]`}
+            className={`${skillTones[index] ?? skillTones[0]} ${surfaceCardClass} reveal-pop rounded-[1.25rem] border-2 border-ink p-[1.375rem] shadow-[4px_4px_0_var(--color-ink)] hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]`}
             data-reveal-item
             key={category.title}
           >

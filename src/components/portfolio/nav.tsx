@@ -17,7 +17,7 @@ export function Nav() {
       <div className="mx-auto w-full max-w-[73.75rem] px-0 sm:px-4 md:px-6 lg:px-8">
         <div
           className={cx(
-            'page-enter motion-delay-1 relative rounded-[1.2rem] border border-ink bg-[linear-gradient(180deg,rgba(255,255,255,0.72),rgba(244,250,249,0.94)),var(--color-paper)] px-3 py-3 shadow-[0_0.5rem_1.2rem_rgba(46,61,58,0.08)] transition-[translate,box-shadow,border-color] duration-300 ease-out-soft hover:-translate-y-0.5 hover:shadow-[0_0.9rem_1.8rem_rgba(46,61,58,0.12)] sm:rounded-[1.4rem] md:px-4 md:py-[0.95rem] lg:rounded-[1.75rem_1.375rem_1.875rem_1.5rem/1.5rem_1.875rem_1.5rem_2rem] lg:px-[1.2rem] lg:py-[0.95rem]',
+            'page-enter enter-from-top motion-delay-1 relative rounded-[1.2rem] border border-ink bg-[linear-gradient(180deg,rgba(255,255,255,0.72),rgba(244,250,249,0.94)),var(--color-paper)] px-3 py-3 shadow-[0_0.5rem_1.2rem_rgba(46,61,58,0.08)] transition-[translate,box-shadow,border-color] duration-300 ease-out-soft hover:-translate-y-0.5 hover:shadow-[0_0.9rem_1.8rem_rgba(46,61,58,0.12)] sm:rounded-[1.4rem] md:px-4 md:py-[0.95rem] lg:rounded-[1.75rem_1.375rem_1.875rem_1.5rem/1.5rem_1.875rem_1.5rem_2rem] lg:px-[1.2rem] lg:py-[0.95rem]',
             "before:pointer-events-none before:absolute before:right-6 before:top-[-0.625rem] before:hidden before:h-[1.125rem] before:w-[4.5rem] before:rounded-full before:border-2 before:border-ink/30 before:bg-peach/70 before:content-[''] before:rotate-[7deg] lg:before:block",
             "after:pointer-events-none after:absolute after:inset-2 after:hidden after:rounded-[1.375rem_1.125rem_1.5rem_1.25rem/1.25rem_1.5rem_1.25rem_1.625rem] after:content-[''] lg:after:block",
           )}

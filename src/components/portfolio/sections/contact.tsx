@@ -16,7 +16,7 @@ export function Contact() {
       <div
         className={cx(
           surfaceCardClass,
-          'reveal relative mx-auto mt-14 max-w-[45rem] rounded-[2rem_1.75rem_2.25rem_1.5rem/1.75rem_2rem_1.5rem_2.25rem] border-[3px] border-ink px-6 py-12 shadow-crayon-lg hover:-translate-y-[0.3rem] hover:shadow-[9px_10px_0_var(--color-ink)] md:px-10 md:py-14',
+          'reveal reveal-soft relative mx-auto mt-14 max-w-[45rem] rounded-[2rem_1.75rem_2.25rem_1.5rem/1.75rem_2rem_1.5rem_2.25rem] border-[3px] border-ink px-6 py-12 shadow-crayon-lg hover:-translate-y-[0.3rem] hover:shadow-[9px_10px_0_var(--color-ink)] md:px-10 md:py-14',
         )}
       >
         <div className="absolute left-[-0.625rem] top-[-0.625rem] size-[3.75rem]">

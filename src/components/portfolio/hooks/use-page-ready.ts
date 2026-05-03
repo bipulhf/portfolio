@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export function usePageReady(delay = 90) {
+export function usePageReady(delay = 40) {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
