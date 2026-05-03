@@ -37,7 +37,7 @@ export function ProjectGrid({
               cardRotations[index % cardRotations.length],
               surfaceCardClass,
               index % 3 === 0 ? 'reveal-left' : index % 3 === 1 ? 'reveal-pop' : 'reveal-right',
-              'overflow-hidden rounded-[1.25rem_1.5rem_1.125rem_1.625rem/1.5rem_1.125rem_1.625rem_1.25rem] border-[2.5px] border-ink shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]',
+              'group overflow-hidden rounded-[1.25rem_1.5rem_1.125rem_1.625rem/1.5rem_1.125rem_1.625rem_1.25rem] border-[2.5px] border-ink shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]',
             )}
             data-reveal-item
             key={project.id}
@@ -51,11 +51,13 @@ export function ProjectGrid({
               {project.coverImagePath ? (
                 <img
                   alt={project.title}
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="motion-cover absolute inset-0 h-full w-full object-cover"
                   src={project.coverImagePath}
                 />
               ) : (
-                <ProjectCover index={index} />
+                <div className="motion-cover">
+                  <ProjectCover index={index} />
+                </div>
               )}
             </div>
             <div className="flex h-full flex-col px-5 pb-5 pt-4 sm:px-[1.375rem] sm:pb-[1.375rem] sm:pt-5">
@@ -89,7 +91,7 @@ export function ProjectGrid({
                   params={{ slug: project.slug }}
                 >
                   View case study
-                  <span className="ml-1">→</span>
+                  <span className="motion-arrow ml-1">→</span>
                   <span className="absolute bottom-[-0.1875rem] left-0 h-[3px] w-full origin-left scale-x-0 rounded-full bg-ink transition-transform duration-300 ease-out-soft group-hover:scale-x-100" />
                 </Link>
                 {project.liveUrl ? (

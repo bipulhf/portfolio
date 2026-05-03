@@ -138,26 +138,19 @@
       opacity 560ms var(--ease-awwwards-enter),
       translate 560ms var(--ease-awwwards-enter),
       scale 560ms var(--ease-awwwards-enter),
+      transform 240ms var(--ease-out-soft),
       box-shadow 280ms var(--ease-out-soft),
       filter 280ms var(--ease-out-soft),
-      background-color 220ms var(--ease-out-soft);
+      background-color 220ms var(--ease-out-soft),
+      border-color 220ms var(--ease-out-soft);
   }
 
   .page-enter {
     opacity: 0;
-    translate: var(--enter-x, 0) var(--enter-y, 0.875rem);
-    scale: var(--enter-scale, 0.988);
-    transition:
-      opacity 680ms var(--ease-awwwards-enter),
-      translate 680ms var(--ease-awwwards-enter),
-      scale 680ms var(--ease-awwwards-enter);
-    transition-delay: var(--enter-delay, 0ms);
-  }
-
-  .motion-ready .page-enter {
-    opacity: 1;
-    translate: 0 0;
-    scale: 1;
+    transform: translate3d(var(--enter-x, 0), var(--enter-y, 0.875rem), 0)
+      scale(var(--enter-scale, 0.988));
+    animation: pageEnter 620ms var(--ease-awwwards-enter) var(--enter-delay, 0ms) both;
+    will-change: transform, opacity;
   }
 
   .motion-delay-1 {
@@ -208,6 +201,7 @@
       opacity 560ms var(--ease-awwwards-enter),
       translate 560ms var(--ease-awwwards-enter),
       scale 560ms var(--ease-awwwards-enter);
+    will-change: translate, scale, opacity;
   }
 
   .reveal {
@@ -253,11 +247,7 @@
 
   .bg-doodles {
     opacity: 0;
-    transition: opacity 720ms var(--ease-awwwards-enter) 120ms;
-  }
-
-  .motion-ready .bg-doodles {
-    opacity: 1;
+    animation: bgDoodlesIn 520ms var(--ease-awwwards-enter) 120ms both;
   }
 
   .float-doodle {
@@ -269,15 +259,15 @@
   }
 
   .nav-shell-intro {
-    animation: navShellIn 560ms var(--ease-awwwards-enter) both;
+    animation: navShellIn 500ms var(--ease-awwwards-enter) both;
   }
 
   .nav-brand-intro {
-    animation: navItemIn 520ms var(--ease-awwwards-enter) 50ms both;
+    animation: navItemIn 430ms var(--ease-awwwards-enter) 30ms both;
   }
 
   .nav-items-intro {
-    animation: navItemIn 520ms var(--ease-awwwards-enter) 110ms both;
+    animation: navItemIn 430ms var(--ease-awwwards-enter) 80ms both;
   }
 
   .nav-menu-intro {
@@ -286,21 +276,22 @@
 
   .hero-backdrop-intro {
     opacity: 0;
-    animation: heroBackdropIn 520ms var(--ease-awwwards-enter) both;
+    animation: heroBackdropIn 420ms var(--ease-awwwards-enter) both;
   }
 
   .hero-portrait-intro {
     opacity: 0;
     translate: 1.1rem 0;
     scale: 0.985;
-    animation: heroPortraitIn 680ms var(--ease-awwwards-enter) 80ms both;
+    animation: heroPortraitIn 600ms var(--ease-awwwards-enter) 60ms both;
   }
 
   .hero-copy-item {
     opacity: 0;
     translate: 0 0.75rem;
     scale: 0.992;
-    animation: heroCopyIn 620ms var(--ease-awwwards-enter) var(--hero-delay, 0ms) both;
+    animation: heroCopyIn 520ms var(--ease-awwwards-enter) var(--hero-delay, 0ms) both;
+    will-change: transform, opacity;
   }
 
   .hero-backdrop-mask {
@@ -323,8 +314,7 @@
     display: block;
   }
 
-  .hero-backdrop-intro svg,
-  .motion-ready .hero-backdrop svg {
+  .hero-backdrop svg {
     animation: heroBackdropLift 20s ease-in-out infinite;
   }
 
@@ -362,13 +352,13 @@
   }
 
   .hero-scribble path,
-  .motion-ready .hero-scribble path {
-    animation: scribbleDraw 780ms var(--ease-awwwards-enter) 180ms forwards;
+  .hero-scribble path {
+    animation: scribbleDraw 640ms var(--ease-awwwards-enter) 140ms forwards;
   }
 
   .hero-scribble path:nth-child(2),
-  .motion-ready .hero-scribble path:nth-child(2) {
-    animation-delay: 260ms;
+  .hero-scribble path:nth-child(2) {
+    animation-delay: 210ms;
   }
 
   .section-scribble.in path {
@@ -381,6 +371,31 @@
 
   .route-progress-bar {
     animation: routeProgress 1.1s linear infinite;
+  }
+
+  .route-progress-dot {
+    animation: routeProgressDot 1.1s linear infinite;
+  }
+
+  .motion-cover {
+    transition:
+      transform 520ms var(--ease-out-soft),
+      filter 240ms var(--ease-out-soft);
+    will-change: transform;
+  }
+
+  .group:hover .motion-cover,
+  .group:focus-within .motion-cover {
+    transform: scale(1.045) rotate(0.4deg);
+  }
+
+  .motion-arrow {
+    transition: translate 220ms var(--ease-out-soft);
+  }
+
+  .group:hover .motion-arrow,
+  .group:focus-within .motion-arrow {
+    translate: 0.25rem 0;
   }
 
   .loader-card {
@@ -556,12 +571,38 @@
     opacity: 1 !important;
     translate: 0 0 !important;
     scale: 1 !important;
+    transform: none !important;
     filter: none !important;
   }
 
   .hero-scribble path,
   .section-scribble path {
     stroke-dashoffset: 0 !important;
+  }
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--enter-x, 0), var(--enter-y, 0.875rem), 0)
+      scale(var(--enter-scale, 0.988));
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes bgDoodlesIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 
@@ -738,11 +779,27 @@
 
 @keyframes routeProgress {
   0% {
-    transform: translateX(-110%);
+    transform: translateX(-118%);
   }
 
   100% {
-    transform: translateX(410%);
+    transform: translateX(280%);
+  }
+}
+
+@keyframes routeProgressDot {
+  0% {
+    transform: translateX(-160%) scale(0.96);
+    opacity: 0;
+  }
+
+  16% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(1120%) scale(1);
+    opacity: 0.92;
   }
 }
 

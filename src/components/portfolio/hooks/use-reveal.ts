@@ -3,6 +3,18 @@ import { useEffect } from 'react'
 export function useReveal() {
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>('.reveal, [data-reveal-sequence]')
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    if (reduceMotion) {
+      elements.forEach((element) => {
+        element.classList.add('in')
+        element
+          .querySelectorAll<HTMLElement>('[data-reveal-item]')
+          .forEach((item) => item.classList.add('in'))
+      })
+
+      return
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -17,11 +29,12 @@ export function useReveal() {
             const items = Array.from(
               target.querySelectorAll<HTMLElement>('[data-reveal-item]'),
             )
+            const step = Number(target.dataset.revealStep ?? 55)
 
             target.classList.add('in')
 
             items.forEach((item, index) => {
-              item.style.setProperty('--reveal-delay', `${index * 70}ms`)
+              item.style.setProperty('--reveal-delay', `${index * step}ms`)
               item.classList.add('in')
             })
           } else {
@@ -32,8 +45,8 @@ export function useReveal() {
         })
       },
       {
-        threshold: 0.08,
-        rootMargin: '0px 0px -10% 0px',
+        threshold: 0.12,
+        rootMargin: '0px 0px -8% 0px',
       },
     )
 

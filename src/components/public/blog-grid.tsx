@@ -41,7 +41,7 @@ export function BlogGrid({
       {items.length ? (
         items.map((post, index) => (
           <Link
-            className={`${surfaceCardClass} ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'} overflow-hidden rounded-[1.375rem] border-[2.5px] border-ink text-ink no-underline shadow-crayon-md hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_var(--color-ink)]`}
+            className={`${surfaceCardClass} ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'} group overflow-hidden rounded-[1.375rem] border-[2.5px] border-ink text-ink no-underline shadow-crayon-md hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_var(--color-ink)]`}
             data-reveal-item
             key={post.id}
             preload="intent"
@@ -52,11 +52,13 @@ export function BlogGrid({
               {post.coverImagePath ? (
                 <img
                   alt={post.title}
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="motion-cover absolute inset-0 h-full w-full object-cover"
                   src={post.coverImagePath}
                 />
               ) : (
-                <BlogCover index={index} />
+                <div className="motion-cover">
+                  <BlogCover index={index} />
+                </div>
               )}
             </div>
             <div className="flex h-full flex-col px-5 pb-5 pt-4 sm:px-[1.375rem] sm:pb-[1.375rem] sm:pt-[1.125rem]">
@@ -68,7 +70,7 @@ export function BlogGrid({
               </h2>
               <p className="flex-1 text-[0.9375rem] text-ink-soft">{post.excerpt}</p>
               <span className="mt-3 inline-flex items-center gap-1.5 font-hand text-base text-ink">
-                Read on →
+                Read on <span className="motion-arrow">→</span>
               </span>
             </div>
           </Link>
