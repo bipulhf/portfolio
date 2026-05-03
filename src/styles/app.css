@@ -176,6 +176,8 @@ section {
   align-items: center;
   justify-content: center;
   opacity: 0.5;
+  animation: accentDrift 12s ease-in-out infinite;
+  animation-delay: var(--accent-delay, 0s);
   filter: saturate(0.95);
 }
 
@@ -643,6 +645,10 @@ section {
   display: block;
 }
 
+.motion-ready .hero-backdrop svg {
+  animation: heroBackdropLift 20s ease-in-out infinite;
+}
+
 .hero-inner {
   position: relative;
   z-index: 1;
@@ -750,6 +756,10 @@ section {
   transform: rotate(-4deg);
 }
 
+.motion-ready .hero-portrait-note {
+  animation: noteBob 8.5s ease-in-out infinite;
+}
+
 .hero-portrait-pin {
   width: 0.9rem;
   height: 0.9rem;
@@ -781,6 +791,18 @@ section {
   right: -0.25rem;
   bottom: 4.25rem;
   transform: rotate(18deg);
+}
+
+.hero-ornament-float {
+  animation: ornamentBob 10s ease-in-out infinite;
+}
+
+.hero-ornament-float.delay-2 {
+  animation-delay: -2.5s;
+}
+
+.hero-ornament-float.delay-3 {
+  animation-delay: -4.75s;
 }
 
 .hero-greet,
@@ -969,6 +991,28 @@ section {
   bottom: -0.875rem;
   width: calc(100% + 1rem);
   height: 1.375rem;
+}
+
+.hero-name .scribble-under path,
+.section-title .scribble-under path {
+  stroke-dasharray: 720;
+  stroke-dashoffset: 720;
+}
+
+.motion-ready .hero-name .scribble-under path {
+  animation: scribbleDraw 1.15s var(--ease-out-soft) forwards;
+}
+
+.motion-ready .hero-name .scribble-under path:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.section-title.in .scribble-under path {
+  animation: scribbleDraw 1s var(--ease-out-soft) forwards;
+}
+
+.section-title.in .scribble-under path:nth-child(2) {
+  animation-delay: 100ms;
 }
 
 .about,
@@ -1759,6 +1803,52 @@ section {
   }
 }
 
+@keyframes accentDrift {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(2deg);
+  }
+}
+
+@keyframes heroBackdropLift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes noteBob {
+  0%,
+  100% {
+    transform: rotate(-4deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-3deg) translateY(-2px);
+  }
+}
+
+@keyframes ornamentBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes scribbleDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 @media (max-width: 47.998rem) {
   .section-accent-item {
     opacity: 0.42;
@@ -1770,7 +1860,8 @@ section {
   }
 
   .float-doodle,
-  .section-accent-item {
+  .section-accent-item,
+  .hero-ornament-float {
     animation-duration: 18s;
   }
 }
@@ -1955,5 +2046,10 @@ section {
     translate: 0 0 !important;
     scale: 1 !important;
     filter: none !important;
+  }
+
+  .hero-name .scribble-under path,
+  .section-title .scribble-under path {
+    stroke-dashoffset: 0 !important;
   }
 }

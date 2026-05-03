@@ -23,13 +23,13 @@ export function Hero() {
               <span className="hero-portrait-pin" />
               <span>crayon mood, real me</span>
             </div>
-            <div aria-hidden="true" className="hero-portrait-doodle hero-portrait-doodle-star">
+            <div aria-hidden="true" className="hero-portrait-doodle hero-portrait-doodle-star hero-ornament-float">
               <Star color="var(--yellow)" size={34} />
             </div>
-            <div aria-hidden="true" className="hero-portrait-doodle hero-portrait-doodle-heart">
+            <div aria-hidden="true" className="hero-portrait-doodle hero-portrait-doodle-heart hero-ornament-float delay-2">
               <Heart color="var(--pink)" size={30} />
             </div>
-            <div aria-hidden="true" className="hero-portrait-doodle hero-portrait-doodle-squiggle">
+            <div aria-hidden="true" className="hero-portrait-doodle hero-portrait-doodle-squiggle hero-ornament-float delay-3">
               <Squiggle color="var(--mint)" size={34} />
             </div>
           </div>
