@@ -7,6 +7,7 @@ export function Experience() {
   return (
     <SectionShell accent="experience" id="experience">
       <SectionHeader
+        description="Teams, roles, and the kind of engineering work I enjoy owning from first draft to stable release."
         kicker="02 - experience"
         title="Where I&apos;ve worked"
         underlineColor="var(--color-mint)"

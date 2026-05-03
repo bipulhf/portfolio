@@ -67,6 +67,10 @@ export const SKILL_CATEGORIES = [
     title: 'Tools',
     tags: ['Git', 'Docker', 'AWS', 'Figma', 'Linux'],
   },
+  {
+    title: 'Workflow',
+    tags: ['Testing', 'Code Review', 'DX', 'Accessibility', 'Performance'],
+  },
 ] as const
 
 export const ACHIEVEMENT_ITEMS = [
