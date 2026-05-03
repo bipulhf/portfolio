@@ -44,7 +44,7 @@ export function Nav() {
 
   return (
     <nav className="sticky top-0 z-50 pt-2 sm:pt-3 md:pt-5">
-      <div className={cx(pageContainerClass, 'px-5 sm:px-5 md:px-6 lg:px-8')}>
+      <div className={pageContainerClass}>
         <div
           className={cx(
             'nav-shell-intro relative rounded-[1.05rem] border border-ink bg-white px-3 py-3 shadow-[0_0.5rem_1.2rem_rgba(46,61,58,0.08)] transition-[translate,box-shadow,border-color] duration-300 ease-out-soft hover:-translate-y-0.5 hover:shadow-[0_0.9rem_1.8rem_rgba(46,61,58,0.12)] sm:rounded-[1.25rem] sm:px-3.5 md:px-4 md:py-[0.95rem] lg:rounded-[1.75rem_1.375rem_1.875rem_1.5rem/1.5rem_1.875rem_1.5rem_2rem] lg:px-[1.2rem] lg:py-[0.95rem]',
@@ -94,7 +94,7 @@ export function Nav() {
               className="nav-items-intro hidden min-h-11 items-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.7))] px-4 py-[0.65rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[3px_3px_0_var(--color-ink)] transition-[transform,box-shadow,background-color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[1deg] hover:shadow-[4px_4px_0_var(--color-ink)] xl:inline-flex"
               href="/#contact"
             >
-              <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-[#7fd893] shadow-[0_0_0_0.15rem_rgba(127,216,147,0.18)]" />
+              <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-mint ring-[0.15rem] ring-mint/30" />
               Available for collaborations
             </a>
 
@@ -159,7 +159,7 @@ export function Nav() {
                 href="/#contact"
                 onClick={closeMenu}
               >
-                <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-[#7fd893]" />
+                <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-mint ring-[0.15rem] ring-mint/30" />
                 Available for collaborations
               </a>
             </div>
