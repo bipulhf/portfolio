@@ -1,27 +1,39 @@
-import { ACHIEVEMENT_ITEMS } from '../lib/content'
-import { SectionAccent } from '../section-accent'
 import { SectionHeader } from '../section-header'
+import { SectionShell } from '../section-shell'
+import { ACHIEVEMENT_ITEMS } from '../lib/content'
+import { surfaceCardClass } from '../lib/styles'
+
+const medalTones = ['bg-yellow', 'bg-peach', 'bg-mint', 'bg-sky', 'bg-pink', 'bg-lilac'] as const
 
 export function Achievements() {
   return (
-    <section className="container" id="achievements">
-      <SectionAccent variant="achievements" />
+    <SectionShell accent="achievements" id="achievements">
       <SectionHeader
-        kicker="06 — wins"
+        kicker="06 - wins"
         title="A few proud moments"
-        underlineColor="var(--mint)"
+        underlineColor="var(--color-mint)"
       />
-      <div className="achievements-grid" data-reveal-sequence>
-        {ACHIEVEMENT_ITEMS.map((item) => (
-          <div className="medal" data-reveal-item key={`${item.title}-${item.meta}`}>
-            <div className="medal-icon">{item.icon}</div>
+      <div className="mt-12 grid gap-[1.375rem] md:grid-cols-2 lg:grid-cols-3" data-reveal-sequence>
+        {ACHIEVEMENT_ITEMS.map((item, index) => (
+          <div
+            className={`${surfaceCardClass} flex items-start gap-4 rounded-[1.375rem] border-[2.5px] border-ink p-6 shadow-crayon-md ${index % 2 === 0 ? 'rotate-[-0.8deg]' : 'rotate-[0.8deg]'} hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]`}
+            data-reveal-item
+            key={`${item.title}-${item.meta}`}
+          >
+            <div
+              className={`${medalTones[index % medalTones.length]} flex size-14 shrink-0 items-center justify-center rounded-full border-[2.5px] border-ink font-display text-[1.875rem] font-bold text-ink shadow-[2px_2px_0_var(--color-ink)]`}
+            >
+              {item.icon}
+            </div>
             <div>
-              <h3>{item.title}</h3>
-              <div className="medal-meta">{item.meta}</div>
+              <h3 className="mb-1 font-display text-[1.75rem] font-bold leading-[1.1] text-ink">
+                {item.title}
+              </h3>
+              <div className="font-hand text-[0.9375rem] text-ink-soft">{item.meta}</div>
             </div>
           </div>
         ))}
       </div>
-    </section>
+    </SectionShell>
   )
 }

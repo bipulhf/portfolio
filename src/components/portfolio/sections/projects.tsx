@@ -1,9 +1,13 @@
 import { Cloud, Flower, Heart, Spiral, Star, Sun } from '../doodles'
-import { PROJECT_ITEMS } from '../lib/content'
-import { SectionAccent } from '../section-accent'
 import { SectionHeader } from '../section-header'
+import { SectionShell } from '../section-shell'
+import { PROJECT_ITEMS } from '../lib/content'
+import { surfaceCardClass } from '../lib/styles'
 
-function ProjectCover({ index }: { index: number }) {
+const coverColors = ['bg-mint', 'bg-peach', 'bg-sky', 'bg-yellow', 'bg-pink', 'bg-lilac'] as const
+const cardRotations = ['rotate-[-1deg]', 'rotate-[1deg]', 'rotate-[0.5deg]'] as const
+
+function ProjectCover({ index }: Readonly<{ index: number }>) {
   const covers = [
     <Sun key="sun" size={90} />,
     <Flower key="flower" size={90} />,
@@ -18,34 +22,50 @@ function ProjectCover({ index }: { index: number }) {
 
 export function Projects() {
   return (
-    <section className="container" id="projects">
-      <SectionAccent variant="projects" />
+    <SectionShell accent="projects" id="projects">
       <SectionHeader
-        kicker="05 — selected work"
+        kicker="05 - selected work"
         title="Things I&apos;ve built"
-        underlineColor="var(--peach)"
+        underlineColor="var(--color-peach)"
       />
-      <div className="projects-grid" data-reveal-sequence>
+      <div className="mt-12 grid gap-7 md:grid-cols-2 lg:grid-cols-3 lg:gap-8" data-reveal-sequence>
         {PROJECT_ITEMS.map((project, index) => (
-          <div className="project" data-reveal-item key={project.title}>
-            <div className="project-cover">
+          <div
+            className={`${cardRotations[index % cardRotations.length]} ${surfaceCardClass} overflow-hidden rounded-[1.25rem_1.5rem_1.125rem_1.625rem/1.5rem_1.125rem_1.625rem_1.25rem] border-[2.5px] border-ink shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]`}
+            data-reveal-item
+            key={project.title}
+          >
+            <div
+              className={`${coverColors[index % coverColors.length]} relative flex min-h-40 items-center justify-center border-b-2 border-ink`}
+            >
               <ProjectCover index={index} />
             </div>
-            <div className="project-body">
-              <h3>{project.title}</h3>
-              <p className="project-desc">{project.desc}</p>
-              <div className="project-tags">
+            <div className="flex h-full flex-col px-[1.375rem] pb-[1.375rem] pt-5">
+              <h3 className="mb-2 font-display text-[2rem] font-bold leading-none text-ink">
+                {project.title}
+              </h3>
+              <p className="mb-3.5 flex-1 text-[0.9375rem] text-ink-soft">{project.desc}</p>
+              <div className="mb-3.5 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
-                  <span key={tag}>{tag}</span>
+                  <span
+                    className="inline-flex min-h-8 items-center rounded-[0.875rem] border-[1.5px] border-ink bg-paper px-3 py-1 font-hand text-[0.8125rem] text-ink"
+                    key={tag}
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
-              <a className="project-link" href={project.link}>
+              <a
+                className="group relative inline-flex items-center self-start font-hand text-[1.0625rem] text-ink no-underline"
+                href={project.link}
+              >
                 View case study →
+                <span className="absolute bottom-[-0.1875rem] left-0 h-[3px] w-full origin-left scale-x-0 rounded-full bg-ink transition-transform duration-300 ease-out-soft group-hover:scale-x-100" />
               </a>
             </div>
           </div>
         ))}
       </div>
-    </section>
+    </SectionShell>
   )
 }

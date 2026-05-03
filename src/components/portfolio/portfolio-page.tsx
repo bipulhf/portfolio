@@ -12,13 +12,14 @@ import { Education } from './sections/education'
 import { Experience } from './sections/experience'
 import { Projects } from './sections/projects'
 import { Skills } from './sections/skills'
+import { cx } from './lib/styles'
 
 export function PortfolioPage() {
   useReveal()
   const pageReady = usePageReady()
 
   return (
-    <div className={`app ${pageReady ? 'motion-ready' : ''}`}>
+    <div className={cx('relative isolate z-[1]', pageReady && 'motion-ready')}>
       <BackgroundDoodles />
       <Nav />
       <Hero />

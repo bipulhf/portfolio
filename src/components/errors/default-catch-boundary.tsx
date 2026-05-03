@@ -1,4 +1,3 @@
-import type { CSSProperties } from 'react'
 import type { ErrorComponentProps } from '@tanstack/react-router'
 import {
   ErrorComponent,
@@ -7,23 +6,7 @@ import {
   useMatch,
   useRouter,
 } from '@tanstack/react-router'
-
-const actionStyle: CSSProperties = {
-  border: '2px solid var(--ink)',
-  borderRadius: '0.875rem',
-  background: 'var(--yellow)',
-  boxShadow: '3px 3px 0 var(--ink)',
-  color: 'var(--ink)',
-  cursor: 'pointer',
-  display: 'inline-flex',
-  fontFamily: "'Patrick Hand', cursive",
-  fontSize: '1.125rem',
-  minHeight: '2.75rem',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: '0.5rem 1rem',
-  textDecoration: 'none',
-}
+import { crayonButtonClass, surfaceCardClass } from '~/components/portfolio/lib/styles'
 
 export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
   const router = useRouter()
@@ -35,35 +18,39 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
   console.error('DefaultCatchBoundary Error:', error)
 
   return (
-    <main className="error-shell">
-      <div className="error-card">
-        <h1 className="error-title">Something went sideways</h1>
-        <p className="error-copy">
+    <main className="grid min-h-screen place-items-center px-6 py-6">
+      <div
+        className={`${surfaceCardClass} w-full max-w-3xl rounded-[1.5rem] border-[2.5px] border-ink px-6 py-8 text-center shadow-crayon-md`}
+      >
+        <h1 className="mb-3 font-display text-[clamp(2.5rem,10vw,4rem)] font-bold leading-none text-ink">
+          Something went sideways
+        </h1>
+        <p className="text-ink-soft">
           The portfolio hit an unexpected problem while rendering.
         </p>
-        <div className="error-details">
+        <div className="my-6 text-left">
           <ErrorComponent error={error} />
         </div>
-        <div className="error-actions">
+        <div className="flex flex-wrap items-center justify-center gap-3.5">
           <button
+            className={crayonButtonClass('yellow')}
             onClick={() => router.invalidate()}
-            style={actionStyle}
             type="button"
           >
             Try again
           </button>
           {isRoot ? (
-            <Link to="/" style={actionStyle}>
+            <Link className={crayonButtonClass('mint')} to="/">
               Back home
             </Link>
           ) : (
             <Link
-              to="/"
+              className={crayonButtonClass('mint')}
               onClick={(event) => {
                 event.preventDefault()
                 window.history.back()
               }}
-              style={actionStyle}
+              to="/"
             >
               Go back
             </Link>

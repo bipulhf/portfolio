@@ -1,34 +1,17 @@
-import { EDUCATION_ITEMS } from '../lib/content'
-import { SectionAccent } from '../section-accent'
 import { SectionHeader } from '../section-header'
+import { SectionShell } from '../section-shell'
+import { TimelineList } from '../timeline-list'
+import { EDUCATION_ITEMS } from '../lib/content'
 
 export function Education() {
   return (
-    <section className="container" id="education">
-      <SectionAccent variant="education" />
+    <SectionShell accent="education" id="education">
       <SectionHeader
-        kicker="03 — education"
+        kicker="03 - education"
         title="Where I studied"
-        underlineColor="var(--sky)"
+        underlineColor="var(--color-sky)"
       />
-      <div className="timeline" data-reveal-sequence>
-        {EDUCATION_ITEMS.map((item) => (
-          <div className="timeline-item" data-reveal-item key={`${item.role}-${item.place}`}>
-            <div className="timeline-card">
-              <div className="timeline-meta">
-                <div className="timeline-role">{item.role}</div>
-                <div className="timeline-when">{item.when}</div>
-              </div>
-              <div className="timeline-place">{item.place}</div>
-              <ul>
-                {item.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
+      <TimelineList items={EDUCATION_ITEMS} />
+    </SectionShell>
   )
 }

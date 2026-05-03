@@ -136,8 +136,8 @@ export const BLOG_ITEMS = [
 ] as const
 
 export const CONTACT_LINKS = [
-  { label: '✉ Email me', href: 'mailto:hello@example.com', className: 'btn' },
-  { label: 'GitHub', href: '#', className: 'btn mint' },
-  { label: 'LinkedIn', href: '#', className: 'btn sky' },
-  { label: 'Twitter', href: '#', className: 'btn peach' },
+  { label: '✉ Email me', href: 'mailto:hello@example.com', tone: 'yellow' },
+  { label: 'GitHub', href: '#', tone: 'mint' },
+  { label: 'LinkedIn', href: '#', tone: 'sky' },
+  { label: 'Twitter', href: '#', tone: 'peach' },
 ] as const
