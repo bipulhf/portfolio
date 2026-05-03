@@ -20,13 +20,13 @@ export function Skills() {
             data-reveal-item
             key={category.title}
           >
-            <h3 className="mb-3 font-display text-[2rem] font-bold leading-none text-ink">
+            <h3 className="type-display-card-lg mb-3">
               {category.title}
             </h3>
             <div className="flex flex-wrap gap-2">
               {category.tags.map((tag) => (
                 <span
-                  className="inline-flex min-h-8 items-center rounded-[0.875rem] border-[1.5px] border-ink bg-paper px-3 py-1 font-hand text-[0.9375rem] text-ink shadow-[1.5px_1.5px_0_var(--color-ink)]"
+                  className="type-tag inline-flex min-h-8 items-center rounded-[0.875rem] border-[1.5px] border-ink bg-paper px-3 py-1 shadow-[1.5px_1.5px_0_var(--color-ink)]"
                   key={tag}
                 >
                   {tag}

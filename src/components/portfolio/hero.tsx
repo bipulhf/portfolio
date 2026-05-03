@@ -49,12 +49,12 @@ export function Hero() {
         </div>
 
         <div className="order-1 relative flex max-w-[47.5rem] flex-col justify-center py-2 sm:py-4">
-          <div className="hero-copy-item mb-2 flex flex-wrap items-center gap-2.5 font-hand text-lg text-ink-soft sm:text-xl md:text-[1.25rem]" style={{ ['--hero-delay' as string]: '40ms' }}>
+          <div className="hero-copy-item type-kicker mb-2 flex flex-wrap items-center gap-2.5" style={{ ['--hero-delay' as string]: '40ms' }}>
             <span className="hero-wave inline-block">👋</span>
             <span>hello, I&apos;m</span>
           </div>
 
-          <h1 className="hero-copy-item relative mb-[1.125rem] mt-1 block font-display text-[clamp(3rem,15vw,6.75rem)] font-bold leading-none tracking-[-0.01em] text-ink" style={{ ['--hero-delay' as string]: '90ms' }}>
+          <h1 className="type-display-hero hero-copy-item relative mb-[1.125rem] mt-1 block" style={{ ['--hero-delay' as string]: '90ms' }}>
             <span className="relative inline-block">Shahiduzzaman</span>{' '}
             <span className="relative inline-block">
               Bipul.
@@ -64,7 +64,7 @@ export function Hero() {
             </span>
           </h1>
 
-          <div className="hero-copy-item mb-[1.125rem] max-w-[35rem] font-hand text-[1.18rem] leading-[1.55] text-ink sm:text-[1.3rem] lg:max-w-[32.5rem] lg:text-[1.375rem] lg:leading-[1.6]" style={{ ['--hero-delay' as string]: '140ms' }}>
+          <div className="type-lead-hand hero-copy-item mb-[1.125rem] max-w-[35rem] lg:max-w-[32.5rem]" style={{ ['--hero-delay' as string]: '140ms' }}>
             A{' '}
             <span className="mx-0.5 inline-block whitespace-nowrap rounded-[1.25rem] border-[1.5px] border-ink bg-mint px-3 py-px shadow-[2px_2px_0_var(--color-ink)] rotate-[-1.2deg]">
               software engineer
@@ -72,7 +72,7 @@ export function Hero() {
             crafting calm, considered software one careful detail at a time.
           </div>
 
-          <p className="hero-copy-item mb-7 max-w-[35rem] text-base leading-[1.7] text-ink-soft lg:max-w-[32.5rem]" style={{ ['--hero-delay' as string]: '190ms' }}>
+          <p className="type-copy hero-copy-item mb-7 max-w-[35rem] lg:max-w-[32.5rem]" style={{ ['--hero-delay' as string]: '190ms' }}>
             Currently at <strong>InfancyIT Ltd.</strong> &middot; Computer Science,{' '}
             <strong>Shahjalal University of Science and Technology</strong>.
           </p>

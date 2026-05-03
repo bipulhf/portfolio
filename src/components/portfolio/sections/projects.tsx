@@ -51,14 +51,14 @@ export function Projects({ items }: Readonly<{ items: SerializedProject[] }>) {
               )}
             </div>
             <div className="flex h-full flex-col px-[1.375rem] pb-[1.375rem] pt-5">
-              <h3 className="mb-2 font-display text-[2rem] font-bold leading-none text-ink">
+              <h3 className="type-display-card-lg mb-2">
                 {project.title}
               </h3>
-              <p className="mb-3.5 flex-1 text-[0.9375rem] text-ink-soft">{project.summary}</p>
+              <p className="type-copy mb-3.5 flex-1 text-[0.98rem]">{project.summary}</p>
               <div className="mb-3.5 flex flex-wrap gap-2">
                 {project.techStack.map((tag) => (
                   <span
-                    className="inline-flex min-h-8 items-center rounded-[0.875rem] border-[1.5px] border-ink bg-paper px-3 py-1 font-hand text-[0.8125rem] text-ink"
+                    className="type-tag inline-flex min-h-8 items-center rounded-[0.875rem] border-[1.5px] border-ink bg-paper px-3 py-1"
                     key={tag}
                   >
                     {tag}
@@ -66,7 +66,7 @@ export function Projects({ items }: Readonly<{ items: SerializedProject[] }>) {
                 ))}
               </div>
               <a
-                className="group relative inline-flex items-center self-start font-hand text-[1.0625rem] text-ink no-underline"
+                className="type-link-hand group relative inline-flex items-center self-start no-underline"
                 href={`/projects/${project.slug}`}
               >
                 View case study <span className="motion-arrow">→</span>
@@ -76,8 +76,8 @@ export function Projects({ items }: Readonly<{ items: SerializedProject[] }>) {
           </div>
         )) : (
           <div className={`${surfaceCardClass} reveal reveal-soft col-span-full rounded-[1.5rem] border-[2.5px] border-dashed border-ink px-6 py-10 text-center shadow-crayon-md`}>
-            <h3 className="mb-2 font-display text-[2rem] font-bold text-ink">Projects coming soon</h3>
-            <p className="mx-auto max-w-2xl text-ink-soft">
+            <h3 className="type-display-card-lg mb-2">Projects coming soon</h3>
+            <p className="type-copy mx-auto max-w-[60ch]">
               Publish projects from the admin panel and they&apos;ll show up here automatically.
             </p>
           </div>

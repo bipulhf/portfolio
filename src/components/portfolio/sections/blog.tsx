@@ -58,22 +58,22 @@ export function Blog({ items }: Readonly<{ items: SerializedBlog[] }>) {
               )}
             </div>
             <div className="flex h-full flex-col px-[1.375rem] pb-[1.375rem] pt-[1.125rem]">
-              <div className="mb-1.5 font-hand text-sm text-ink-soft">
+              <div className="type-meta mb-1.5">
                 {formatPublishedDate(post.publishedAt)} · {post.readingTimeMinutes} min
               </div>
-              <h3 className="mb-2 font-display text-[1.75rem] font-bold leading-[1.05] text-ink">
+              <h3 className="type-display-card-md mb-2">
                 {post.title}
               </h3>
-              <p className="flex-1 text-[0.9375rem] text-ink-soft">{post.excerpt}</p>
-              <span className="mt-3 inline-flex items-center gap-1.5 font-hand text-base text-ink">
+              <p className="type-copy flex-1 text-[0.98rem]">{post.excerpt}</p>
+              <span className="type-link-hand mt-3 inline-flex items-center gap-1.5">
                 Read on <span className="motion-arrow">→</span>
               </span>
             </div>
           </a>
         )) : (
           <div className={`${surfaceCardClass} reveal reveal-soft col-span-full rounded-[1.5rem] border-[2.5px] border-dashed border-ink px-6 py-10 text-center shadow-crayon-md`}>
-            <h3 className="mb-2 font-display text-[2rem] font-bold text-ink">No posts published yet</h3>
-            <p className="mx-auto max-w-2xl text-ink-soft">
+            <h3 className="type-display-card-lg mb-2">No posts published yet</h3>
+            <p className="type-copy mx-auto max-w-[60ch]">
               The blog section will light up as soon as posts are published from the admin panel.
             </p>
           </div>

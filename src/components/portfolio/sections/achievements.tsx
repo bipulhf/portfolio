@@ -26,10 +26,10 @@ export function Achievements() {
               {item.icon}
             </div>
             <div>
-              <h3 className="mb-1 font-display text-[1.75rem] font-bold leading-[1.1] text-ink">
+              <h3 className="type-display-card-md mb-1">
                 {item.title}
               </h3>
-              <div className="font-hand text-[0.9375rem] text-ink-soft">{item.meta}</div>
+              <div className="type-meta">{item.meta}</div>
             </div>
           </div>
         ))}

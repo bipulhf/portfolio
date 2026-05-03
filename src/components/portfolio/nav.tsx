@@ -60,10 +60,10 @@ export function Nav() {
                 src="/logo.png"
               />
               <span className="flex min-w-0 flex-col leading-none">
-                <span className="font-display text-[1.55rem] font-bold sm:text-[1.75rem] md:text-[2.2rem]">
+                <span className="font-display text-[1.58rem] font-bold leading-[0.92] tracking-[-0.012em] sm:text-[1.8rem] md:text-[2.2rem]">
                   Bipul
                 </span>
-                <span className="mt-0.5 hidden font-hand text-[0.92rem] text-ink-soft md:inline">
+                <span className="mt-0.5 hidden font-hand text-[0.92rem] leading-[1.1] tracking-[0.035em] text-ink-soft md:inline">
                   software engineer portfolio
                 </span>
               </span>
@@ -76,7 +76,7 @@ export function Nav() {
               {NAV_LINKS.map((link, index) => (
                 <a
                   className={cx(
-                    'group relative inline-flex min-h-11 items-center justify-center rounded-full px-[0.95rem] py-[0.55rem] font-hand text-[1.02rem] text-ink no-underline transition-[transform,background-color,box-shadow,color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]',
+                    'group relative inline-flex min-h-11 items-center justify-center rounded-full px-[0.95rem] py-[0.55rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline transition-[transform,background-color,box-shadow,color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]',
                     navLinkTones[index],
                   )}
                   href={link.href}
@@ -91,7 +91,7 @@ export function Nav() {
             </div>
 
             <a
-              className="nav-items-intro hidden min-h-11 items-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.7))] px-4 py-[0.65rem] font-hand text-base text-ink no-underline shadow-[3px_3px_0_var(--color-ink)] transition-[transform,box-shadow,background-color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[1deg] hover:shadow-[4px_4px_0_var(--color-ink)] xl:inline-flex"
+              className="nav-items-intro hidden min-h-11 items-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.7))] px-4 py-[0.65rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[3px_3px_0_var(--color-ink)] transition-[transform,box-shadow,background-color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[1deg] hover:shadow-[4px_4px_0_var(--color-ink)] xl:inline-flex"
               href="/#contact"
             >
               <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-[#7fd893] shadow-[0_0_0_0.15rem_rgba(127,216,147,0.18)]" />
@@ -142,7 +142,7 @@ export function Nav() {
                 {NAV_LINKS.map((link, index) => (
                   <a
                     className={cx(
-                      'inline-flex min-h-11 items-center justify-center rounded-full border-2 border-ink/15 bg-white/65 px-3 py-[0.65rem] text-center font-hand text-[0.98rem] text-ink no-underline shadow-[0.12rem_0.12rem_0_rgba(46,61,58,0.18)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]',
+                      'inline-flex min-h-11 items-center justify-center rounded-full border-2 border-ink/15 bg-white/65 px-3 py-[0.65rem] text-center font-hand text-[0.96rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[0.12rem_0.12rem_0_rgba(46,61,58,0.18)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]',
                       navLinkTones[index],
                     )}
                     href={link.href}
@@ -155,7 +155,7 @@ export function Nav() {
               </div>
 
               <a
-                className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.76))] px-4 py-[0.7rem] font-hand text-[1rem] text-ink no-underline shadow-[2px_2px_0_var(--color-ink)] transition-[transform,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:shadow-[3px_3px_0_var(--color-ink)]"
+                className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.76))] px-4 py-[0.7rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[2px_2px_0_var(--color-ink)] transition-[transform,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:shadow-[3px_3px_0_var(--color-ink)]"
                 href="/#contact"
                 onClick={closeMenu}
               >

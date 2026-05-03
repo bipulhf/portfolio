@@ -32,15 +32,15 @@ export function TimelineList({ items }: Readonly<{ items: readonly TimelineItem[
             className={`${surfaceCardClass} rounded-[1.125rem_1.375rem_1rem_1.5rem/1.375rem_1rem_1.5rem_1.125rem] border-2 border-ink px-4 pb-4 pt-4 shadow-[4px_4px_0_var(--color-ink)] hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)] sm:px-5 sm:pb-5 sm:pt-5`}
           >
             <div className="mb-1.5 flex flex-wrap items-baseline justify-between gap-2">
-              <div className="font-display text-[1.55rem] font-bold leading-none text-ink sm:text-[2rem]">
+              <div className="type-display-card-lg">
                 {item.role}
               </div>
-              <div className="inline-flex min-h-8 items-center rounded-xl border-[1.5px] border-ink bg-yellow px-2.5 py-0.5 font-hand text-sm text-ink-soft sm:text-base">
+              <div className="type-meta inline-flex min-h-8 items-center rounded-xl border-[1.5px] border-ink bg-yellow px-2.5 py-0.5">
                 {item.when}
               </div>
             </div>
-            <div className="mb-2 font-hand text-base text-ink-soft sm:text-lg">{item.place}</div>
-            <ul className="pl-5">
+            <div className="type-lead-hand mb-2 text-[1.05rem] text-ink-soft sm:text-[1.12rem] md:text-[1.16rem]">{item.place}</div>
+            <ul className="type-copy-strong pl-5">
               {item.bullets.map((bullet) => (
                 <li className="mt-1 first:mt-0" key={bullet}>
                   {bullet}

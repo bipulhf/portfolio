@@ -62,14 +62,14 @@ export function BlogGrid({
               )}
             </div>
             <div className="flex h-full flex-col px-5 pb-5 pt-4 sm:px-[1.375rem] sm:pb-[1.375rem] sm:pt-[1.125rem]">
-              <div className="mb-1.5 font-hand text-sm text-ink-soft">
+              <div className="type-meta mb-1.5">
                 {formatPublishedDate(post.publishedAt)} · {post.readingTimeMinutes} min
               </div>
-              <h2 className="mb-2 font-display text-[1.5rem] font-bold leading-[1.05] text-ink sm:text-[1.75rem]">
+              <h2 className="type-display-card-md mb-2">
                 {post.title}
               </h2>
-              <p className="flex-1 text-[0.9375rem] text-ink-soft">{post.excerpt}</p>
-              <span className="mt-3 inline-flex items-center gap-1.5 font-hand text-base text-ink">
+              <p className="type-copy flex-1 text-[0.98rem]">{post.excerpt}</p>
+              <span className="type-link-hand mt-3 inline-flex items-center gap-1.5">
                 Read on <span className="motion-arrow">→</span>
               </span>
             </div>
@@ -79,8 +79,8 @@ export function BlogGrid({
         <div
           className={`${surfaceCardClass} reveal reveal-soft col-span-full rounded-[1.5rem] border-[2.5px] border-dashed border-ink px-6 py-10 text-center shadow-crayon-md`}
         >
-          <h2 className="mb-2 font-display text-[2rem] font-bold text-ink">{emptyTitle}</h2>
-          <p className="mx-auto max-w-2xl text-ink-soft">{emptyText}</p>
+          <h2 className="type-display-card-lg mb-2">{emptyTitle}</h2>
+          <p className="type-copy mx-auto max-w-[60ch]">{emptyText}</p>
         </div>
       )}
     </div>

@@ -18,17 +18,17 @@ export function About() {
           className={`${surfaceCardClass} reveal reveal-left relative rotate-[-1deg] rounded-[1.375rem_1.625rem_1.25rem_1.75rem/1.625rem_1.25rem_1.75rem_1.375rem] border-[2.5px] border-ink px-5 py-6 shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)] sm:px-6 sm:py-8`}
         >
           <div className="absolute left-8 top-[-0.875rem] size-7 rounded-full border-2 border-ink bg-peach shadow-[inset_-2px_-3px_0_rgba(46,61,58,0.2)]" />
-          <p>
+          <p className="type-copy-strong">
             I&apos;m a software engineer at <strong>InfancyIT Ltd.</strong>, where I focus on
             building products that feel calm, considered, and genuinely useful.
           </p>
-          <p className="mt-3.5">
+          <p className="type-copy-strong mt-3.5">
             I graduated in Computer Science from{' '}
             <strong>Shahjalal University of Science and Technology</strong>, and have spent the
             years since shipping products, contributing to teams, and quietly racking up hackathon
             wins on the weekends.
           </p>
-          <p className="mt-3.5">
+          <p className="type-copy-strong mt-3.5">
             I care about the small details - the readable code, the gentle interaction, the right
             word in the right place.
           </p>
@@ -46,8 +46,8 @@ export function About() {
               data-reveal-item
               key={label}
             >
-              <div className="font-display text-[2.3rem] font-bold leading-none text-ink sm:text-5xl">{value}</div>
-              <div className="font-hand text-sm text-ink-soft sm:text-base">{label}</div>
+              <div className="type-display-stat">{value}</div>
+              <div className="type-meta mt-1">{label}</div>
             </div>
           ))}
         </div>

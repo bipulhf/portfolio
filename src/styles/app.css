@@ -48,6 +48,8 @@
 
   body {
     @apply m-0 min-w-80 overflow-x-hidden bg-paper font-body text-base leading-[1.65] tracking-[0.01em] text-ink antialiased;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
     background-image:
       radial-gradient(var(--paper-noise) 1px, transparent 1.2px),
       radial-gradient(var(--paper-noise-soft) 1px, transparent 1.2px);
@@ -130,6 +132,58 @@
 
   .crayon-btn-ghost {
     @apply border-2 border-dashed border-ink bg-transparent shadow-none hover:bg-yellow/40 hover:shadow-none;
+  }
+
+  .type-kicker {
+    @apply font-hand text-[0.98rem] leading-[1.2] tracking-[0.04em] text-ink-soft sm:text-[1.06rem] md:text-[1.14rem];
+  }
+
+  .type-display-hero {
+    @apply font-display text-[clamp(3.25rem,15vw,7rem)] font-bold leading-[0.9] tracking-[-0.015em] text-ink;
+  }
+
+  .type-display-page {
+    @apply font-display text-[clamp(2.95rem,8vw,5.35rem)] font-bold leading-[0.92] tracking-[-0.012em] text-ink;
+  }
+
+  .type-display-section {
+    @apply font-display text-[clamp(2.45rem,10vw,4.15rem)] font-bold leading-[0.92] tracking-[-0.012em] text-ink;
+  }
+
+  .type-display-card-lg {
+    @apply font-display text-[clamp(1.78rem,4vw,2.15rem)] font-bold leading-[0.98] tracking-[-0.01em] text-ink;
+  }
+
+  .type-display-card-md {
+    @apply font-display text-[clamp(1.58rem,3.5vw,1.88rem)] font-bold leading-[1] tracking-[-0.01em] text-ink;
+  }
+
+  .type-display-stat {
+    @apply font-display text-[clamp(2.4rem,8vw,3.4rem)] font-bold leading-[0.88] tracking-[-0.02em] text-ink;
+  }
+
+  .type-lead-hand {
+    @apply font-hand text-[1.14rem] leading-[1.55] text-ink sm:text-[1.24rem] md:text-[1.32rem] lg:text-[1.42rem];
+  }
+
+  .type-copy {
+    @apply text-base leading-[1.72] text-ink-soft;
+  }
+
+  .type-copy-strong {
+    @apply text-[1.01rem] leading-[1.78] text-ink;
+  }
+
+  .type-meta {
+    @apply font-hand text-[0.9rem] leading-[1.2] tracking-[0.02em] text-ink-soft sm:text-[0.97rem];
+  }
+
+  .type-tag {
+    @apply font-hand text-[0.84rem] leading-[1.1] tracking-[0.015em] text-ink sm:text-[0.9rem];
+  }
+
+  .type-link-hand {
+    @apply font-hand text-[1.03rem] leading-none tracking-[0.01em] text-ink;
   }
 
   .crayon-surface {
@@ -418,7 +472,7 @@
   }
 
   .rich-content {
-    @apply space-y-5 text-[1rem] leading-[1.8] text-ink;
+    @apply space-y-5 text-[1.02rem] leading-[1.82] text-ink;
   }
 
   .rich-content > :first-child {
@@ -426,11 +480,11 @@
   }
 
   .rich-content h2 {
-    @apply mt-10 font-display text-[2.2rem] font-bold leading-none text-ink;
+    @apply mt-11 font-display text-[clamp(2.15rem,5vw,2.75rem)] font-bold leading-[0.95] tracking-[-0.012em] text-ink;
   }
 
   .rich-content h3 {
-    @apply mt-8 font-hand text-[1.75rem] text-ink;
+    @apply mt-8 font-hand text-[1.55rem] leading-[1.08] text-ink md:text-[1.72rem];
   }
 
   .rich-content p,
@@ -455,7 +509,7 @@
   }
 
   .rich-content blockquote {
-    @apply rounded-[1.2rem] border-2 border-ink/15 bg-white/65 px-5 py-4 font-hand text-[1.3rem] text-ink;
+    @apply rounded-[1.2rem] border-2 border-ink/15 bg-white/65 px-5 py-4 font-hand text-[1.22rem] leading-[1.6] text-ink md:text-[1.28rem];
   }
 
   .rich-content pre {
@@ -495,11 +549,11 @@
   }
 
   .editor-content h2 {
-    @apply mt-6 font-display text-[2rem] font-bold leading-none text-ink;
+    @apply mt-6 font-display text-[1.95rem] font-bold leading-[0.96] tracking-[-0.01em] text-ink;
   }
 
   .editor-content h3 {
-    @apply mt-5 font-hand text-[1.6rem] text-ink;
+    @apply mt-5 font-hand text-[1.5rem] leading-[1.08] text-ink;
   }
 
   .editor-content p,
@@ -516,7 +570,7 @@
   }
 
   .editor-content blockquote {
-    @apply rounded-[1.1rem] border-l-4 border-ink bg-paper-shadow/35 px-4 py-3 font-hand text-[1.2rem] text-ink;
+    @apply rounded-[1.1rem] border-l-4 border-ink bg-paper-shadow/35 px-4 py-3 font-hand text-[1.12rem] leading-[1.6] text-ink;
   }
 
   .editor-content pre {
