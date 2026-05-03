@@ -29,17 +29,15 @@ import { $createImageNode, ImageNode } from './image-node'
 import { EditorPendingShell } from '~/components/loaders/crayon-pending'
 
 function ToolbarButton({
-  active = false,
   children,
   onClick,
 }: Readonly<{
-  active?: boolean
   children: string
   onClick: () => void
 }>) {
   return (
     <button
-      className={`rounded-[0.85rem] border px-3 py-2 font-hand text-[1rem] transition-colors ${active ? 'border-ink bg-yellow text-ink' : 'border-ink/15 bg-white/65 text-ink-soft hover:border-ink hover:text-ink'}`}
+      className="rounded-full border border-ink/12 bg-white px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:border-ink/25 hover:text-ink"
       onClick={(event) => {
         event.preventDefault()
         onClick()
@@ -76,7 +74,7 @@ function ToolbarPlugin({
           })
         }
       >
-        P
+        Paragraph
       </ToolbarButton>
       <ToolbarButton
         onClick={() =>
@@ -88,7 +86,7 @@ function ToolbarPlugin({
           })
         }
       >
-        H2
+        Heading
       </ToolbarButton>
       <ToolbarButton
         onClick={() =>
@@ -100,7 +98,7 @@ function ToolbarPlugin({
           })
         }
       >
-        H3
+        Subheading
       </ToolbarButton>
       <ToolbarButton
         onClick={() =>
@@ -114,8 +112,8 @@ function ToolbarPlugin({
       >
         Quote
       </ToolbarButton>
-      <ToolbarButton onClick={() => editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined)}>List</ToolbarButton>
-      <ToolbarButton onClick={() => editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined)}>1.</ToolbarButton>
+      <ToolbarButton onClick={() => editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined)}>Bullets</ToolbarButton>
+      <ToolbarButton onClick={() => editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined)}>Numbers</ToolbarButton>
       <ToolbarButton onClick={() => editor.dispatchCommand(REMOVE_LIST_COMMAND, undefined)}>Clear list</ToolbarButton>
       <ToolbarButton
         onClick={() =>

@@ -117,12 +117,12 @@ export function ProjectEditorForm({
 
   return (
     <form
-      className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]"
+      className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_19.5rem]"
       onSubmit={(event) => event.preventDefault()}
     >
       <div className="space-y-6">
         <AdminCard>
-          <AdminSectionHeading eyebrow="overview" title="Project details" />
+          <AdminSectionHeading eyebrow="Step 1" title="Project details" />
           <div className="grid gap-4 md:grid-cols-2">
             <AdminField label="Title">
               <AdminInput
@@ -171,7 +171,7 @@ export function ProjectEditorForm({
         </AdminCard>
 
         <AdminCard>
-          <AdminSectionHeading eyebrow="story" title="Case study body" />
+          <AdminSectionHeading eyebrow="Step 2" title="Write the case study" />
           <LexicalRichEditor
             onChange={({ bodyHtml, bodyJson }) =>
               setValues((current) => ({
@@ -192,9 +192,12 @@ export function ProjectEditorForm({
         </AdminCard>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-6 xl:sticky xl:top-24 xl:self-start">
         <AdminCard>
-          <AdminSectionHeading eyebrow="publish" title="Visibility" />
+          <AdminSectionHeading eyebrow="Step 3" title="Save and publish" />
+          <p className="mb-4 text-sm text-ink-soft">
+            Start with a draft while writing. Publish when the content and media are ready.
+          </p>
           <div className="space-y-4">
             <AdminField label="Status">
               <AdminSelect
@@ -229,10 +232,42 @@ export function ProjectEditorForm({
               }
             />
           </div>
+          <div className="mt-5 flex flex-col gap-3">
+            <button
+              className="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-ink px-4 py-3 text-sm font-semibold text-paper transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
+              disabled={saveMutation.isPending || deleteMutation.isPending}
+              onClick={() => saveMutation.mutate('draft')}
+              type="button"
+            >
+              {saveMutation.isPending && values.status !== 'published' ? 'Saving draft...' : 'Save draft'}
+            </button>
+            <button
+              className="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-mint px-4 py-3 text-sm font-semibold text-ink transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
+              disabled={saveMutation.isPending || deleteMutation.isPending}
+              onClick={() => saveMutation.mutate('published')}
+              type="button"
+            >
+              {saveMutation.isPending && values.status === 'published' ? 'Publishing...' : 'Publish now'}
+            </button>
+          </div>
+          {projectId ? (
+            <button
+              className="mt-4 inline-flex min-h-10 w-full items-center justify-center rounded-full border border-red-300 bg-red-50 px-4 py-2.5 text-sm font-medium text-red-700 transition-colors hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-70"
+              disabled={deleteMutation.isPending || saveMutation.isPending}
+              onClick={() => {
+                if (window.confirm('Delete this project? This cannot be undone.')) {
+                  deleteMutation.mutate()
+                }
+              }}
+              type="button"
+            >
+              {deleteMutation.isPending ? 'Deleting...' : 'Delete project'}
+            </button>
+          ) : null}
         </AdminCard>
 
         <AdminCard>
-          <AdminSectionHeading eyebrow="links" title="URLs and media" />
+          <AdminSectionHeading eyebrow="Optional" title="Links and media" />
           <div className="space-y-4">
             <AdminField label="Live URL">
               <AdminInput
@@ -264,7 +299,7 @@ export function ProjectEditorForm({
         </AdminCard>
 
         <AdminCard>
-          <AdminSectionHeading eyebrow="seo" title="Search metadata" />
+          <AdminSectionHeading eyebrow="Optional" title="SEO metadata" />
           <div className="space-y-4">
             <AdminField label="SEO title">
               <AdminInput
@@ -284,41 +319,6 @@ export function ProjectEditorForm({
               />
             </AdminField>
           </div>
-        </AdminCard>
-
-        <AdminCard>
-          <div className="flex flex-wrap gap-3">
-            <button
-              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-[1rem] border-2 border-ink bg-yellow px-4 py-3 font-hand text-xl text-ink shadow-crayon-sm transition-transform hover:-translate-y-px disabled:cursor-not-allowed disabled:opacity-70"
-              disabled={saveMutation.isPending || deleteMutation.isPending}
-              onClick={() => saveMutation.mutate('draft')}
-              type="button"
-            >
-              {saveMutation.isPending && values.status !== 'published' ? 'Saving...' : 'Save draft'}
-            </button>
-            <button
-              className="inline-flex min-h-12 flex-1 items-center justify-center rounded-[1rem] border-2 border-ink bg-mint px-4 py-3 font-hand text-xl text-ink shadow-crayon-sm transition-transform hover:-translate-y-px disabled:cursor-not-allowed disabled:opacity-70"
-              disabled={saveMutation.isPending || deleteMutation.isPending}
-              onClick={() => saveMutation.mutate('published')}
-              type="button"
-            >
-              {saveMutation.isPending && values.status === 'published' ? 'Publishing...' : 'Publish'}
-            </button>
-          </div>
-          {projectId ? (
-            <button
-              className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-[0.95rem] border-2 border-dashed border-ink bg-transparent px-4 py-3 font-hand text-lg text-ink transition-colors hover:bg-peach/45 disabled:cursor-not-allowed disabled:opacity-70"
-              disabled={deleteMutation.isPending || saveMutation.isPending}
-              onClick={() => {
-                if (window.confirm('Delete this project? This cannot be undone.')) {
-                  deleteMutation.mutate()
-                }
-              }}
-              type="button"
-            >
-              {deleteMutation.isPending ? 'Deleting...' : 'Delete project'}
-            </button>
-          ) : null}
         </AdminCard>
       </div>
     </form>

@@ -13,7 +13,7 @@ export function AdminCard({
     <section
       className={cx(
         surfaceCardClass,
-        'rounded-[1.7rem] border-[2.5px] border-ink bg-[linear-gradient(180deg,rgba(255,255,255,0.7),rgba(244,250,249,0.96))] p-5 shadow-crayon-md md:p-6',
+        'rounded-[1.35rem] border border-ink/10 bg-white p-5 shadow-[0_10px_28px_rgba(46,61,58,0.05)] md:p-6',
         className,
       )}
     >
@@ -33,7 +33,7 @@ export function AdminField({
 }>) {
   return (
     <label className="block space-y-2">
-      <span className="block font-hand text-[1.15rem] text-ink">{label}</span>
+      <span className="block text-sm font-semibold tracking-[0.01em] text-ink">{label}</span>
       {children}
       {help ? <span className="block text-sm text-ink-soft">{help}</span> : null}
     </label>
@@ -45,7 +45,7 @@ export function AdminInput(props: Readonly<ComponentProps<'input'>>) {
     <input
       {...props}
       className={cx(
-        'min-h-12 w-full rounded-[1rem] border-2 border-ink bg-white/75 px-4 py-3 text-base text-ink outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-ink-soft/70 focus:border-ink focus:bg-white focus:shadow-[0_0_0_4px_rgba(174,228,214,0.35)]',
+        'min-h-12 w-full rounded-[0.95rem] border border-ink/15 bg-paper/45 px-4 py-3 text-base text-ink outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-ink-soft/70 focus:border-ink/35 focus:bg-white focus:shadow-[0_0_0_4px_rgba(174,228,214,0.22)]',
         props.className,
       )}
     />
@@ -57,7 +57,7 @@ export function AdminTextarea(props: Readonly<ComponentProps<'textarea'>>) {
     <textarea
       {...props}
       className={cx(
-        'min-h-32 w-full rounded-[1rem] border-2 border-ink bg-white/75 px-4 py-3 text-base text-ink outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-ink-soft/70 focus:border-ink focus:bg-white focus:shadow-[0_0_0_4px_rgba(174,228,214,0.35)]',
+        'min-h-32 w-full rounded-[0.95rem] border border-ink/15 bg-paper/45 px-4 py-3 text-base text-ink outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-ink-soft/70 focus:border-ink/35 focus:bg-white focus:shadow-[0_0_0_4px_rgba(174,228,214,0.22)]',
         props.className,
       )}
     />
@@ -69,7 +69,7 @@ export function AdminSelect(props: Readonly<ComponentProps<'select'>>) {
     <select
       {...props}
       className={cx(
-        'min-h-12 w-full rounded-[1rem] border-2 border-ink bg-white/75 px-4 py-3 text-base text-ink outline-none transition-[border-color,box-shadow,background-color] duration-150 focus:border-ink focus:bg-white focus:shadow-[0_0_0_4px_rgba(174,228,214,0.35)]',
+        'min-h-12 w-full rounded-[0.95rem] border border-ink/15 bg-paper/45 px-4 py-3 text-base text-ink outline-none transition-[border-color,box-shadow,background-color] duration-150 focus:border-ink/35 focus:bg-white focus:shadow-[0_0_0_4px_rgba(174,228,214,0.22)]',
         props.className,
       )}
     />
@@ -82,10 +82,10 @@ export function AdminCheckbox({
   ...props
 }: Readonly<ComponentProps<'input'> & { help?: string; label: string }>) {
   return (
-    <label className="flex items-start gap-3 rounded-[1rem] border-2 border-ink/10 bg-white/55 px-4 py-3">
+    <label className="flex items-start gap-3 rounded-[1rem] border border-ink/10 bg-paper/35 px-4 py-3">
       <input {...props} className="mt-1 size-4 accent-ink" type="checkbox" />
       <span className="block">
-        <span className="block font-hand text-[1.1rem] text-ink">{label}</span>
+        <span className="block text-sm font-semibold text-ink">{label}</span>
         {help ? <span className="mt-1 block text-sm text-ink-soft">{help}</span> : null}
       </span>
     </label>
@@ -102,10 +102,10 @@ export function AdminSectionHeading({
   title: string
 }>) {
   return (
-    <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+    <div className="mb-5 flex flex-wrap items-end justify-between gap-3 border-b border-ink/8 pb-4">
       <div>
-        {eyebrow ? <div className="mb-2 font-hand text-base text-ink-soft">{eyebrow}</div> : null}
-        <h2 className="font-display text-[2.1rem] font-bold leading-none text-ink">{title}</h2>
+        {eyebrow ? <div className="mb-1 text-sm font-medium uppercase tracking-[0.08em] text-ink-soft">{eyebrow}</div> : null}
+        <h2 className="font-display text-[1.9rem] font-bold leading-none text-ink">{title}</h2>
       </div>
       {action}
     </div>
@@ -116,8 +116,8 @@ export function AdminStatusPill({ status }: Readonly<{ status: 'draft' | 'publis
   return (
     <span
       className={cx(
-        'inline-flex min-h-8 items-center rounded-full border border-ink px-3 py-1 font-hand text-sm',
-        status === 'published' ? 'bg-mint text-ink' : 'bg-yellow text-ink',
+        'inline-flex min-h-8 items-center rounded-full border border-ink/12 px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em]',
+        status === 'published' ? 'bg-mint/65 text-ink' : 'bg-yellow/70 text-ink',
       )}
     >
       {status}
@@ -141,7 +141,7 @@ export function AdminEmptyState({
       <h3 className="font-display text-[2rem] font-bold text-ink">{title}</h3>
       <p className="mx-auto mt-3 max-w-2xl text-ink-soft">{description}</p>
       <div className="mt-6">
-        <Link className={crayonButtonClass('yellow')} preload="intent" to={actionTo}>
+        <Link className="inline-flex min-h-11 items-center justify-center rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-paper no-underline transition-opacity hover:opacity-90" preload="intent" to={actionTo}>
           {actionLabel}
         </Link>
       </div>
@@ -157,7 +157,7 @@ export function AdminActionLink({
   to: string
 }>) {
   return (
-    <Link className={crayonButtonClass('yellow')} preload="intent" to={to}>
+    <Link className="inline-flex min-h-10 items-center justify-center rounded-full bg-ink px-4 py-2 text-sm font-semibold text-paper no-underline transition-opacity hover:opacity-90" preload="intent" to={to}>
       {children}
     </Link>
   )
