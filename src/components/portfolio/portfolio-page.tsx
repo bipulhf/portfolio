@@ -2,6 +2,7 @@ import { BackgroundDoodles } from './background-doodles'
 import { Footer } from './footer'
 import { Hero } from './hero'
 import { Nav } from './nav'
+import { usePageReady } from './hooks/use-page-ready'
 import { useReveal } from './hooks/use-reveal'
 import { About } from './sections/about'
 import { Achievements } from './sections/achievements'
@@ -14,9 +15,10 @@ import { Skills } from './sections/skills'
 
 export function PortfolioPage() {
   useReveal()
+  const pageReady = usePageReady()
 
   return (
-    <div className="app">
+    <div className={`app ${pageReady ? 'motion-ready' : ''}`}>
       <BackgroundDoodles />
       <Nav />
       <Hero />

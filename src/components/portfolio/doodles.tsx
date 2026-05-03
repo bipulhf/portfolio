@@ -357,7 +357,7 @@ export function HeroBackdrop({ className, style }: BaseProps) {
         strokeLinecap="round"
         strokeWidth="1.2"
       />
-      <g style={{ animation: 'breathe 14s ease-in-out infinite' }}>
+      <g>
         <circle
           cx="1240"
           cy="150"
@@ -369,7 +369,7 @@ export function HeroBackdrop({ className, style }: BaseProps) {
         />
         <circle cx="1240" cy="150" fill="#ffe9a8" opacity="0.28" r="38" />
       </g>
-      <g style={{ animation: 'driftSlow 90s linear infinite' }} opacity="0.55">
+      <g opacity="0.55">
         <path
           d="M180,200 Q168,200 168,188 Q168,176 184,176 Q188,162 204,162 Q220,162 224,176 Q238,176 238,190 Q238,202 224,202 L194,202 Q180,202 180,200 Z"
           fill="none"
@@ -378,10 +378,7 @@ export function HeroBackdrop({ className, style }: BaseProps) {
           strokeWidth="1.4"
         />
       </g>
-      <g
-        opacity="0.45"
-        style={{ animation: 'driftSlow 110s linear infinite reverse', animationDelay: '-30s' }}
-      >
+      <g opacity="0.45">
         <path
           d="M580,130 Q570,130 570,120 Q570,110 584,110 Q588,98 602,98 Q616,98 620,110 Q632,110 632,122 Q632,132 620,132 L592,132 Q580,132 580,130 Z"
           fill="none"
@@ -390,10 +387,7 @@ export function HeroBackdrop({ className, style }: BaseProps) {
           strokeWidth="1.3"
         />
       </g>
-      <g
-        opacity="0.4"
-        style={{ animation: 'driftSlow 130s linear infinite', animationDelay: '-50s' }}
-      >
+      <g opacity="0.4">
         <path
           d="M960,80 Q950,80 950,70 Q950,60 964,60 Q968,48 982,48 Q996,48 1000,60 Q1012,60 1012,72 Q1012,82 1000,82 L972,82 Q960,82 960,80 Z"
           fill="none"
@@ -434,7 +428,7 @@ export function HeroBackdrop({ className, style }: BaseProps) {
           />
         </AnimatedCircle>
       </g>
-      <g opacity="0.35" style={{ animation: 'driftSlow 70s linear infinite' }}>
+      <g opacity="0.35">
         <path
           d="M380,260 Q386,254 392,260 Q398,254 404,260"
           fill="none"
@@ -443,10 +437,7 @@ export function HeroBackdrop({ className, style }: BaseProps) {
           strokeWidth="1.4"
         />
       </g>
-      <g
-        opacity="0.3"
-        style={{ animation: 'driftSlow 85s linear infinite reverse', animationDelay: '-20s' }}
-      >
+      <g opacity="0.3">
         <path
           d="M820,290 Q826,284 832,290 Q838,284 844,290"
           fill="none"
@@ -455,11 +446,7 @@ export function HeroBackdrop({ className, style }: BaseProps) {
           strokeWidth="1.4"
         />
       </g>
-      <g
-        opacity="0.4"
-        style={{ animation: 'sway 9s ease-in-out infinite' }}
-        transform="translate(1000, 488)"
-      >
+      <g opacity="0.4" transform="translate(1000, 488)">
         <path
           d="M-10,10 L10,10 L7,16 L-7,16 Z"
           fill="none"

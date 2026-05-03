@@ -11,9 +11,9 @@ export function Skills() {
         title="Things I use"
         underlineColor="var(--yellow)"
       />
-      <div className="skills-grid reveal">
+      <div className="skills-grid" data-reveal-sequence>
         {SKILL_CATEGORIES.map((category) => (
-          <div className="skill-cat" key={category.title}>
+          <div className="skill-cat" data-reveal-item key={category.title}>
             <h3>{category.title}</h3>
             <div className="skill-tags">
               {category.tags.map((tag) => (

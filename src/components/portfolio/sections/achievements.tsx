@@ -11,9 +11,9 @@ export function Achievements() {
         title="A few proud moments"
         underlineColor="var(--mint)"
       />
-      <div className="achievements-grid reveal">
+      <div className="achievements-grid" data-reveal-sequence>
         {ACHIEVEMENT_ITEMS.map((item) => (
-          <div className="medal" key={`${item.title}-${item.meta}`}>
+          <div className="medal" data-reveal-item key={`${item.title}-${item.meta}`}>
             <div className="medal-icon">{item.icon}</div>
             <div>
               <h3>{item.title}</h3>

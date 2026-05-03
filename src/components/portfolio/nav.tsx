@@ -5,7 +5,7 @@ export function Nav() {
   return (
     <nav className="nav">
       <div className="nav-inner">
-        <div className="nav-shell">
+        <div className="nav-shell page-enter motion-delay-1">
           <div className="nav-row">
             <a className="nav-logo" href="#top">
               <span className="nav-logo-mark">

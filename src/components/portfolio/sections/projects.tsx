@@ -25,9 +25,9 @@ export function Projects() {
         title="Things I&apos;ve built"
         underlineColor="var(--peach)"
       />
-      <div className="projects-grid reveal">
+      <div className="projects-grid" data-reveal-sequence>
         {PROJECT_ITEMS.map((project, index) => (
-          <div className="project" key={project.title}>
+          <div className="project" data-reveal-item key={project.title}>
             <div className="project-cover">
               <ProjectCover index={index} />
             </div>

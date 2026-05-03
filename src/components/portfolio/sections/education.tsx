@@ -11,9 +11,9 @@ export function Education() {
         title="Where I studied"
         underlineColor="var(--sky)"
       />
-      <div className="timeline reveal">
+      <div className="timeline" data-reveal-sequence>
         {EDUCATION_ITEMS.map((item) => (
-          <div className="timeline-item" key={`${item.role}-${item.place}`}>
+          <div className="timeline-item" data-reveal-item key={`${item.role}-${item.place}`}>
             <div className="timeline-card">
               <div className="timeline-meta">
                 <div className="timeline-role">{item.role}</div>

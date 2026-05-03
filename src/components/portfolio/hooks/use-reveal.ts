@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 export function useReveal() {
   useEffect(() => {
-    const elements = document.querySelectorAll<HTMLElement>('.reveal')
+    const elements = document.querySelectorAll<HTMLElement>('.reveal, [data-reveal-sequence]')
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -11,7 +11,23 @@ export function useReveal() {
             return
           }
 
-          entry.target.classList.add('in')
+          const target = entry.target as HTMLElement
+
+          if (target.hasAttribute('data-reveal-sequence')) {
+            const items = Array.from(
+              target.querySelectorAll<HTMLElement>('[data-reveal-item]'),
+            )
+
+            target.classList.add('in')
+
+            items.forEach((item, index) => {
+              item.style.setProperty('--reveal-delay', `${index * 90}ms`)
+              item.classList.add('in')
+            })
+          } else {
+            target.classList.add('in')
+          }
+
           observer.unobserve(entry.target)
         })
       },

@@ -26,9 +26,9 @@ export function Blog() {
         title="From the blog"
         underlineColor="var(--sky)"
       />
-      <div className="blog-grid reveal">
+      <div className="blog-grid" data-reveal-sequence>
         {BLOG_ITEMS.map((post, index) => (
-          <a className="blog-card" href="#" key={post.title}>
+          <a className="blog-card" data-reveal-item href="#" key={post.title}>
             <div className="blog-cover">
               <BlogCover index={index} />
             </div>

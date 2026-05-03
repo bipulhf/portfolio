@@ -7,7 +7,7 @@ export function Hero() {
         <HeroBackdrop />
       </div>
       <div className="hero-inner container">
-        <div className="hero-portrait reveal">
+        <div className="hero-portrait page-enter motion-delay-4">
           <div className="hero-portrait-stack">
             <div className="hero-portrait-card">
               <div className="hero-portrait-shape">
@@ -35,11 +35,11 @@ export function Hero() {
           </div>
         </div>
         <div className="hero-text">
-          <div className="hero-greet">
+          <div className="hero-greet page-enter motion-delay-2">
             <span className="hero-wave">👋</span>
             <span>hello, I&apos;m</span>
           </div>
-          <h1 className="hero-name">
+          <h1 className="hero-name page-enter motion-delay-3">
             <span className="name-word">Shahiduzzaman</span>{' '}
             <span className="name-word">
               Bipul.
@@ -48,19 +48,19 @@ export function Hero() {
               </span>
             </span>
           </h1>
-          <div className="hero-role">
+          <div className="hero-role page-enter motion-delay-4">
             A <span className="role-pill">software engineer</span> crafting calm, considered software
             {' '}one careful detail at a time.
           </div>
-          <p className="hero-blurb">
+          <p className="hero-blurb page-enter motion-delay-5">
             Currently at <strong>InfancyIT Ltd.</strong> &middot; Computer Science,
             {' '}<strong>Shahjalal University of Science and Technology</strong>.
           </p>
-          <div className="hero-cta">
-            <a className="btn" href="#projects">
+          <div className="hero-cta page-enter motion-delay-6">
+            <a className="btn hero-cta-primary" href="#projects">
               View my work →
             </a>
-            <a className="btn ghost" href="#contact">
+            <a className="btn ghost hero-cta-secondary" href="#contact">
               Get in touch
             </a>
           </div>

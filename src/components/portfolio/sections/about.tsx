@@ -29,20 +29,20 @@ export function About() {
           </p>
         </div>
 
-        <div className="about-stats reveal">
-          <div className="stat">
+        <div className="about-stats" data-reveal-sequence>
+          <div className="stat" data-reveal-item>
             <div className="num">10+</div>
             <div className="label">hackathons won</div>
           </div>
-          <div className="stat">
+          <div className="stat" data-reveal-item>
             <div className="num">4+</div>
             <div className="label">years coding</div>
           </div>
-          <div className="stat">
+          <div className="stat" data-reveal-item>
             <div className="num">20+</div>
             <div className="label">projects shipped</div>
           </div>
-          <div className="stat">
+          <div className="stat" data-reveal-item>
             <div className="num">∞</div>
             <div className="label">cups of chai</div>
           </div>
