@@ -265,7 +265,7 @@
   }
 
   .hero-backdrop {
-    opacity: 0;
+    opacity: 0.55;
   }
 
   .hero-backdrop-mask {
@@ -281,10 +281,6 @@
       rgb(0 0 0 / 0.3) 35%,
       rgb(0 0 0 / 0.9) 80%
     );
-  }
-
-  .motion-ready .hero-backdrop {
-    opacity: 0.55;
   }
 
   .hero-backdrop svg,
