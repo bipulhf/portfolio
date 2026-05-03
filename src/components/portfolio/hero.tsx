@@ -6,13 +6,13 @@ export function Hero() {
     <section className="relative flex items-center overflow-hidden py-6 sm:py-8 lg:min-h-[40rem] lg:py-14" id="top">
       <div
         aria-hidden="true"
-        className="hero-backdrop hero-backdrop-mask pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ease-out-soft"
+        className="hero-backdrop hero-backdrop-intro hero-backdrop-mask pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ease-out-soft"
       >
         <HeroBackdrop />
       </div>
 
       <div className={cx(pageContainerClass, 'relative z-[1] grid gap-6 md:grid-cols-[minmax(0,1.1fr)_minmax(18rem,24rem)] md:items-center lg:grid-cols-[minmax(0,1fr)_minmax(22rem,26rem)] lg:gap-12')}>
-        <div className="order-2 flex justify-center md:justify-end">
+        <div className="hero-portrait-intro order-2 flex justify-center md:justify-end">
           <div className="relative w-full max-w-[21rem] px-1 pb-5 pt-2 sm:max-w-96 sm:px-2.5 sm:pb-6 sm:pt-3 md:max-w-[26rem]">
             <div
               className={cx(
@@ -49,12 +49,12 @@ export function Hero() {
         </div>
 
         <div className="order-1 relative flex max-w-[47.5rem] flex-col justify-center py-2 sm:py-4">
-          <div className="mb-2 flex flex-wrap items-center gap-2.5 font-hand text-lg text-ink-soft sm:text-xl md:text-[1.25rem]">
+          <div className="hero-copy-item mb-2 flex flex-wrap items-center gap-2.5 font-hand text-lg text-ink-soft sm:text-xl md:text-[1.25rem]" style={{ ['--hero-delay' as string]: '40ms' }}>
             <span className="hero-wave inline-block">👋</span>
             <span>hello, I&apos;m</span>
           </div>
 
-          <h1 className="relative mb-[1.125rem] mt-1 block font-display text-[clamp(3rem,15vw,6.75rem)] font-bold leading-none tracking-[-0.01em] text-ink">
+          <h1 className="hero-copy-item relative mb-[1.125rem] mt-1 block font-display text-[clamp(3rem,15vw,6.75rem)] font-bold leading-none tracking-[-0.01em] text-ink" style={{ ['--hero-delay' as string]: '90ms' }}>
             <span className="relative inline-block">Shahiduzzaman</span>{' '}
             <span className="relative inline-block">
               Bipul.
@@ -64,7 +64,7 @@ export function Hero() {
             </span>
           </h1>
 
-          <div className="mb-[1.125rem] max-w-[35rem] font-hand text-[1.18rem] leading-[1.55] text-ink sm:text-[1.3rem] lg:max-w-[32.5rem] lg:text-[1.375rem] lg:leading-[1.6]">
+          <div className="hero-copy-item mb-[1.125rem] max-w-[35rem] font-hand text-[1.18rem] leading-[1.55] text-ink sm:text-[1.3rem] lg:max-w-[32.5rem] lg:text-[1.375rem] lg:leading-[1.6]" style={{ ['--hero-delay' as string]: '140ms' }}>
             A{' '}
             <span className="mx-0.5 inline-block whitespace-nowrap rounded-[1.25rem] border-[1.5px] border-ink bg-mint px-3 py-px shadow-[2px_2px_0_var(--color-ink)] rotate-[-1.2deg]">
               software engineer
@@ -72,12 +72,12 @@ export function Hero() {
             crafting calm, considered software one careful detail at a time.
           </div>
 
-          <p className="mb-7 max-w-[35rem] text-base leading-[1.7] text-ink-soft lg:max-w-[32.5rem]">
+          <p className="hero-copy-item mb-7 max-w-[35rem] text-base leading-[1.7] text-ink-soft lg:max-w-[32.5rem]" style={{ ['--hero-delay' as string]: '190ms' }}>
             Currently at <strong>InfancyIT Ltd.</strong> &middot; Computer Science,{' '}
             <strong>Shahjalal University of Science and Technology</strong>.
           </p>
 
-          <div className="flex flex-wrap items-center gap-3.5">
+          <div className="hero-copy-item flex flex-wrap items-center gap-3.5" style={{ ['--hero-delay' as string]: '240ms' }}>
             <a className={crayonButtonClass('yellow', { className: 'w-full justify-center sm:w-auto' })} href="/#projects">
               View my work →
             </a>

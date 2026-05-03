@@ -268,6 +268,41 @@
     opacity: 0.55;
   }
 
+  .nav-shell-intro {
+    animation: navShellIn 560ms var(--ease-awwwards-enter) both;
+  }
+
+  .nav-brand-intro {
+    animation: navItemIn 520ms var(--ease-awwwards-enter) 50ms both;
+  }
+
+  .nav-items-intro {
+    animation: navItemIn 520ms var(--ease-awwwards-enter) 110ms both;
+  }
+
+  .nav-menu-intro {
+    transform-origin: top center;
+  }
+
+  .hero-backdrop-intro {
+    opacity: 0;
+    animation: heroBackdropIn 520ms var(--ease-awwwards-enter) both;
+  }
+
+  .hero-portrait-intro {
+    opacity: 0;
+    translate: 1.1rem 0;
+    scale: 0.985;
+    animation: heroPortraitIn 680ms var(--ease-awwwards-enter) 80ms both;
+  }
+
+  .hero-copy-item {
+    opacity: 0;
+    translate: 0 0.75rem;
+    scale: 0.992;
+    animation: heroCopyIn 620ms var(--ease-awwwards-enter) var(--hero-delay, 0ms) both;
+  }
+
   .hero-backdrop-mask {
     mask-image: radial-gradient(
       ellipse at 30% 50%,
@@ -288,24 +323,31 @@
     display: block;
   }
 
+  .hero-backdrop-intro svg,
   .motion-ready .hero-backdrop svg {
     animation: heroBackdropLift 20s ease-in-out infinite;
   }
 
-  .motion-ready .hero-portrait-note {
-    animation: noteBob 8.5s ease-in-out infinite;
+  .hero-portrait-note {
+    opacity: 0;
+    animation:
+      heroNoteIn 540ms var(--ease-awwwards-enter) 220ms both,
+      noteBob 8.5s ease-in-out 900ms infinite;
   }
 
   .hero-ornament-float {
-    animation: ornamentBob 10s ease-in-out infinite;
+    opacity: 0;
+    animation:
+      heroOrnamentIn 520ms var(--ease-awwwards-enter) 180ms both,
+      ornamentBob 10s ease-in-out 760ms infinite;
   }
 
   .hero-ornament-float.delay-2 {
-    animation-delay: -2.5s;
+    animation-delay: 180ms, -2.5s;
   }
 
   .hero-ornament-float.delay-3 {
-    animation-delay: -4.75s;
+    animation-delay: 180ms, -4.75s;
   }
 
   .hero-wave {
@@ -319,12 +361,14 @@
     stroke-dashoffset: 720;
   }
 
+  .hero-scribble path,
   .motion-ready .hero-scribble path {
-    animation: scribbleDraw 820ms var(--ease-awwwards-enter) forwards;
+    animation: scribbleDraw 780ms var(--ease-awwwards-enter) 180ms forwards;
   }
 
+  .hero-scribble path:nth-child(2),
   .motion-ready .hero-scribble path:nth-child(2) {
-    animation-delay: 80ms;
+    animation-delay: 260ms;
   }
 
   .section-scribble.in path {
@@ -579,6 +623,88 @@
 
   50% {
     transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes navShellIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -14px, 0) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes navItemIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -9px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes heroBackdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.55;
+  }
+}
+
+@keyframes heroPortraitIn {
+  from {
+    opacity: 0;
+    transform: translate3d(18px, 0, 0) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes heroCopyIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(0.992);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes heroNoteIn {
+  from {
+    opacity: 0;
+    transform: rotate(-6deg) translate3d(-10px, 10px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotate(-4deg) translate3d(0, 0, 0);
+  }
+}
+
+@keyframes heroOrnamentIn {
+  from {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 

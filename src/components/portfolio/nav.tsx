@@ -47,13 +47,13 @@ export function Nav() {
       <div className="mx-auto w-full max-w-[73.75rem] px-3 sm:px-4 md:px-6 lg:px-8">
         <div
           className={cx(
-            'relative rounded-[1.05rem] border border-ink bg-white px-3 py-3 shadow-[0_0.5rem_1.2rem_rgba(46,61,58,0.08)] transition-[translate,box-shadow,border-color] duration-300 ease-out-soft hover:-translate-y-0.5 hover:shadow-[0_0.9rem_1.8rem_rgba(46,61,58,0.12)] sm:rounded-[1.25rem] md:px-4 md:py-[0.95rem] lg:rounded-[1.75rem_1.375rem_1.875rem_1.5rem/1.5rem_1.875rem_1.5rem_2rem] lg:px-[1.2rem] lg:py-[0.95rem]',
+            'nav-shell-intro relative rounded-[1.05rem] border border-ink bg-white px-3 py-3 shadow-[0_0.5rem_1.2rem_rgba(46,61,58,0.08)] transition-[translate,box-shadow,border-color] duration-300 ease-out-soft hover:-translate-y-0.5 hover:shadow-[0_0.9rem_1.8rem_rgba(46,61,58,0.12)] sm:rounded-[1.25rem] md:px-4 md:py-[0.95rem] lg:rounded-[1.75rem_1.375rem_1.875rem_1.5rem/1.5rem_1.875rem_1.5rem_2rem] lg:px-[1.2rem] lg:py-[0.95rem]',
             "before:pointer-events-none before:absolute before:right-6 before:top-[-0.625rem] before:hidden before:h-[1.125rem] before:w-[4.5rem] before:rounded-full before:border-2 before:border-ink/30 before:bg-peach/70 before:content-[''] before:rotate-[7deg] lg:before:block",
             "after:pointer-events-none after:absolute after:inset-2 after:hidden after:rounded-[1.375rem_1.125rem_1.5rem_1.25rem/1.25rem_1.5rem_1.25rem_1.625rem] after:content-[''] lg:after:block",
           )}
         >
           <div className="relative z-[1] flex items-center gap-3 md:gap-4">
-            <a className="inline-flex min-w-0 items-center gap-2 no-underline md:gap-3.5" href="/">
+            <a className="nav-brand-intro inline-flex min-w-0 items-center gap-2 no-underline md:gap-3.5" href="/">
               <img
                 alt="Bipul logo"
                 className="size-[2.45rem] rounded-[0.95rem] border-2 border-ink bg-white object-contain p-1 shadow-[3px_3px_0_var(--color-ink)] sm:size-[2.7rem] md:size-[3rem]"
@@ -70,7 +70,7 @@ export function Nav() {
             </a>
 
             <div
-              className="ml-auto hidden items-center gap-2 rounded-full border-2 border-ink/12 bg-white/45 p-[0.35rem] xl:flex"
+              className="nav-items-intro ml-auto hidden items-center gap-2 rounded-full border-2 border-ink/12 bg-white/45 p-[0.35rem] xl:flex"
               role="navigation"
             >
               {NAV_LINKS.map((link, index) => (
@@ -91,7 +91,7 @@ export function Nav() {
             </div>
 
             <a
-              className="hidden min-h-11 items-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.7))] px-4 py-[0.65rem] font-hand text-base text-ink no-underline shadow-[3px_3px_0_var(--color-ink)] transition-[transform,box-shadow,background-color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[1deg] hover:shadow-[4px_4px_0_var(--color-ink)] xl:inline-flex"
+              className="nav-items-intro hidden min-h-11 items-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.7))] px-4 py-[0.65rem] font-hand text-base text-ink no-underline shadow-[3px_3px_0_var(--color-ink)] transition-[transform,box-shadow,background-color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[1deg] hover:shadow-[4px_4px_0_var(--color-ink)] xl:inline-flex"
               href="/#contact"
             >
               <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-[#7fd893] shadow-[0_0_0_0.15rem_rgba(127,216,147,0.18)]" />
@@ -102,7 +102,7 @@ export function Nav() {
               aria-controls={mobileMenuId}
               aria-expanded={menuOpen}
               aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-              className="ml-auto inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border-2 border-ink bg-white/80 text-ink shadow-[2px_2px_0_var(--color-ink)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:bg-yellow/30 hover:shadow-[3px_3px_0_var(--color-ink)] xl:hidden"
+              className="nav-items-intro ml-auto inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border-2 border-ink bg-white/80 text-ink shadow-[2px_2px_0_var(--color-ink)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:bg-yellow/30 hover:shadow-[3px_3px_0_var(--color-ink)] xl:hidden"
               onClick={() => setMenuOpen((value) => !value)}
               type="button"
             >
@@ -132,7 +132,7 @@ export function Nav() {
           <div
             aria-hidden={!menuOpen}
             className={cx(
-              'relative z-[1] overflow-hidden transition-[max-height,opacity,margin] duration-300 ease-out-soft xl:hidden',
+              'nav-menu-intro relative z-[1] overflow-hidden transition-[max-height,opacity,margin] duration-300 ease-out-soft xl:hidden',
               menuOpen ? 'mt-3 max-h-[30rem] opacity-100' : 'max-h-0 opacity-0',
             )}
             id={mobileMenuId}
