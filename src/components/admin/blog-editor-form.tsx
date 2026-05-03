@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useNavigate } from '@tanstack/react-router'
 import { toast } from 'sonner'
@@ -10,11 +10,22 @@ import {
   uploadImageRequest,
 } from '~/lib/admin-queries'
 import type { BlogFormState } from '~/lib/api/types'
-import { LexicalRichEditor } from '~/components/editor/lexical-rich-editor'
+import { EditorPendingShell, ImageFieldPendingShell } from '~/components/loaders/crayon-pending'
 import { useUnsavedChangesWarning } from './use-unsaved-changes-warning'
-import { ImagePathField } from './image-path-field'
 import { listToString, stringToList } from './form-state'
 import { AdminCard, AdminField, AdminInput, AdminSectionHeading, AdminSelect, AdminTextarea } from './primitives'
+
+const LexicalRichEditor = lazy(() =>
+  import('~/components/editor/lexical-rich-editor').then((module) => ({
+    default: module.LexicalRichEditor,
+  })),
+)
+
+const ImagePathField = lazy(() =>
+  import('./image-path-field').then((module) => ({
+    default: module.ImagePathField,
+  })),
+)
 
 function normalizePublishedAt(value: string) {
   if (!value) {
@@ -159,23 +170,25 @@ export function BlogEditorForm({
 
         <AdminCard>
           <AdminSectionHeading eyebrow="Step 2" title="Write the article" />
-          <LexicalRichEditor
-            onChange={({ bodyHtml, bodyJson }) =>
-              setValues((current) => ({
-                ...current,
-                bodyHtml,
-                bodyJson,
-              }))
-            }
-            onUploadImage={async (file) => {
-              const upload = await uploadImageRequest(file)
-              toast.success('Image added to the article.')
-              return upload.publicPath
-            }}
-            placeholder="Write the post here. Lead with the idea, then support it with examples."
-            valueHtml={values.bodyHtml}
-            valueJson={values.bodyJson}
-          />
+          <Suspense fallback={<EditorPendingShell />}>
+            <LexicalRichEditor
+              onChange={({ bodyHtml, bodyJson }) =>
+                setValues((current) => ({
+                  ...current,
+                  bodyHtml,
+                  bodyJson,
+                }))
+              }
+              onUploadImage={async (file) => {
+                const upload = await uploadImageRequest(file)
+                toast.success('Image added to the article.')
+                return upload.publicPath
+              }}
+              placeholder="Write the post here. Lead with the idea, then support it with examples."
+              valueHtml={values.bodyHtml}
+              valueJson={values.bodyJson}
+            />
+          </Suspense>
         </AdminCard>
       </div>
 
@@ -258,18 +271,22 @@ export function BlogEditorForm({
         <AdminCard>
           <AdminSectionHeading eyebrow="Optional" title="Images" />
           <div className="space-y-4">
-            <ImagePathField
-              help="Shown on post cards and at the top of the post page."
-              label="Cover image"
-              onChange={(value) => setValues((current) => ({ ...current, coverImagePath: value }))}
-              value={values.coverImagePath ?? ''}
-            />
-            <ImagePathField
-              help="Optional. Use this if you want a different social preview image."
-              label="Open Graph image"
-              onChange={(value) => setValues((current) => ({ ...current, ogImagePath: value }))}
-              value={values.ogImagePath ?? ''}
-            />
+            <Suspense fallback={<ImageFieldPendingShell />}>
+              <ImagePathField
+                help="Shown on post cards and at the top of the post page."
+                label="Cover image"
+                onChange={(value) => setValues((current) => ({ ...current, coverImagePath: value }))}
+                value={values.coverImagePath ?? ''}
+              />
+            </Suspense>
+            <Suspense fallback={<ImageFieldPendingShell />}>
+              <ImagePathField
+                help="Optional. Use this if you want a different social preview image."
+                label="Open Graph image"
+                onChange={(value) => setValues((current) => ({ ...current, ogImagePath: value }))}
+                value={values.ogImagePath ?? ''}
+              />
+            </Suspense>
           </div>
         </AdminCard>
 

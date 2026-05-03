@@ -47,3 +47,13 @@ export function EditorPendingShell() {
     </div>
   )
 }
+
+export function ImageFieldPendingShell() {
+  return (
+    <div className="space-y-3">
+      <div className="loader-card h-12 rounded-[1rem]" />
+      <div className="loader-card h-11 rounded-[1rem]" />
+      <div className="loader-card h-36 rounded-[1.25rem]" />
+    </div>
+  )
+}
