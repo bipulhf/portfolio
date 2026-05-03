@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-04T00:00:00+06:00",
+  "title": "Design System: Shahiduzzaman Bipul Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper Wash",
+        "canonical": "#f4faf9",
+        "tonalRamp": [
+          "#24302e",
+          "#334442",
+          "#506b67",
+          "#72938d",
+          "#96b7b1",
+          "#bfd9d5",
+          "#dceeec",
+          "#f4faf9"
+        ]
+      },
+      "paper-shadow": {
+        "role": "neutral",
+        "displayName": "Pressed Paper",
+        "canonical": "#dceeec",
+        "tonalRamp": [
+          "#314643",
+          "#48635f",
+          "#63807c",
+          "#809c98",
+          "#9fbab6",
+          "#bfd7d4",
+          "#dceeec",
+          "#f3fbfa"
+        ]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Deep Ink",
+        "canonical": "#2e3d3a",
+        "tonalRamp": [
+          "#121716",
+          "#1c2523",
+          "#2e3d3a",
+          "#425652",
+          "#5b726e",
+          "#7f9792",
+          "#b3c2bf",
+          "#e6eceb"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "#506b67",
+        "tonalRamp": [
+          "#18211f",
+          "#283533",
+          "#3d514e",
+          "#506b67",
+          "#6d8884",
+          "#8fa7a4",
+          "#bccac8",
+          "#edf1f1"
+        ]
+      },
+      "yellow": {
+        "role": "secondary",
+        "displayName": "Notebook Yellow",
+        "canonical": "#fde98a",
+        "tonalRamp": [
+          "#463b13",
+          "#69591d",
+          "#8f7827",
+          "#b79937",
+          "#d8ba58",
+          "#eed476",
+          "#fde98a",
+          "#fff8d6"
+        ]
+      },
+      "mint": {
+        "role": "primary",
+        "displayName": "Calm Proof Mint",
+        "canonical": "#aee4d6",
+        "tonalRamp": [
+          "#173a33",
+          "#266155",
+          "#388876",
+          "#54b199",
+          "#74ccb3",
+          "#95dcc7",
+          "#aee4d6",
+          "#e3f7f1"
+        ]
+      },
+      "peach": {
+        "role": "tertiary",
+        "displayName": "Sketchbook Peach",
+        "canonical": "#ffc8b8",
+        "tonalRamp": [
+          "#49271e",
+          "#704033",
+          "#9d5c4b",
+          "#c87d67",
+          "#e79d86",
+          "#f5b6a4",
+          "#ffc8b8",
+          "#fff0ea"
+        ]
+      },
+      "sky": {
+        "role": "tertiary",
+        "displayName": "Sky Haze",
+        "canonical": "#a9d4ec",
+        "tonalRamp": [
+          "#183545",
+          "#28546c",
+          "#3c7693",
+          "#5599b7",
+          "#75b8d2",
+          "#93cae1",
+          "#a9d4ec",
+          "#e5f2fa"
+        ]
+      },
+      "pink": {
+        "role": "tertiary",
+        "displayName": "Pencil Pink",
+        "canonical": "#f4c5cf",
+        "tonalRamp": [
+          "#422129",
+          "#67333f",
+          "#8f4957",
+          "#b76878",
+          "#d78d9a",
+          "#eab0b9",
+          "#f4c5cf",
+          "#fdf0f4"
+        ]
+      },
+      "lilac": {
+        "role": "tertiary",
+        "displayName": "Dusty Lilac",
+        "canonical": "#c8d4ec",
+        "tonalRamp": [
+          "#252d40",
+          "#3b4865",
+          "#55678d",
+          "#7386b0",
+          "#94a6cb",
+          "#b2bfdc",
+          "#c8d4ec",
+          "#eef2fb"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Signature Display",
+        "purpose": "Hero names, section statements, authored title moments."
+      },
+      "body": {
+        "displayName": "Reading Body",
+        "purpose": "All primary reading, detail pages, and supportive copy."
+      },
+      "hand": {
+        "displayName": "Hand Label",
+        "purpose": "Buttons, chips, metadata, and playful supporting labels."
+      },
+      "label": {
+        "displayName": "Utility Label",
+        "purpose": "Compact navigation and interface labels with warmth."
+      }
+    },
+    "shadows": [
+      {
+        "name": "crayon-sm",
+        "value": "3px 3px 0 var(--color-ink)",
+        "purpose": "Buttons, notes, and compact tactile elements."
+      },
+      {
+        "name": "crayon-md",
+        "value": "5px 5px 0 var(--color-ink)",
+        "purpose": "Primary card and surface shadow for public sections."
+      },
+      {
+        "name": "crayon-lg",
+        "value": "7px 7px 0 var(--color-ink)",
+        "purpose": "Hero cards and larger signature surfaces."
+      },
+      {
+        "name": "admin-soft",
+        "value": "0 10px 28px rgba(46,61,58,0.05)",
+        "purpose": "Quiet admin surface lift."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-awwwards-enter",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Primary entrance easing for hero, nav, and reveal choreography."
+      },
+      {
+        "name": "ease-out-soft",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Default hover and state easing."
+      },
+      {
+        "name": "hero-backdrop-lift",
+        "value": "20s ease-in-out infinite",
+        "purpose": "Slow ambient hero background drift."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "30rem"
+      },
+      {
+        "name": "md",
+        "value": "48rem"
+      },
+      {
+        "name": "lg",
+        "value": "64rem"
+      },
+      {
+        "name": "xl",
+        "value": "72rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The default call-to-action, tactile and friendly with an offset crayon shadow.",
+      "html": "<button class=\"ds-btn-primary\">View my work</button>",
+      "css": ".ds-btn-primary { min-height: 2.75rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border: 0; border-radius: 0.875rem; padding: 0.75rem 1.5rem; background: var(--color-yellow); color: var(--color-ink); font-family: var(--font-hand); font-size: 1.1875rem; line-height: 1; box-shadow: 3px 3px 0 var(--color-ink); cursor: pointer; transition: transform 150ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 150ms cubic-bezier(0.22, 1, 0.36, 1), background-color 150ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-primary:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--color-ink); } .ds-btn-primary:focus-visible { outline: 3px solid rgba(174, 228, 214, 0.45); outline-offset: 3px; } .ds-btn-primary:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--color-ink); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action button for back links and lower-pressure calls to action.",
+      "html": "<button class=\"ds-btn-ghost\">Get in touch</button>",
+      "css": ".ds-btn-ghost { min-height: 2.75rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border: 2px dashed var(--color-ink); border-radius: 0.875rem; padding: 0.75rem 1.5rem; background: transparent; color: var(--color-ink); font-family: var(--font-hand); font-size: 1.1875rem; line-height: 1; cursor: pointer; transition: transform 150ms cubic-bezier(0.22, 1, 0.36, 1), background-color 150ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-ghost:hover { transform: translateY(-1px); background: rgba(253, 233, 138, 0.4); } .ds-btn-ghost:focus-visible { outline: 3px solid rgba(174, 228, 214, 0.45); outline-offset: 3px; }"
+    },
+    {
+      "name": "Navigation Shell",
+      "kind": "nav",
+      "refersTo": "nav-shell",
+      "description": "Floating brand shell for the public site, equal parts trust object and signature stamp.",
+      "html": "<nav class=\"ds-nav\"><div class=\"ds-nav__brand\"><img class=\"ds-nav__logo\" src=\"/logo.png\" alt=\"Bipul logo\" /><span class=\"ds-nav__wordmark\">Bipul</span></div><a class=\"ds-nav__link\" href=\"#projects\">Projects</a><a class=\"ds-nav__link\" href=\"#blog\">Blog</a><button class=\"ds-nav__toggle\" aria-label=\"Open menu\"><span></span><span></span><span></span></button></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 0.75rem; border: 1px solid var(--color-ink); border-radius: 1.05rem; padding: 0.75rem; background: #ffffff; color: var(--color-ink); box-shadow: 0 0.5rem 1.2rem rgba(46, 61, 58, 0.08); } .ds-nav__brand { display: inline-flex; align-items: center; gap: 0.5rem; min-width: 0; margin-right: auto; } .ds-nav__logo { width: 2.45rem; height: 2.45rem; object-fit: contain; padding: 0.25rem; border: 2px solid var(--color-ink); border-radius: 0.95rem; background: white; box-shadow: 3px 3px 0 var(--color-ink); } .ds-nav__wordmark { font-family: var(--font-display); font-size: 1.55rem; font-weight: 700; line-height: 1; } .ds-nav__link { display: inline-flex; min-height: 2.75rem; align-items: center; justify-content: center; border-radius: 999px; padding: 0.55rem 0.95rem; background: rgba(255,255,255,0.45); color: var(--color-ink); font-family: var(--font-hand); font-size: 1.02rem; text-decoration: none; transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), background-color 200ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-nav__link:hover { transform: translateY(-1px); background: rgba(174, 228, 214, 0.45); } .ds-nav__toggle { display: inline-flex; min-width: 2.75rem; min-height: 2.75rem; align-items: center; justify-content: center; border: 2px solid var(--color-ink); border-radius: 999px; background: rgba(255,255,255,0.8); box-shadow: 2px 2px 0 var(--color-ink); cursor: pointer; } .ds-nav__toggle span { display: block; width: 1.1rem; height: 2px; border-radius: 999px; background: var(--color-ink); margin: 2px 0; } .ds-nav__toggle:hover { transform: translateY(-1px); background: rgba(253, 233, 138, 0.3); } .ds-nav__toggle:focus-visible { outline: 3px solid rgba(174, 228, 214, 0.45); outline-offset: 3px; }"
+    },
+    {
+      "name": "Portfolio Card",
+      "kind": "card",
+      "refersTo": "card-surface",
+      "description": "The default expressive content surface for project and article listings.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card__eyebrow\">featured project</div><h3 class=\"ds-card__title\">Project title</h3><p class=\"ds-card__body\">A calm, credible summary of the work and why it matters.</p></article>",
+      "css": ".ds-card { border: 2.5px solid var(--color-ink); border-radius: 1.6rem; padding: 1.25rem; background: var(--color-paper); color: var(--color-ink); box-shadow: 5px 5px 0 var(--color-ink); } .ds-card__eyebrow { display: inline-flex; align-items: center; min-height: 2rem; border: 1.5px solid rgba(46, 61, 58, 0.2); border-radius: 999px; padding: 0.25rem 0.625rem; background: rgba(255,255,255,0.5); font-family: var(--font-hand); font-size: 0.875rem; color: var(--color-ink-soft); } .ds-card__title { margin: 0.75rem 0 0.5rem; font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; line-height: 1; color: var(--color-ink); } .ds-card__body { margin: 0; font-family: var(--font-body); font-size: 1rem; line-height: 1.65; color: var(--color-ink-soft); max-width: 34ch; }"
+    },
+    {
+      "name": "Admin Input",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Quiet utility field for the CMS, intentionally calmer than the public brand surfaces.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field__label\">Title</span><input class=\"ds-input\" type=\"text\" placeholder=\"A calm but capable product title\" /></label>",
+      "css": ".ds-field { display: grid; gap: 0.5rem; color: var(--color-ink); } .ds-field__label { font-family: var(--font-body); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.01em; color: var(--color-ink); } .ds-input { width: 100%; min-height: 3rem; border: 1px solid rgba(46, 61, 58, 0.15); border-radius: 0.95rem; padding: 0.75rem 1rem; background: rgba(244, 250, 249, 0.45); color: var(--color-ink); font-family: var(--font-body); font-size: 1rem; transition: border-color 150ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 150ms cubic-bezier(0.22, 1, 0.36, 1), background-color 150ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-input::placeholder { color: rgba(80, 107, 103, 0.7); } .ds-input:hover { background: rgba(255,255,255,0.72); } .ds-input:focus-visible { outline: none; border-color: rgba(46, 61, 58, 0.35); background: white; box-shadow: 0 0 0 4px rgba(174, 228, 214, 0.22); }"
+    },
+    {
+      "name": "Hero Note",
+      "kind": "custom",
+      "refersTo": "card-surface",
+      "description": "Signature sticky-note accent used around the portrait block and other authored moments.",
+      "html": "<div class=\"ds-note\"><span class=\"ds-note__dot\"></span><span class=\"ds-note__text\">crayon mood, real me</span></div>",
+      "css": ".ds-note { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.5rem; max-width: 12rem; border: 2px solid var(--color-ink); border-radius: 1rem; padding: 0.5rem 0.75rem; background: var(--color-yellow); color: var(--color-ink); font-family: var(--font-hand); font-size: 0.95rem; box-shadow: 3px 3px 0 var(--color-ink); transform: rotate(-4deg); } .ds-note__dot { width: 0.9rem; height: 0.9rem; flex: 0 0 auto; border: 2px solid var(--color-ink); border-radius: 999px; background: var(--color-peach); box-shadow: inset -1px -2px 0 rgba(46, 61, 58, 0.18); } .ds-note__text { line-height: 1.1; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Playful Proof of Work",
+    "overview": "This design system makes the portfolio feel like evidence with personality. It leads with calm trust, then layers in hand-drawn expression through typography, scribbles, offset shadows, and paper-like surfaces. The public site is crafted and expressive, while the admin stays quieter and more utilitarian without abandoning the core brand DNA.",
+    "keyCharacteristics": [
+      "Calm and trusted paper-toned foundation",
+      "Hand-drawn signature moments for identity",
+      "Tactile offset-shadow surfaces",
+      "Immediate, lightweight motion",
+      "Clear separation between brand expression and admin utility"
+    ],
+    "rules": [
+      {
+        "name": "The Tinted-Neutral Rule",
+        "body": "Never fall back to pure white or pure black. The paper and ink tones define the emotional trust baseline.",
+        "section": "colors"
+      },
+      {
+        "name": "The Signature-Then-Structure Rule",
+        "body": "Use Caveat and Patrick Hand to signal authorship and warmth, but let Nunito carry clarity and reading stability.",
+        "section": "typography"
+      },
+      {
+        "name": "The Shadow-Means-Object Rule",
+        "body": "Hard offset shadows are for tactile public surfaces. Softer elevation is reserved for the admin and support infrastructure.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep the paper base and ink structure intact before adding playful accents.",
+      "Do use accent colors with distinct jobs: yellow for action, mint for openness, peach for warmth.",
+      "Do preserve strong contrast, readable spacing, and reduced-motion support."
+    ],
+    "donts": [
+      "Don't make the site feel template-like, too loud, or too generic.",
+      "Don't use gradient text, glassmorphism-by-default, side-stripe borders, or endless identical cards.",
+      "Don't let creativity overpower trust or comprehension."
+    ]
+  }
+}
