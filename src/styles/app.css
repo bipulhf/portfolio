@@ -11,6 +11,9 @@
   --lilac: #c8d4ec;
   --paper-noise: rgba(46, 61, 58, 0.05);
   --paper-noise-soft: rgba(46, 61, 58, 0.03);
+  --page-gutter: 1rem;
+  --page-gutter-tablet: 1.5rem;
+  --page-gutter-desktop: 2rem;
 }
 
 *,
@@ -130,9 +133,10 @@ ul {
 
 .container,
 .nav-inner {
-  width: min(100%, 73.75rem);
+  width: 100%;
+  max-width: 73.75rem;
   margin: 0 auto;
-  padding-inline: 1.25rem;
+  padding-inline: var(--page-gutter);
   position: relative;
 }
 
@@ -151,14 +155,14 @@ section {
 
 .nav {
   position: sticky;
-  top: 0.875rem;
+  top: 0;
   z-index: 50;
-  padding-inline: 0.75rem;
+  padding-inline: 0;
   background: transparent;
   border: 0;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  padding-top: 10px;
+  padding-top: 0.625rem;
 }
 
 .nav-inner {
@@ -177,6 +181,7 @@ section {
       rgba(244, 250, 249, 0.94)
     ),
     var(--paper);
+  box-shadow: 0 0.5rem 1.2rem rgba(46, 61, 58, 0.08);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
@@ -395,8 +400,6 @@ section {
   gap: 0.65rem;
   margin-top: 0.9rem;
   padding-bottom: 0.1rem;
-  overflow-x: auto;
-  scrollbar-width: none;
 }
 
 .nav-mobile-rail::-webkit-scrollbar {
@@ -433,26 +436,24 @@ section {
 
 @media (max-width: 29.998rem) {
   .nav {
-    top: 0.5rem;
-    padding-inline: 0.45rem;
+    padding-top: 0.5rem;
   }
 
   .nav-shell {
-    padding: 0.75rem 0.8rem 0.9rem;
-    border-radius: 1.4rem 1.15rem 1.5rem 1.2rem / 1.2rem 1.55rem 1.2rem 1.6rem;
+    padding: 0.8rem;
+    border-radius: 1.2rem;
   }
 
   .nav-shell::before {
-    width: 3.1rem;
-    right: 1rem;
+    display: none;
   }
 
   .nav-shell::after {
-    inset: 0.4rem;
+    display: none;
   }
 
   .nav-row {
-    gap: 0.75rem;
+    gap: 0.7rem;
   }
 
   .nav-logo {
@@ -473,28 +474,26 @@ section {
   }
 
   .nav-status {
-    width: 100%;
-    justify-content: center;
-    margin-left: 0;
-    font-size: 0.95rem;
-    padding-inline: 0.9rem;
+    display: none;
   }
 
   .nav-mobile-rail {
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.55rem;
     margin-top: 0.75rem;
+    overflow: visible;
   }
 
   .nav-mobile-link {
-    min-height: 2.35rem;
-    padding-inline: 0.8rem;
-    font-size: 0.94rem;
+    min-width: 0;
+    min-height: 2.55rem;
+    padding-inline: 0.55rem;
+    font-size: 0.92rem;
   }
 
   .nav-doodle-star {
-    left: auto;
-    right: 4rem;
-    top: -0.45rem;
+    display: none;
   }
 
   .nav-doodle-squiggle {
@@ -504,17 +503,37 @@ section {
 
 @media (min-width: 30rem) and (max-width: 47.998rem) {
   .nav-row {
-    gap: 0.9rem;
+    gap: 0.8rem;
+  }
+
+  .nav-shell::before {
+    display: none;
+  }
+
+  .nav-shell::after {
+    display: none;
   }
 
   .nav-status {
-    width: 100%;
-    justify-content: center;
-    margin-left: 0;
+    display: none;
+  }
+
+  .nav-mobile-rail {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+    overflow: visible;
   }
 
   .nav-mobile-link {
-    font-size: 0.98rem;
+    min-width: 0;
+    padding-inline: 0.7rem;
+    font-size: 0.96rem;
+  }
+
+  .nav-doodle-star,
+  .nav-doodle-squiggle {
+    display: none;
   }
 }
 
@@ -1593,7 +1612,7 @@ section {
 @media (min-width: 48rem) {
   .container,
   .nav-inner {
-    padding-inline: 2rem;
+    padding-inline: var(--page-gutter-tablet);
   }
 
   section {
@@ -1615,11 +1634,11 @@ section {
   }
 
   .nav {
-    padding-inline: 1rem;
+    padding-top: 0.75rem;
   }
 
   .nav-inner {
-    padding-inline: 2rem;
+    padding-inline: 0;
   }
 
   .about {
@@ -1652,21 +1671,33 @@ section {
   }
 
   .nav-mobile-rail {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     margin-top: 0.85rem;
+    overflow: visible;
   }
 
   .nav-status {
-    font-size: 0.96rem;
-    padding-inline: 0.9rem;
+    display: none;
   }
 
+  .nav-mobile-link {
+    min-width: 0;
+    font-size: 0.98rem;
+  }
+
+  .nav-doodle-star,
   .nav-doodle-squiggle {
-    right: 6.5rem;
+    display: none;
   }
 }
 
 @media (min-width: 64rem) {
+  .container,
+  .nav-inner {
+    padding-inline: var(--page-gutter-desktop);
+  }
+
   section {
     padding-block: 10rem 8.125rem;
   }
@@ -1682,6 +1713,15 @@ section {
 
   .nav-mobile-rail {
     display: none;
+  }
+
+  .nav-status {
+    display: inline-flex;
+  }
+
+  .nav-doodle-star,
+  .nav-doodle-squiggle {
+    display: block;
   }
 
   .hero-inner {
