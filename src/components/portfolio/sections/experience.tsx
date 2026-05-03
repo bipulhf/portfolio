@@ -1,9 +1,11 @@
 import { EXPERIENCE_ITEMS } from '../lib/content'
+import { SectionAccent } from '../section-accent'
 import { SectionHeader } from '../section-header'
 
 export function Experience() {
   return (
     <section className="container" id="experience">
+      <SectionAccent variant="experience" />
       <SectionHeader
         kicker="02 — experience"
         title="Where I&apos;ve worked"

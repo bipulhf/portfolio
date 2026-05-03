@@ -1,10 +1,12 @@
 import { CONTACT_LINKS } from '../lib/content'
 import { CornerBurst } from '../doodles'
+import { SectionAccent } from '../section-accent'
 import { SectionHeader } from '../section-header'
 
 export function Contact() {
   return (
     <section className="container contact" id="contact">
+      <SectionAccent variant="contact" />
       <SectionHeader
         kicker="08 — say hi"
         title="Let&apos;s make something"

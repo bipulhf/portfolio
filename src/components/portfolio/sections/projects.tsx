@@ -1,5 +1,6 @@
 import { Cloud, Flower, Heart, Spiral, Star, Sun } from '../doodles'
 import { PROJECT_ITEMS } from '../lib/content'
+import { SectionAccent } from '../section-accent'
 import { SectionHeader } from '../section-header'
 
 function ProjectCover({ index }: { index: number }) {
@@ -18,6 +19,7 @@ function ProjectCover({ index }: { index: number }) {
 export function Projects() {
   return (
     <section className="container" id="projects">
+      <SectionAccent variant="projects" />
       <SectionHeader
         kicker="05 — selected work"
         title="Things I&apos;ve built"

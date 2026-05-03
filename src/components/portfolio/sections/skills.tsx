@@ -1,9 +1,11 @@
 import { SKILL_CATEGORIES } from '../lib/content'
+import { SectionAccent } from '../section-accent'
 import { SectionHeader } from '../section-header'
 
 export function Skills() {
   return (
     <section className="container" id="skills">
+      <SectionAccent variant="skills" />
       <SectionHeader
         kicker="04 — toolkit"
         title="Things I use"

@@ -1,9 +1,11 @@
 import { ACHIEVEMENT_ITEMS } from '../lib/content'
+import { SectionAccent } from '../section-accent'
 import { SectionHeader } from '../section-header'
 
 export function Achievements() {
   return (
     <section className="container" id="achievements">
+      <SectionAccent variant="achievements" />
       <SectionHeader
         kicker="06 — wins"
         title="A few proud moments"

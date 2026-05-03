@@ -145,6 +145,24 @@ section {
   padding-block: 4.5rem 4rem;
 }
 
+.section-accent {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-accent-item {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.58;
+  animation: accentDrift 12s ease-in-out infinite;
+  animation-delay: var(--accent-delay, 0s);
+  filter: saturate(0.95);
+}
+
 .hero {
   min-height: auto;
   display: flex;
@@ -1606,6 +1624,27 @@ section {
   }
   100% {
     transform: translateX(30px);
+  }
+}
+
+@keyframes accentDrift {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(2deg);
+  }
+}
+
+@media (max-width: 47.998rem) {
+  .section-accent-item {
+    opacity: 0.42;
+    transform: scale(0.86);
+  }
+
+  .section-accent-item:nth-child(2) {
+    display: none;
   }
 }
 

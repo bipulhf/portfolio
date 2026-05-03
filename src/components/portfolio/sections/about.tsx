@@ -1,8 +1,10 @@
+import { SectionAccent } from '../section-accent'
 import { SectionHeader } from '../section-header'
 
 export function About() {
   return (
     <section className="container" id="about">
+      <SectionAccent variant="about" />
       <SectionHeader
         kicker="01 — about"
         title="A little about me"

@@ -1,5 +1,6 @@
 import { Cloud, Flower, Sun } from '../doodles'
 import { BLOG_ITEMS } from '../lib/content'
+import { SectionAccent } from '../section-accent'
 import { SectionHeader } from '../section-header'
 
 function BlogCover({ index }: { index: number }) {
@@ -19,6 +20,7 @@ function BlogCover({ index }: { index: number }) {
 export function Blog() {
   return (
     <section className="container" id="blog">
+      <SectionAccent variant="blog" />
       <SectionHeader
         kicker="07 — words"
         title="From the blog"
