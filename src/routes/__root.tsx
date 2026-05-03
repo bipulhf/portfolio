@@ -8,6 +8,7 @@ import {
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import appCss from '~/styles/app.css?url'
+import { AppProviders } from '~/components/app/app-providers'
 import { DefaultCatchBoundary } from '~/components/errors/default-catch-boundary'
 import { NotFound } from '~/components/errors/not-found'
 
@@ -44,8 +45,17 @@ export const Route = createRootRoute({
   }),
   errorComponent: DefaultCatchBoundary,
   notFoundComponent: () => <NotFound />,
+  component: RootApp,
   shellComponent: RootDocument,
 })
+
+function RootApp() {
+  return (
+    <AppProviders>
+      <Outlet />
+    </AppProviders>
+  )
+}
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
   return (

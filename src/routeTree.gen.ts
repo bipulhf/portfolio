@@ -9,38 +9,375 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
+import { Route as MediaSplatRouteImport } from './routes/media/$'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AdminProjectsRouteImport } from './routes/admin.projects'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminBlogsRouteImport } from './routes/admin.blogs'
+import { Route as ApiAuthSessionRouteImport } from './routes/api/auth/session'
+import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
+import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
+import { Route as ApiAdminProjectsRouteImport } from './routes/api/admin/projects'
+import { Route as ApiAdminBlogsRouteImport } from './routes/api/admin/blogs'
+import { Route as AdminProjectsNewRouteImport } from './routes/admin.projects.new'
+import { Route as AdminBlogsNewRouteImport } from './routes/admin.blogs.new'
+import { Route as ApiAdminUploadsImagesRouteImport } from './routes/api/admin/uploads/images'
+import { Route as ApiAdminProjectsIdRouteImport } from './routes/api/admin/projects.$id'
+import { Route as ApiAdminBlogsIdRouteImport } from './routes/api/admin/blogs.$id'
+import { Route as AdminProjectsIdEditRouteImport } from './routes/admin.projects.$id.edit'
+import { Route as AdminBlogsIdEditRouteImport } from './routes/admin.blogs.$id.edit'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ProjectsRoute,
+} as any)
+const MediaSplatRoute = MediaSplatRouteImport.update({
+  id: '/media/$',
+  path: '/media/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
+const AdminProjectsRoute = AdminProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBlogsRoute = AdminBlogsRouteImport.update({
+  id: '/blogs',
+  path: '/blogs',
+  getParentRoute: () => AdminRoute,
+} as any)
+const ApiAuthSessionRoute = ApiAuthSessionRouteImport.update({
+  id: '/api/auth/session',
+  path: '/api/auth/session',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthLogoutRoute = ApiAuthLogoutRouteImport.update({
+  id: '/api/auth/logout',
+  path: '/api/auth/logout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
+  id: '/api/auth/login',
+  path: '/api/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminProjectsRoute = ApiAdminProjectsRouteImport.update({
+  id: '/api/admin/projects',
+  path: '/api/admin/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminBlogsRoute = ApiAdminBlogsRouteImport.update({
+  id: '/api/admin/blogs',
+  path: '/api/admin/blogs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminProjectsNewRoute = AdminProjectsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminProjectsRoute,
+} as any)
+const AdminBlogsNewRoute = AdminBlogsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminBlogsRoute,
+} as any)
+const ApiAdminUploadsImagesRoute = ApiAdminUploadsImagesRouteImport.update({
+  id: '/api/admin/uploads/images',
+  path: '/api/admin/uploads/images',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminProjectsIdRoute = ApiAdminProjectsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiAdminProjectsRoute,
+} as any)
+const ApiAdminBlogsIdRoute = ApiAdminBlogsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiAdminBlogsRoute,
+} as any)
+const AdminProjectsIdEditRoute = AdminProjectsIdEditRouteImport.update({
+  id: '/$id/edit',
+  path: '/$id/edit',
+  getParentRoute: () => AdminProjectsRoute,
+} as any)
+const AdminBlogsIdEditRoute = AdminBlogsIdEditRouteImport.update({
+  id: '/$id/edit',
+  path: '/$id/edit',
+  getParentRoute: () => AdminBlogsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/blog': typeof BlogRouteWithChildren
+  '/projects': typeof ProjectsRouteWithChildren
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/blogs': typeof AdminBlogsRouteWithChildren
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/projects': typeof AdminProjectsRouteWithChildren
+  '/blog/$slug': typeof BlogSlugRoute
+  '/media/$': typeof MediaSplatRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/blogs/new': typeof AdminBlogsNewRoute
+  '/admin/projects/new': typeof AdminProjectsNewRoute
+  '/api/admin/blogs': typeof ApiAdminBlogsRouteWithChildren
+  '/api/admin/projects': typeof ApiAdminProjectsRouteWithChildren
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/session': typeof ApiAuthSessionRoute
+  '/admin/blogs/$id/edit': typeof AdminBlogsIdEditRoute
+  '/admin/projects/$id/edit': typeof AdminProjectsIdEditRoute
+  '/api/admin/blogs/$id': typeof ApiAdminBlogsIdRoute
+  '/api/admin/projects/$id': typeof ApiAdminProjectsIdRoute
+  '/api/admin/uploads/images': typeof ApiAdminUploadsImagesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRouteWithChildren
+  '/projects': typeof ProjectsRouteWithChildren
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/blogs': typeof AdminBlogsRouteWithChildren
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/projects': typeof AdminProjectsRouteWithChildren
+  '/blog/$slug': typeof BlogSlugRoute
+  '/media/$': typeof MediaSplatRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
+  '/admin': typeof AdminIndexRoute
+  '/admin/blogs/new': typeof AdminBlogsNewRoute
+  '/admin/projects/new': typeof AdminProjectsNewRoute
+  '/api/admin/blogs': typeof ApiAdminBlogsRouteWithChildren
+  '/api/admin/projects': typeof ApiAdminProjectsRouteWithChildren
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/session': typeof ApiAuthSessionRoute
+  '/admin/blogs/$id/edit': typeof AdminBlogsIdEditRoute
+  '/admin/projects/$id/edit': typeof AdminProjectsIdEditRoute
+  '/api/admin/blogs/$id': typeof ApiAdminBlogsIdRoute
+  '/api/admin/projects/$id': typeof ApiAdminProjectsIdRoute
+  '/api/admin/uploads/images': typeof ApiAdminUploadsImagesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/blog': typeof BlogRouteWithChildren
+  '/projects': typeof ProjectsRouteWithChildren
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/admin/blogs': typeof AdminBlogsRouteWithChildren
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/projects': typeof AdminProjectsRouteWithChildren
+  '/blog/$slug': typeof BlogSlugRoute
+  '/media/$': typeof MediaSplatRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/blogs/new': typeof AdminBlogsNewRoute
+  '/admin/projects/new': typeof AdminProjectsNewRoute
+  '/api/admin/blogs': typeof ApiAdminBlogsRouteWithChildren
+  '/api/admin/projects': typeof ApiAdminProjectsRouteWithChildren
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/session': typeof ApiAuthSessionRoute
+  '/admin/blogs/$id/edit': typeof AdminBlogsIdEditRoute
+  '/admin/projects/$id/edit': typeof AdminProjectsIdEditRoute
+  '/api/admin/blogs/$id': typeof ApiAdminBlogsIdRoute
+  '/api/admin/projects/$id': typeof ApiAdminProjectsIdRoute
+  '/api/admin/uploads/images': typeof ApiAdminUploadsImagesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/blog'
+    | '/projects'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/admin/blogs'
+    | '/admin/login'
+    | '/admin/projects'
+    | '/blog/$slug'
+    | '/media/$'
+    | '/projects/$slug'
+    | '/admin/'
+    | '/admin/blogs/new'
+    | '/admin/projects/new'
+    | '/api/admin/blogs'
+    | '/api/admin/projects'
+    | '/api/auth/login'
+    | '/api/auth/logout'
+    | '/api/auth/session'
+    | '/admin/blogs/$id/edit'
+    | '/admin/projects/$id/edit'
+    | '/api/admin/blogs/$id'
+    | '/api/admin/projects/$id'
+    | '/api/admin/uploads/images'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/blog'
+    | '/projects'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/admin/blogs'
+    | '/admin/login'
+    | '/admin/projects'
+    | '/blog/$slug'
+    | '/media/$'
+    | '/projects/$slug'
+    | '/admin'
+    | '/admin/blogs/new'
+    | '/admin/projects/new'
+    | '/api/admin/blogs'
+    | '/api/admin/projects'
+    | '/api/auth/login'
+    | '/api/auth/logout'
+    | '/api/auth/session'
+    | '/admin/blogs/$id/edit'
+    | '/admin/projects/$id/edit'
+    | '/api/admin/blogs/$id'
+    | '/api/admin/projects/$id'
+    | '/api/admin/uploads/images'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/blog'
+    | '/projects'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/admin/blogs'
+    | '/admin/login'
+    | '/admin/projects'
+    | '/blog/$slug'
+    | '/media/$'
+    | '/projects/$slug'
+    | '/admin/'
+    | '/admin/blogs/new'
+    | '/admin/projects/new'
+    | '/api/admin/blogs'
+    | '/api/admin/projects'
+    | '/api/auth/login'
+    | '/api/auth/logout'
+    | '/api/auth/session'
+    | '/admin/blogs/$id/edit'
+    | '/admin/projects/$id/edit'
+    | '/api/admin/blogs/$id'
+    | '/api/admin/projects/$id'
+    | '/api/admin/uploads/images'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  BlogRoute: typeof BlogRouteWithChildren
+  ProjectsRoute: typeof ProjectsRouteWithChildren
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  MediaSplatRoute: typeof MediaSplatRoute
+  ApiAdminBlogsRoute: typeof ApiAdminBlogsRouteWithChildren
+  ApiAdminProjectsRoute: typeof ApiAdminProjectsRouteWithChildren
+  ApiAuthLoginRoute: typeof ApiAuthLoginRoute
+  ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
+  ApiAuthSessionRoute: typeof ApiAuthSessionRoute
+  ApiAdminUploadsImagesRoute: typeof ApiAdminUploadsImagesRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +385,245 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/projects/$slug': {
+      id: '/projects/$slug'
+      path: '/$slug'
+      fullPath: '/projects/$slug'
+      preLoaderRoute: typeof ProjectsSlugRouteImport
+      parentRoute: typeof ProjectsRoute
+    }
+    '/media/$': {
+      id: '/media/$'
+      path: '/media/$'
+      fullPath: '/media/$'
+      preLoaderRoute: typeof MediaSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/admin/projects': {
+      id: '/admin/projects'
+      path: '/projects'
+      fullPath: '/admin/projects'
+      preLoaderRoute: typeof AdminProjectsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/blogs': {
+      id: '/admin/blogs'
+      path: '/blogs'
+      fullPath: '/admin/blogs'
+      preLoaderRoute: typeof AdminBlogsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/api/auth/session': {
+      id: '/api/auth/session'
+      path: '/api/auth/session'
+      fullPath: '/api/auth/session'
+      preLoaderRoute: typeof ApiAuthSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/logout': {
+      id: '/api/auth/logout'
+      path: '/api/auth/logout'
+      fullPath: '/api/auth/logout'
+      preLoaderRoute: typeof ApiAuthLogoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/login': {
+      id: '/api/auth/login'
+      path: '/api/auth/login'
+      fullPath: '/api/auth/login'
+      preLoaderRoute: typeof ApiAuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/projects': {
+      id: '/api/admin/projects'
+      path: '/api/admin/projects'
+      fullPath: '/api/admin/projects'
+      preLoaderRoute: typeof ApiAdminProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/blogs': {
+      id: '/api/admin/blogs'
+      path: '/api/admin/blogs'
+      fullPath: '/api/admin/blogs'
+      preLoaderRoute: typeof ApiAdminBlogsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/projects/new': {
+      id: '/admin/projects/new'
+      path: '/new'
+      fullPath: '/admin/projects/new'
+      preLoaderRoute: typeof AdminProjectsNewRouteImport
+      parentRoute: typeof AdminProjectsRoute
+    }
+    '/admin/blogs/new': {
+      id: '/admin/blogs/new'
+      path: '/new'
+      fullPath: '/admin/blogs/new'
+      preLoaderRoute: typeof AdminBlogsNewRouteImport
+      parentRoute: typeof AdminBlogsRoute
+    }
+    '/api/admin/uploads/images': {
+      id: '/api/admin/uploads/images'
+      path: '/api/admin/uploads/images'
+      fullPath: '/api/admin/uploads/images'
+      preLoaderRoute: typeof ApiAdminUploadsImagesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/projects/$id': {
+      id: '/api/admin/projects/$id'
+      path: '/$id'
+      fullPath: '/api/admin/projects/$id'
+      preLoaderRoute: typeof ApiAdminProjectsIdRouteImport
+      parentRoute: typeof ApiAdminProjectsRoute
+    }
+    '/api/admin/blogs/$id': {
+      id: '/api/admin/blogs/$id'
+      path: '/$id'
+      fullPath: '/api/admin/blogs/$id'
+      preLoaderRoute: typeof ApiAdminBlogsIdRouteImport
+      parentRoute: typeof ApiAdminBlogsRoute
+    }
+    '/admin/projects/$id/edit': {
+      id: '/admin/projects/$id/edit'
+      path: '/$id/edit'
+      fullPath: '/admin/projects/$id/edit'
+      preLoaderRoute: typeof AdminProjectsIdEditRouteImport
+      parentRoute: typeof AdminProjectsRoute
+    }
+    '/admin/blogs/$id/edit': {
+      id: '/admin/blogs/$id/edit'
+      path: '/$id/edit'
+      fullPath: '/admin/blogs/$id/edit'
+      preLoaderRoute: typeof AdminBlogsIdEditRouteImport
+      parentRoute: typeof AdminBlogsRoute
+    }
   }
 }
 
+interface AdminBlogsRouteChildren {
+  AdminBlogsNewRoute: typeof AdminBlogsNewRoute
+  AdminBlogsIdEditRoute: typeof AdminBlogsIdEditRoute
+}
+
+const AdminBlogsRouteChildren: AdminBlogsRouteChildren = {
+  AdminBlogsNewRoute: AdminBlogsNewRoute,
+  AdminBlogsIdEditRoute: AdminBlogsIdEditRoute,
+}
+
+const AdminBlogsRouteWithChildren = AdminBlogsRoute._addFileChildren(
+  AdminBlogsRouteChildren,
+)
+
+interface AdminProjectsRouteChildren {
+  AdminProjectsNewRoute: typeof AdminProjectsNewRoute
+  AdminProjectsIdEditRoute: typeof AdminProjectsIdEditRoute
+}
+
+const AdminProjectsRouteChildren: AdminProjectsRouteChildren = {
+  AdminProjectsNewRoute: AdminProjectsNewRoute,
+  AdminProjectsIdEditRoute: AdminProjectsIdEditRoute,
+}
+
+const AdminProjectsRouteWithChildren = AdminProjectsRoute._addFileChildren(
+  AdminProjectsRouteChildren,
+)
+
+interface AdminRouteChildren {
+  AdminBlogsRoute: typeof AdminBlogsRouteWithChildren
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminProjectsRoute: typeof AdminProjectsRouteWithChildren
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminBlogsRoute: AdminBlogsRouteWithChildren,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminProjectsRoute: AdminProjectsRouteWithChildren,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
+interface ProjectsRouteChildren {
+  ProjectsSlugRoute: typeof ProjectsSlugRoute
+}
+
+const ProjectsRouteChildren: ProjectsRouteChildren = {
+  ProjectsSlugRoute: ProjectsSlugRoute,
+}
+
+const ProjectsRouteWithChildren = ProjectsRoute._addFileChildren(
+  ProjectsRouteChildren,
+)
+
+interface ApiAdminBlogsRouteChildren {
+  ApiAdminBlogsIdRoute: typeof ApiAdminBlogsIdRoute
+}
+
+const ApiAdminBlogsRouteChildren: ApiAdminBlogsRouteChildren = {
+  ApiAdminBlogsIdRoute: ApiAdminBlogsIdRoute,
+}
+
+const ApiAdminBlogsRouteWithChildren = ApiAdminBlogsRoute._addFileChildren(
+  ApiAdminBlogsRouteChildren,
+)
+
+interface ApiAdminProjectsRouteChildren {
+  ApiAdminProjectsIdRoute: typeof ApiAdminProjectsIdRoute
+}
+
+const ApiAdminProjectsRouteChildren: ApiAdminProjectsRouteChildren = {
+  ApiAdminProjectsIdRoute: ApiAdminProjectsIdRoute,
+}
+
+const ApiAdminProjectsRouteWithChildren =
+  ApiAdminProjectsRoute._addFileChildren(ApiAdminProjectsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  BlogRoute: BlogRouteWithChildren,
+  ProjectsRoute: ProjectsRouteWithChildren,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  MediaSplatRoute: MediaSplatRoute,
+  ApiAdminBlogsRoute: ApiAdminBlogsRouteWithChildren,
+  ApiAdminProjectsRoute: ApiAdminProjectsRouteWithChildren,
+  ApiAuthLoginRoute: ApiAuthLoginRoute,
+  ApiAuthLogoutRoute: ApiAuthLogoutRoute,
+  ApiAuthSessionRoute: ApiAuthSessionRoute,
+  ApiAdminUploadsImagesRoute: ApiAdminUploadsImagesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

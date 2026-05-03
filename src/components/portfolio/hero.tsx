@@ -78,10 +78,10 @@ export function Hero() {
           </p>
 
           <div className="page-enter enter-soft motion-delay-6 flex flex-wrap items-center gap-3.5">
-            <a className={crayonButtonClass('yellow')} href="#projects">
+            <a className={crayonButtonClass('yellow')} href="/#projects">
               View my work →
             </a>
-            <a className={crayonButtonClass('yellow', { ghost: true })} href="#contact">
+            <a className={crayonButtonClass('yellow', { ghost: true })} href="/#contact">
               Get in touch
             </a>
           </div>

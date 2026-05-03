@@ -1,10 +1,10 @@
 export const NAV_LINKS = [
-  { label: 'About', href: '#about' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Achievements', href: '#achievements' },
-  { label: 'Blog', href: '#blog' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'About', href: '/#about' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Projects', href: '/#projects' },
+  { label: 'Achievements', href: '/#achievements' },
+  { label: 'Blog', href: '/#blog' },
+  { label: 'Contact', href: '/#contact' },
 ] as const
 
 export const EXPERIENCE_ITEMS = [
@@ -69,45 +69,6 @@ export const SKILL_CATEGORIES = [
   },
 ] as const
 
-export const PROJECT_ITEMS = [
-  {
-    title: 'Project Aurora',
-    desc: 'A real-time collaboration tool for distributed teams. Placeholder description.',
-    tags: ['React', 'Node', 'WebSocket'],
-    link: '#',
-  },
-  {
-    title: 'Bloom Tracker',
-    desc: 'A habit and mood tracker with playful gamification. Placeholder description.',
-    tags: ['Next.js', 'Postgres'],
-    link: '#',
-  },
-  {
-    title: 'CrayonAPI',
-    desc: 'A lightweight design tokens API for crayon-styled apps. Placeholder description.',
-    tags: ['TypeScript', 'Express'],
-    link: '#',
-  },
-  {
-    title: 'Hackathon Kit',
-    desc: 'A bootstrap kit my team uses to ship hackathon projects in 24 hours.',
-    tags: ['Vite', 'React'],
-    link: '#',
-  },
-  {
-    title: 'StudyBuddy',
-    desc: 'A pomodoro + note app for university friends. Placeholder description.',
-    tags: ['Flutter'],
-    link: '#',
-  },
-  {
-    title: 'Sketch CMS',
-    desc: 'A handwriting-friendly CMS for journaling sites. Placeholder description.',
-    tags: ['Django', 'React'],
-    link: '#',
-  },
-] as const
-
 export const ACHIEVEMENT_ITEMS = [
   { title: 'Winner — National Hackathon', meta: 'placeholder · 2024', icon: '1st' },
   { title: 'Runner-up — Regional CodeFest', meta: 'placeholder · 2023', icon: '2nd' },
@@ -115,24 +76,6 @@ export const ACHIEVEMENT_ITEMS = [
   { title: 'Top 10 — Online AI Challenge', meta: 'placeholder · 2023', icon: 'AI' },
   { title: 'Winner — InterUni Code Sprint', meta: 'placeholder · 2022', icon: 'CS' },
   { title: 'Speaker — University Tech Talk', meta: 'SUST · 2022', icon: '🎤' },
-] as const
-
-export const BLOG_ITEMS = [
-  {
-    date: 'Mar 12, 2026',
-    title: 'How I Approach Hackathons (and actually finish)',
-    excerpt: 'A friendly guide to scoping, shipping, and not burning out at 3am.',
-  },
-  {
-    date: 'Feb 04, 2026',
-    title: 'Notes on Building Tiny Tools at Work',
-    excerpt: "Small internal tools changed our team. Here's how I think about them.",
-  },
-  {
-    date: 'Jan 18, 2026',
-    title: 'From SUST to Software: A Friendly Roadmap',
-    excerpt: "What I'd tell my first-year self about university, code, and craft.",
-  },
 ] as const
 
 export const CONTACT_LINKS = [

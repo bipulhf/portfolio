@@ -13,7 +13,7 @@ const navLinkTones = [
 
 export function Nav() {
   return (
-    <nav className="sticky top-0 z-50 pt-2.5 md:pt-3">
+    <nav className="sticky top-0 z-50 bg-[linear-gradient(180deg,rgba(244,250,249,0.96),rgba(244,250,249,0.72))] pt-2.5 md:pt-3">
       <div className="mx-auto w-full max-w-[73.75rem] px-0 sm:px-4 md:px-6 lg:px-8">
         <div
           className={cx(
@@ -23,7 +23,7 @@ export function Nav() {
           )}
         >
           <div className="relative z-[1] flex flex-wrap items-center justify-between gap-3 md:gap-4">
-            <a className="inline-flex min-w-0 items-center gap-2.5 no-underline md:gap-3.5" href="#top">
+            <a className="inline-flex min-w-0 items-center gap-2.5 no-underline md:gap-3.5" href="/">
               <span className="inline-flex size-[2.45rem] items-center justify-center rounded-[1.1rem] border-2 border-ink bg-[linear-gradient(145deg,var(--color-peach),#ffe8dc)] shadow-[3px_3px_0_var(--color-ink)] rotate-[-4deg] md:size-[2.875rem] lg:rounded-[1.1rem_1.35rem_1rem_1.25rem/1.3rem_1rem_1.35rem_1rem]">
                 <span className="size-[0.95rem] rounded-full bg-yellow shadow-[2px_2px_0_var(--color-ink)]" />
               </span>
@@ -58,7 +58,7 @@ export function Nav() {
 
             <a
               className="ml-auto hidden min-h-11 items-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.7))] px-4 py-[0.65rem] font-hand text-base text-ink no-underline shadow-[3px_3px_0_var(--color-ink)] transition-[transform,box-shadow,background-color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[1deg] hover:shadow-[4px_4px_0_var(--color-ink)] lg:inline-flex xl:ml-0"
-              href="#contact"
+              href="/#contact"
             >
               <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-[#7fd893] shadow-[0_0_0_0.15rem_rgba(127,216,147,0.18)]" />
               Open to collaborate
