@@ -3,7 +3,7 @@ import { crayonButtonClass, cx, pageContainerClass, surfaceCardClass } from './l
 
 export function Hero() {
   return (
-    <section className="relative flex items-center overflow-hidden py-8 md:py-8 lg:min-h-[40rem] lg:py-14" id="top">
+    <section className="relative flex items-center overflow-hidden py-6 sm:py-8 lg:min-h-[40rem] lg:py-14" id="top">
       <div
         aria-hidden="true"
         className="hero-backdrop hero-backdrop-mask pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ease-out-soft"
@@ -11,9 +11,9 @@ export function Hero() {
         <HeroBackdrop />
       </div>
 
-      <div className={cx(pageContainerClass, 'relative z-[1] grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(18rem,24rem)] md:items-center lg:grid-cols-[minmax(0,1fr)_minmax(22rem,26rem)] lg:gap-12')}>
-        <div className="order-first flex justify-center md:order-2 md:justify-end">
-          <div className="relative w-full max-w-96 px-2.5 pb-6 pt-3 md:max-w-[26rem]">
+      <div className={cx(pageContainerClass, 'relative z-[1] grid gap-6 md:grid-cols-[minmax(0,1.1fr)_minmax(18rem,24rem)] md:items-center lg:grid-cols-[minmax(0,1fr)_minmax(22rem,26rem)] lg:gap-12')}>
+        <div className="order-2 flex justify-center md:justify-end">
+          <div className="relative w-full max-w-[21rem] px-1 pb-5 pt-2 sm:max-w-96 sm:px-2.5 sm:pb-6 sm:pt-3 md:max-w-[26rem]">
             <div
               className={cx(
                 surfaceCardClass,
@@ -31,7 +31,7 @@ export function Hero() {
               </div>
             </div>
 
-            <div className="hero-portrait-note absolute bottom-0 left-0 inline-flex min-h-10 items-center gap-2 rounded-2xl border-2 border-ink bg-yellow px-4 py-2 font-hand text-base text-ink shadow-crayon-sm rotate-[-4deg]">
+            <div className="hero-portrait-note absolute bottom-0 left-1 inline-flex min-h-10 max-w-[12rem] items-center gap-2 rounded-2xl border-2 border-ink bg-yellow px-3 py-2 font-hand text-sm text-ink shadow-crayon-sm rotate-[-4deg] sm:left-0 sm:max-w-none sm:px-4 sm:text-base">
               <span className="size-[0.9rem] shrink-0 rounded-full border-2 border-ink bg-peach shadow-[inset_-1px_-2px_0_rgba(46,61,58,0.18)]" />
               <span>crayon mood, real me</span>
             </div>
@@ -48,13 +48,13 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative flex max-w-[47.5rem] flex-col justify-center py-4">
-          <div className="mb-2 flex items-center gap-2.5 whitespace-nowrap font-hand text-xl text-ink-soft md:text-[1.25rem]">
+        <div className="order-1 relative flex max-w-[47.5rem] flex-col justify-center py-2 sm:py-4">
+          <div className="mb-2 flex flex-wrap items-center gap-2.5 font-hand text-lg text-ink-soft sm:text-xl md:text-[1.25rem]">
             <span className="hero-wave inline-block">👋</span>
             <span>hello, I&apos;m</span>
           </div>
 
-          <h1 className="relative mb-[1.125rem] mt-1 block font-display text-[clamp(3.5rem,14vw,6.75rem)] font-bold leading-none tracking-[-0.01em] text-ink">
+          <h1 className="relative mb-[1.125rem] mt-1 block font-display text-[clamp(3rem,15vw,6.75rem)] font-bold leading-none tracking-[-0.01em] text-ink">
             <span className="relative inline-block">Shahiduzzaman</span>{' '}
             <span className="relative inline-block">
               Bipul.
@@ -64,7 +64,7 @@ export function Hero() {
             </span>
           </h1>
 
-          <div className="mb-[1.125rem] max-w-[35rem] font-hand text-[1.375rem] leading-[1.55] text-ink lg:max-w-[32.5rem] lg:leading-[1.6]">
+          <div className="mb-[1.125rem] max-w-[35rem] font-hand text-[1.18rem] leading-[1.55] text-ink sm:text-[1.3rem] lg:max-w-[32.5rem] lg:text-[1.375rem] lg:leading-[1.6]">
             A{' '}
             <span className="mx-0.5 inline-block whitespace-nowrap rounded-[1.25rem] border-[1.5px] border-ink bg-mint px-3 py-px shadow-[2px_2px_0_var(--color-ink)] rotate-[-1.2deg]">
               software engineer
@@ -78,10 +78,10 @@ export function Hero() {
           </p>
 
           <div className="flex flex-wrap items-center gap-3.5">
-            <a className={crayonButtonClass('yellow')} href="/#projects">
+            <a className={crayonButtonClass('yellow', { className: 'w-full justify-center sm:w-auto' })} href="/#projects">
               View my work →
             </a>
-            <a className={crayonButtonClass('yellow', { ghost: true })} href="/#contact">
+            <a className={crayonButtonClass('yellow', { className: 'w-full justify-center sm:w-auto', ghost: true })} href="/#contact">
               Get in touch
             </a>
           </div>

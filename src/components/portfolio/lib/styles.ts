@@ -2,9 +2,9 @@ export function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(' ')
 }
 
-export const pageContainerClass = 'mx-auto w-full max-w-[73.75rem] px-4 md:px-6 lg:px-8'
+export const pageContainerClass = 'mx-auto w-full max-w-[73.75rem] px-3 sm:px-4 md:px-6 lg:px-8'
 
-export const sectionShellClass = `${pageContainerClass} relative scroll-mt-28 py-[4.5rem] md:py-[5.625rem] lg:py-[8.125rem]`
+export const sectionShellClass = `${pageContainerClass} relative scroll-mt-24 py-14 md:py-20 lg:py-28`
 
 export const surfaceCardClass = 'crayon-surface bg-paper'
 

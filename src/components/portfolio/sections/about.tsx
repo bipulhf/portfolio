@@ -13,9 +13,9 @@ export function About() {
         underlineColor="var(--color-peach)"
       />
 
-      <div className="mt-12 grid gap-8 md:grid-cols-[1fr_1.15fr] md:items-center md:gap-14">
+      <div className="mt-10 grid gap-6 md:mt-12 md:grid-cols-[1fr_1.15fr] md:items-center md:gap-14">
         <div
-          className={`${surfaceCardClass} reveal reveal-left relative rotate-[-1deg] rounded-[1.375rem_1.625rem_1.25rem_1.75rem/1.625rem_1.25rem_1.75rem_1.375rem] border-[2.5px] border-ink px-6 py-8 shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]`}
+          className={`${surfaceCardClass} reveal reveal-left relative rotate-[-1deg] rounded-[1.375rem_1.625rem_1.25rem_1.75rem/1.625rem_1.25rem_1.75rem_1.375rem] border-[2.5px] border-ink px-5 py-6 shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)] sm:px-6 sm:py-8`}
         >
           <div className="absolute left-8 top-[-0.875rem] size-7 rounded-full border-2 border-ink bg-peach shadow-[inset_-2px_-3px_0_rgba(46,61,58,0.2)]" />
           <p>
@@ -34,7 +34,7 @@ export function About() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-4" data-reveal-sequence>
+        <div className="grid grid-cols-2 gap-3 sm:gap-4" data-reveal-sequence>
           {[
             ['10+', 'hackathons won'],
             ['4+', 'years coding'],
@@ -46,8 +46,8 @@ export function About() {
               data-reveal-item
               key={label}
             >
-              <div className="font-display text-5xl font-bold leading-none text-ink">{value}</div>
-              <div className="font-hand text-base text-ink-soft">{label}</div>
+              <div className="font-display text-[2.3rem] font-bold leading-none text-ink sm:text-5xl">{value}</div>
+              <div className="font-hand text-sm text-ink-soft sm:text-base">{label}</div>
             </div>
           ))}
         </div>

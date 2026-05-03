@@ -29,7 +29,7 @@ export function ProjectGrid({
   items: SerializedProject[]
 }>) {
   return (
-    <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3 lg:gap-8" data-reveal-sequence>
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8" data-reveal-sequence>
       {items.length ? (
         items.map((project, index) => (
           <article
@@ -45,7 +45,7 @@ export function ProjectGrid({
             <div
               className={cx(
                 coverColors[index % coverColors.length],
-                'relative flex min-h-40 items-center justify-center border-b-2 border-ink',
+                'relative flex min-h-32 items-center justify-center border-b-2 border-ink sm:min-h-40',
               )}
             >
               {project.coverImagePath ? (
@@ -58,8 +58,8 @@ export function ProjectGrid({
                 <ProjectCover index={index} />
               )}
             </div>
-            <div className="flex h-full flex-col px-[1.375rem] pb-[1.375rem] pt-5">
-              <div className="mb-2 flex items-center gap-2 font-hand text-sm text-ink-soft">
+            <div className="flex h-full flex-col px-5 pb-5 pt-4 sm:px-[1.375rem] sm:pb-[1.375rem] sm:pt-5">
+              <div className="mb-2 flex flex-wrap items-center gap-2 font-hand text-sm text-ink-soft">
                 <span className="inline-flex rounded-full border border-ink/20 bg-white/50 px-2 py-1">
                   {project.featured ? 'featured' : 'project'}
                 </span>
@@ -67,7 +67,7 @@ export function ProjectGrid({
                   <span>{new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' }).format(new Date(project.publishedAt))}</span>
                 ) : null}
               </div>
-              <h2 className="mb-2 font-display text-[2rem] font-bold leading-none text-ink">
+              <h2 className="mb-2 font-display text-[1.7rem] font-bold leading-none text-ink sm:text-[2rem]">
                 {project.title}
               </h2>
               <p className="mb-3.5 flex-1 text-[0.9375rem] text-ink-soft">{project.summary}</p>

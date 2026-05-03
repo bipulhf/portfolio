@@ -37,7 +37,7 @@ export function BlogGrid({
   items: SerializedBlog[]
 }>) {
   return (
-    <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3" data-reveal-sequence>
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3" data-reveal-sequence>
       {items.length ? (
         items.map((post, index) => (
           <Link
@@ -48,7 +48,7 @@ export function BlogGrid({
             to="/blog/$slug"
             params={{ slug: post.slug }}
           >
-            <div className={`${coverTones[index % coverTones.length]} relative flex min-h-[8.125rem] items-center justify-center border-b-2 border-ink`}>
+            <div className={`${coverTones[index % coverTones.length]} relative flex min-h-[7rem] items-center justify-center border-b-2 border-ink sm:min-h-[8.125rem]`}>
               {post.coverImagePath ? (
                 <img
                   alt={post.title}
@@ -59,11 +59,11 @@ export function BlogGrid({
                 <BlogCover index={index} />
               )}
             </div>
-            <div className="flex h-full flex-col px-[1.375rem] pb-[1.375rem] pt-[1.125rem]">
+            <div className="flex h-full flex-col px-5 pb-5 pt-4 sm:px-[1.375rem] sm:pb-[1.375rem] sm:pt-[1.125rem]">
               <div className="mb-1.5 font-hand text-sm text-ink-soft">
                 {formatPublishedDate(post.publishedAt)} · {post.readingTimeMinutes} min
               </div>
-              <h2 className="mb-2 font-display text-[1.75rem] font-bold leading-[1.05] text-ink">
+              <h2 className="mb-2 font-display text-[1.5rem] font-bold leading-[1.05] text-ink sm:text-[1.75rem]">
                 {post.title}
               </h2>
               <p className="flex-1 text-[0.9375rem] text-ink-soft">{post.excerpt}</p>

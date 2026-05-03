@@ -28,16 +28,16 @@ export function AdminShell({
     <div className="min-h-screen bg-[linear-gradient(180deg,#f8fcfb_0%,#f1f8f7_100%)] pb-14">
       <div className={pageContainerClass}>
         <div className="py-5 md:py-6">
-          <div className="sticky top-3 z-40 rounded-[1.35rem] border border-ink/10 bg-white/88 px-4 py-4 shadow-[0_10px_30px_rgba(46,61,58,0.08)] backdrop-blur-sm md:px-5">
-            <div className="flex flex-wrap items-center gap-3">
+          <div className="sticky top-3 z-40 rounded-[1.2rem] border border-ink/10 bg-white/88 px-3.5 py-3.5 shadow-[0_10px_30px_rgba(46,61,58,0.08)] backdrop-blur-sm sm:px-4 md:px-5 md:py-4">
+            <div className="flex flex-wrap items-start gap-3 md:items-center">
               <div className="min-w-0">
-                <Link className="inline-flex font-display text-[1.9rem] font-bold text-ink no-underline" to="/">
+                <Link className="inline-flex font-display text-[1.65rem] font-bold text-ink no-underline sm:text-[1.9rem]" to="/">
                   Bipul CMS
                 </Link>
-                <div className="text-sm text-ink-soft">simple content workspace</div>
+                <div className="hidden text-sm text-ink-soft sm:block">simple content workspace</div>
               </div>
 
-              <nav className="ml-auto flex flex-wrap items-center gap-2">
+              <nav className="order-3 flex w-full flex-wrap items-center gap-2 md:order-none md:ml-auto md:w-auto">
                 {links.map((link) => {
                   const active =
                     location.pathname === link.to ||
@@ -55,7 +55,7 @@ export function AdminShell({
                 })}
               </nav>
 
-              <div className="flex w-full flex-wrap items-center justify-between gap-3 border-t border-ink/8 pt-3 md:w-auto md:border-t-0 md:pt-0">
+              <div className="flex w-full flex-wrap items-center justify-between gap-3 border-t border-ink/8 pt-3 sm:justify-between md:w-auto md:border-t-0 md:pt-0">
                 <div className="text-sm text-ink-soft">
                   {session.data?.email ?? 'Loading session...'}
                 </div>
@@ -79,8 +79,8 @@ export function AdminShell({
             </div>
           </div>
 
-          <main className="mx-auto mt-6 max-w-[70rem] space-y-6">
-            <header className="rounded-[1.5rem] border border-ink/10 bg-white px-6 py-6 shadow-[0_10px_28px_rgba(46,61,58,0.05)] md:px-7 md:py-7">
+          <main className="mx-auto mt-5 max-w-[70rem] space-y-5 md:mt-6 md:space-y-6">
+            <header className="rounded-[1.35rem] border border-ink/10 bg-white px-5 py-5 shadow-[0_10px_28px_rgba(46,61,58,0.05)] sm:px-6 md:rounded-[1.5rem] md:px-7 md:py-7">
               <div className="mb-2 font-hand text-base text-ink-soft">admin workspace</div>
               <h1 className="font-display text-[clamp(2.3rem,6vw,3.8rem)] font-bold leading-[0.95] text-ink">
                 {title}

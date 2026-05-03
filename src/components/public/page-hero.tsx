@@ -15,12 +15,12 @@ export function PageHero({
   title: string
 }>) {
   return (
-    <section className={cx(pageContainerClass, 'relative pt-12 md:pt-16 lg:pt-20')}>
-      <div className="page-enter enter-soft motion-delay-2 relative overflow-hidden rounded-[2rem] border-[2.5px] border-ink bg-[linear-gradient(180deg,rgba(255,255,255,0.72),rgba(244,250,249,0.95)),var(--color-paper)] px-6 py-10 shadow-crayon-lg md:px-10 md:py-12 lg:px-14 lg:py-16">
+    <section className={cx(pageContainerClass, 'relative pt-8 sm:pt-10 md:pt-16 lg:pt-20')}>
+      <div className="page-enter enter-soft motion-delay-2 relative overflow-hidden rounded-[1.6rem] border-[2.5px] border-ink bg-[linear-gradient(180deg,rgba(255,255,255,0.72),rgba(244,250,249,0.95)),var(--color-paper)] px-5 py-8 shadow-crayon-lg sm:rounded-[2rem] sm:px-6 sm:py-10 md:px-10 md:py-12 lg:px-14 lg:py-16">
         <div className="absolute inset-x-0 top-0 h-28 bg-[radial-gradient(circle_at_top_left,rgba(255,200,184,0.35),transparent_56%),radial-gradient(circle_at_top_right,rgba(169,212,236,0.28),transparent_52%)]" />
         <div className="relative max-w-3xl">
-          <div className="mb-4 flex items-center gap-3 font-hand text-lg text-ink-soft md:text-xl">
-            <span className="h-0.5 w-10 rounded-full bg-ink-soft" />
+          <div className="mb-4 flex flex-wrap items-center gap-3 font-hand text-base text-ink-soft sm:text-lg md:text-xl">
+            <span className="h-0.5 w-8 rounded-full bg-ink-soft sm:w-10" />
             <span>{eyebrow}</span>
           </div>
           <h1 className="section-scribble relative inline-block font-display text-[clamp(2.8rem,8vw,5.2rem)] font-bold leading-[0.95] text-ink">
@@ -50,12 +50,16 @@ export function PageHeroActions({
 }>) {
   return (
     <>
-      <Link className={crayonButtonClass('yellow')} preload="intent" to={primaryTo}>
+      <Link
+        className={crayonButtonClass('yellow', { className: 'w-full justify-center sm:w-auto' })}
+        preload="intent"
+        to={primaryTo}
+      >
         {primaryLabel}
       </Link>
       {secondaryLabel && secondaryTo ? (
         <Link
-          className={crayonButtonClass('mint', { ghost: true })}
+          className={crayonButtonClass('mint', { className: 'w-full justify-center sm:w-auto', ghost: true })}
           preload="intent"
           to={secondaryTo}
         >

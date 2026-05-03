@@ -1,53 +1,82 @@
-import { ScribbleUnder, Squiggle, Star } from "./doodles";
-import { NAV_LINKS } from "./lib/content";
-import { cx } from "./lib/styles";
+import { useEffect, useId, useState } from 'react'
+import { ScribbleUnder, Squiggle, Star } from './doodles'
+import { NAV_LINKS } from './lib/content'
+import { cx } from './lib/styles'
 
 const navLinkTones = [
-  "hover:bg-yellow/45",
-  "hover:bg-mint/45",
-  "hover:bg-peach/45",
-  "hover:bg-sky/45",
-  "hover:bg-pink/45",
-  "hover:bg-lilac/50",
-] as const;
+  'hover:bg-yellow/45',
+  'hover:bg-mint/45',
+  'hover:bg-peach/45',
+  'hover:bg-sky/45',
+  'hover:bg-pink/45',
+  'hover:bg-lilac/50',
+] as const
 
 export function Nav() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const mobileMenuId = useId()
+
+  useEffect(() => {
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
+      }
+    }
+
+    function handleResize() {
+      if (window.innerWidth >= 1280) {
+        setMenuOpen(false)
+      }
+    }
+
+    window.addEventListener('keydown', handleEscape)
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('keydown', handleEscape)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  function closeMenu() {
+    setMenuOpen(false)
+  }
+
   return (
     <nav className="sticky top-0 z-50 pt-2.5 md:pt-5">
-      <div className="mx-auto w-full max-w-[73.75rem] px-0 sm:px-4 md:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-[73.75rem] px-3 sm:px-4 md:px-6 lg:px-8">
         <div
           className={cx(
-            "relative rounded-[1.2rem] border border-ink bg-white px-3 py-3 shadow-[0_0.5rem_1.2rem_rgba(46,61,58,0.08)] transition-[translate,box-shadow,border-color] duration-300 ease-out-soft hover:-translate-y-0.5 hover:shadow-[0_0.9rem_1.8rem_rgba(46,61,58,0.12)] sm:rounded-[1.4rem] md:px-4 md:py-[0.95rem] lg:rounded-[1.75rem_1.375rem_1.875rem_1.5rem/1.5rem_1.875rem_1.5rem_2rem] lg:px-[1.2rem] lg:py-[0.95rem]",
+            'relative rounded-[1.05rem] border border-ink bg-white px-3 py-3 shadow-[0_0.5rem_1.2rem_rgba(46,61,58,0.08)] transition-[translate,box-shadow,border-color] duration-300 ease-out-soft hover:-translate-y-0.5 hover:shadow-[0_0.9rem_1.8rem_rgba(46,61,58,0.12)] sm:rounded-[1.25rem] md:px-4 md:py-[0.95rem] lg:rounded-[1.75rem_1.375rem_1.875rem_1.5rem/1.5rem_1.875rem_1.5rem_2rem] lg:px-[1.2rem] lg:py-[0.95rem]',
             "before:pointer-events-none before:absolute before:right-6 before:top-[-0.625rem] before:hidden before:h-[1.125rem] before:w-[4.5rem] before:rounded-full before:border-2 before:border-ink/30 before:bg-peach/70 before:content-[''] before:rotate-[7deg] lg:before:block",
             "after:pointer-events-none after:absolute after:inset-2 after:hidden after:rounded-[1.375rem_1.125rem_1.5rem_1.25rem/1.25rem_1.5rem_1.25rem_1.625rem] after:content-[''] lg:after:block",
           )}
         >
-          <div className="relative z-[1] flex flex-wrap items-center justify-between gap-3 md:gap-4">
-            <a
-              className="inline-flex min-w-0 items-center gap-2.5 no-underline md:gap-3.5"
-              href="/"
-            >
-              <span className="inline-flex size-[2.45rem] items-center justify-center rounded-[1.1rem] border-2 border-ink bg-[linear-gradient(145deg,var(--color-peach),#ffe8dc)] shadow-[3px_3px_0_var(--color-ink)] rotate-[-4deg] md:size-[2.875rem] lg:rounded-[1.1rem_1.35rem_1rem_1.25rem/1.3rem_1rem_1.35rem_1rem]">
-                <span className="size-[0.95rem] rounded-full bg-yellow shadow-[2px_2px_0_var(--color-ink)]" />
-              </span>
+          <div className="relative z-[1] flex items-center gap-3 md:gap-4">
+            <a className="inline-flex min-w-0 items-center gap-2 no-underline md:gap-3.5" href="/">
+              <img
+                alt="Bipul logo"
+                className="size-[2.45rem] rounded-[0.95rem] border-2 border-ink bg-white object-contain p-1 shadow-[3px_3px_0_var(--color-ink)] sm:size-[2.7rem] md:size-[3rem]"
+                src="/logo.png"
+              />
               <span className="flex min-w-0 flex-col leading-none">
-                <span className="font-display text-[1.85rem] font-bold md:text-[2.2rem]">
+                <span className="font-display text-[1.55rem] font-bold sm:text-[1.75rem] md:text-[2.2rem]">
                   Bipul
                 </span>
-                <span className="mt-0.5 hidden font-hand text-[0.92rem] text-ink-soft sm:inline">
+                <span className="mt-0.5 hidden font-hand text-[0.92rem] text-ink-soft md:inline">
                   software engineer portfolio
                 </span>
               </span>
             </a>
 
             <div
-              className="hidden items-center gap-2 rounded-full border-2 border-ink/12 bg-white/45 p-[0.35rem] xl:flex"
+              className="ml-auto hidden items-center gap-2 rounded-full border-2 border-ink/12 bg-white/45 p-[0.35rem] xl:flex"
               role="navigation"
             >
               {NAV_LINKS.map((link, index) => (
                 <a
                   className={cx(
-                    "group relative inline-flex min-h-11 items-center justify-center rounded-full px-[0.95rem] py-[0.55rem] font-hand text-[1.02rem] text-ink no-underline transition-[transform,background-color,box-shadow,color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]",
+                    'group relative inline-flex min-h-11 items-center justify-center rounded-full px-[0.95rem] py-[0.55rem] font-hand text-[1.02rem] text-ink no-underline transition-[transform,background-color,box-shadow,color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]',
                     navLinkTones[index],
                   )}
                   href={link.href}
@@ -62,27 +91,78 @@ export function Nav() {
             </div>
 
             <a
-              className="ml-auto hidden min-h-11 items-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.7))] px-4 py-[0.65rem] font-hand text-base text-ink no-underline shadow-[3px_3px_0_var(--color-ink)] transition-[transform,box-shadow,background-color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[1deg] hover:shadow-[4px_4px_0_var(--color-ink)] lg:inline-flex xl:ml-0"
+              className="hidden min-h-11 items-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.7))] px-4 py-[0.65rem] font-hand text-base text-ink no-underline shadow-[3px_3px_0_var(--color-ink)] transition-[transform,box-shadow,background-color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[1deg] hover:shadow-[4px_4px_0_var(--color-ink)] xl:inline-flex"
               href="/#contact"
             >
               <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-[#7fd893] shadow-[0_0_0_0.15rem_rgba(127,216,147,0.18)]" />
               Open to collaborate
             </a>
+
+            <button
+              aria-controls={mobileMenuId}
+              aria-expanded={menuOpen}
+              aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              className="ml-auto inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border-2 border-ink bg-white/80 text-ink shadow-[2px_2px_0_var(--color-ink)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:bg-yellow/30 hover:shadow-[3px_3px_0_var(--color-ink)] xl:hidden"
+              onClick={() => setMenuOpen((value) => !value)}
+              type="button"
+            >
+              <span className="relative block h-4 w-5">
+                <span
+                  className={cx(
+                    'absolute left-0 top-0 h-[2px] w-full rounded-full bg-current transition-[transform,top,opacity] duration-200',
+                    menuOpen && 'top-[7px] rotate-45',
+                  )}
+                />
+                <span
+                  className={cx(
+                    'absolute left-0 top-[7px] h-[2px] w-full rounded-full bg-current transition-opacity duration-200',
+                    menuOpen && 'opacity-0',
+                  )}
+                />
+                <span
+                  className={cx(
+                    'absolute bottom-0 left-0 h-[2px] w-full rounded-full bg-current transition-[transform,bottom] duration-200',
+                    menuOpen && 'bottom-[7px] -rotate-45',
+                  )}
+                />
+              </span>
+            </button>
           </div>
 
-          <div className="relative z-[1] mt-3 grid grid-cols-3 gap-2 sm:gap-[0.65rem] xl:hidden">
-            {NAV_LINKS.map((link, index) => (
+          <div
+            aria-hidden={!menuOpen}
+            className={cx(
+              'relative z-[1] overflow-hidden transition-[max-height,opacity,margin] duration-300 ease-out-soft xl:hidden',
+              menuOpen ? 'mt-3 max-h-[30rem] opacity-100' : 'max-h-0 opacity-0',
+            )}
+            id={mobileMenuId}
+          >
+            <div className="rounded-[1rem] border-2 border-ink/12 bg-paper/70 p-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
+              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                {NAV_LINKS.map((link, index) => (
+                  <a
+                    className={cx(
+                      'inline-flex min-h-11 items-center justify-center rounded-full border-2 border-ink/15 bg-white/65 px-3 py-[0.65rem] text-center font-hand text-[0.98rem] text-ink no-underline shadow-[0.12rem_0.12rem_0_rgba(46,61,58,0.18)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]',
+                      navLinkTones[index],
+                    )}
+                    href={link.href}
+                    key={link.href}
+                    onClick={closeMenu}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+
               <a
-                className={cx(
-                  "inline-flex min-h-[2.55rem] items-center justify-center rounded-full border-2 border-ink/15 bg-white/55 px-2 py-[0.55rem] text-center font-hand text-[0.92rem] text-ink no-underline shadow-[0.12rem_0.12rem_0_rgba(46,61,58,0.18)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg] sm:px-3 sm:text-[0.96rem] lg:text-[0.98rem]",
-                  navLinkTones[index],
-                )}
-                href={link.href}
-                key={link.href}
+                className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.76))] px-4 py-[0.7rem] font-hand text-[1rem] text-ink no-underline shadow-[2px_2px_0_var(--color-ink)] transition-[transform,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:shadow-[3px_3px_0_var(--color-ink)]"
+                href="/#contact"
+                onClick={closeMenu}
               >
-                {link.label}
+                <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-[#7fd893]" />
+                Open to collaborate
               </a>
-            ))}
+            </div>
           </div>
 
           <div
@@ -100,5 +180,5 @@ export function Nav() {
         </div>
       </div>
     </nav>
-  );
+  )
 }

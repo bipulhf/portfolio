@@ -33,9 +33,9 @@ export function RichContentPage({
   title: string
 }>) {
   return (
-    <main className={cx(pageContainerClass, 'pb-16 pt-12 md:pt-16')}>
+    <main className={cx(pageContainerClass, 'pb-14 pt-8 sm:pt-10 md:pb-16 md:pt-16')}>
       <article className={`${surfaceCardClass} page-enter enter-soft overflow-hidden rounded-[2rem] border-[2.5px] border-ink shadow-crayon-lg`}>
-        <div className="border-b-2 border-ink bg-[linear-gradient(180deg,rgba(255,255,255,0.7),rgba(244,250,249,0.95)),var(--color-paper)] px-6 py-8 md:px-10 md:py-10">
+        <div className="border-b-2 border-ink bg-[linear-gradient(180deg,rgba(255,255,255,0.7),rgba(244,250,249,0.95)),var(--color-paper)] px-5 py-7 sm:px-6 sm:py-8 md:px-10 md:py-10">
           <div className="mb-4 flex flex-wrap items-center gap-3 font-hand text-base text-ink-soft">
             <span className="inline-flex rounded-full border border-ink/15 bg-white/70 px-3 py-1">
               {kicker}
@@ -47,23 +47,23 @@ export function RichContentPage({
           </h1>
           <p className="mt-5 max-w-3xl text-base text-ink-soft md:text-lg">{description}</p>
           <div className="mt-6">
-            <Link className={crayonButtonClass('mint', { ghost: true })} preload="intent" to={backTo}>
+            <Link className={crayonButtonClass('mint', { className: 'w-full justify-center sm:w-auto', ghost: true })} preload="intent" to={backTo}>
               {backLabel}
             </Link>
           </div>
         </div>
 
         {coverImagePath ? (
-          <div className="border-b-2 border-ink bg-paper-shadow/30 px-4 py-4 md:px-6">
+          <div className="border-b-2 border-ink bg-paper-shadow/30 px-3 py-3 sm:px-4 sm:py-4 md:px-6">
             <img
               alt={title}
-              className="w-full rounded-[1.5rem] border-2 border-ink object-cover shadow-crayon-sm"
+              className="w-full rounded-[1.1rem] border-2 border-ink object-cover shadow-crayon-sm sm:rounded-[1.5rem]"
               src={coverImagePath}
             />
           </div>
         ) : null}
 
-        <div className="px-6 py-8 md:px-10 md:py-10">
+        <div className="px-5 py-7 sm:px-6 sm:py-8 md:px-10 md:py-10">
           <div
             className="rich-content mx-auto max-w-3xl"
             dangerouslySetInnerHTML={{ __html: bodyHtml }}
