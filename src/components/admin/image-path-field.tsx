@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import { uploadImageRequest } from '~/lib/admin-queries'
@@ -14,8 +15,19 @@ export function ImagePathField({
   onChange: (value: string) => void
   value: string
 }>) {
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null)
   const uploadMutation = useMutation({
-    mutationFn: uploadImageRequest,
+    mutationFn: async (file: File) => {
+      setUploadProgress(0)
+
+      try {
+        return await uploadImageRequest(file, {
+          onUploadProgress: setUploadProgress,
+        })
+      } finally {
+        setUploadProgress(null)
+      }
+    },
     onSuccess: (response) => {
       onChange(response.publicPath)
       toast.success('Image uploaded.')
@@ -30,7 +42,7 @@ export function ImagePathField({
       <div className="flex flex-col gap-3">
         <AdminInput
           onChange={(event) => onChange(event.target.value)}
-          placeholder="/media/example-image.png"
+          placeholder="https://your-app.ufs.sh/f/example-file-key"
           value={value}
         />
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
@@ -49,7 +61,9 @@ export function ImagePathField({
               }}
               type="file"
             />
-            {uploadMutation.isPending ? 'Uploading...' : 'Upload from computer'}
+            {uploadMutation.isPending
+              ? `Uploading${typeof uploadProgress === 'number' ? ` ${Math.round(uploadProgress)}%` : '...'}`
+              : 'Upload from computer'}
           </label>
           {value ? (
             <a
@@ -62,6 +76,17 @@ export function ImagePathField({
             </a>
           ) : null}
         </div>
+        {typeof uploadProgress === 'number' ? (
+          <div className="space-y-2">
+            <div className="h-2 overflow-hidden rounded-full bg-paper-shadow/60">
+              <div
+                className="h-full rounded-full bg-mint transition-[width] duration-200"
+                style={{ width: `${Math.min(Math.max(uploadProgress, 0), 100)}%` }}
+              />
+            </div>
+            <p className="text-sm text-ink-soft">Uploading to your media library...</p>
+          </div>
+        ) : null}
         {value ? (
           <div className="overflow-hidden rounded-[1rem] border-2 border-ink bg-paper-shadow/35 p-2">
             <img alt={label} className="max-h-48 w-full rounded-[0.8rem] object-cover" src={value} />

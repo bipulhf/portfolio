@@ -5,8 +5,7 @@ import { z } from 'zod'
 const envSchema = z.object({
   DATABASE_URL: z.string().min(1),
   SESSION_SECRET: z.string().min(16),
-  MEDIA_ROOT: z.string().min(1).default('./storage/uploads'),
-  PUBLIC_MEDIA_BASE_URL: z.string().min(1).default('/media'),
+  UPLOADTHING_TOKEN: z.string().min(1).optional(),
   SITE_URL: z.url(),
 })
 
@@ -86,8 +85,7 @@ export function getEnv() {
   cachedEnv = envSchema.parse({
     DATABASE_URL: resolveEnvValue('DATABASE_URL'),
     SESSION_SECRET: resolveEnvValue('SESSION_SECRET'),
-    MEDIA_ROOT: resolveEnvValue('MEDIA_ROOT', './storage/uploads'),
-    PUBLIC_MEDIA_BASE_URL: resolveEnvValue('PUBLIC_MEDIA_BASE_URL', '/media'),
+    UPLOADTHING_TOKEN: resolveEnvValue('UPLOADTHING_TOKEN'),
     SITE_URL: resolveEnvValue('SITE_URL', 'http://localhost:3000'),
   })
 

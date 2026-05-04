@@ -17,7 +17,7 @@ This project includes:
 - public `/projects` and `/blog` listing pages
 - public project and blog detail pages
 - a protected admin CMS at `/admin`
-- local media uploads served from `/media/*`
+- headless UploadThing-backed media uploads through the custom admin UI
 - SEO-friendly SSR with prerendering for stable public routes
 
 The original handoff/prototype is kept in [`my-portfolio/`](./my-portfolio) for reference. The working TanStack Start app lives in [`src/`](./src).
@@ -43,7 +43,7 @@ The original handoff/prototype is kept in [`my-portfolio/`](./my-portfolio) for 
 - Admin dashboard for managing projects and blog posts
 - Rich text editing with Lexical for long-form project and blog content
 - Draft and published content states
-- Local image upload workflow
+- Custom-themed image upload workflow backed by UploadThing Cloud
 - Dynamic SEO metadata, JSON-LD, `robots.txt`, and `sitemap.xml`
 - Responsive public site and admin workspace
 
@@ -63,7 +63,7 @@ src/
     auth/          Session helpers and auth utilities
     content/       Content queries and serializers
     db/            Drizzle schema and DB setup
-    media/         Local media storage helpers
+    uploadthing/   UploadThing upload and cleanup helpers
     seo/           Metadata and structured data helpers
     validation/    Shared Zod schemas
   routes/
@@ -90,8 +90,7 @@ Required environment variables:
 ```env
 DATABASE_URL=postgres://postgres:postgres@localhost:5432/portfolio
 SESSION_SECRET=replace-with-a-long-random-secret
-MEDIA_ROOT=./storage/uploads
-PUBLIC_MEDIA_BASE_URL=/media
+UPLOADTHING_TOKEN=your-uploadthing-token
 SITE_URL=http://localhost:3000
 ```
 
@@ -132,6 +131,7 @@ npm run start            # Run the built server
 npm run db:push          # Push Drizzle schema to the database
 npm run db:studio        # Open Drizzle Studio
 npm run admin:bootstrap  # Create the first admin account
+npm run media:audit:legacy # Find remaining legacy /media references
 ```
 
 ## Content Workflow
@@ -146,9 +146,9 @@ Published entries appear on the public portfolio automatically.
 
 ## Media Storage
 
-Uploaded files are stored locally on disk using `MEDIA_ROOT`. Public URLs are served through the configured `PUBLIC_MEDIA_BASE_URL`, which defaults to `/media`.
+Images are uploaded to UploadThing Cloud and stored as absolute CDN URLs in project/blog content. The admin UI remains fully custom-themed, so UploadThing handles storage and upload orchestration without replacing your design.
 
-This setup is intended for a persistent Node/VPS deployment rather than ephemeral serverless storage.
+When a project or blog post replaces or removes an UploadThing-hosted image, the app deletes the old file only if no other content still references it. Legacy `/media/...` assets are not migrated automatically; run `npm run media:audit:legacy` before deploy to catch any remaining old references.
 
 ## Build Notes
 

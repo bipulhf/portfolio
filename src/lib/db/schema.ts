@@ -73,19 +73,6 @@ export const blogs = pgTable('blogs', {
   ...timestamps,
 })
 
-export const mediaAssets = pgTable('media_assets', {
-  id: uuid('id').defaultRandom().primaryKey(),
-  filename: varchar('filename', { length: 255 }).notNull(),
-  mimeType: varchar('mime_type', { length: 120 }).notNull(),
-  sizeBytes: integer('size_bytes').notNull(),
-  publicPath: text('public_path').notNull().unique(),
-  altText: text('alt_text'),
-  uploadedByAdminId: uuid('uploaded_by_admin_id').references(() => admins.id, {
-    onDelete: 'set null',
-  }),
-  ...timestamps,
-})
-
 export type AdminRow = typeof admins.$inferSelect
 export type ProjectRow = typeof projects.$inferSelect
 export type BlogRow = typeof blogs.$inferSelect

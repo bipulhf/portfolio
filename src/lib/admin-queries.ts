@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { api } from './api/client'
 import type { SessionPayload } from './api/types'
 import type { SerializedBlog, SerializedProject } from './content/types'
+import { uploadAdminImage } from './uploadthing/client'
 import type { BlogInput, ProjectInput } from './validation/content'
 
 export const queryKeys = {
@@ -64,15 +65,18 @@ export async function deleteBlogRequest(id: string) {
   return api.delete(`admin/blogs/${id}`).json<{ ok: true }>()
 }
 
-export async function uploadImageRequest(file: File) {
-  const formData = new FormData()
-  formData.append('file', file)
+export async function uploadImageRequest(
+  file: File,
+  options: {
+    onUploadProgress?: (progress: number) => void
+  } = {},
+) {
+  const upload = await uploadAdminImage(file, options)
 
-  return api
-    .post('admin/uploads/images', {
-      body: formData,
-    })
-    .json<{ publicPath: string }>()
+  return {
+    fileKey: upload.fileKey,
+    publicPath: upload.publicPath,
+  }
 }
 
 export function useAdminSession() {

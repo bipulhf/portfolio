@@ -2,6 +2,11 @@ import sanitizeHtml from 'sanitize-html'
 import { and, desc, eq, ne, sql } from 'drizzle-orm'
 import { db } from '~/lib/db'
 import { blogs, projects } from '~/lib/db/schema'
+import {
+  cleanupRemovedUploadThingFiles,
+  cleanupUnreferencedUploadThingFiles,
+  collectUploadThingFileKeys,
+} from '~/lib/uploadthing/cleanup'
 import type { BlogInput, ProjectInput } from '~/lib/validation/content'
 import { buildExcerpt, computeReadingTimeMinutes, stripHtml } from '~/lib/utils/text'
 import { slugify } from '~/lib/utils/slug'
@@ -288,8 +293,16 @@ export async function createProject(input: ProjectInput) {
 }
 
 export async function updateProject(id: string, input: ProjectInput) {
+  const [existing] = await db.select().from(projects).where(eq(projects.id, id)).limit(1)
+
+  if (!existing) {
+    return null
+  }
+
   const values = buildProjectValues(input)
   await ensureUniqueProjectSlug(values.slug, id)
+  const previousFileKeys = collectUploadThingFileKeys(existing)
+  const nextFileKeys = collectUploadThingFileKeys(values)
 
   const [row] = await db
     .update(projects)
@@ -300,11 +313,24 @@ export async function updateProject(id: string, input: ProjectInput) {
     .where(eq(projects.id, id))
     .returning()
 
-  return row ? serializeProject(row) : null
+  if (!row) {
+    return null
+  }
+
+  await cleanupRemovedUploadThingFiles(previousFileKeys, nextFileKeys)
+
+  return serializeProject(row)
 }
 
 export async function deleteProject(id: string) {
+  const [existing] = await db.select().from(projects).where(eq(projects.id, id)).limit(1)
+
+  if (!existing) {
+    return
+  }
+
   await db.delete(projects).where(eq(projects.id, id))
+  await cleanupUnreferencedUploadThingFiles(collectUploadThingFileKeys(existing))
 }
 
 export async function createBlog(input: BlogInput) {
@@ -316,8 +342,16 @@ export async function createBlog(input: BlogInput) {
 }
 
 export async function updateBlog(id: string, input: BlogInput) {
+  const [existing] = await db.select().from(blogs).where(eq(blogs.id, id)).limit(1)
+
+  if (!existing) {
+    return null
+  }
+
   const values = buildBlogValues(input)
   await ensureUniqueBlogSlug(values.slug, id)
+  const previousFileKeys = collectUploadThingFileKeys(existing)
+  const nextFileKeys = collectUploadThingFileKeys(values)
 
   const [row] = await db
     .update(blogs)
@@ -328,11 +362,24 @@ export async function updateBlog(id: string, input: BlogInput) {
     .where(eq(blogs.id, id))
     .returning()
 
-  return row ? serializeBlog(row) : null
+  if (!row) {
+    return null
+  }
+
+  await cleanupRemovedUploadThingFiles(previousFileKeys, nextFileKeys)
+
+  return serializeBlog(row)
 }
 
 export async function deleteBlog(id: string) {
+  const [existing] = await db.select().from(blogs).where(eq(blogs.id, id)).limit(1)
+
+  if (!existing) {
+    return
+  }
+
   await db.delete(blogs).where(eq(blogs.id, id))
+  await cleanupUnreferencedUploadThingFiles(collectUploadThingFileKeys(existing))
 }
 
 export async function getPublishedSlugs() {

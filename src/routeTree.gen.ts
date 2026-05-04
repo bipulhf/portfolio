@@ -17,8 +17,8 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
-import { Route as MediaSplatRouteImport } from './routes/media/$'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as ApiUploadthingRouteImport } from './routes/api/uploadthing'
 import { Route as AdminProjectsRouteImport } from './routes/admin.projects'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminBlogsRouteImport } from './routes/admin.blogs'
@@ -31,7 +31,6 @@ import { Route as ApiAdminProjectsRouteImport } from './routes/api/admin/project
 import { Route as ApiAdminBlogsRouteImport } from './routes/api/admin/blogs'
 import { Route as AdminProjectsNewRouteImport } from './routes/admin.projects.new'
 import { Route as AdminBlogsNewRouteImport } from './routes/admin.blogs.new'
-import { Route as ApiAdminUploadsImagesRouteImport } from './routes/api/admin/uploads/images'
 import { Route as ApiAdminProjectsIdRouteImport } from './routes/api/admin/projects.$id'
 import { Route as ApiAdminBlogsIdRouteImport } from './routes/api/admin/blogs.$id'
 import { Route as AdminProjectsIdEditRouteImport } from './routes/admin.projects.$id.edit'
@@ -77,15 +76,15 @@ const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ProjectsRoute,
 } as any)
-const MediaSplatRoute = MediaSplatRouteImport.update({
-  id: '/media/$',
-  path: '/media/$',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => BlogRoute,
+} as any)
+const ApiUploadthingRoute = ApiUploadthingRouteImport.update({
+  id: '/api/uploadthing',
+  path: '/api/uploadthing',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminProjectsRoute = AdminProjectsRouteImport.update({
   id: '/projects',
@@ -147,11 +146,6 @@ const AdminBlogsNewRoute = AdminBlogsNewRouteImport.update({
   path: '/new',
   getParentRoute: () => AdminBlogsRoute,
 } as any)
-const ApiAdminUploadsImagesRoute = ApiAdminUploadsImagesRouteImport.update({
-  id: '/api/admin/uploads/images',
-  path: '/api/admin/uploads/images',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiAdminProjectsIdRoute = ApiAdminProjectsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -183,8 +177,8 @@ export interface FileRoutesByFullPath {
   '/admin/blogs': typeof AdminBlogsRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/projects': typeof AdminProjectsRouteWithChildren
+  '/api/uploadthing': typeof ApiUploadthingRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/media/$': typeof MediaSplatRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/blogs/new': typeof AdminBlogsNewRoute
@@ -200,7 +194,6 @@ export interface FileRoutesByFullPath {
   '/admin/projects/$id/edit': typeof AdminProjectsIdEditRoute
   '/api/admin/blogs/$id': typeof ApiAdminBlogsIdRoute
   '/api/admin/projects/$id': typeof ApiAdminProjectsIdRoute
-  '/api/admin/uploads/images': typeof ApiAdminUploadsImagesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -209,8 +202,8 @@ export interface FileRoutesByTo {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
+  '/api/uploadthing': typeof ApiUploadthingRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/media/$': typeof MediaSplatRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/admin': typeof AdminIndexRoute
   '/admin/blogs/new': typeof AdminBlogsNewRoute
@@ -226,7 +219,6 @@ export interface FileRoutesByTo {
   '/admin/projects/$id/edit': typeof AdminProjectsIdEditRoute
   '/api/admin/blogs/$id': typeof ApiAdminBlogsIdRoute
   '/api/admin/projects/$id': typeof ApiAdminProjectsIdRoute
-  '/api/admin/uploads/images': typeof ApiAdminUploadsImagesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -239,8 +231,8 @@ export interface FileRoutesById {
   '/admin/blogs': typeof AdminBlogsRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/projects': typeof AdminProjectsRouteWithChildren
+  '/api/uploadthing': typeof ApiUploadthingRoute
   '/blog/$slug': typeof BlogSlugRoute
-  '/media/$': typeof MediaSplatRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/admin/blogs/new': typeof AdminBlogsNewRoute
@@ -256,7 +248,6 @@ export interface FileRoutesById {
   '/admin/projects/$id/edit': typeof AdminProjectsIdEditRoute
   '/api/admin/blogs/$id': typeof ApiAdminBlogsIdRoute
   '/api/admin/projects/$id': typeof ApiAdminProjectsIdRoute
-  '/api/admin/uploads/images': typeof ApiAdminUploadsImagesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -270,8 +261,8 @@ export interface FileRouteTypes {
     | '/admin/blogs'
     | '/admin/login'
     | '/admin/projects'
+    | '/api/uploadthing'
     | '/blog/$slug'
-    | '/media/$'
     | '/projects/$slug'
     | '/admin/'
     | '/admin/blogs/new'
@@ -287,7 +278,6 @@ export interface FileRouteTypes {
     | '/admin/projects/$id/edit'
     | '/api/admin/blogs/$id'
     | '/api/admin/projects/$id'
-    | '/api/admin/uploads/images'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -296,8 +286,8 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/admin/login'
+    | '/api/uploadthing'
     | '/blog/$slug'
-    | '/media/$'
     | '/projects/$slug'
     | '/admin'
     | '/admin/blogs/new'
@@ -313,7 +303,6 @@ export interface FileRouteTypes {
     | '/admin/projects/$id/edit'
     | '/api/admin/blogs/$id'
     | '/api/admin/projects/$id'
-    | '/api/admin/uploads/images'
   id:
     | '__root__'
     | '/'
@@ -325,8 +314,8 @@ export interface FileRouteTypes {
     | '/admin/blogs'
     | '/admin/login'
     | '/admin/projects'
+    | '/api/uploadthing'
     | '/blog/$slug'
-    | '/media/$'
     | '/projects/$slug'
     | '/admin/'
     | '/admin/blogs/new'
@@ -342,7 +331,6 @@ export interface FileRouteTypes {
     | '/admin/projects/$id/edit'
     | '/api/admin/blogs/$id'
     | '/api/admin/projects/$id'
-    | '/api/admin/uploads/images'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -352,13 +340,12 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRouteWithChildren
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  MediaSplatRoute: typeof MediaSplatRoute
+  ApiUploadthingRoute: typeof ApiUploadthingRoute
   ApiAdminBlogsRoute: typeof ApiAdminBlogsRouteWithChildren
   ApiAdminProjectsRoute: typeof ApiAdminProjectsRouteWithChildren
   ApiAuthLoginRoute: typeof ApiAuthLoginRoute
   ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
   ApiAuthSessionRoute: typeof ApiAuthSessionRoute
-  ApiAdminUploadsImagesRoute: typeof ApiAdminUploadsImagesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -419,19 +406,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsSlugRouteImport
       parentRoute: typeof ProjectsRoute
     }
-    '/media/$': {
-      id: '/media/$'
-      path: '/media/$'
-      fullPath: '/media/$'
-      preLoaderRoute: typeof MediaSplatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/blog/$slug': {
       id: '/blog/$slug'
       path: '/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
+    }
+    '/api/uploadthing': {
+      id: '/api/uploadthing'
+      path: '/api/uploadthing'
+      fullPath: '/api/uploadthing'
+      preLoaderRoute: typeof ApiUploadthingRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/projects': {
       id: '/admin/projects'
@@ -516,13 +503,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/blogs/new'
       preLoaderRoute: typeof AdminBlogsNewRouteImport
       parentRoute: typeof AdminBlogsRoute
-    }
-    '/api/admin/uploads/images': {
-      id: '/api/admin/uploads/images'
-      path: '/api/admin/uploads/images'
-      fullPath: '/api/admin/uploads/images'
-      preLoaderRoute: typeof ApiAdminUploadsImagesRouteImport
-      parentRoute: typeof rootRouteImport
     }
     '/api/admin/projects/$id': {
       id: '/api/admin/projects/$id'
@@ -655,13 +635,12 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRouteWithChildren,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
-  MediaSplatRoute: MediaSplatRoute,
+  ApiUploadthingRoute: ApiUploadthingRoute,
   ApiAdminBlogsRoute: ApiAdminBlogsRouteWithChildren,
   ApiAdminProjectsRoute: ApiAdminProjectsRouteWithChildren,
   ApiAuthLoginRoute: ApiAuthLoginRoute,
   ApiAuthLogoutRoute: ApiAuthLogoutRoute,
   ApiAuthSessionRoute: ApiAuthSessionRoute,
-  ApiAdminUploadsImagesRoute: ApiAdminUploadsImagesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
