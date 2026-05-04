@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { SectionAccent, type AccentVariant } from './section-accent'
-import { cx, sectionShellClass } from './lib/styles'
+import { cx, sectionFrameClass, sectionInnerClass, sectionShellClass } from './lib/styles'
 
 type SectionShellProps = {
   accent: AccentVariant
@@ -16,9 +16,14 @@ export function SectionShell({
   id,
 }: Readonly<SectionShellProps>) {
   return (
-    <section className={cx(sectionShellClass, className)} id={id}>
-      <SectionAccent variant={accent} />
-      {children}
+    <section className={cx(sectionShellClass, `portfolio-section--${accent}`, className)} id={id}>
+      <div className={sectionFrameClass}>
+        <div aria-hidden="true" className="portfolio-section-band" />
+        <div className={sectionInnerClass}>
+          <SectionAccent variant={accent} />
+          {children}
+        </div>
+      </div>
     </section>
   )
 }
