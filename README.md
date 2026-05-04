@@ -1,4 +1,4 @@
-# Shahiduzzaman Bipul Portfolio
+# Bipul Portfolio
 
 A brand-first portfolio and CMS built with TanStack Start. The public site presents projects, writing, experience, and contact details in two switchable public themes, while the admin workspace lets a single owner manage blog posts and project case studies.
 

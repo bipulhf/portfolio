@@ -1,15 +1,18 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { CrayonGridPending, CrayonPendingPage } from '~/components/loaders/crayon-pending'
-import { pageContainerClass } from '~/components/portfolio/lib/styles'
-import { BlogGrid } from '~/components/public/blog-grid'
-import { usePublicThemePageMeta } from '~/components/public/public-theme'
-import { PageHero, PageHeroActions } from '~/components/public/page-hero'
-import { SiteShell } from '~/components/public/site-shell'
-import { listPublishedBlogsFn } from '~/lib/server-fns/content'
-import { PUBLIC_LIST_CACHE_CONTROL } from '~/lib/http'
-import { baseMeta } from '~/lib/seo'
+import { createFileRoute } from "@tanstack/react-router";
+import {
+  CrayonGridPending,
+  CrayonPendingPage,
+} from "~/components/loaders/crayon-pending";
+import { pageContainerClass } from "~/components/portfolio/lib/styles";
+import { BlogGrid } from "~/components/public/blog-grid";
+import { usePublicThemePageMeta } from "~/components/public/public-theme";
+import { PageHero, PageHeroActions } from "~/components/public/page-hero";
+import { SiteShell } from "~/components/public/site-shell";
+import { listPublishedBlogsFn } from "~/lib/server-fns/content";
+import { PUBLIC_LIST_CACHE_CONTROL } from "~/lib/http";
+import { baseMeta } from "~/lib/seo";
 
-export const Route = createFileRoute('/blog')({
+export const Route = createFileRoute("/blog")({
   loader: async () => listPublishedBlogsFn(),
   pendingComponent: () => (
     <SiteShell>
@@ -19,20 +22,21 @@ export const Route = createFileRoute('/blog')({
     </SiteShell>
   ),
   headers: () => ({
-    'Cache-Control': PUBLIC_LIST_CACHE_CONTROL,
+    "Cache-Control": PUBLIC_LIST_CACHE_CONTROL,
   }),
   head: () =>
     baseMeta({
-      description: 'Writing on building products, frontend craft, and engineering process by Shahiduzzaman Bipul.',
-      pathname: '/blog',
-      title: 'Blog — Shahiduzzaman Bipul',
+      description:
+        "Writing on building products, frontend craft, and engineering process by Bipul.",
+      pathname: "/blog",
+      title: "Blog — Bipul",
     }),
   component: BlogPage,
-})
+});
 
 function BlogPage() {
-  const posts = Route.useLoaderData()
-  usePublicThemePageMeta('blog')
+  const posts = Route.useLoaderData();
+  usePublicThemePageMeta("blog");
 
   return (
     <SiteShell>
@@ -52,5 +56,5 @@ function BlogPage() {
         <BlogGrid items={posts} />
       </section>
     </SiteShell>
-  )
+  );
 }

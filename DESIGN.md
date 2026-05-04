@@ -1,5 +1,5 @@
 ---
-name: Shahiduzzaman Bipul Portfolio
+name: Bipul Portfolio
 description: Crayon-crafted portfolio and CMS with calm trust, playful identity, and confident execution.
 colors:
   paper: "#f4faf9"
@@ -14,25 +14,25 @@ colors:
   lilac: "#c8d4ec"
 typography:
   display:
-    fontFamily: "\"Caveat\", cursive"
+    fontFamily: '"Caveat", cursive'
     fontSize: "clamp(3rem, 15vw, 6.75rem)"
     fontWeight: 700
     lineHeight: 1
     letterSpacing: "-0.01em"
   body:
-    fontFamily: "\"Nunito\", system-ui, sans-serif"
+    fontFamily: '"Nunito", system-ui, sans-serif'
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.65
     letterSpacing: "0.01em"
   hand:
-    fontFamily: "\"Patrick Hand\", cursive"
+    fontFamily: '"Patrick Hand", cursive'
     fontSize: "1.1875rem"
     fontWeight: 400
     lineHeight: 1.4
     letterSpacing: "normal"
   label:
-    fontFamily: "\"Patrick Hand\", cursive"
+    fontFamily: '"Patrick Hand", cursive'
     fontSize: "0.98rem"
     fontWeight: 400
     lineHeight: 1.2
@@ -81,7 +81,7 @@ components:
     height: "3rem"
 ---
 
-# Design System: Shahiduzzaman Bipul Portfolio
+# Design System: Bipul Portfolio
 
 ## 1. Overview
 
@@ -94,6 +94,7 @@ The visual philosophy is calm and trusted first, expressive second. Soft paper b
 This system explicitly rejects template-like sameness, generic developer-portfolio tropes, and loud visual noise. It should not drift into glossy SaaS polish, empty editorial affectation, or overstimulated brand theater. The public site can be expressive, but every expressive move should still strengthen comprehension and trust.
 
 **Key Characteristics:**
+
 - Calm, paper-like base with soft color confidence
 - Hand-drawn typography used as identity, not as novelty
 - Tactile surfaces with structural offset shadows
@@ -105,15 +106,19 @@ This system explicitly rejects template-like sameness, generic developer-portfol
 The palette is a restrained full-palette system: tinted neutrals do the trust-building, while pastel accents create personality without shouting.
 
 ### Primary
+
 - **Calm Proof Mint** (`#aee4d6`): the signature optimism color. It appears in badges, collaboration cues, highlight chips, and hover accents where the brand wants to feel open, collaborative, and fresh.
 
 ### Secondary
+
 - **Notebook Yellow** (`#fde98a`): the warm action color. It powers primary buttons, sticky-note moments, and emphasis markers where the site needs a friendly but unmistakable call to action.
 
 ### Tertiary
+
 - **Sketchbook Peach** (`#ffc8b8`): the emotional accent. It appears in scribble underlines, tape-like details, and soft highlights that give the brand warmth without drifting into sentimentality.
 
 ### Neutral
+
 - **Paper Wash** (`#f4faf9`): the main canvas. It keeps the site airy, calm, and lightly tinted rather than stark white.
 - **Pressed Paper** (`#dceeec`): the support neutral for soft contrast, fills, chips, and inset treatment.
 - **Deep Ink** (`#2e3d3a`): the primary text, stroke, and structure color. It anchors the playful system with seriousness.
@@ -123,6 +128,7 @@ The palette is a restrained full-palette system: tinted neutrals do the trust-bu
 - **Dusty Lilac** (`#c8d4ec`): a balancing accent for calmer decorative shifts and section variety.
 
 ### Named Rules
+
 **The Tinted-Neutral Rule.** The foundation is never pure black on pure white. Every neutral should carry a slight green-blue tint so the site feels physical and personal rather than digital-default.
 
 **The Accent-Has-a-Job Rule.** Accent colors are not interchangeable decoration. Yellow calls action, mint signals openness, and peach carries warmth and emphasis.
@@ -136,6 +142,7 @@ The palette is a restrained full-palette system: tinted neutrals do the trust-bu
 **Character:** The pairing balances trust and identity. Caveat gives the site its handwritten signature, Patrick Hand carries labels and interface warmth, and Nunito makes longer reading and utility content feel clean, stable, and legible.
 
 ### Hierarchy
+
 - **Display** (700, `clamp(3rem, 15vw, 6.75rem)`, 1): used for hero names and major titles that need memorable authorship.
 - **Headline** (700, `clamp(2.8rem, 8vw, 5.2rem)`, 0.95): used for page heroes and major section framing.
 - **Title** (700, `1.7rem` to `2.2rem`, 1 to 1.05): used inside cards, timelines, and richer content headings.
@@ -143,6 +150,7 @@ The palette is a restrained full-palette system: tinted neutrals do the trust-bu
 - **Label** (400, `0.92rem` to `1.25rem`, 1.2): used for metadata, navigation labels, chips, and interface cues where a hand-drawn voice adds warmth without reducing clarity.
 
 ### Named Rules
+
 **The Signature-Then-Structure Rule.** Use Caveat for authored moments and Patrick Hand for supportive labels, but let Nunito carry comprehension. Handwriting establishes identity; sans serif carries trust.
 
 ## 4. Elevation
@@ -150,17 +158,20 @@ The palette is a restrained full-palette system: tinted neutrals do the trust-bu
 Elevation is structural and tactile, not atmospheric. The main public site uses hard offset shadows in deep ink to make buttons, cards, portrait frames, and notes feel like physical pieces placed on paper. The admin uses a softer shadow language so utility work feels calmer and easier to scan. Depth is created through borders, offsets, and paper layering more than through blur.
 
 ### Shadow Vocabulary
+
 - **Crayon Small** (`3px 3px 0 var(--color-ink)`): used for buttons, note-like details, compact chips, and small tactile elements.
 - **Crayon Medium** (`5px 5px 0 var(--color-ink)`): the default public card shadow for project cards and section surfaces.
 - **Crayon Large** (`7px 7px 0 var(--color-ink)`): used for hero surfaces and larger signature containers where presence matters.
 - **Soft Admin Lift** (`0 10px 28px rgba(46,61,58,0.05)` to `0 10px 30px rgba(46,61,58,0.08)`): used in admin shells and utility cards where sharp offsets would add noise.
 
 ### Named Rules
+
 **The Shadow-Means-Object Rule.** Hard offset shadows are for tactile brand surfaces only. If the element should feel like a piece of paper, note, card, or button, use the crayon shadow language. If it should feel like infrastructure, use the softer admin lift or no shadow at all.
 
 ## 5. Components
 
 ### Buttons
+
 - **Character:** friendly, tactile, and decisive.
 - **Shape:** rounded rectangle with a soft hand-cut feel (`0.875rem` radius).
 - **Primary:** yellow background, deep ink text, Patrick Hand typography, `3px 3px` offset shadow, generous horizontal padding.
@@ -168,10 +179,12 @@ Elevation is structural and tactile, not atmospheric. The main public site uses 
 - **Secondary / Ghost:** ghost buttons stay transparent or paper-toned with a dashed border, especially for lower-priority actions and detail-page back links.
 
 ### Chips
+
 - **Style:** small rounded pills with full borders, paper fills, and hand-labeled type.
 - **State:** published/draft pills shift between mint and yellow; tech tags stay quieter and more paper-based.
 
 ### Cards / Containers
+
 - **Character:** scrapbook surfaces with clear structure.
 - **Corner Style:** asymmetrical or slightly irregular radii on public cards, cleaner rounded rectangles in admin.
 - **Background:** paper as the baseline, sometimes layered with white gradients or light fills.
@@ -180,23 +193,27 @@ Elevation is structural and tactile, not atmospheric. The main public site uses 
 - **Internal Padding:** comfortable, usually `1.25rem` to `1.5rem`, increasing on larger surfaces.
 
 ### Inputs / Fields
+
 - **Character:** quiet and supportive, never ornamental.
 - **Style:** softly rounded fields (`0.95rem`), paper-tinted fills, ink-tinted strokes, readable base text.
 - **Focus:** border deepens, the field turns whiter, and a mint-tinted focus ring appears as the primary interaction signal.
 - **Error / Disabled:** error states should lean on full-border and message clarity rather than stripe accents; disabled states should flatten contrast slightly without losing legibility.
 
 ### Navigation
+
 - **Character:** a floating crafted object, not a flat bar.
 - **Style:** white shell with ink border, soft interior card feel, doodle accents, and a logo tile that behaves like a branded stamp.
 - **States:** immediate-load animation, hand-labeled links, scribble underline on desktop hover, true hamburger interaction on smaller screens.
 - **Mobile treatment:** a dedicated collapsible menu panel, never a squeezed horizontal rail.
 
 ### Signature Component
+
 - **Hero Portrait Block:** the portrait frame, pinned note, floating doodles, and scribble underline together form the clearest signature motif in the system. It should remain recognizably handcrafted, confident, and slightly playful without becoming noisy.
 
 ## 6. Do's and Don'ts
 
 ### Do:
+
 - **Do** keep the paper base and ink structure intact, the brand needs calm trust before it adds play.
 - **Do** use handwriting to signal authorship and warmth, then hand off longer reading to Nunito for clarity.
 - **Do** keep hard offset shadows on public brand elements where tactility matters, especially buttons, feature cards, and portrait-like surfaces.
@@ -204,6 +221,7 @@ Elevation is structural and tactile, not atmospheric. The main public site uses 
 - **Do** preserve strong contrast, clear states, and reduced-motion support as non-negotiable defaults.
 
 ### Don't:
+
 - **Don't** make the site feel template-like, too loud, or too generic. Those are explicit anti-references from PRODUCT.md and should be treated as hard failures.
 - **Don't** swap the tinted paper system for pure white, pure black, or default SaaS gradients.
 - **Don't** use side-stripe borders, gradient text, glassmorphism-by-default, or endless identical icon cards.
