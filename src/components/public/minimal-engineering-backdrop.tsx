@@ -52,17 +52,10 @@ export function MinimalEngineeringBackdrop() {
   return (
     <div aria-hidden="true" className="minimal-engineering-backdrop">
       <div className="minimal-engineering-grid" />
-      <div className="minimal-engineering-orbit is-left" />
-      <div className="minimal-engineering-orbit is-right" />
       {PANELS.map((panel) => (
-        <div className={`minimal-engineering-panel ${panel.className}`} key={panel.label}>
-          <div className="minimal-engineering-panel__bar">
-            <span />
-            <span />
-            <span />
-            <strong>{panel.label}</strong>
-          </div>
-          <pre className="minimal-engineering-panel__code">
+        <div className={`minimal-engineering-fragment ${panel.className}`} key={panel.label}>
+          <span className="minimal-engineering-fragment__label">{panel.label}</span>
+          <pre className="minimal-engineering-fragment__code">
             {panel.lines.map((line) => (
               <span key={line}>{line}</span>
             ))}

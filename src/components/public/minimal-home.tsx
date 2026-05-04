@@ -184,7 +184,7 @@ export function MinimalHome({
               ))
             ) : (
               <p className={`py-3 text-sm ${charcoalSoft}`}>
-                Projects will appear here.
+                No projects for now.
               </p>
             )}
           </div>
@@ -251,7 +251,7 @@ export function MinimalHome({
               ))
             ) : (
               <p className={`py-3 text-sm ${charcoalSoft}`}>
-                Notes will appear here.
+                No notes for now.
               </p>
             )}
           </div>
