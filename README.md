@@ -2,7 +2,7 @@
 
 A brand-first portfolio and CMS built with TanStack Start. The public site presents projects, writing, experience, and contact details in a calm crayon-crafted visual system, while the admin workspace lets a single owner manage blog posts and project case studies.
 
-![Landing preview](./pubilc/home.png)
+![Landing preview](./public/home.png)
 
 ## Overview
 

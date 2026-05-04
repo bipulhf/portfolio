@@ -8,7 +8,7 @@ export function About() {
   return (
     <SectionShell accent="about" id="about">
       <SectionHeader
-        description="I care about shipping products that feel reliable, readable, and quietly thoughtful, both for users and for the teams building them."
+        description="I build software with a calm, product-minded approach: clear interfaces, dependable systems, and details that make things easier to use."
         kicker="01 - about"
         title="The person behind the work"
         underlineColor="var(--color-peach)"
@@ -20,27 +20,27 @@ export function About() {
         >
           <div className="absolute left-8 top-[-0.875rem] size-7 rounded-full border-2 border-ink bg-peach shadow-[inset_-2px_-3px_0_rgba(46,61,58,0.2)]" />
           <p className="type-copy-strong">
-            I&apos;m a software engineer at <strong>InfancyIT Ltd.</strong>, where I focus on
-            building products that feel calm, considered, and genuinely useful.
+            I build web products that aim to feel clear from the first click. The work I enjoy
+            most sits between product thinking and engineering craft: shaping the interface,
+            structuring the logic, and making the whole thing feel dependable.
           </p>
           <p className="type-copy-strong mt-3.5">
-            I graduated in Computer Science from{' '}
-            <strong>Shahjalal University of Science and Technology</strong>, and have spent the
-            years since shipping products, contributing to teams, and quietly racking up hackathon
-            wins on the weekends.
+            Hackathons taught me how to move fast, explain ideas clearly, and build under
+            pressure. Longer projects taught me the opposite skill too: slow down, refine the
+            details, and leave the code easier to work with than I found it.
           </p>
           <p className="type-copy-strong mt-3.5">
-            I care about the small details - the readable code, the gentle interaction, the right
-            word in the right place.
+            I care about readable code, thoughtful UX, and products that feel steady rather than
+            noisy. That is usually the thread running through everything I make.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-3.5 min-[30rem]:grid-cols-2 sm:gap-4.5" data-reveal-sequence>
           {[
-            ['10+', 'hackathons won'],
-            ['4+', 'years coding'],
-            ['20+', 'projects shipped'],
-            ['∞', 'cups of chai'],
+            ['6', 'hackathons featured'],
+            ['Web', 'product focus'],
+            ['UI', 'frontend strength'],
+            ['Systems', 'backend mindset'],
             ['Calm', 'build style'],
           ].map(([value, label], index) => (
             <div

@@ -1,9 +1,17 @@
-import { Heart, HeroBackdrop, HeroScribble, Star, Squiggle } from './doodles'
-import { crayonButtonClass, cx, pageContainerClass, surfaceCardClass } from './lib/styles'
+import { Heart, HeroBackdrop, HeroScribble, Star, Squiggle } from "./doodles";
+import {
+  crayonButtonClass,
+  cx,
+  pageContainerClass,
+  surfaceCardClass,
+} from "./lib/styles";
 
 export function Hero() {
   return (
-    <section className="relative flex items-center overflow-hidden py-6 sm:py-8 lg:min-h-[40rem] lg:py-14" id="top">
+    <section
+      className="relative flex items-center overflow-hidden py-6 sm:py-8 lg:min-h-[40rem] lg:py-14"
+      id="top"
+    >
       <div
         aria-hidden="true"
         className="hero-backdrop hero-backdrop-intro hero-backdrop-mask pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ease-out-soft"
@@ -11,13 +19,18 @@ export function Hero() {
         <HeroBackdrop />
       </div>
 
-      <div className={cx(pageContainerClass, 'relative z-[1] grid gap-7 md:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,26rem)] lg:items-center lg:gap-12')}>
+      <div
+        className={cx(
+          pageContainerClass,
+          "relative z-[1] grid gap-7 md:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,26rem)] lg:items-center lg:gap-12",
+        )}
+      >
         <div className="hero-portrait-intro order-2 flex justify-center lg:justify-end">
           <div className="relative w-full max-w-[19.5rem] px-1 pb-5 pt-2 sm:max-w-[22rem] sm:px-2.5 sm:pb-6 sm:pt-3 md:max-w-[24rem] lg:max-w-[26rem]">
             <div
               className={cx(
                 surfaceCardClass,
-                'relative rotate-[1.4deg] rounded-[2rem_1.625rem_2.375rem_1.75rem/1.75rem_2.125rem_1.75rem_2.375rem] border-[2.5px] border-ink p-3.5 shadow-[6px_6px_0_var(--color-ink)] hover:-translate-y-[0.3rem] hover:shadow-[8px_10px_0_var(--color-ink)]',
+                "relative rotate-[1.4deg] rounded-[2rem_1.625rem_2.375rem_1.75rem/1.75rem_2.125rem_1.75rem_2.375rem] border-[2.5px] border-ink p-3.5 shadow-[6px_6px_0_var(--color-ink)] hover:-translate-y-[0.3rem] hover:shadow-[8px_10px_0_var(--color-ink)]",
                 "before:pointer-events-none before:absolute before:inset-[0.55rem] before:rounded-[1.75rem_1.25rem_2rem_1.375rem/1.5rem_1.875rem_1.375rem_2rem] before:border-2 before:border-dashed before:border-ink/25 before:content-['']",
               )}
             >
@@ -36,26 +49,41 @@ export function Hero() {
               <span>illustrated, still me</span>
             </div>
 
-            <div aria-hidden="true" className="hero-ornament-float absolute right-[0.35rem] top-0 rotate-[14deg]">
+            <div
+              aria-hidden="true"
+              className="hero-ornament-float absolute right-[0.35rem] top-0 rotate-[14deg]"
+            >
               <Star color="var(--color-yellow)" size={34} />
             </div>
-            <div aria-hidden="true" className="hero-ornament-float delay-2 absolute left-0 top-[4.5rem] rotate-[-12deg]">
+            <div
+              aria-hidden="true"
+              className="hero-ornament-float delay-2 absolute left-0 top-[4.5rem] rotate-[-12deg]"
+            >
               <Heart color="var(--color-pink)" size={30} />
             </div>
-            <div aria-hidden="true" className="hero-ornament-float delay-3 absolute bottom-[4.25rem] right-0 rotate-[18deg]">
+            <div
+              aria-hidden="true"
+              className="hero-ornament-float delay-3 absolute bottom-[4.25rem] right-0 rotate-[18deg]"
+            >
               <Squiggle color="var(--color-mint)" size={34} />
             </div>
           </div>
         </div>
 
         <div className="order-1 relative flex max-w-[42rem] flex-col justify-center py-2 sm:py-4 md:max-w-[46rem] lg:max-w-[47.5rem]">
-          <div className="hero-copy-item type-kicker mb-2 flex flex-wrap items-center gap-2.5" style={{ ['--hero-delay' as string]: '40ms' }}>
+          <div
+            className="hero-copy-item type-kicker mb-2 flex flex-wrap items-center gap-2.5"
+            style={{ ["--hero-delay" as string]: "40ms" }}
+          >
             <span className="hero-wave inline-block">👋</span>
             <span>Hi, I&apos;m</span>
           </div>
 
-          <h1 className="type-display-hero hero-copy-item relative mb-[1.125rem] mt-1 block" style={{ ['--hero-delay' as string]: '90ms' }}>
-            <span className="relative inline-block">Shahiduzzaman</span>{' '}
+          <h1
+            className="type-display-hero hero-copy-item relative mb-[1.125rem] mt-1 block"
+            style={{ ["--hero-delay" as string]: "90ms" }}
+          >
+            <span className="relative inline-block">Shahiduzzaman</span>{" "}
             <span className="relative inline-block">
               Bipul.
               <span className="hero-scribble pointer-events-none absolute bottom-[-0.625rem] left-[-0.625rem] h-8 w-[calc(100%+1.25rem)]">
@@ -64,29 +92,41 @@ export function Hero() {
             </span>
           </h1>
 
-          <div className="type-lead-hand hero-copy-item mb-[1.125rem] max-w-[35rem] lg:max-w-[32.5rem]" style={{ ['--hero-delay' as string]: '140ms' }}>
-            A{' '}
+          <div
+            className="type-lead-hand hero-copy-item mb-[1.125rem] max-w-[35rem] lg:max-w-[32.5rem]"
+            style={{ ["--hero-delay" as string]: "140ms" }}
+          >
+            A{" "}
             <span className="mx-0.5 inline-block whitespace-nowrap rounded-[1.25rem] border-[1.5px] border-ink bg-mint px-3 py-px shadow-[2px_2px_0_var(--color-ink)] rotate-[-1.2deg]">
               software engineer
-            </span>{' '}
+            </span>{" "}
             crafting calm, considered software one careful detail at a time.
           </div>
 
-          <p className="type-copy hero-copy-item mb-7 max-w-[35rem] lg:max-w-[32.5rem]" style={{ ['--hero-delay' as string]: '190ms' }}>
-            Currently at <strong>InfancyIT Ltd.</strong> &middot; Computer Science,{' '}
-            <strong>Shahjalal University of Science and Technology</strong>.
-          </p>
-
-          <div className="hero-copy-item flex flex-wrap items-center gap-3.5" style={{ ['--hero-delay' as string]: '240ms' }}>
-            <a className={crayonButtonClass('yellow', { className: 'w-full justify-center sm:w-auto' })} href="/#projects">
+          <div
+            className="hero-copy-item flex flex-wrap items-center gap-3.5"
+            style={{ ["--hero-delay" as string]: "240ms" }}
+          >
+            <a
+              className={crayonButtonClass("yellow", {
+                className: "w-full justify-center sm:w-auto",
+              })}
+              href="/#projects"
+            >
               See selected work →
             </a>
-            <a className={crayonButtonClass('yellow', { className: 'w-full justify-center sm:w-auto', ghost: true })} href="/#contact">
+            <a
+              className={crayonButtonClass("yellow", {
+                className: "w-full justify-center sm:w-auto",
+                ghost: true,
+              })}
+              href="/#contact"
+            >
               Start a conversation
             </a>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

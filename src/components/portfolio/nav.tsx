@@ -1,45 +1,45 @@
-import { useEffect, useId, useState } from 'react'
-import { ScribbleUnder, Squiggle, Star } from './doodles'
-import { NAV_LINKS } from './lib/content'
-import { cx, pageContainerClass } from './lib/styles'
+import { useEffect, useId, useState } from "react";
+import { ScribbleUnder, Squiggle, Star } from "./doodles";
+import { NAV_LINKS } from "./lib/content";
+import { cx, pageContainerClass } from "./lib/styles";
 
 const navLinkTones = [
-  'hover:bg-yellow/45',
-  'hover:bg-mint/45',
-  'hover:bg-peach/45',
-  'hover:bg-sky/45',
-  'hover:bg-pink/45',
-  'hover:bg-lilac/50',
-] as const
+  "hover:bg-yellow/45",
+  "hover:bg-mint/45",
+  "hover:bg-peach/45",
+  "hover:bg-sky/45",
+  "hover:bg-pink/45",
+  "hover:bg-lilac/50",
+] as const;
 
 export function Nav() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const mobileMenuId = useId()
+  const [menuOpen, setMenuOpen] = useState(false);
+  const mobileMenuId = useId();
 
   useEffect(() => {
     function handleEscape(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
-        setMenuOpen(false)
+      if (event.key === "Escape") {
+        setMenuOpen(false);
       }
     }
 
     function handleResize() {
       if (window.innerWidth >= 1280) {
-        setMenuOpen(false)
+        setMenuOpen(false);
       }
     }
 
-    window.addEventListener('keydown', handleEscape)
-    window.addEventListener('resize', handleResize)
+    window.addEventListener("keydown", handleEscape);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('keydown', handleEscape)
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
+      window.removeEventListener("keydown", handleEscape);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   function closeMenu() {
-    setMenuOpen(false)
+    setMenuOpen(false);
   }
 
   return (
@@ -47,13 +47,16 @@ export function Nav() {
       <div className={pageContainerClass}>
         <div
           className={cx(
-            'nav-shell-intro relative rounded-[1.05rem] border border-ink bg-white px-3 py-3 shadow-[0_0.5rem_1.2rem_rgba(46,61,58,0.08)] transition-[translate,box-shadow,border-color] duration-300 ease-out-soft hover:-translate-y-0.5 hover:shadow-[0_0.9rem_1.8rem_rgba(46,61,58,0.12)] sm:rounded-[1.25rem] sm:px-3.5 md:px-4 md:py-[0.95rem] lg:rounded-[1.75rem_1.375rem_1.875rem_1.5rem/1.5rem_1.875rem_1.5rem_2rem] lg:px-[1.2rem] lg:py-[0.95rem]',
+            "nav-shell-intro relative rounded-[1.05rem] border border-ink bg-white px-3 py-3 shadow-[0_0.5rem_1.2rem_rgba(46,61,58,0.08)] transition-[translate,box-shadow,border-color] duration-300 ease-out-soft hover:-translate-y-0.5 hover:shadow-[0_0.9rem_1.8rem_rgba(46,61,58,0.12)] sm:rounded-[1.25rem] sm:px-3.5 md:px-4 md:py-[0.95rem] lg:rounded-[1.75rem_1.375rem_1.875rem_1.5rem/1.5rem_1.875rem_1.5rem_2rem] lg:px-[1.2rem] lg:py-[0.95rem]",
             "before:pointer-events-none before:absolute before:right-6 before:top-[-0.625rem] before:hidden before:h-[1.125rem] before:w-[4.5rem] before:rounded-full before:border-2 before:border-ink/30 before:bg-peach/70 before:content-[''] before:rotate-[7deg] lg:before:block",
             "after:pointer-events-none after:absolute after:inset-2 after:hidden after:rounded-[1.375rem_1.125rem_1.5rem_1.25rem/1.25rem_1.5rem_1.25rem_1.625rem] after:content-[''] lg:after:block",
           )}
         >
           <div className="relative z-[1] flex items-center gap-3 md:gap-4">
-            <a className="nav-brand-intro inline-flex min-w-0 flex-1 items-center gap-2 no-underline md:gap-3.5" href="/">
+            <a
+              className="nav-brand-intro inline-flex min-w-0 flex-1 items-center gap-2 no-underline md:gap-3.5"
+              href="/"
+            >
               <img
                 alt="Bipul logo"
                 className="size-[2.45rem] rounded-[0.95rem] border-2 border-ink bg-white object-contain p-1 shadow-[3px_3px_0_var(--color-ink)] sm:size-[2.7rem] md:size-[3rem]"
@@ -64,7 +67,7 @@ export function Nav() {
                   Bipul
                 </span>
                 <span className="mt-0.5 hidden font-hand text-[0.92rem] leading-[1.1] tracking-[0.035em] text-ink-soft md:inline">
-                  software engineer, calm systems
+                  software engineer
                 </span>
               </span>
             </a>
@@ -76,7 +79,7 @@ export function Nav() {
               {NAV_LINKS.map((link, index) => (
                 <a
                   className={cx(
-                    'group relative inline-flex min-h-11 items-center justify-center rounded-full px-[0.95rem] py-[0.55rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline transition-[transform,background-color,box-shadow,color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]',
+                    "group relative inline-flex min-h-11 items-center justify-center rounded-full px-[0.95rem] py-[0.55rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline transition-[transform,background-color,box-shadow,color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]",
                     navLinkTones[index],
                   )}
                   href={link.href}
@@ -101,7 +104,9 @@ export function Nav() {
             <button
               aria-controls={mobileMenuId}
               aria-expanded={menuOpen}
-              aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-label={
+                menuOpen ? "Close navigation menu" : "Open navigation menu"
+              }
               className="nav-items-intro ml-auto inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-full border-2 border-ink bg-white/80 text-ink shadow-[2px_2px_0_var(--color-ink)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:bg-yellow/30 hover:shadow-[3px_3px_0_var(--color-ink)] xl:hidden"
               onClick={() => setMenuOpen((value) => !value)}
               type="button"
@@ -109,20 +114,20 @@ export function Nav() {
               <span className="relative block h-4 w-5">
                 <span
                   className={cx(
-                    'absolute left-0 top-0 h-[2px] w-full rounded-full bg-current transition-[transform,top,opacity] duration-200',
-                    menuOpen && 'top-[7px] rotate-45',
+                    "absolute left-0 top-0 h-[2px] w-full rounded-full bg-current transition-[transform,top,opacity] duration-200",
+                    menuOpen && "top-[7px] rotate-45",
                   )}
                 />
                 <span
                   className={cx(
-                    'absolute left-0 top-[7px] h-[2px] w-full rounded-full bg-current transition-opacity duration-200',
-                    menuOpen && 'opacity-0',
+                    "absolute left-0 top-[7px] h-[2px] w-full rounded-full bg-current transition-opacity duration-200",
+                    menuOpen && "opacity-0",
                   )}
                 />
                 <span
                   className={cx(
-                    'absolute bottom-0 left-0 h-[2px] w-full rounded-full bg-current transition-[transform,bottom] duration-200',
-                    menuOpen && 'bottom-[7px] -rotate-45',
+                    "absolute bottom-0 left-0 h-[2px] w-full rounded-full bg-current transition-[transform,bottom] duration-200",
+                    menuOpen && "bottom-[7px] -rotate-45",
                   )}
                 />
               </span>
@@ -132,8 +137,10 @@ export function Nav() {
           <div
             aria-hidden={!menuOpen}
             className={cx(
-              'nav-menu-intro relative z-[1] overflow-hidden transition-[max-height,opacity,margin] duration-300 ease-out-soft xl:hidden',
-              menuOpen ? 'mt-2.5 max-h-[30rem] opacity-100' : 'max-h-0 opacity-0',
+              "nav-menu-intro relative z-[1] overflow-hidden transition-[max-height,opacity,margin] duration-300 ease-out-soft xl:hidden",
+              menuOpen
+                ? "mt-2.5 max-h-[30rem] opacity-100"
+                : "max-h-0 opacity-0",
             )}
             id={mobileMenuId}
           >
@@ -142,7 +149,7 @@ export function Nav() {
                 {NAV_LINKS.map((link, index) => (
                   <a
                     className={cx(
-                      'inline-flex min-h-11 items-center justify-center rounded-full border-2 border-ink/15 bg-white/65 px-3 py-[0.65rem] text-center font-hand text-[0.96rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[0.12rem_0.12rem_0_rgba(46,61,58,0.18)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]',
+                      "inline-flex min-h-11 items-center justify-center rounded-full border-2 border-ink/15 bg-white/65 px-3 py-[0.65rem] text-center font-hand text-[0.96rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[0.12rem_0.12rem_0_rgba(46,61,58,0.18)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]",
                       navLinkTones[index],
                     )}
                     href={link.href}
@@ -180,5 +187,5 @@ export function Nav() {
         </div>
       </div>
     </nav>
-  )
+  );
 }
