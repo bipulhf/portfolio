@@ -1,8 +1,13 @@
 # Shahiduzzaman Bipul Portfolio
 
-A brand-first portfolio and CMS built with TanStack Start. The public site presents projects, writing, experience, and contact details in a calm crayon-crafted visual system, while the admin workspace lets a single owner manage blog posts and project case studies.
+A brand-first portfolio and CMS built with TanStack Start. The public site presents projects, writing, experience, and contact details in two switchable public themes, while the admin workspace lets a single owner manage blog posts and project case studies.
 
-![Landing preview](./public/home.png)
+## Theme Preview
+
+<p align="center">
+  <img src="./public/home-crayon.png" alt="Crayon theme homepage preview" width="48%" />
+  <img src="./public/home-minimal.png" alt="Minimal theme homepage preview" width="48%" />
+</p>
 
 ## Overview
 
@@ -32,6 +37,7 @@ The original handoff/prototype is kept in [`my-portfolio/`](./my-portfolio) for 
 
 ## Features
 
+- Two public presentation modes: crayon and minimal
 - Distinctive portfolio landing page with modular section components
 - Admin dashboard for managing projects and blog posts
 - Rich text editing with Lexical for long-form project and blog content
