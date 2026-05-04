@@ -31,7 +31,7 @@ export function PortfolioPage({
       </div>
       <div className={themeOnlyClass('minimal')}>
         <MinimalHero />
-        <MinimalHome projects={projects} />
+        <MinimalHome blogs={blogs} projects={projects} />
       </div>
     </SiteShell>
   )

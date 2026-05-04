@@ -41,9 +41,9 @@ function BlogPage() {
         actions={
           <PageHeroActions
             page="blog"
-            primaryLabel="Back to home"
+            primaryLabel="Home"
             primaryTo="/"
-            secondaryLabel="See projects"
+            secondaryLabel="Projects"
             secondaryTo="/projects"
           />
         }

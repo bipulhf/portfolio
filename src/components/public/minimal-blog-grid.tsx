@@ -23,11 +23,11 @@ export function MinimalBlogGrid({
   items: SerializedBlog[]
 }>) {
   return (
-    <div className="minimal-blog-grid" data-reveal-sequence>
+    <div className="theme-only-minimal minimal-blog-grid" data-reveal-sequence>
       {items.length ? (
         items.map((post, index) => (
           <Link
-            className={`minimal-blog-card ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
+            className="minimal-blog-card group reveal-skew"
             data-reveal-item
             key={post.id}
             preload="intent"
@@ -35,18 +35,24 @@ export function MinimalBlogGrid({
             params={{ slug: post.slug }}
           >
             <div className="minimal-blog-card-meta">
-              <span>{formatBlogDate(post.publishedAt)}</span>
-              <span>{post.readingTimeMinutes} min</span>
+              {formatBlogDate(post.publishedAt)}
+              <span>{post.readingTimeMinutes} min read</span>
+              {post.tags.slice(0, 2).map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
             </div>
+
             <h2 className="minimal-blog-card-title">{post.title}</h2>
+
             <p className="minimal-blog-card-excerpt">{post.excerpt}</p>
-            <span className="minimal-blog-card-link">Read note</span>
+
+            <div className="minimal-blog-card-link">Read</div>
           </Link>
         ))
       ) : (
-        <div className="minimal-grid-empty reveal reveal-soft col-span-full">
-          <h2>{emptyTitle}</h2>
-          {emptyText ? <p>{emptyText}</p> : null}
+        <div className="py-20 text-center reveal-mask">
+          <h2 className="text-2xl font-bold uppercase tracking-tighter opacity-20">{emptyTitle}</h2>
+          {emptyText ? <p className="mt-4 text-ink-soft">{emptyText}</p> : null}
         </div>
       )}
     </div>

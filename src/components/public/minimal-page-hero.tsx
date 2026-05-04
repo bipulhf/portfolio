@@ -12,7 +12,7 @@ export function MinimalPageHero({
   const config = PUBLIC_THEME_CONFIG.minimal.pages[page]
 
   return (
-    <section className={cx(pageContainerClass, 'theme-only-minimal relative pt-10 md:pt-16 lg:pt-20')}>
+    <section className={cx(pageContainerClass, 'theme-only-minimal relative pt-10 md:pt-16 lg:pt-20')} id="top">
       <div className="minimal-page-hero-shell page-enter enter-soft motion-delay-2">
         <div className="minimal-page-hero-header">
           <div className="minimal-page-hero-label">{config.eyebrow}</div>

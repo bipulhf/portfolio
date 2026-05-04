@@ -21,30 +21,43 @@ export function MinimalRichContentPage({
   title: string
 }>) {
   return (
-    <main className={cx(pageContainerClass, 'theme-only-minimal pb-16 pt-10 md:pb-20 md:pt-16')}>
-      <article className="minimal-article-shell page-enter enter-soft">
+    <main className={cx(pageContainerClass, 'theme-only-minimal pb-32 pt-32')} id="top">
+      <article className="minimal-article-shell mx-auto max-w-5xl">
         <header className="minimal-article-header">
-          <div className="minimal-article-meta">
-            <span>{kicker}</span>
-            <span>{meta}</span>
+          <div className="reveal-mask">
+            <div className="minimal-article-meta">
+              <span>{kicker}</span>
+              <span>{meta}</span>
+            </div>
           </div>
+
           <div className="minimal-article-headline-block">
-            <h1 className="minimal-article-title">{title}</h1>
-            <p className="minimal-article-description">{description}</p>
+            <h1 className="minimal-article-title reveal-skew">{title}</h1>
+            <p className="minimal-article-description reveal-mask">{description}</p>
           </div>
-          <Link className="minimal-article-back" preload="intent" to={backTo}>
-            {backLabel}
-          </Link>
+
+          <div className="minimal-page-hero-actions reveal-skew">
+            <Link className="minimal-article-back" preload="intent" to={backTo}>
+              {backLabel}
+            </Link>
+          </div>
         </header>
 
         {coverImagePath ? (
-          <div className="minimal-article-cover page-enter enter-soft motion-delay-3">
-            <img alt={title} className="minimal-article-cover-image" src={coverImagePath} />
+          <div className="minimal-article-cover reveal-mask">
+            <img
+              alt={title}
+              className="minimal-article-cover-image"
+              src={coverImagePath}
+            />
           </div>
         ) : null}
 
-        <div className="minimal-article-body page-enter enter-soft motion-delay-4">
-          <div className="minimal-rich-content" dangerouslySetInnerHTML={{ __html: bodyHtml }} />
+        <div className="reveal-mask">
+          <div
+            className="minimal-rich-content"
+            dangerouslySetInnerHTML={{ __html: bodyHtml }}
+          />
         </div>
       </article>
     </main>

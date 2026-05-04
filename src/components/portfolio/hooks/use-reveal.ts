@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 
-export function useReveal() {
+export function useReveal(deps: any[] = []) {
   useEffect(() => {
-    const elements = document.querySelectorAll<HTMLElement>('.reveal, [data-reveal-sequence]')
+    const elements = document.querySelectorAll<HTMLElement>('.reveal, .reveal-mask, .reveal-skew, [data-reveal-sequence]')
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     if (reduceMotion) {
@@ -53,5 +53,5 @@ export function useReveal() {
     elements.forEach((element) => observer.observe(element))
 
     return () => observer.disconnect()
-  }, [])
+  }, deps)
 }

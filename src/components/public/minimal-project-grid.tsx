@@ -1,4 +1,5 @@
 import { Link } from '@tanstack/react-router'
+import { cx } from '~/components/portfolio/lib/styles'
 import type { SerializedProject } from '~/lib/content/types'
 
 function formatProjectDate(value: string | null) {
@@ -25,11 +26,14 @@ export function MinimalProjectGrid({
 }>) {
   if (mode === 'home') {
     return (
-      <div className="minimal-project-story" data-reveal-sequence>
+      <div className="theme-only-minimal minimal-project-story" data-reveal-sequence>
         {items.length ? (
           items.map((project, index) => (
             <article
-              className={`minimal-project-story-panel ${index % 2 === 0 ? 'is-media-right' : 'is-media-left'} ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
+              className={cx(
+                'minimal-project-story-panel group reveal-skew',
+                index % 2 === 0 ? '' : 'is-media-left'
+              )}
               data-reveal-item
               key={project.id}
             >
@@ -40,19 +44,27 @@ export function MinimalProjectGrid({
                       <span>{String(index + 1).padStart(2, '0')}</span>
                       <span>{project.featured ? 'Featured project' : 'Selected project'}</span>
                     </div>
+
                     <div className="minimal-project-story-meta">
                       <span>{formatProjectDate(project.publishedAt)}</span>
-                      <span>{project.techStack.slice(0, 2).join(' · ')}</span>
+                      {project.liveUrl ? <span>Live preview available</span> : <span>Case study available</span>}
+                      {project.repoUrl ? <span>Repository included</span> : null}
                     </div>
+
                     <h2 className="minimal-project-story-title">{project.title}</h2>
+
                     <p className="minimal-project-story-summary">{project.summary}</p>
-                    <div className="minimal-project-story-tags">
-                      {project.techStack.slice(0, 5).map((tag) => (
-                        <span className="minimal-project-card-tag" key={tag}>
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+
+                    {project.techStack.length ? (
+                      <div className="minimal-project-story-tags">
+                        {project.techStack.map((tag) => (
+                          <span className="minimal-project-card-tag" key={tag}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
+
                     <div className="minimal-project-story-actions">
                       <Link
                         className="minimal-project-card-link"
@@ -60,7 +72,7 @@ export function MinimalProjectGrid({
                         to="/projects/$slug"
                         params={{ slug: project.slug }}
                       >
-                        Open project
+                        Details
                       </Link>
                       {project.liveUrl ? (
                         <a
@@ -69,17 +81,23 @@ export function MinimalProjectGrid({
                           rel="noreferrer"
                           target="_blank"
                         >
-                          Live site
+                          Live
+                        </a>
+                      ) : null}
+                      {project.repoUrl ? (
+                        <a
+                          className="minimal-project-card-link is-secondary"
+                          href={project.repoUrl}
+                          rel="noreferrer"
+                          target="_blank"
+                        >
+                          Code
                         </a>
                       ) : null}
                     </div>
                   </div>
-
                   <div className="minimal-project-story-media-wrap">
-                    <div className="minimal-project-story-panel-number" aria-hidden="true">
-                      {String(index + 1).padStart(2, '0')}
-                    </div>
-                    <div className="minimal-project-story-media">
+                    <div className="minimal-project-story-media reveal-mask">
                       {project.coverImagePath ? (
                         <img
                           alt={project.title}
@@ -88,19 +106,21 @@ export function MinimalProjectGrid({
                         />
                       ) : (
                         <div className="minimal-project-story-image minimal-project-card-placeholder">
-                          <span>{String(index + 1).padStart(2, '0')}</span>
+                          {String(index + 1).padStart(2, '0')}
                         </div>
                       )}
                     </div>
+                    <span aria-hidden="true" className="minimal-project-story-panel-number">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
                   </div>
                 </div>
               </div>
             </article>
           ))
         ) : (
-          <div className="minimal-grid-empty reveal reveal-soft col-span-full">
-            <h2>{emptyTitle}</h2>
-            {emptyText ? <p>{emptyText}</p> : null}
+          <div className="reveal-mask">
+            <h2 className="text-2xl opacity-40">{emptyTitle}</h2>
           </div>
         )}
       </div>
@@ -108,15 +128,18 @@ export function MinimalProjectGrid({
   }
 
   return (
-    <div className={`minimal-project-grid ${mode === 'home' ? 'is-home' : 'is-index'}`} data-reveal-sequence>
+    <div className={cx(
+      'theme-only-minimal minimal-project-grid',
+      'is-index'
+    )} data-reveal-sequence>
       {items.length ? (
         items.map((project, index) => (
           <article
-            className={`minimal-project-card ${index % 2 === 0 ? 'reveal-left' : 'reveal-right'}`}
+            className="minimal-project-card group reveal-skew"
             data-reveal-item
             key={project.id}
           >
-            <div className="minimal-project-card-media">
+            <div className="minimal-project-card-media reveal-mask">
               {project.coverImagePath ? (
                 <img
                   alt={project.title}
@@ -125,24 +148,37 @@ export function MinimalProjectGrid({
                 />
               ) : (
                 <div className="minimal-project-card-image minimal-project-card-placeholder">
-                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  {project.title.slice(0, 2)}
                 </div>
               )}
             </div>
+
             <div className="minimal-project-card-copy">
               <div className="minimal-project-card-meta">
                 <span>{project.featured ? 'Featured project' : 'Project'}</span>
                 <span>{formatProjectDate(project.publishedAt)}</span>
+                {project.liveUrl ? <span>Live preview</span> : null}
+                {project.repoUrl ? <span>Repository</span> : null}
               </div>
-              <h2 className="minimal-project-card-title">{project.title}</h2>
-              <p className="minimal-project-card-summary">{project.summary}</p>
-              <div className="minimal-project-card-tags">
-                {project.techStack.slice(0, 4).map((tag) => (
-                  <span className="minimal-project-card-tag" key={tag}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
+
+              <h2 className="minimal-project-card-title">
+                {project.title}
+              </h2>
+
+              <p className="minimal-project-card-summary">
+                {project.summary}
+              </p>
+
+              {project.techStack.length ? (
+                <div className="minimal-project-card-tags">
+                  {project.techStack.map((tag) => (
+                    <span className="minimal-project-card-tag" key={tag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
+
               <div className="minimal-project-card-actions">
                 <Link
                   className="minimal-project-card-link"
@@ -150,7 +186,7 @@ export function MinimalProjectGrid({
                   to="/projects/$slug"
                   params={{ slug: project.slug }}
                 >
-                  Open project
+                  Details
                 </Link>
                 {project.liveUrl ? (
                   <a
@@ -159,7 +195,17 @@ export function MinimalProjectGrid({
                     rel="noreferrer"
                     target="_blank"
                   >
-                    Live site
+                    Live
+                  </a>
+                ) : null}
+                {project.repoUrl ? (
+                  <a
+                    className="minimal-project-card-link is-secondary"
+                    href={project.repoUrl}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Code
                   </a>
                 ) : null}
               </div>
@@ -167,9 +213,9 @@ export function MinimalProjectGrid({
           </article>
         ))
       ) : (
-        <div className="minimal-grid-empty reveal reveal-soft col-span-full">
-          <h2>{emptyTitle}</h2>
-          {emptyText ? <p>{emptyText}</p> : null}
+        <div className="col-span-full py-20 text-center reveal-mask">
+          <h2 className="text-2xl font-bold uppercase tracking-tighter opacity-20">{emptyTitle}</h2>
+          {emptyText ? <p className="mt-4 text-ink-soft">{emptyText}</p> : null}
         </div>
       )}
     </div>
