@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { CONTACT_LINKS } from '~/components/portfolio/lib/content'
+import { MinimalWindowControls } from '~/components/public/minimal-window-controls'
 import { pageContainerClass } from '~/components/portfolio/lib/styles'
 import type { SerializedBlog, SerializedProject } from '~/lib/content/types'
 
@@ -11,114 +12,201 @@ export function MinimalHome({
   projects: SerializedProject[]
 }>) {
   const featuredProjects = projects.filter((project) => project.featured).slice(0, 3)
+  const recentBlogs = blogs.slice(0, 3)
+  const stack = ['React', 'Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'Tailwind', 'Prisma']
+  const profileRows = [
+    ['Focus', 'Frontend, product, systems'],
+    ['Base', 'Dhaka, Bangladesh'],
+    ['Style', 'Clear logic, calm UI'],
+  ] as const
   const charcoalStrong = 'text-[#3a342e]'
   const charcoalSoft = 'text-[#3a342e]/72'
-  const charcoalFaint = 'text-[#3a342e]/58'
+  const charcoalFaint = 'text-[#3a342e]/46'
 
   return (
-    <main className={`theme-only-minimal py-4 space-y-6 ${charcoalStrong}`}>
+    <main className="theme-only-minimal py-10 space-y-10 md:py-12 md:space-y-12">
       <section className={pageContainerClass} id="about">
-        <div className="coding-border p-4 rounded-lg">
-          <div className="mb-4 flex items-center justify-between border-b border-[#3a342e]/10 pb-2">
-            <span className={`text-[10px] font-semibold uppercase tracking-[0.14em] ${charcoalFaint}`}>
-              About
-            </span>
-          </div>
-          <div className="grid lg:grid-cols-[1fr_250px] gap-8">
-            <div className="space-y-4">
-              <h2 className={`text-lg font-bold ${charcoalStrong}`}>Fullstack engineer</h2>
-              <p className={`max-w-md text-[11px] font-normal leading-relaxed ${charcoalSoft}`}>
-                I build web products with strong frontend craft and dependable backend logic.
-              </p>
+        <div className="coding-border overflow-hidden rounded-xl">
+          <div className={`flex items-center justify-between border-b border-[#3a342e]/8 px-6 py-4 text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
+            <div className="flex items-center gap-3">
+              <MinimalWindowControls />
+              <span>/src/profile.ts</span>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {[
-                ['6+', 'Wins'],
-                ['Web', 'Products'],
-                ['UI', 'Craft'],
-                ['Safe', 'Systems'],
-              ].map(([v, l]) => (
-                <div className="coding-border rounded bg-white/5 p-2 text-center" key={l}>
-                  <div className={`text-lg font-bold ${charcoalStrong}`}>{v}</div>
-                  <div className={`text-[9px] font-normal uppercase tracking-tighter ${charcoalFaint}`}>{l}</div>
+            <span>profile</span>
+          </div>
+          <div className="grid gap-8 px-6 py-7 md:px-7 md:py-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(15rem,0.8fr)]">
+            <div className="space-y-5">
+              <div className={`space-y-1 text-[0.98rem] leading-7 [font-family:var(--minimal-mono)] ${charcoalSoft}`}>
+                <div className={charcoalStrong}>export const profile = {'{'}</div>
+                <div className="pl-4">
+                  <span className={charcoalFaint}>role:</span>{' '}
+                  <span className={`font-semibold ${charcoalStrong}`}>"fullstack engineer"</span>,
+                </div>
+                <div className="pl-4">
+                  <span className={charcoalFaint}>focus:</span>{' '}
+                  <span>["frontend", "product", "systems"]</span>,
+                </div>
+                <div className="pl-4">
+                  <span className={charcoalFaint}>style:</span>{' '}
+                  <span>"clear, dependable"</span>
+                </div>
+                <div className={charcoalStrong}>{'}'}</div>
+              </div>
+
+              <p className={`max-w-2xl text-sm leading-relaxed md:text-[0.95rem] ${charcoalSoft}`}>
+                I ship web products with strong frontend craft, maintainable backend logic, and product decisions that stay clear under pressure.
+              </p>
+
+              <div className="flex flex-wrap gap-2">
+                {stack.map((skill) => (
+                  <span
+                    className={`rounded-[0.7rem] border border-[#3a342e]/10 bg-white/36 px-3 py-1.5 text-[11px] font-medium [font-family:var(--minimal-mono)] ${charcoalStrong}`}
+                    key={skill}
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <dl className="grid gap-3 self-start">
+              {profileRows.map(([label, value]) => (
+                <div className="rounded-[0.9rem] border border-[#3a342e]/10 bg-white/34 px-4 py-3" key={label}>
+                  <dt className={`text-[10px] uppercase tracking-[0.18em] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
+                    {label}
+                  </dt>
+                  <dd className={`mt-2 text-sm [font-family:var(--minimal-mono)] ${charcoalStrong}`}>
+                    {value}
+                  </dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </div>
         </div>
       </section>
 
       <section className={pageContainerClass} id="projects">
-        <div className="grid lg:grid-cols-2 gap-6">
-          <div className="coding-border p-4 rounded-lg">
-            <span className={`mb-4 block text-[10px] font-semibold uppercase tracking-[0.14em] ${charcoalFaint}`}>
-              Toolkit
-            </span>
-            <div className="flex flex-wrap gap-2">
-              {['React', 'Next.js', 'Typescript', 'Node.js', 'PostgreSQL', 'Tailwind'].map(skill => (
-                <span
-                  className={`rounded border border-[#3a342e]/10 bg-white/5 px-2 py-0.5 text-[9px] font-medium ${charcoalStrong}`}
-                  key={skill}
-                >
-                  {skill}
-                </span>
-              ))}
+        <div className="coding-border overflow-hidden rounded-xl">
+          <div className={`flex items-center justify-between border-b border-[#3a342e]/8 px-6 py-4 text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
+            <div className="flex items-center gap-3">
+              <MinimalWindowControls />
+              <span>/src/projects.ts</span>
             </div>
+            <Link className={`no-underline transition-colors hover:text-[#3a342e] ${charcoalFaint}`} to="/projects">
+              open archive
+            </Link>
           </div>
-
-          <div className="coding-border p-4 rounded-lg">
-            <div className="flex items-center justify-between mb-4">
-              <span className={`text-[10px] font-semibold uppercase tracking-[0.14em] ${charcoalFaint}`}>
-                Selected work
-              </span>
-              <Link className={`text-[9px] font-medium no-underline ${charcoalFaint}`} to="/projects">All projects</Link>
-            </div>
-            <div className="space-y-3">
-              {featuredProjects.length ? featuredProjects.map((p) => (
-                <Link 
-                  className="flex items-center gap-4 no-underline group"
-                  key={p.id}
+          <div className="px-6 py-4 md:px-7 md:py-5">
+            {featuredProjects.length ? (
+              featuredProjects.map((project, index) => (
+                <Link
+                  className="group grid gap-3 border-b border-[#3a342e]/8 py-4 no-underline last:border-b-0 md:grid-cols-[7.5rem_minmax(0,1fr)_auto] md:items-start"
+                  key={project.id}
+                  params={{ slug: project.slug }}
                   to="/projects/$slug"
-                  params={{ slug: p.slug }}
                 >
-                  <div className="size-10 rounded overflow-hidden flex-shrink-0 bg-white/5">
-                    {p.coverImagePath ? (
-                      <img alt={p.title} className="h-full w-full object-cover grayscale opacity-55 group-hover:opacity-100" src={p.coverImagePath} />
-                    ) : (
-                      <div className={`flex h-full w-full items-center justify-center text-[10px] font-bold ${charcoalStrong}`}>
-                        {p.title.slice(0, 2).toUpperCase()}
+                  <div className={`text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
+                    <div>{String(index + 1).padStart(2, '0')}</div>
+                    <div className="mt-1">{project.slug}.tsx</div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <h2 className={`text-base font-semibold [font-family:var(--minimal-mono)] ${charcoalStrong}`}>
+                      {project.title}
+                    </h2>
+                    <p className={`max-w-2xl text-sm leading-relaxed ${charcoalSoft}`}>
+                      {project.summary}
+                    </p>
+                    {project.techStack.length ? (
+                      <div className={`text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
+                        {project.techStack.slice(0, 4).join(' · ')}
                       </div>
-                    )}
+                    ) : null}
                   </div>
-                  <div>
-                    <h3 className={`text-[11px] font-bold ${charcoalStrong}`}>{p.title}</h3>
-                    <p className={`w-32 truncate text-[9px] font-normal md:w-48 ${charcoalFaint}`}>{p.summary}</p>
+
+                  <div className={`text-[11px] font-medium [font-family:var(--minimal-mono)] transition-transform group-hover:translate-x-1 ${charcoalStrong}`}>
+                    open
                   </div>
-                  <span className={`ml-auto text-[10px] font-semibold opacity-0 transition-all group-hover:opacity-100 ${charcoalSoft}`}>→</span>
                 </Link>
-              )) : (
-                <p className={`text-[11px] font-normal ${charcoalSoft}`}>Projects will appear here.</p>
-              )}
+              ))
+            ) : (
+              <p className={`py-3 text-sm ${charcoalSoft}`}>Projects will appear here.</p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section className={pageContainerClass} id="blog">
+        <div className="coding-border overflow-hidden rounded-xl">
+          <div className={`flex items-center justify-between border-b border-[#3a342e]/8 px-6 py-4 text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
+            <div className="flex items-center gap-3">
+              <MinimalWindowControls />
+              <span>/notes/index.md</span>
             </div>
+            <Link className={`no-underline transition-colors hover:text-[#3a342e] ${charcoalFaint}`} to="/blog">
+              all notes
+            </Link>
+          </div>
+          <div className="px-6 py-4 md:px-7 md:py-5">
+            {recentBlogs.length ? (
+              recentBlogs.map((blog) => (
+                <Link
+                  className="group grid gap-3 border-b border-[#3a342e]/8 py-4 no-underline last:border-b-0 md:grid-cols-[8rem_minmax(0,1fr)_auto] md:items-start"
+                  key={blog.id}
+                  params={{ slug: blog.slug }}
+                  to="/blog/$slug"
+                >
+                  <div className={`text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
+                    {new Date(blog.publishedAt || '').toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: '2-digit',
+                    })}
+                  </div>
+
+                  <div className="space-y-2">
+                    <h2 className={`text-base font-semibold [font-family:var(--minimal-mono)] ${charcoalStrong}`}>
+                      {blog.title}
+                    </h2>
+                    <p className={`max-w-2xl text-sm leading-relaxed ${charcoalSoft}`}>
+                      {blog.excerpt}
+                    </p>
+                  </div>
+
+                  <div className={`text-[11px] font-medium [font-family:var(--minimal-mono)] transition-transform group-hover:translate-x-1 ${charcoalStrong}`}>
+                    read
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <p className={`py-3 text-sm ${charcoalSoft}`}>Notes will appear here.</p>
+            )}
           </div>
         </div>
       </section>
 
       <section className={pageContainerClass} id="contact">
-        <div className="coding-border rounded-lg border-[#3a342e]/12 bg-white/5 p-6 text-center">
-          <h2 className={`mb-2 text-sm font-bold ${charcoalStrong}`}>Contact</h2>
-          <div className="flex flex-wrap justify-center gap-6">
-            {CONTACT_LINKS.map(link => (
-              <a
-                className={`text-[9px] font-semibold uppercase tracking-widest no-underline hover:underline ${charcoalSoft}`}
-                href={link.href}
-                key={link.label}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {link.label.replace(/^✉\s*/, '')}
-              </a>
-            ))}
+        <div className="coding-border overflow-hidden rounded-xl">
+          <div className={`flex items-center gap-3 border-b border-[#3a342e]/8 px-6 py-4 text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
+            <MinimalWindowControls />
+            <span>/src/contact.ts</span>
+          </div>
+          <div className="px-6 py-7 md:px-7 md:py-8">
+            <p className={`text-sm leading-relaxed md:text-[0.95rem] ${charcoalSoft}`}>
+              If the work feels aligned, email is the fastest path.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              {CONTACT_LINKS.map((link) => (
+                <a
+                  className={`rounded-[0.8rem] border border-[#3a342e]/12 bg-white/40 px-4 py-2 text-[11px] font-medium no-underline transition-colors hover:bg-white/70 [font-family:var(--minimal-mono)] ${charcoalStrong}`}
+                  href={link.href}
+                  key={link.label}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  {link.label.replace(/^✉\s*/, '')}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>

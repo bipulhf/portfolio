@@ -168,10 +168,10 @@ export const PUBLIC_THEME_CONFIG: Record<PublicTheme, PublicThemeConfig> = {
     hero: {
       artAlt: 'Minimal hero artwork for Bipul portfolio mode',
       artSrc: '/minimal-portrait.svg',
-      ctaPrimary: 'Work',
-      ctaSecondary: 'Contact',
-      intro: 'Software engineer',
-      lead: 'I build calm web products with clear interfaces and dependable systems.',
+      ctaPrimary: 'View work',
+      ctaSecondary: 'Email',
+      intro: 'software engineer',
+      lead: 'I build clear interfaces, dependable systems, and product-focused web software.',
       note: 'alternate public mode',
       support: 'frontend clarity / backend reliability',
       title: 'Bipul',
@@ -207,11 +207,10 @@ export const PUBLIC_THEME_CONFIG: Record<PublicTheme, PublicThemeConfig> = {
     },
     nav: {
       ctaHref: '/#contact',
-      ctaLabel: 'Contact',
+      ctaLabel: 'Email',
       links: [
         { href: '/#about', label: 'About' },
         { href: '/#projects', label: 'Work' },
-        { href: '/projects', label: 'Projects' },
         { href: '/blog', label: 'Notes' },
         { href: '/#contact', label: 'Contact' },
       ],
@@ -222,15 +221,15 @@ export const PUBLIC_THEME_CONFIG: Record<PublicTheme, PublicThemeConfig> = {
     },
     pages: {
       blog: {
-        description: 'Short writing on product, interfaces, and engineering decisions.',
-        eyebrow: 'Notes',
+        description: 'Short writing on product work, interface decisions, and software craft.',
+        eyebrow: '/notes/index.md',
         primaryLabel: 'Home',
         secondaryLabel: 'Projects',
         title: 'Notes',
       },
       projects: {
-        description: 'Selected projects across product, interface, and system work.',
-        eyebrow: 'Selected work',
+        description: 'Selected builds, shipped interfaces, and engineering case studies.',
+        eyebrow: '/projects/index.ts',
         primaryLabel: 'Home',
         secondaryLabel: 'Notes',
         title: 'Projects',
