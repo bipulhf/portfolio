@@ -72,20 +72,23 @@ export function Hero() {
 
         <div className="order-1 relative flex max-w-[42rem] flex-col justify-center py-2 sm:py-4 md:max-w-[46rem] lg:max-w-[47.5rem]">
           <div
-            className="hero-copy-item type-kicker mb-2 flex flex-wrap items-center gap-2.5"
+            className="hero-copy-item type-kicker mb-2 flex flex-wrap items-center gap-3 md:mb-3"
             style={{ ["--hero-delay" as string]: "40ms" }}
           >
-            <span className="hero-wave inline-block">👋</span>
-            <span>Hi, I&apos;m</span>
+            <span className="inline-flex items-center gap-2.5 text-ink-soft">
+              <span className="h-0.5 w-7 rounded-full bg-peach/90 md:w-9" />
+              <span className="font-hand text-[1rem] tracking-[0.03em] text-ink-soft/95">
+                say hello to
+              </span>
+            </span>
           </div>
 
           <h1
             className="type-display-hero hero-copy-item relative mb-[1.125rem] mt-1 block"
             style={{ ["--hero-delay" as string]: "90ms" }}
           >
-            <span className="relative inline-block">Shahiduzzaman</span>{" "}
             <span className="relative inline-block">
-              Bipul.
+              Bipul
               <span className="hero-scribble pointer-events-none absolute bottom-[-0.625rem] left-[-0.625rem] h-8 w-[calc(100%+1.25rem)]">
                 <HeroScribble color="var(--color-peach)" />
               </span>
