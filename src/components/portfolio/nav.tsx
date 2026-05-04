@@ -1,5 +1,4 @@
 import { useEffect, useId, useState } from 'react'
-import { ThemeToggle } from '~/components/public/theme-toggle'
 import { PUBLIC_THEME_CONFIG } from '~/components/public/public-theme'
 import { MinimalNav } from '~/components/public/minimal-nav'
 import { ScribbleUnder, Squiggle, Star } from './doodles'
@@ -105,8 +104,6 @@ function CrayonNav() {
               ))}
             </div>
 
-            <ThemeToggle className="nav-items-intro hidden xl:flex" />
-
             <a
               className="nav-items-intro hidden min-h-11 items-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.7))] px-4 py-[0.65rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[3px_3px_0_var(--color-ink)] transition-[transform,box-shadow,background-color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[1deg] hover:shadow-[4px_4px_0_var(--color-ink)] xl:inline-flex"
               href={nav.ctaHref}
@@ -159,7 +156,6 @@ function CrayonNav() {
             id={mobileMenuId}
           >
             <div className="rounded-[1rem] border-2 border-ink/12 bg-paper/70 p-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
-              <ThemeToggle className="mb-2 flex w-full" />
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 {nav.links.map((link, index) => (
                   <a

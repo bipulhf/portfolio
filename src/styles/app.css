@@ -249,6 +249,44 @@
     box-shadow: 2px 2px 0 rgb(46 61 58 / 0.14);
   }
 
+  .public-theme-toggle-rail {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 1rem;
+    z-index: 60;
+    display: flex;
+    justify-content: center;
+    padding-bottom: env(safe-area-inset-bottom);
+    pointer-events: none;
+  }
+
+  .public-theme-toggle-dock {
+    pointer-events: auto;
+  }
+
+  .public-theme-toggle-dock .public-theme-toggle {
+    pointer-events: auto;
+    background: rgb(255 255 255 / 0.84);
+    box-shadow:
+      0 0.85rem 1.8rem rgb(46 61 58 / 0.12),
+      inset 0 1px 0 rgb(255 255 255 / 0.62);
+    backdrop-filter: blur(16px);
+  }
+
+  @media (min-width: 48rem) {
+    .public-theme-toggle-rail {
+      left: auto;
+      right: 0;
+      top: auto;
+      bottom: 1.25rem;
+      width: auto;
+      justify-content: flex-end;
+      padding-right: 1.25rem;
+    }
+  }
+
   .crayon-surface {
     background: var(--color-paper);
     transition:
@@ -819,6 +857,14 @@
     background: var(--color-yellow);
     color: var(--color-ink);
     box-shadow: none;
+  }
+
+  [data-public-theme='minimal'] .public-theme-toggle-dock .public-theme-toggle {
+    border-color: rgb(22 22 22 / 0.1);
+    background: rgb(248 242 234 / 0.9);
+    box-shadow:
+      0 0.9rem 1.8rem rgb(22 22 22 / 0.08),
+      inset 0 1px 0 rgb(255 255 255 / 0.52);
   }
 
   [data-public-theme='minimal'] .minimal-window-controls {

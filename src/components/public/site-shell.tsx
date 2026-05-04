@@ -6,6 +6,7 @@ import { useReveal } from '~/components/portfolio/hooks/use-reveal'
 import { MinimalAmbientGeometry } from '~/components/public/minimal-ambient-geometry'
 import { Nav } from '~/components/portfolio/nav'
 import { MinimalScrollProgress } from '~/components/public/minimal-scroll-progress'
+import { ThemeToggle } from '~/components/public/theme-toggle'
 import { usePublicTheme } from '~/components/public/public-theme'
 
 export function SiteShell({ children }: Readonly<{ children: ReactNode }>) {
@@ -20,6 +21,11 @@ export function SiteShell({ children }: Readonly<{ children: ReactNode }>) {
       <RouteProgress />
       <BackgroundDoodles />
       <Nav />
+      <div className="public-theme-toggle-rail" aria-label="Theme switcher region">
+        <div className="public-theme-toggle-dock">
+          <ThemeToggle />
+        </div>
+      </div>
       {children}
       <Footer />
     </div>
