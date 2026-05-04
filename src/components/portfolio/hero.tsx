@@ -1,15 +1,19 @@
-import { Heart, HeroBackdrop, HeroScribble, Star, Squiggle } from "./doodles";
+import { PUBLIC_THEME_CONFIG, themeOnlyClass } from '~/components/public/public-theme'
+import { Heart, HeroBackdrop, HeroScribble, Star, Squiggle } from './doodles'
 import {
   crayonButtonClass,
   cx,
   pageContainerClass,
   surfaceCardClass,
-} from "./lib/styles";
+} from './lib/styles'
 
 export function Hero() {
   return (
     <section
-      className="relative flex items-center overflow-hidden py-6 sm:py-8 lg:min-h-[40rem] lg:py-14"
+      className={cx(
+        'relative flex items-center overflow-hidden py-6 sm:py-8 lg:min-h-[40rem] lg:py-14',
+        themeOnlyClass('crayon'),
+      )}
       id="top"
     >
       <div
@@ -22,7 +26,7 @@ export function Hero() {
       <div
         className={cx(
           pageContainerClass,
-          "relative z-[1] grid gap-7 md:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,26rem)] lg:items-center lg:gap-12",
+          'relative z-[1] grid gap-7 md:gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(22rem,26rem)] lg:items-center lg:gap-12',
         )}
       >
         <div className="hero-portrait-intro order-2 flex justify-center lg:justify-end">
@@ -36,17 +40,17 @@ export function Hero() {
             >
               <div className="portrait-blob-mask relative aspect-[1/1.06] overflow-hidden rounded-[42%_58%_52%_48%/34%_40%_60%_66%] border-2 border-ink bg-[radial-gradient(circle_at_20%_18%,rgba(255,229,122,0.25),transparent_18%),radial-gradient(circle_at_82%_20%,rgba(169,212,236,0.24),transparent_20%),linear-gradient(180deg,rgba(255,255,255,0.32),transparent_28%)] shadow-[inset_0_-0.375rem_0_rgba(46,61,58,0.08)]">
                 <img
-                  alt="Portrait of Shahiduzzaman Bipul in a crayon illustration style"
+                  alt={PUBLIC_THEME_CONFIG.crayon.hero.artAlt}
                   className="block h-full w-full scale-[1.02] object-cover object-center transition-transform duration-700 ease-out-soft hover:scale-[1.045]"
                   loading="eager"
-                  src="/my-image.png"
+                  src={PUBLIC_THEME_CONFIG.crayon.hero.artSrc}
                 />
               </div>
             </div>
 
             <div className="hero-portrait-note absolute bottom-0 left-1 inline-flex min-h-10 max-w-[12rem] items-center gap-2 rounded-2xl border-2 border-ink bg-yellow px-3 py-2 font-hand text-sm text-ink shadow-crayon-sm rotate-[-4deg] sm:left-0 sm:max-w-none sm:px-4 sm:text-base">
               <span className="size-[0.9rem] shrink-0 rounded-full border-2 border-ink bg-peach shadow-[inset_-1px_-2px_0_rgba(46,61,58,0.18)]" />
-              <span>illustrated, still me</span>
+              <span>{PUBLIC_THEME_CONFIG.crayon.hero.note}</span>
             </div>
 
             <div
@@ -73,22 +77,22 @@ export function Hero() {
         <div className="order-1 relative flex max-w-[42rem] flex-col justify-center py-2 sm:py-4 md:max-w-[46rem] lg:max-w-[47.5rem]">
           <div
             className="hero-copy-item type-kicker mb-2 flex flex-wrap items-center gap-3 md:mb-3"
-            style={{ ["--hero-delay" as string]: "40ms" }}
+            style={{ ['--hero-delay' as string]: '40ms' }}
           >
             <span className="inline-flex items-center gap-2.5 text-ink-soft">
               <span className="h-0.5 w-7 rounded-full bg-peach/90 md:w-9" />
               <span className="font-hand text-[1rem] tracking-[0.03em] text-ink-soft/95">
-                say hello to
+                {PUBLIC_THEME_CONFIG.crayon.hero.intro}
               </span>
             </span>
           </div>
 
           <h1
             className="type-display-hero hero-copy-item relative mb-[1.125rem] mt-1 block"
-            style={{ ["--hero-delay" as string]: "90ms" }}
+            style={{ ['--hero-delay' as string]: '90ms' }}
           >
             <span className="relative inline-block">
-              Bipul
+              {PUBLIC_THEME_CONFIG.crayon.hero.title}
               <span className="hero-scribble pointer-events-none absolute bottom-[-0.625rem] left-[-0.625rem] h-8 w-[calc(100%+1.25rem)]">
                 <HeroScribble color="var(--color-peach)" />
               </span>
@@ -97,39 +101,39 @@ export function Hero() {
 
           <div
             className="type-lead-hand hero-copy-item mb-[1.125rem] max-w-[35rem] lg:max-w-[32.5rem]"
-            style={{ ["--hero-delay" as string]: "140ms" }}
+            style={{ ['--hero-delay' as string]: '140ms' }}
           >
-            A{" "}
+            A{' '}
             <span className="mx-0.5 inline-block whitespace-nowrap rounded-[1.25rem] border-[1.5px] border-ink bg-mint px-3 py-px shadow-[2px_2px_0_var(--color-ink)] rotate-[-1.2deg]">
-              software engineer
-            </span>{" "}
+              {PUBLIC_THEME_CONFIG.crayon.hero.support}
+            </span>{' '}
             crafting calm, considered software one careful detail at a time.
           </div>
 
           <div
             className="hero-copy-item flex flex-wrap items-center gap-3.5"
-            style={{ ["--hero-delay" as string]: "240ms" }}
+            style={{ ['--hero-delay' as string]: '240ms' }}
           >
             <a
-              className={crayonButtonClass("yellow", {
-                className: "w-full justify-center sm:w-auto",
+              className={crayonButtonClass('yellow', {
+                className: 'w-full justify-center sm:w-auto',
               })}
               href="/#projects"
             >
-              See selected work →
+              {PUBLIC_THEME_CONFIG.crayon.hero.ctaPrimary}
             </a>
             <a
-              className={crayonButtonClass("yellow", {
-                className: "w-full justify-center sm:w-auto",
+              className={crayonButtonClass('yellow', {
+                className: 'w-full justify-center sm:w-auto',
                 ghost: true,
               })}
               href="/#contact"
             >
-              Start a conversation
+              {PUBLIC_THEME_CONFIG.crayon.hero.ctaSecondary}
             </a>
           </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

@@ -11,6 +11,7 @@ import appCss from '~/styles/app.css?url'
 import { AppProviders } from '~/components/app/app-providers'
 import { DefaultCatchBoundary } from '~/components/errors/default-catch-boundary'
 import { NotFound } from '~/components/errors/not-found'
+import { DEFAULT_PUBLIC_THEME, PUBLIC_THEME_BOOTSTRAP_SCRIPT } from '~/components/public/public-theme'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -44,6 +45,10 @@ export const Route = createRootRoute({
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap',
       },
+      {
+        rel: 'stylesheet',
+        href: 'https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@400,500,700,900&display=swap',
+      },
     ],
   }),
   errorComponent: DefaultCatchBoundary,
@@ -62,8 +67,9 @@ function RootApp() {
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en">
+    <html data-public-theme={DEFAULT_PUBLIC_THEME} lang="en">
       <head>
+        <script dangerouslySetInnerHTML={{ __html: PUBLIC_THEME_BOOTSTRAP_SCRIPT }} />
         <HeadContent />
       </head>
       <body>

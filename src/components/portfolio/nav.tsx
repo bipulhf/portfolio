@@ -1,49 +1,61 @@
-import { useEffect, useId, useState } from "react";
-import { ScribbleUnder, Squiggle, Star } from "./doodles";
-import { NAV_LINKS } from "./lib/content";
-import { cx, pageContainerClass } from "./lib/styles";
+import { useEffect, useId, useState } from 'react'
+import { ThemeToggle } from '~/components/public/theme-toggle'
+import { PUBLIC_THEME_CONFIG } from '~/components/public/public-theme'
+import { MinimalNav } from '~/components/public/minimal-nav'
+import { ScribbleUnder, Squiggle, Star } from './doodles'
+import { cx, pageContainerClass } from './lib/styles'
 
 const navLinkTones = [
-  "hover:bg-yellow/45",
-  "hover:bg-mint/45",
-  "hover:bg-peach/45",
-  "hover:bg-sky/45",
-  "hover:bg-pink/45",
-  "hover:bg-lilac/50",
-] as const;
+  'hover:bg-yellow/45',
+  'hover:bg-mint/45',
+  'hover:bg-peach/45',
+  'hover:bg-sky/45',
+  'hover:bg-pink/45',
+  'hover:bg-lilac/50',
+] as const
 
 export function Nav() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const mobileMenuId = useId();
+  return (
+    <>
+      <CrayonNav />
+      <MinimalNav />
+    </>
+  )
+}
+
+function CrayonNav() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const mobileMenuId = useId()
+  const nav = PUBLIC_THEME_CONFIG.crayon.nav
 
   useEffect(() => {
     function handleEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setMenuOpen(false);
+      if (event.key === 'Escape') {
+        setMenuOpen(false)
       }
     }
 
     function handleResize() {
       if (window.innerWidth >= 1280) {
-        setMenuOpen(false);
+        setMenuOpen(false)
       }
     }
 
-    window.addEventListener("keydown", handleEscape);
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('keydown', handleEscape)
+    window.addEventListener('resize', handleResize)
 
     return () => {
-      window.removeEventListener("keydown", handleEscape);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+      window.removeEventListener('keydown', handleEscape)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   function closeMenu() {
-    setMenuOpen(false);
+    setMenuOpen(false)
   }
 
   return (
-    <nav className="sticky top-0 z-50 pt-2 sm:pt-3 md:pt-5">
+    <nav className="theme-only-crayon sticky top-0 z-50 pt-2 sm:pt-3 md:pt-5">
       <div className={pageContainerClass}>
         <div
           className={cx(
@@ -58,16 +70,16 @@ export function Nav() {
               href="/"
             >
               <img
-                alt="Bipul logo"
+                alt={nav.logoAlt}
                 className="size-[2.45rem] rounded-[0.95rem] border-2 border-ink bg-white object-contain p-1 shadow-[3px_3px_0_var(--color-ink)] sm:size-[2.7rem] md:size-[3rem]"
-                src="/logo.png"
+                src={nav.logoSrc}
               />
               <span className="flex min-w-0 flex-col leading-none">
                 <span className="font-display text-[1.58rem] font-bold leading-[0.92] tracking-[-0.012em] sm:text-[1.8rem] md:text-[2.2rem]">
-                  Bipul
+                  {nav.title}
                 </span>
                 <span className="mt-0.5 hidden font-hand text-[0.92rem] leading-[1.1] tracking-[0.035em] text-ink-soft md:inline">
-                  software engineer
+                  {nav.subtitle}
                 </span>
               </span>
             </a>
@@ -76,11 +88,11 @@ export function Nav() {
               className="nav-items-intro ml-auto hidden items-center gap-2 rounded-full border-2 border-ink/12 bg-white/45 p-[0.35rem] xl:flex"
               role="navigation"
             >
-              {NAV_LINKS.map((link, index) => (
+              {nav.links.map((link, index) => (
                 <a
                   className={cx(
-                    "group relative inline-flex min-h-11 items-center justify-center rounded-full px-[0.95rem] py-[0.55rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline transition-[transform,background-color,box-shadow,color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]",
-                    navLinkTones[index],
+                    'group relative inline-flex min-h-11 items-center justify-center rounded-full px-[0.95rem] py-[0.55rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline transition-[transform,background-color,box-shadow,color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]',
+                    navLinkTones[index % navLinkTones.length],
                   )}
                   href={link.href}
                   key={link.href}
@@ -93,12 +105,14 @@ export function Nav() {
               ))}
             </div>
 
+            <ThemeToggle className="nav-items-intro hidden xl:flex" />
+
             <a
               className="nav-items-intro hidden min-h-11 items-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.7))] px-4 py-[0.65rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[3px_3px_0_var(--color-ink)] transition-[transform,box-shadow,background-color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[1deg] hover:shadow-[4px_4px_0_var(--color-ink)] xl:inline-flex"
-              href="/#contact"
+              href={nav.ctaHref}
             >
               <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-mint ring-[0.15rem] ring-mint/30" />
-              Available for collaborations
+              {nav.ctaLabel}
             </a>
 
             <button
@@ -145,12 +159,13 @@ export function Nav() {
             id={mobileMenuId}
           >
             <div className="rounded-[1rem] border-2 border-ink/12 bg-paper/70 p-2.5 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]">
+              <ThemeToggle className="mb-2 flex w-full" />
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                {NAV_LINKS.map((link, index) => (
+                {nav.links.map((link, index) => (
                   <a
                     className={cx(
-                      "inline-flex min-h-11 items-center justify-center rounded-full border-2 border-ink/15 bg-white/65 px-3 py-[0.65rem] text-center font-hand text-[0.96rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[0.12rem_0.12rem_0_rgba(46,61,58,0.18)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]",
-                      navLinkTones[index],
+                      'inline-flex min-h-11 items-center justify-center rounded-full border-2 border-ink/15 bg-white/65 px-3 py-[0.65rem] text-center font-hand text-[0.96rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[0.12rem_0.12rem_0_rgba(46,61,58,0.18)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]',
+                      navLinkTones[index % navLinkTones.length],
                     )}
                     href={link.href}
                     key={link.href}
@@ -163,11 +178,11 @@ export function Nav() {
 
               <a
                 className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.76))] px-4 py-[0.7rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[2px_2px_0_var(--color-ink)] transition-[transform,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:shadow-[3px_3px_0_var(--color-ink)]"
-                href="/#contact"
+                href={nav.ctaHref}
                 onClick={closeMenu}
               >
                 <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-mint ring-[0.15rem] ring-mint/30" />
-                Available for collaborations
+                {nav.ctaLabel}
               </a>
             </div>
           </div>
@@ -187,5 +202,5 @@ export function Nav() {
         </div>
       </div>
     </nav>
-  );
+  )
 }

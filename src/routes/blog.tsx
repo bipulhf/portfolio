@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { CrayonGridPending, CrayonPendingPage } from '~/components/loaders/crayon-pending'
 import { pageContainerClass } from '~/components/portfolio/lib/styles'
 import { BlogGrid } from '~/components/public/blog-grid'
+import { usePublicThemePageMeta } from '~/components/public/public-theme'
 import { PageHero, PageHeroActions } from '~/components/public/page-hero'
 import { SiteShell } from '~/components/public/site-shell'
 import { listPublishedBlogsFn } from '~/lib/server-fns/content'
@@ -31,21 +32,21 @@ export const Route = createFileRoute('/blog')({
 
 function BlogPage() {
   const posts = Route.useLoaderData()
+  usePublicThemePageMeta('blog')
 
   return (
     <SiteShell>
       <PageHero
+        page="blog"
         actions={
           <PageHeroActions
+            page="blog"
             primaryLabel="Back to home"
             primaryTo="/"
             secondaryLabel="See projects"
             secondaryTo="/projects"
           />
         }
-        description="Writing about product engineering, frontend craft, and the thinking behind the work."
-        eyebrow="Writing"
-        title="Blog and essays"
       />
       <section className={`${pageContainerClass} py-10 md:py-12 lg:py-16`}>
         <BlogGrid items={posts} />

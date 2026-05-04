@@ -1,15 +1,15 @@
-import { pageContainerClass } from "./lib/styles";
+import { MinimalFooter } from '~/components/public/minimal-footer'
+import { pageContainerClass } from './lib/styles'
 
 export function Footer() {
   return (
-    <footer
-      className={`${pageContainerClass} pb-12 pt-8 text-center font-hand text-base text-ink-soft`}
-    >
-      Made with{" "}
-      <span className="inline-block text-peach drop-shadow-[1px_1px_0_var(--color-ink)]">
-        ♥
-      </span>{" "}
-      and a box of crayons - © {new Date().getFullYear()} Bipul Hf
-    </footer>
-  );
+    <>
+      <footer
+        className={`${pageContainerClass} theme-only-crayon pb-12 pt-8 text-center font-hand text-base text-ink-soft`}
+      >
+        Made with a box of crayons and careful thinking. © {new Date().getFullYear()} Bipul Hf
+      </footer>
+      <MinimalFooter />
+    </>
+  )
 }

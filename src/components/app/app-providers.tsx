@@ -1,11 +1,6 @@
 import type { ReactNode } from 'react'
-import { RouteProgress } from '~/components/loaders/route-progress'
+import { PublicThemeProvider } from '~/components/public/public-theme'
 
 export function AppProviders({ children }: Readonly<{ children: ReactNode }>) {
-  return (
-    <>
-      <RouteProgress />
-      {children}
-    </>
-  )
+  return <PublicThemeProvider>{children}</PublicThemeProvider>
 }

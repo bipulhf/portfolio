@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { CrayonGridPending, CrayonPendingPage } from '~/components/loaders/crayon-pending'
 import { pageContainerClass } from '~/components/portfolio/lib/styles'
+import { usePublicThemePageMeta } from '~/components/public/public-theme'
 import { PageHero, PageHeroActions } from '~/components/public/page-hero'
 import { ProjectGrid } from '~/components/public/project-grid'
 import { SiteShell } from '~/components/public/site-shell'
@@ -31,21 +32,21 @@ export const Route = createFileRoute('/projects')({
 
 function ProjectsPage() {
   const projects = Route.useLoaderData()
+  usePublicThemePageMeta('projects')
 
   return (
     <SiteShell>
       <PageHero
+        page="projects"
         actions={
           <PageHeroActions
+            page="projects"
             primaryLabel="Back to home"
             primaryTo="/"
             secondaryLabel="Read the blog"
             secondaryTo="/blog"
           />
         }
-        description="Selected case studies, engineering decisions, and the small details that shaped each build."
-        eyebrow="Selected work"
-        title="Projects and case studies"
       />
       <section className={`${pageContainerClass} py-10 md:py-12 lg:py-16`}>
         <ProjectGrid items={projects} />

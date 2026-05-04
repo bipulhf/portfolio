@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { Link, useLocation, useNavigate } from '@tanstack/react-router'
 import { toast } from 'sonner'
 import { useAdminSession, useLogoutMutation } from '~/lib/admin-queries'
+import { RouteProgress } from '~/components/loaders/route-progress'
 import { pageContainerClass } from '~/components/portfolio/lib/styles'
 
 const links = [
@@ -26,6 +27,7 @@ export function AdminShell({
 
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#f8fcfb_0%,#f1f8f7_100%)] pb-14">
+      <RouteProgress />
       <div className={pageContainerClass}>
         <div className="py-5 md:py-6">
           <div className="sticky top-2 z-40 rounded-[1.2rem] border border-ink/10 bg-white/88 px-3.5 py-3.5 shadow-[0_10px_30px_rgba(46,61,58,0.08)] backdrop-blur-sm sm:top-3 sm:px-4 md:px-5 md:py-4">
