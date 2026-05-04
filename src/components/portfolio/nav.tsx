@@ -1,17 +1,17 @@
-import { useEffect, useId, useState } from 'react'
-import { PUBLIC_THEME_CONFIG } from '~/components/public/public-theme'
-import { MinimalNav } from '~/components/public/minimal-nav'
-import { ScribbleUnder, Squiggle, Star } from './doodles'
-import { cx, pageContainerClass } from './lib/styles'
+import { useEffect, useId, useState } from "react";
+import { PUBLIC_THEME_CONFIG } from "~/components/public/public-theme";
+import { MinimalNav } from "~/components/public/minimal-nav";
+import { ScribbleUnder, Squiggle, Star } from "./doodles";
+import { cx, pageContainerClass } from "./lib/styles";
 
 const navLinkTones = [
-  'hover:bg-yellow/45',
-  'hover:bg-mint/45',
-  'hover:bg-peach/45',
-  'hover:bg-sky/45',
-  'hover:bg-pink/45',
-  'hover:bg-lilac/50',
-] as const
+  "hover:bg-yellow/45",
+  "hover:bg-mint/45",
+  "hover:bg-peach/45",
+  "hover:bg-sky/45",
+  "hover:bg-pink/45",
+  "hover:bg-lilac/50",
+] as const;
 
 export function Nav() {
   return (
@@ -19,38 +19,38 @@ export function Nav() {
       <CrayonNav />
       <MinimalNav />
     </>
-  )
+  );
 }
 
 function CrayonNav() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const mobileMenuId = useId()
-  const nav = PUBLIC_THEME_CONFIG.crayon.nav
+  const [menuOpen, setMenuOpen] = useState(false);
+  const mobileMenuId = useId();
+  const nav = PUBLIC_THEME_CONFIG.crayon.nav;
 
   useEffect(() => {
     function handleEscape(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
-        setMenuOpen(false)
+      if (event.key === "Escape") {
+        setMenuOpen(false);
       }
     }
 
     function handleResize() {
       if (window.innerWidth >= 1280) {
-        setMenuOpen(false)
+        setMenuOpen(false);
       }
     }
 
-    window.addEventListener('keydown', handleEscape)
-    window.addEventListener('resize', handleResize)
+    window.addEventListener("keydown", handleEscape);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('keydown', handleEscape)
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
+      window.removeEventListener("keydown", handleEscape);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   function closeMenu() {
-    setMenuOpen(false)
+    setMenuOpen(false);
   }
 
   return (
@@ -68,11 +68,6 @@ function CrayonNav() {
               className="nav-brand-intro inline-flex min-w-0 flex-1 items-center gap-2 no-underline md:gap-3.5"
               href="/"
             >
-              <img
-                alt={nav.logoAlt}
-                className="size-[2.45rem] rounded-[0.95rem] border-2 border-ink bg-white object-contain p-1 shadow-[3px_3px_0_var(--color-ink)] sm:size-[2.7rem] md:size-[3rem]"
-                src={nav.logoSrc}
-              />
               <span className="flex min-w-0 flex-col leading-none">
                 <span className="font-display text-[1.58rem] font-bold leading-[0.92] tracking-[-0.012em] sm:text-[1.8rem] md:text-[2.2rem]">
                   {nav.title}
@@ -90,7 +85,7 @@ function CrayonNav() {
               {nav.links.map((link, index) => (
                 <a
                   className={cx(
-                    'group relative inline-flex min-h-11 items-center justify-center rounded-full px-[0.95rem] py-[0.55rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline transition-[transform,background-color,box-shadow,color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]',
+                    "group relative inline-flex min-h-11 items-center justify-center rounded-full px-[0.95rem] py-[0.55rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline transition-[transform,background-color,box-shadow,color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]",
                     navLinkTones[index % navLinkTones.length],
                   )}
                   href={link.href}
@@ -160,7 +155,7 @@ function CrayonNav() {
                 {nav.links.map((link, index) => (
                   <a
                     className={cx(
-                      'inline-flex min-h-11 items-center justify-center rounded-full border-2 border-ink/15 bg-white/65 px-3 py-[0.65rem] text-center font-hand text-[0.96rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[0.12rem_0.12rem_0_rgba(46,61,58,0.18)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]',
+                      "inline-flex min-h-11 items-center justify-center rounded-full border-2 border-ink/15 bg-white/65 px-3 py-[0.65rem] text-center font-hand text-[0.96rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[0.12rem_0.12rem_0_rgba(46,61,58,0.18)] transition-[transform,background-color,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[-1deg]",
                       navLinkTones[index % navLinkTones.length],
                     )}
                     href={link.href}
@@ -198,5 +193,5 @@ function CrayonNav() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

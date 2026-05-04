@@ -45,8 +45,8 @@ export function useReveal(deps: any[] = []) {
         })
       },
       {
-        threshold: 0.12,
-        rootMargin: '0px 0px -8% 0px',
+        threshold: 0.01,
+        rootMargin: '0px 0px 200px 0px',
       },
     )
 

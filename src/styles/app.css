@@ -95,6 +95,22 @@
     z-index: 0;
   }
 
+  html[data-public-theme-transition='true'] .public-site > :not(.public-theme-toggle-rail) {
+    animation: public-theme-soft-enter 420ms var(--ease-out-soft);
+  }
+
+  @keyframes public-theme-soft-enter {
+    0% {
+      opacity: 0.76;
+      transform: translateY(0.4rem);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   a,
   button,
   input,
@@ -213,7 +229,9 @@
   }
 
   .public-theme-toggle {
-    display: inline-flex;
+    position: relative;
+    display: inline-grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: center;
     gap: 0.25rem;
     border: 1.5px solid rgb(46 61 58 / 0.12);
@@ -221,9 +239,42 @@
     padding: 0.28rem;
     background: rgb(255 255 255 / 0.62);
     box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.58);
+    overflow: hidden;
+    transition:
+      background-color 220ms var(--ease-out-soft),
+      border-color 220ms var(--ease-out-soft),
+      box-shadow 220ms var(--ease-out-soft),
+      transform 220ms var(--ease-out-soft);
+  }
+
+  .public-theme-toggle.is-switching {
+    transform: translateY(-1px) scale(0.985);
+  }
+
+  .public-theme-toggle__thumb {
+    position: absolute;
+    top: 0.28rem;
+    bottom: 0.28rem;
+    left: 0.28rem;
+    width: calc(50% - 0.405rem);
+    border-radius: 999px;
+    background: var(--color-paper);
+    box-shadow: 2px 2px 0 rgb(46 61 58 / 0.14);
+    pointer-events: none;
+    transition:
+      transform 320ms var(--ease-out-soft),
+      background-color 220ms var(--ease-out-soft),
+      box-shadow 220ms var(--ease-out-soft),
+      opacity 220ms var(--ease-out-soft);
+  }
+
+  .public-theme-toggle__thumb.is-minimal {
+    transform: translateX(calc(100% + 0.25rem));
   }
 
   .public-theme-toggle__button {
+    position: relative;
+    z-index: 1;
     border: 0;
     border-radius: 999px;
     background: transparent;
@@ -244,9 +295,9 @@
   }
 
   .public-theme-toggle__button.is-active {
-    background: var(--color-paper);
+    background: transparent;
     color: var(--color-ink);
-    box-shadow: 2px 2px 0 rgb(46 61 58 / 0.14);
+    box-shadow: none;
   }
 
   .public-theme-toggle-rail {
@@ -853,10 +904,13 @@
     color: rgb(22 22 22 / 0.76);
   }
 
-  [data-public-theme='minimal'] .public-theme-toggle__button.is-active {
+  [data-public-theme='minimal'] .public-theme-toggle__thumb {
     background: var(--color-yellow);
-    color: var(--color-ink);
     box-shadow: none;
+  }
+
+  [data-public-theme='minimal'] .public-theme-toggle__button.is-active {
+    color: var(--color-ink);
   }
 
   [data-public-theme='minimal'] .public-theme-toggle-dock .public-theme-toggle {

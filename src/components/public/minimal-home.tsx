@@ -24,7 +24,7 @@ export function MinimalHome({
   const charcoalFaint = 'text-[#3a342e]/46'
 
   return (
-    <main className="theme-only-minimal minimal-stack-sections pb-10 pt-0 md:pb-12" data-reveal-sequence>
+    <main className="theme-only-minimal minimal-stack-sections pb-10 pt-0 md:pb-12" data-reveal-sequence data-reveal-step="40">
       <section className={`${pageContainerClass} minimal-stack-item`} data-reveal-item id="about">
         <div className="coding-border minimal-stack-shell overflow-hidden rounded-xl">
           <div className={`flex items-center justify-between border-b border-[#3a342e]/8 px-6 py-4 text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>

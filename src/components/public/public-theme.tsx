@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react'
 
@@ -85,6 +86,7 @@ declare global {
 
 export const DEFAULT_PUBLIC_THEME: PublicTheme = 'crayon'
 export const PUBLIC_THEME_STORAGE_KEY = 'portfolio-public-theme'
+const PUBLIC_THEME_TRANSITION_MS = 420
 
 export const PUBLIC_THEME_CONFIG: Record<PublicTheme, PublicThemeConfig> = {
   crayon: {
@@ -271,6 +273,14 @@ function applyThemeToDocument(theme: PublicTheme) {
   window.__PUBLIC_THEME__ = theme
 }
 
+function clearThemeTransitionState() {
+  delete document.documentElement.dataset.publicThemeTransition
+}
+
+function shouldAnimateThemeTransition() {
+  return typeof window !== 'undefined' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
 export const PUBLIC_THEME_BOOTSTRAP_SCRIPT = `(() => {
   const key = '${PUBLIC_THEME_STORAGE_KEY}';
   const fallback = '${DEFAULT_PUBLIC_THEME}';
@@ -295,6 +305,7 @@ export function PublicThemeProvider({
   children: ReactNode
 }>) {
   const [theme, setThemeState] = useState<PublicTheme>(DEFAULT_PUBLIC_THEME)
+  const themeTransitionTimeoutRef = useRef<number | null>(null)
 
   useEffect(() => {
     const nextTheme = getBrowserTheme()
@@ -311,14 +322,52 @@ export function PublicThemeProvider({
     }
 
     window.addEventListener('storage', handleStorage)
-    return () => window.removeEventListener('storage', handleStorage)
+    return () => {
+      window.removeEventListener('storage', handleStorage)
+
+      if (themeTransitionTimeoutRef.current !== null) {
+        window.clearTimeout(themeTransitionTimeoutRef.current)
+      }
+
+      clearThemeTransitionState()
+    }
   }, [])
+
+  function updateTheme(nextTheme: PublicTheme, options?: { animate?: boolean }) {
+    const shouldAnimate = options?.animate === true && shouldAnimateThemeTransition()
+
+    if (themeTransitionTimeoutRef.current !== null) {
+      window.clearTimeout(themeTransitionTimeoutRef.current)
+      themeTransitionTimeoutRef.current = null
+    }
+
+    if (shouldAnimate) {
+      clearThemeTransitionState()
+      void document.documentElement.offsetWidth
+      document.documentElement.dataset.publicThemeTransition = 'true'
+    } else {
+      clearThemeTransitionState()
+    }
+
+    setThemeState(nextTheme)
+    applyThemeToDocument(nextTheme)
+
+    if (shouldAnimate) {
+      themeTransitionTimeoutRef.current = window.setTimeout(() => {
+        clearThemeTransitionState()
+        themeTransitionTimeoutRef.current = null
+      }, PUBLIC_THEME_TRANSITION_MS)
+    }
+  }
 
   const value = useMemo<PublicThemeContextValue>(
     () => ({
       setTheme: (nextTheme) => {
-        setThemeState(nextTheme)
-        applyThemeToDocument(nextTheme)
+        if (nextTheme === theme) {
+          return
+        }
+
+        updateTheme(nextTheme, { animate: true })
 
         try {
           window.localStorage.setItem(PUBLIC_THEME_STORAGE_KEY, nextTheme)
@@ -329,8 +378,7 @@ export function PublicThemeProvider({
       theme,
       toggleTheme: () => {
         const nextTheme = theme === 'crayon' ? 'minimal' : 'crayon'
-        setThemeState(nextTheme)
-        applyThemeToDocument(nextTheme)
+        updateTheme(nextTheme, { animate: true })
 
         try {
           window.localStorage.setItem(PUBLIC_THEME_STORAGE_KEY, nextTheme)
