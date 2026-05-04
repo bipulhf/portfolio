@@ -250,16 +250,16 @@
   }
 
   .public-theme-toggle-rail {
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: auto;
-    bottom: 1rem;
-    z-index: 60;
-    display: flex;
-    justify-content: center;
-    padding-bottom: env(safe-area-inset-bottom);
-    pointer-events: none;
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    bottom: 1rem !important;
+    z-index: 60 !important;
+    display: flex !important;
+    justify-content: center !important;
+    padding-bottom: env(safe-area-inset-bottom) !important;
+    pointer-events: none !important;
   }
 
   .public-theme-toggle-dock {
@@ -277,13 +277,13 @@
 
   @media (min-width: 48rem) {
     .public-theme-toggle-rail {
-      left: auto;
-      right: 0;
-      top: auto;
-      bottom: 1.25rem;
-      width: auto;
-      justify-content: flex-end;
-      padding-right: 1.25rem;
+      left: auto !important;
+      right: 0 !important;
+      top: auto !important;
+      bottom: 1.25rem !important;
+      width: auto !important;
+      justify-content: flex-end !important;
+      padding-right: 1.25rem !important;
     }
   }
 
