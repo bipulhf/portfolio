@@ -4,6 +4,7 @@ import { BackgroundDoodles } from "~/components/portfolio/background-doodles";
 import { Footer } from "~/components/portfolio/footer";
 import { useReveal } from "~/components/portfolio/hooks/use-reveal";
 import { MinimalAmbientGeometry } from "~/components/public/minimal-ambient-geometry";
+import { MinimalEngineeringBackdrop } from "~/components/public/minimal-engineering-backdrop";
 import { Nav } from "~/components/portfolio/nav";
 import { FloatingThemeToggle } from "~/components/public/floating-theme-toggle";
 import { usePublicTheme } from "~/components/public/public-theme";
@@ -16,6 +17,7 @@ export function SiteShell({ children }: Readonly<{ children: ReactNode }>) {
     <div className="public-site relative isolate z-[1] min-h-screen overflow-x-clip">
       <div aria-hidden="true" className="public-site-theme-layer" />
       {theme === "minimal" ? <MinimalAmbientGeometry /> : null}
+      {theme === "minimal" ? <MinimalEngineeringBackdrop /> : null}
       <RouteProgress />
       <BackgroundDoodles />
       <Nav />

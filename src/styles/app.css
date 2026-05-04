@@ -784,7 +784,128 @@
     overflow: hidden;
   }
 
-  [data-public-theme='minimal'] .public-site > :not(.public-site-theme-layer):not(.minimal-ambient-geometry) {
+  [data-public-theme='minimal'] .minimal-engineering-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    mix-blend-mode: multiply;
+    opacity: 0.34;
+    mask-image: radial-gradient(circle at center, black 32%, rgb(0 0 0 / 0.42) 68%, transparent 96%);
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgb(21 18 15 / 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(21 18 15 / 0.018) 1px, transparent 1px);
+    background-size: 3.4rem 3.4rem;
+    mask-image: radial-gradient(circle at center, black 28%, transparent 82%);
+    opacity: 0.34;
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-orbit {
+    position: absolute;
+    width: 26rem;
+    height: 26rem;
+    border-radius: 999px;
+    border: 1px solid rgb(21 18 15 / 0.045);
+    background:
+      radial-gradient(circle at center, rgb(21 18 15 / 0.035), transparent 68%),
+      linear-gradient(180deg, rgb(21 18 15 / 0.02), transparent 70%);
+    filter: blur(8px);
+    opacity: 0.28;
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-orbit.is-left {
+    top: 10rem;
+    left: -9rem;
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-orbit.is-right {
+    right: -8rem;
+    bottom: 11rem;
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-panel {
+    position: absolute;
+    border: 1px solid rgb(21 18 15 / 0.06);
+    border-radius: 1.2rem;
+    background:
+      linear-gradient(180deg, rgb(21 18 15 / 0.065), rgb(21 18 15 / 0.04)),
+      linear-gradient(135deg, rgb(21 18 15 / 0.04), transparent 56%);
+    box-shadow:
+      0 1.2rem 2.2rem rgb(21 18 15 / 0.025),
+      inset 0 1px 0 rgb(255 255 255 / 0.04);
+    color: rgb(21 18 15 / 0.18);
+    backdrop-filter: blur(0.8px);
+    opacity: 0.52;
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-panel.is-route-map {
+    display: none;
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-panel.is-terminal {
+    top: 34rem;
+    left: -1rem;
+    width: min(19rem, 24vw);
+    transform: rotate(-5deg);
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-panel.is-schema {
+    right: 3%;
+    bottom: 13rem;
+    width: min(18rem, 22vw);
+    transform: rotate(-3deg);
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-panel.is-commit {
+    display: none;
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-panel__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.42rem;
+    padding: 0.7rem 0.9rem;
+    border-bottom: 1px solid rgb(21 18 15 / 0.045);
+    font-family: var(--minimal-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-panel__bar span {
+    width: 0.46rem;
+    height: 0.46rem;
+    border-radius: 999px;
+    background: rgb(21 18 15 / 0.12);
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-panel__bar strong {
+    margin-left: 0.28rem;
+    font-weight: 500;
+    opacity: 0.72;
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-panel__code {
+    margin: 0;
+    padding: 1rem 1rem 1.05rem;
+    font-family: var(--minimal-mono);
+    font-size: 0.74rem;
+    line-height: 1.72;
+    white-space: pre-wrap;
+    opacity: 0.7;
+  }
+
+  [data-public-theme='minimal'] .minimal-engineering-panel__code span {
+    display: block;
+  }
+
+  [data-public-theme='minimal'] .public-site > :not(.public-site-theme-layer):not(.minimal-ambient-geometry):not(.minimal-engineering-backdrop) {
     position: relative;
     z-index: 1;
   }
@@ -836,6 +957,18 @@
   @media (max-width: 48rem) {
     [data-public-theme='minimal'] .minimal-ambient-shape:nth-child(3n) {
       display: none;
+    }
+
+    [data-public-theme='minimal'] .minimal-engineering-panel.is-terminal {
+      top: 27rem;
+      left: -4rem;
+      width: min(15rem, 62vw);
+    }
+
+    [data-public-theme='minimal'] .minimal-engineering-panel.is-schema {
+      right: -3rem;
+      bottom: 7rem;
+      width: min(14rem, 56vw);
     }
   }
 
