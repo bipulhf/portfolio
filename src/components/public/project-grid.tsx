@@ -1,10 +1,28 @@
-import { Link } from '@tanstack/react-router'
-import { Cloud, Flower, Heart, Spiral, Star, Sun } from '~/components/portfolio/doodles'
-import { cx, surfaceCardClass } from '~/components/portfolio/lib/styles'
-import type { SerializedProject } from '~/lib/content/types'
+import { Link } from "@tanstack/react-router";
+import {
+  Cloud,
+  Flower,
+  Heart,
+  Spiral,
+  Star,
+  Sun,
+} from "~/components/portfolio/doodles";
+import { cx, surfaceCardClass } from "~/components/portfolio/lib/styles";
+import type { SerializedProject } from "~/lib/content/types";
 
-const coverColors = ['bg-mint', 'bg-peach', 'bg-sky', 'bg-yellow', 'bg-pink', 'bg-lilac'] as const
-const cardRotations = ['rotate-[-1deg]', 'rotate-[1deg]', 'rotate-[0.5deg]'] as const
+const coverColors = [
+  "bg-mint",
+  "bg-peach",
+  "bg-sky",
+  "bg-yellow",
+  "bg-pink",
+  "bg-lilac",
+] as const;
+const cardRotations = [
+  "rotate-[-1deg]",
+  "rotate-[1deg]",
+  "rotate-[0.5deg]",
+] as const;
 
 function ProjectCover({ index }: Readonly<{ index: number }>) {
   const covers = [
@@ -14,30 +32,37 @@ function ProjectCover({ index }: Readonly<{ index: number }>) {
     <Star color="#fff" key="star" size={88} />,
     <Heart color="#fff" key="heart" size={78} />,
     <Spiral color="#3d3a2e" key="spiral" size={78} />,
-  ]
+  ];
 
-  return covers[index % covers.length]
+  return covers[index % covers.length];
 }
 
 export function ProjectGrid({
-  emptyTitle = 'No published projects yet',
-  emptyText = 'New case studies will appear here once they are published.',
+  emptyTitle = "No published projects yet",
+  emptyText = "",
   items,
 }: Readonly<{
-  emptyText?: string
-  emptyTitle?: string
-  items: SerializedProject[]
+  emptyText?: string;
+  emptyTitle?: string;
+  items: SerializedProject[];
 }>) {
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8" data-reveal-sequence>
+    <div
+      className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
+      data-reveal-sequence
+    >
       {items.length ? (
         items.map((project, index) => (
           <article
             className={cx(
               cardRotations[index % cardRotations.length],
               surfaceCardClass,
-              index % 3 === 0 ? 'reveal-left' : index % 3 === 1 ? 'reveal-pop' : 'reveal-right',
-              'group overflow-hidden rounded-[1.25rem_1.5rem_1.125rem_1.625rem/1.5rem_1.125rem_1.625rem_1.25rem] border-[2.5px] border-ink shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]',
+              index % 3 === 0
+                ? "reveal-left"
+                : index % 3 === 1
+                  ? "reveal-pop"
+                  : "reveal-right",
+              "group overflow-hidden rounded-[1.25rem_1.5rem_1.125rem_1.625rem/1.5rem_1.125rem_1.625rem_1.25rem] border-[2.5px] border-ink shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]",
             )}
             data-reveal-item
             key={project.id}
@@ -45,7 +70,7 @@ export function ProjectGrid({
             <div
               className={cx(
                 coverColors[index % coverColors.length],
-                'relative flex min-h-32 items-center justify-center border-b-2 border-ink sm:min-h-40',
+                "relative flex min-h-32 items-center justify-center border-b-2 border-ink sm:min-h-40",
               )}
             >
               {project.coverImagePath ? (
@@ -63,16 +88,21 @@ export function ProjectGrid({
             <div className="flex h-full flex-col px-5 pb-5 pt-4 sm:px-[1.375rem] sm:pb-[1.375rem] sm:pt-5">
               <div className="type-meta mb-2 flex flex-wrap items-center gap-2">
                 <span className="inline-flex rounded-full border border-ink/20 bg-white/50 px-2 py-1">
-                  {project.featured ? 'featured' : 'project'}
+                  {project.featured ? "featured" : "project"}
                 </span>
                 {project.publishedAt ? (
-                  <span>{new Intl.DateTimeFormat('en-US', { month: 'short', year: 'numeric' }).format(new Date(project.publishedAt))}</span>
+                  <span>
+                    {new Intl.DateTimeFormat("en-US", {
+                      month: "short",
+                      year: "numeric",
+                    }).format(new Date(project.publishedAt))}
+                  </span>
                 ) : null}
               </div>
-              <h2 className="type-display-card-lg mb-2">
-                {project.title}
-              </h2>
-              <p className="type-copy mb-3.5 flex-1 text-[0.98rem]">{project.summary}</p>
+              <h2 className="type-display-card-lg mb-2">{project.title}</h2>
+              <p className="type-copy mb-3.5 flex-1 text-[0.98rem]">
+                {project.summary}
+              </p>
               <div className="mb-3.5 flex flex-wrap gap-2">
                 {project.techStack.map((tag) => (
                   <span
@@ -117,5 +147,5 @@ export function ProjectGrid({
         </div>
       )}
     </div>
-  )
+  );
 }
