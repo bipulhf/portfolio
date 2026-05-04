@@ -25,7 +25,7 @@ export function MinimalHome({
 
   return (
     <main className="theme-only-minimal minimal-stack-sections pb-10 pt-0 md:pb-12" data-reveal-sequence data-reveal-step="40">
-      <section className={`${pageContainerClass} minimal-stack-item`} data-reveal-item id="about">
+      <section className={`${pageContainerClass} minimal-stack-item minimal-stack-item--static scroll-mt-28 md:scroll-mt-36`} id="about">
         <div className="coding-border minimal-stack-shell overflow-hidden rounded-xl">
           <div className={`flex items-center justify-between border-b border-[#3a342e]/8 px-6 py-4 text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
             <div className="flex items-center gap-3">
@@ -85,14 +85,14 @@ export function MinimalHome({
         </div>
       </section>
 
-      <section className={`${pageContainerClass} minimal-stack-item`} data-reveal-item id="projects">
+      <section className={`${pageContainerClass} minimal-stack-item minimal-stack-item--static scroll-mt-28 md:scroll-mt-36`} data-reveal-item id="projects">
         <div className="coding-border minimal-stack-shell overflow-hidden rounded-xl">
           <div className={`flex items-center justify-between border-b border-[#3a342e]/8 px-6 py-4 text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
             <div className="flex items-center gap-3">
               <MinimalWindowControls />
               <span>/src/projects.ts</span>
             </div>
-            <Link className={`no-underline transition-colors hover:text-[#3a342e] ${charcoalFaint}`} to="/projects">
+            <Link className={`no-underline ${charcoalFaint}`} to="/projects">
               open archive
             </Link>
           </div>
@@ -100,7 +100,7 @@ export function MinimalHome({
             {featuredProjects.length ? (
               featuredProjects.map((project, index) => (
                 <Link
-                  className="group grid gap-3 border-b border-[#3a342e]/8 py-4 no-underline last:border-b-0 md:grid-cols-[7.5rem_minmax(0,1fr)_auto] md:items-start"
+                  className="grid gap-3 border-b border-[#3a342e]/8 py-4 no-underline last:border-b-0 md:grid-cols-[7.5rem_minmax(0,1fr)_auto] md:items-start"
                   key={project.id}
                   params={{ slug: project.slug }}
                   to="/projects/$slug"
@@ -124,7 +124,7 @@ export function MinimalHome({
                     ) : null}
                   </div>
 
-                  <div className={`text-[11px] font-medium [font-family:var(--minimal-mono)] transition-transform group-hover:translate-x-1 ${charcoalStrong}`}>
+                  <div className={`text-[11px] font-medium [font-family:var(--minimal-mono)] ${charcoalStrong}`}>
                     open
                   </div>
                 </Link>
@@ -136,14 +136,14 @@ export function MinimalHome({
         </div>
       </section>
 
-      <section className={`${pageContainerClass} minimal-stack-item`} data-reveal-item id="blog">
+      <section className={`${pageContainerClass} minimal-stack-item minimal-stack-item--static scroll-mt-28 md:scroll-mt-36`} data-reveal-item id="blog">
         <div className="coding-border minimal-stack-shell overflow-hidden rounded-xl">
           <div className={`flex items-center justify-between border-b border-[#3a342e]/8 px-6 py-4 text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
             <div className="flex items-center gap-3">
               <MinimalWindowControls />
               <span>/notes/index.md</span>
             </div>
-            <Link className={`no-underline transition-colors hover:text-[#3a342e] ${charcoalFaint}`} to="/blog">
+            <Link className={`no-underline ${charcoalFaint}`} to="/blog">
               all notes
             </Link>
           </div>
@@ -151,7 +151,7 @@ export function MinimalHome({
             {recentBlogs.length ? (
               recentBlogs.map((blog) => (
                 <Link
-                  className="group grid gap-3 border-b border-[#3a342e]/8 py-4 no-underline last:border-b-0 md:grid-cols-[8rem_minmax(0,1fr)_auto] md:items-start"
+                  className="grid gap-3 border-b border-[#3a342e]/8 py-4 no-underline last:border-b-0 md:grid-cols-[8rem_minmax(0,1fr)_auto] md:items-start"
                   key={blog.id}
                   params={{ slug: blog.slug }}
                   to="/blog/$slug"
@@ -172,7 +172,7 @@ export function MinimalHome({
                     </p>
                   </div>
 
-                  <div className={`text-[11px] font-medium [font-family:var(--minimal-mono)] transition-transform group-hover:translate-x-1 ${charcoalStrong}`}>
+                  <div className={`text-[11px] font-medium [font-family:var(--minimal-mono)] ${charcoalStrong}`}>
                     read
                   </div>
                 </Link>
@@ -184,7 +184,7 @@ export function MinimalHome({
         </div>
       </section>
 
-      <section className={`${pageContainerClass} minimal-stack-item`} data-reveal-item id="contact">
+      <section className={`${pageContainerClass} minimal-stack-item scroll-mt-28 md:scroll-mt-36`} data-reveal-item id="contact">
         <div className="coding-border minimal-stack-shell overflow-hidden rounded-xl">
           <div className={`flex items-center gap-3 border-b border-[#3a342e]/8 px-6 py-4 text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
             <MinimalWindowControls />

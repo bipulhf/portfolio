@@ -211,10 +211,8 @@ export const PUBLIC_THEME_CONFIG: Record<PublicTheme, PublicThemeConfig> = {
       ctaHref: '/#contact',
       ctaLabel: 'Email',
       links: [
-        { href: '/#about', label: 'About' },
         { href: '/#projects', label: 'Work' },
         { href: '/blog', label: 'Notes' },
-        { href: '/#contact', label: 'Contact' },
       ],
       logoAlt: 'Minimal Bipul mark',
       logoSrc: '/minimal-mark.svg',
