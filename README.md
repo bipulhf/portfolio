@@ -39,6 +39,7 @@ The original handoff/prototype is kept in [`my-portfolio/`](./my-portfolio) for 
 
 - Two public presentation modes: crayon and minimal
 - Distinctive portfolio landing page with modular section components
+- Optional Umami Cloud analytics for privacy-first public interaction tracking
 - Admin dashboard for managing projects and blog posts
 - Rich text editing with Lexical for long-form project and blog content
 - Draft and published content states
@@ -92,6 +93,13 @@ SESSION_SECRET=replace-with-a-long-random-secret
 MEDIA_ROOT=./storage/uploads
 PUBLIC_MEDIA_BASE_URL=/media
 SITE_URL=http://localhost:3000
+```
+
+Optional public analytics variables:
+
+```env
+VITE_UMAMI_SCRIPT_URL=https://cloud.umami.is/script.js
+VITE_UMAMI_WEBSITE_ID=your-umami-website-id
 ```
 
 ### 3. Push the database schema
@@ -152,6 +160,12 @@ This setup is intended for a persistent Node/VPS deployment rather than ephemera
   - `/sitemap.xml`
 - Project and blog detail pages remain server-rendered so CMS content can change without a rebuild.
 - Admin routes and admin APIs are configured for `no-store` caching behavior.
+
+## Analytics
+
+If `VITE_UMAMI_SCRIPT_URL` and `VITE_UMAMI_WEBSITE_ID` are set, the public site loads Umami Cloud and tracks a curated set of privacy-first events such as theme switches, nav clicks, hero CTA clicks, project/blog opens, and contact link clicks.
+
+Admin routes are intentionally excluded from this tracking, and no user identifiers, form contents, or sensitive payloads are sent.
 
 ## Design Context
 

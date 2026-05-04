@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Cloud, Flower, Sun } from "~/components/portfolio/doodles";
 import { MinimalBlogGrid } from '~/components/public/minimal-blog-grid'
+import { trackUmamiEvent } from '~/lib/analytics/umami'
 import { surfaceCardClass } from "~/components/portfolio/lib/styles";
 import type { SerializedBlog } from "~/lib/content/types";
 
@@ -53,6 +54,13 @@ export function BlogGrid({
               className={`${surfaceCardClass} blog-card ${index % 2 === 0 ? "reveal-left" : "reveal-right"} group overflow-hidden rounded-[1.375rem] border-[2.5px] border-ink text-ink no-underline shadow-crayon-md hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_var(--color-ink)]`}
               data-reveal-item
               key={post.id}
+              onClick={() =>
+                trackUmamiEvent("blog-opened", {
+                  slug: post.slug,
+                  source: "blog-index",
+                  theme: "crayon",
+                })
+              }
               preload="intent"
               to="/blog/$slug"
               params={{ slug: post.slug }}

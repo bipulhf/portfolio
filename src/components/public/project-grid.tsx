@@ -8,6 +8,7 @@ import {
   Sun,
 } from "~/components/portfolio/doodles";
 import { MinimalProjectGrid } from '~/components/public/minimal-project-grid'
+import { trackUmamiEvent } from '~/lib/analytics/umami'
 import { cx, surfaceCardClass } from "~/components/portfolio/lib/styles";
 import type { SerializedProject } from "~/lib/content/types";
 
@@ -118,6 +119,13 @@ export function ProjectGrid({
                 <div className="project-card-actions mt-auto flex flex-wrap gap-3">
                   <Link
                     className="type-link-hand group relative inline-flex items-center self-start no-underline"
+                    onClick={() =>
+                      trackUmamiEvent("project-opened", {
+                        slug: project.slug,
+                        source: "projects-index",
+                        theme: "crayon",
+                      })
+                    }
                     preload="intent"
                     to="/projects/$slug"
                     params={{ slug: project.slug }}
@@ -130,6 +138,13 @@ export function ProjectGrid({
                     <a
                       className="type-meta inline-flex items-center no-underline transition-colors hover:text-ink"
                       href={project.liveUrl}
+                      onClick={() =>
+                        trackUmamiEvent("project-live-clicked", {
+                          slug: project.slug,
+                          source: "projects-index",
+                          theme: "crayon",
+                        })
+                      }
                       rel="noreferrer"
                       target="_blank"
                     >

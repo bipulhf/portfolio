@@ -2,6 +2,11 @@ import { CornerBurst } from "../doodles";
 import { SectionHeader } from "../section-header";
 import { SectionShell } from "../section-shell";
 import { CONTACT_LINKS } from "../lib/content";
+import {
+  getTrackedContactDestination,
+  sanitizeTrackedLabel,
+  trackUmamiEvent,
+} from "~/lib/analytics/umami";
 import { crayonButtonClass, cx, surfaceCardClass } from "../lib/styles";
 
 export function Contact() {
@@ -44,6 +49,14 @@ export function Contact() {
               className={crayonButtonClass(link.tone)}
               href={link.href}
               key={link.label}
+              onClick={() =>
+                trackUmamiEvent("contact-link-clicked", {
+                  destination: getTrackedContactDestination(link.href),
+                  label: sanitizeTrackedLabel(link.label),
+                  surface: "contact-section",
+                  theme: "crayon",
+                })
+              }
               target="_blank"
             >
               {link.label}

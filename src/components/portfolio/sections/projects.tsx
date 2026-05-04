@@ -1,6 +1,7 @@
 import { Cloud, Flower, Heart, Spiral, Star, Sun } from "../doodles";
 import { SectionHeader } from "../section-header";
 import { SectionShell } from "../section-shell";
+import { trackUmamiEvent } from "~/lib/analytics/umami";
 import { surfaceCardClass } from "../lib/styles";
 import type { SerializedProject } from "~/lib/content/types";
 
@@ -96,6 +97,13 @@ export function Projects({ items }: Readonly<{ items: SerializedProject[] }>) {
                 <a
                   className="type-link-hand group relative inline-flex items-center self-start no-underline"
                   href={`/projects/${project.slug}`}
+                  onClick={() =>
+                    trackUmamiEvent("project-opened", {
+                      slug: project.slug,
+                      source: "home-grid",
+                      theme: "crayon",
+                    })
+                  }
                 >
                   Open case study <span className="motion-arrow">→</span>
                   <span className="absolute bottom-[-0.1875rem] left-0 h-[3px] w-full origin-left scale-x-0 rounded-full bg-ink transition-transform duration-300 ease-out-soft group-hover:scale-x-100" />

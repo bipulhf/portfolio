@@ -1,5 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { CONTACT_LINKS } from "~/components/portfolio/lib/content";
+import {
+  getTrackedContactDestination,
+  sanitizeTrackedLabel,
+  trackUmamiEvent,
+} from "~/lib/analytics/umami";
 import { MinimalWindowControls } from "~/components/public/minimal-window-controls";
 import { pageContainerClass } from "~/components/portfolio/lib/styles";
 import type { SerializedBlog, SerializedProject } from "~/lib/content/types";
@@ -145,6 +150,13 @@ export function MinimalHome({
                 <Link
                   className="grid gap-3 border-b border-[#3a342e]/8 py-4 no-underline last:border-b-0 md:grid-cols-[7.5rem_minmax(0,1fr)_auto] md:items-start"
                   key={project.id}
+                  onClick={() =>
+                    trackUmamiEvent("project-opened", {
+                      slug: project.slug,
+                      source: "minimal-home-list",
+                      theme: "minimal",
+                    })
+                  }
                   params={{ slug: project.slug }}
                   to="/projects/$slug"
                 >
@@ -214,6 +226,13 @@ export function MinimalHome({
                 <Link
                   className="grid gap-3 border-b border-[#3a342e]/8 py-4 no-underline last:border-b-0 md:grid-cols-[8rem_minmax(0,1fr)_auto] md:items-start"
                   key={blog.id}
+                  onClick={() =>
+                    trackUmamiEvent("blog-opened", {
+                      slug: blog.slug,
+                      source: "minimal-home-list",
+                      theme: "minimal",
+                    })
+                  }
                   params={{ slug: blog.slug }}
                   to="/blog/$slug"
                 >
@@ -282,6 +301,14 @@ export function MinimalHome({
                   className={`rounded-[0.8rem] border border-[#3a342e]/12 bg-white/40 px-4 py-2 text-[11px] font-medium no-underline transition-colors hover:bg-white/70 [font-family:var(--minimal-mono)] ${charcoalStrong}`}
                   href={link.href}
                   key={link.label}
+                  onClick={() =>
+                    trackUmamiEvent("contact-link-clicked", {
+                      destination: getTrackedContactDestination(link.href),
+                      label: sanitizeTrackedLabel(link.label),
+                      surface: "contact-section",
+                      theme: "minimal",
+                    })
+                  }
                   rel="noreferrer"
                   target="_blank"
                 >

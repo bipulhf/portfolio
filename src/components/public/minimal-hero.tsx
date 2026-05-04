@@ -1,4 +1,8 @@
 import { PUBLIC_THEME_CONFIG } from "~/components/public/public-theme";
+import {
+  sanitizeTrackedHref,
+  trackUmamiEvent,
+} from "~/lib/analytics/umami";
 import { MinimalWindowControls } from "~/components/public/minimal-window-controls";
 import { ACHIEVEMENT_ITEMS } from "~/components/portfolio/lib/content";
 import { pageContainerClass } from "~/components/portfolio/lib/styles";
@@ -72,12 +76,30 @@ export function MinimalHero() {
                 <a
                   className="rounded-[0.8rem] border border-[#3a342e]/14 bg-[#3a342e] px-5 py-2 text-[11px] font-semibold tracking-[0.05em] text-[#f5efe7] transition-all hover:bg-[#2f2a25] no-underline [font-family:var(--minimal-mono)]"
                   href="#projects"
+                  onClick={() =>
+                    trackUmamiEvent("cta-clicked", {
+                      href: sanitizeTrackedHref("/#projects"),
+                      id: "hero-projects",
+                      page: "home",
+                      surface: "minimal-hero",
+                      theme: "minimal",
+                    })
+                  }
                 >
                   {hero.ctaPrimary}
                 </a>
                 <a
                   className={`rounded-[0.8rem] border border-[#3a342e]/14 bg-white/46 px-5 py-2 text-[11px] font-semibold tracking-[0.05em] transition-all hover:bg-white/68 no-underline [font-family:var(--minimal-mono)] ${charcoalStrong}`}
                   href="#contact"
+                  onClick={() =>
+                    trackUmamiEvent("cta-clicked", {
+                      href: sanitizeTrackedHref("/#contact"),
+                      id: "hero-contact",
+                      page: "home",
+                      surface: "minimal-hero",
+                      theme: "minimal",
+                    })
+                  }
                 >
                   {hero.ctaSecondary}
                 </a>

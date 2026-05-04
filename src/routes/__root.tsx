@@ -5,6 +5,7 @@ import {
   Outlet,
   Scripts,
   createRootRoute,
+  useRouterState,
 } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
 import appCss from '~/styles/app.css?url'
@@ -66,10 +67,27 @@ function RootApp() {
 }
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  })
+  const umamiScriptUrl = import.meta.env['VITE_UMAMI_SCRIPT_URL']?.trim() ?? ''
+  const umamiWebsiteId = import.meta.env['VITE_UMAMI_WEBSITE_ID']?.trim() ?? ''
+  const shouldRenderUmamiScript =
+    pathname.startsWith('/admin') === false &&
+    umamiScriptUrl.length > 0 &&
+    umamiWebsiteId.length > 0
+
   return (
     <html data-public-theme={DEFAULT_PUBLIC_THEME} lang="en">
       <head>
         <script dangerouslySetInnerHTML={{ __html: PUBLIC_THEME_BOOTSTRAP_SCRIPT }} />
+        {shouldRenderUmamiScript ? (
+          <script
+            data-website-id={umamiWebsiteId}
+            defer
+            src={umamiScriptUrl}
+          />
+        ) : null}
         <HeadContent />
       </head>
       <body>

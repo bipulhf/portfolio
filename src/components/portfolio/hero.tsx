@@ -1,4 +1,8 @@
 import { PUBLIC_THEME_CONFIG, themeOnlyClass } from '~/components/public/public-theme'
+import {
+  sanitizeTrackedHref,
+  trackUmamiEvent,
+} from '~/lib/analytics/umami'
 import { Heart, HeroBackdrop, HeroScribble, Star, Squiggle } from './doodles'
 import {
   crayonButtonClass,
@@ -119,6 +123,15 @@ export function Hero() {
                 className: 'w-full justify-center sm:w-auto',
               })}
               href="/#projects"
+              onClick={() =>
+                trackUmamiEvent('cta-clicked', {
+                  href: sanitizeTrackedHref('/#projects'),
+                  id: 'hero-projects',
+                  page: 'home',
+                  surface: 'crayon-hero',
+                  theme: 'crayon',
+                })
+              }
             >
               {PUBLIC_THEME_CONFIG.crayon.hero.ctaPrimary}
             </a>
@@ -128,6 +141,15 @@ export function Hero() {
                 ghost: true,
               })}
               href="/#contact"
+              onClick={() =>
+                trackUmamiEvent('cta-clicked', {
+                  href: sanitizeTrackedHref('/#contact'),
+                  id: 'hero-contact',
+                  page: 'home',
+                  surface: 'crayon-hero',
+                  theme: 'crayon',
+                })
+              }
             >
               {PUBLIC_THEME_CONFIG.crayon.hero.ctaSecondary}
             </a>
