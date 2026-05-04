@@ -50,23 +50,19 @@ export const EDUCATION_ITEMS = [
 export const SKILL_CATEGORIES = [
   {
     title: "Languages",
-    tags: ["JavaScript", "TypeScript", "Python", "Java", "C++"],
+    tags: ["JavaScript", "TypeScript", "Java"],
   },
   {
     title: "Frontend",
-    tags: ["React", "Next.js", "Tailwind", "HTML/CSS", "Redux"],
+    tags: ["React", "Next.js", "Tanstack Start", "Zustand", "Tailwind CSS"],
   },
   {
     title: "Backend",
-    tags: ["Node.js", "Express", "Django", "PostgreSQL", "MongoDB"],
+    tags: ["Node.js", "Express", "SQL", "Spring Boot"],
   },
   {
     title: "Tools",
-    tags: ["Git", "Docker", "AWS", "Figma", "Linux"],
-  },
-  {
-    title: "Workflow",
-    tags: ["Testing", "Code Review", "DX", "Accessibility", "Performance"],
+    tags: ["Git", "Docker", "GitHub Actions"],
   },
 ] as const;
 
