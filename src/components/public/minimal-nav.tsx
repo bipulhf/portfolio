@@ -30,7 +30,7 @@ export function MinimalNav() {
   }, [])
 
   return (
-    <nav className="theme-only-minimal fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3">
+    <nav className="theme-only-minimal fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3 md:py-4">
       <div className={pageContainerClass}>
         <div
           className={cx(

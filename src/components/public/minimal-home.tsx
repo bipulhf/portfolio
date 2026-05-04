@@ -24,9 +24,9 @@ export function MinimalHome({
   const charcoalFaint = 'text-[#3a342e]/46'
 
   return (
-    <main className="theme-only-minimal py-10 space-y-10 md:py-12 md:space-y-12">
-      <section className={pageContainerClass} id="about">
-        <div className="coding-border overflow-hidden rounded-xl">
+    <main className="theme-only-minimal minimal-stack-sections pb-10 pt-0 md:pb-12" data-reveal-sequence>
+      <section className={`${pageContainerClass} minimal-stack-item`} data-reveal-item id="about">
+        <div className="coding-border minimal-stack-shell overflow-hidden rounded-xl">
           <div className={`flex items-center justify-between border-b border-[#3a342e]/8 px-6 py-4 text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
             <div className="flex items-center gap-3">
               <MinimalWindowControls />
@@ -34,7 +34,7 @@ export function MinimalHome({
             </div>
             <span>profile</span>
           </div>
-          <div className="grid gap-8 px-6 py-7 md:px-7 md:py-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(15rem,0.8fr)]">
+          <div className="grid gap-7 px-5 py-6 md:px-6 md:py-7 lg:grid-cols-[minmax(0,1.35fr)_minmax(15rem,0.8fr)]">
             <div className="space-y-5">
               <div className={`space-y-1 text-[0.98rem] leading-7 [font-family:var(--minimal-mono)] ${charcoalSoft}`}>
                 <div className={charcoalStrong}>export const profile = {'{'}</div>
@@ -85,8 +85,8 @@ export function MinimalHome({
         </div>
       </section>
 
-      <section className={pageContainerClass} id="projects">
-        <div className="coding-border overflow-hidden rounded-xl">
+      <section className={`${pageContainerClass} minimal-stack-item`} data-reveal-item id="projects">
+        <div className="coding-border minimal-stack-shell overflow-hidden rounded-xl">
           <div className={`flex items-center justify-between border-b border-[#3a342e]/8 px-6 py-4 text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
             <div className="flex items-center gap-3">
               <MinimalWindowControls />
@@ -96,7 +96,7 @@ export function MinimalHome({
               open archive
             </Link>
           </div>
-          <div className="px-6 py-4 md:px-7 md:py-5">
+          <div className="px-5 py-4 md:px-6 md:py-5">
             {featuredProjects.length ? (
               featuredProjects.map((project, index) => (
                 <Link
@@ -136,8 +136,8 @@ export function MinimalHome({
         </div>
       </section>
 
-      <section className={pageContainerClass} id="blog">
-        <div className="coding-border overflow-hidden rounded-xl">
+      <section className={`${pageContainerClass} minimal-stack-item`} data-reveal-item id="blog">
+        <div className="coding-border minimal-stack-shell overflow-hidden rounded-xl">
           <div className={`flex items-center justify-between border-b border-[#3a342e]/8 px-6 py-4 text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
             <div className="flex items-center gap-3">
               <MinimalWindowControls />
@@ -147,7 +147,7 @@ export function MinimalHome({
               all notes
             </Link>
           </div>
-          <div className="px-6 py-4 md:px-7 md:py-5">
+          <div className="px-5 py-4 md:px-6 md:py-5">
             {recentBlogs.length ? (
               recentBlogs.map((blog) => (
                 <Link
@@ -184,13 +184,13 @@ export function MinimalHome({
         </div>
       </section>
 
-      <section className={pageContainerClass} id="contact">
-        <div className="coding-border overflow-hidden rounded-xl">
+      <section className={`${pageContainerClass} minimal-stack-item`} data-reveal-item id="contact">
+        <div className="coding-border minimal-stack-shell overflow-hidden rounded-xl">
           <div className={`flex items-center gap-3 border-b border-[#3a342e]/8 px-6 py-4 text-[11px] [font-family:var(--minimal-mono)] ${charcoalFaint}`}>
             <MinimalWindowControls />
             <span>/src/contact.ts</span>
           </div>
-          <div className="px-6 py-7 md:px-7 md:py-8">
+          <div className="px-5 py-6 md:px-6 md:py-7">
             <p className={`text-sm leading-relaxed md:text-[0.95rem] ${charcoalSoft}`}>
               If the work feels aligned, email is the fastest path.
             </p>
