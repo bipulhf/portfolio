@@ -963,7 +963,6 @@
     }
 
     [data-public-theme='minimal'] .nav-shell-intro,
-    [data-public-theme='minimal'] .minimal-nav-shell,
     [data-public-theme='minimal'] .public-theme-toggle-dock .public-theme-toggle,
     [data-public-theme='minimal'] .glass-minimal {
       backdrop-filter: none;

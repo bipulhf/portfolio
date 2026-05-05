@@ -98,7 +98,7 @@ export function MinimalNav() {
       <div className={pageContainerClass}>
         <div
           className={cx(
-            "minimal-nav-shell overflow-hidden rounded-[1rem] border border-ink/10 bg-[rgba(248,242,234,0.92)] shadow-[0_12px_28px_rgba(21,18,15,0.05)] backdrop-blur-xl transition-all duration-300",
+            "overflow-hidden rounded-[1rem] border border-ink/10 bg-[rgba(248,242,234,0.92)] shadow-[0_12px_28px_rgba(21,18,15,0.05)] backdrop-blur-xl transition-all duration-300",
             isScrolled &&
               "border-ink/14 bg-[rgba(248,242,234,0.97)] shadow-[0_16px_32px_rgba(21,18,15,0.08)]",
           )}

@@ -16,7 +16,7 @@ export function MinimalHero() {
 
   return (
     <section
-      className="theme-only-minimal pb-4 pt-[6.5rem] md:pb-6 md:pt-[7.5rem]"
+      className="theme-only-minimal pb-4 pt-[6.5rem] md:pb-6 md:pt-[10rem]"
       id="top"
     >
       <div className={pageContainerClass}>
