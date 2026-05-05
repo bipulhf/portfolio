@@ -1,5 +1,4 @@
 import { Link } from '@tanstack/react-router'
-import { trackUmamiEvent } from '~/lib/analytics/umami'
 import type { SerializedBlog } from '~/lib/content/types'
 
 function formatBlogDate(value: string | null) {
@@ -31,13 +30,6 @@ export function MinimalBlogGrid({
             className="minimal-blog-card group reveal-skew"
             data-reveal-item
             key={post.id}
-            onClick={() =>
-              trackUmamiEvent('blog-opened', {
-                slug: post.slug,
-                source: 'minimal-blog-index',
-                theme: 'minimal',
-              })
-            }
             preload="intent"
             to="/blog/$slug"
             params={{ slug: post.slug }}

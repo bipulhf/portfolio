@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { Cloud, Flower, Heart, Spiral, Star, Sun } from "../doodles";
 import { SectionHeader } from "../section-header";
 import { SectionShell } from "../section-shell";
-import { trackUmamiEvent } from "~/lib/analytics/umami";
 import { surfaceCardClass } from "../lib/styles";
 import type { SerializedProject } from "~/lib/content/types";
 
@@ -97,13 +96,6 @@ export function Projects({ items }: Readonly<{ items: SerializedProject[] }>) {
                 </div>
                 <Link
                   className="type-link-hand group relative inline-flex items-center self-start no-underline"
-                  onClick={() =>
-                    trackUmamiEvent("project-opened", {
-                      slug: project.slug,
-                      source: "home-grid",
-                      theme: "crayon",
-                    })
-                  }
                   params={{ slug: project.slug }}
                   preload="intent"
                   to="/projects/$slug"

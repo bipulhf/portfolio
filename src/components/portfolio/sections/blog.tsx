@@ -1,7 +1,6 @@
 import { Cloud, Flower, Sun } from "../doodles";
 import { SectionHeader } from "../section-header";
 import { SectionShell } from "../section-shell";
-import { trackUmamiEvent } from "~/lib/analytics/umami";
 import { surfaceCardClass } from "../lib/styles";
 import type { SerializedBlog } from "~/lib/content/types";
 
@@ -53,13 +52,6 @@ export function Blog({ items }: Readonly<{ items: SerializedBlog[] }>) {
               data-reveal-item
               href={`/blog/${post.slug}`}
               key={post.title}
-              onClick={() =>
-                trackUmamiEvent("blog-opened", {
-                  slug: post.slug,
-                  source: "home-grid",
-                  theme: "crayon",
-                })
-              }
             >
               <div
                 className={`${coverTones[index % coverTones.length]} relative flex min-h-[8.125rem] items-center justify-center border-b-2 border-ink ${index === 0 ? "min-h-48 lg:min-h-full lg:border-b-0 lg:border-r-2" : ""}`}

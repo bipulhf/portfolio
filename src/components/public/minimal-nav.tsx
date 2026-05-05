@@ -1,10 +1,5 @@
 import { type MouseEvent, useEffect, useId, useState } from "react";
 import { PUBLIC_THEME_CONFIG } from "~/components/public/public-theme";
-import {
-  getPublicAnalyticsPage,
-  sanitizeTrackedHref,
-  trackUmamiEvent,
-} from "~/lib/analytics/umami";
 import { MinimalWindowControls } from "~/components/public/minimal-window-controls";
 import { cx, pageContainerClass } from "~/components/portfolio/lib/styles";
 
@@ -70,29 +65,6 @@ export function MinimalNav() {
     window.history.replaceState(null, "", href);
   }
 
-  function trackNavClick(
-    label: string,
-    href: string,
-    surface: "minimal-nav" | "minimal-nav-mobile",
-  ) {
-    trackUmamiEvent("nav-clicked", {
-      href: sanitizeTrackedHref(href),
-      label,
-      surface,
-      theme: "minimal",
-    });
-  }
-
-  function trackNavCtaClick(surface: "minimal-nav" | "minimal-nav-mobile") {
-    trackUmamiEvent("cta-clicked", {
-      href: sanitizeTrackedHref(nav.ctaHref),
-      id: "nav-contact",
-      page: getPublicAnalyticsPage(),
-      surface,
-      theme: "minimal",
-    });
-  }
-
   return (
     <nav className="theme-only-minimal fixed top-0 left-0 w-full z-50 transition-all duration-300 py-3 md:py-4">
       <div className={pageContainerClass}>
@@ -118,10 +90,7 @@ export function MinimalNav() {
               <a
                 className="hidden rounded-[0.72rem] border border-ink/12 bg-ink px-4 py-2 text-[11px] font-semibold tracking-[0.04em] text-paper transition-all hover:bg-[#2a2520] md:inline-flex no-underline [font-family:var(--minimal-mono)]"
                 href={nav.ctaHref}
-                onClick={(event) => {
-                  trackNavCtaClick("minimal-nav");
-                  handleNavLinkClick(event, nav.ctaHref);
-                }}
+                onClick={(event) => handleNavLinkClick(event, nav.ctaHref)}
               >
                 {nav.ctaLabel}
               </a>
@@ -167,10 +136,7 @@ export function MinimalNav() {
                 className="rounded-[0.8rem] border border-[#3a342e]/8 bg-white/34 px-3 py-2 text-[11px] font-medium tracking-[0.04em] text-ink/68 no-underline transition-all hover:border-[#3a342e]/14 hover:bg-white/62 hover:text-ink [font-family:var(--minimal-mono)]"
                 href={link.href}
                 key={link.href}
-                onClick={(event) => {
-                  trackNavClick(link.label, link.href, "minimal-nav");
-                  handleNavLinkClick(event, link.href);
-                }}
+                onClick={(event) => handleNavLinkClick(event, link.href)}
               >
                 {link.label}
               </a>
@@ -188,18 +154,13 @@ export function MinimalNav() {
                 <div className="grid gap-2">
                   {nav.links.map((link, index) => (
                     <a
-                      className="flex items-center justify-between rounded-[0.8rem] border border-ink/8 bg-paper/80 px-4 py-3 text-sm font-medium tracking-tight text-ink no-underline transition-colors hover:bg-white/65"
-                      href={link.href}
-                      key={link.href}
-                      onClick={(event) => {
-                        trackNavClick(
-                          link.label,
-                          link.href,
-                          "minimal-nav-mobile",
-                        );
-                        handleNavLinkClick(event, link.href);
-                        setMenuOpen(false);
-                      }}
+                    className="flex items-center justify-between rounded-[0.8rem] border border-ink/8 bg-paper/80 px-4 py-3 text-sm font-medium tracking-tight text-ink no-underline transition-colors hover:bg-white/65"
+                    href={link.href}
+                    key={link.href}
+                    onClick={(event) => {
+                      handleNavLinkClick(event, link.href);
+                      setMenuOpen(false);
+                    }}
                     >
                       <span className="[font-family:var(--minimal-mono)]">
                         {link.label}
@@ -215,7 +176,6 @@ export function MinimalNav() {
                   className="mt-3 inline-flex w-full items-center justify-center rounded-[0.8rem] border border-ink/12 bg-ink px-4 py-3 text-[11px] font-semibold tracking-[0.04em] text-paper no-underline transition-all hover:bg-[#2a2520] [font-family:var(--minimal-mono)]"
                   href={nav.ctaHref}
                   onClick={(event) => {
-                    trackNavCtaClick("minimal-nav-mobile");
                     handleNavLinkClick(event, nav.ctaHref);
                     setMenuOpen(false);
                   }}

@@ -1,6 +1,5 @@
 import { Link } from '@tanstack/react-router'
 import { cx } from '~/components/portfolio/lib/styles'
-import { trackUmamiEvent } from '~/lib/analytics/umami'
 import type { SerializedProject } from '~/lib/content/types'
 
 function formatProjectDate(value: string | null) {
@@ -25,8 +24,6 @@ export function MinimalProjectGrid({
   items: SerializedProject[]
   mode?: 'home' | 'index'
 }>) {
-  const source = mode === 'home' ? 'minimal-home-list' : 'minimal-project-index'
-
   if (mode === 'home') {
     return (
       <div className="theme-only-minimal minimal-project-story" data-reveal-sequence>
@@ -71,13 +68,6 @@ export function MinimalProjectGrid({
                     <div className="minimal-project-story-actions">
                       <Link
                         className="minimal-project-card-link"
-                        onClick={() =>
-                          trackUmamiEvent('project-opened', {
-                            slug: project.slug,
-                            source,
-                            theme: 'minimal',
-                          })
-                        }
                         preload="intent"
                         to="/projects/$slug"
                         params={{ slug: project.slug }}
@@ -88,13 +78,6 @@ export function MinimalProjectGrid({
                         <a
                           className="minimal-project-card-link is-secondary"
                           href={project.liveUrl}
-                          onClick={() =>
-                            trackUmamiEvent('project-live-clicked', {
-                              slug: project.slug,
-                              source,
-                              theme: 'minimal',
-                            })
-                          }
                           rel="noreferrer"
                           target="_blank"
                         >
@@ -105,13 +88,6 @@ export function MinimalProjectGrid({
                         <a
                           className="minimal-project-card-link is-secondary"
                           href={project.repoUrl}
-                          onClick={() =>
-                            trackUmamiEvent('project-code-clicked', {
-                              slug: project.slug,
-                              source,
-                              theme: 'minimal',
-                            })
-                          }
                           rel="noreferrer"
                           target="_blank"
                         >
@@ -206,13 +182,6 @@ export function MinimalProjectGrid({
               <div className="minimal-project-card-actions">
                 <Link
                   className="minimal-project-card-link"
-                  onClick={() =>
-                    trackUmamiEvent('project-opened', {
-                      slug: project.slug,
-                      source,
-                      theme: 'minimal',
-                    })
-                  }
                   preload="intent"
                   to="/projects/$slug"
                   params={{ slug: project.slug }}
@@ -223,13 +192,6 @@ export function MinimalProjectGrid({
                   <a
                     className="minimal-project-card-link is-secondary"
                     href={project.liveUrl}
-                    onClick={() =>
-                      trackUmamiEvent('project-live-clicked', {
-                        slug: project.slug,
-                        source,
-                        theme: 'minimal',
-                      })
-                    }
                     rel="noreferrer"
                     target="_blank"
                   >
@@ -240,13 +202,6 @@ export function MinimalProjectGrid({
                   <a
                     className="minimal-project-card-link is-secondary"
                     href={project.repoUrl}
-                    onClick={() =>
-                      trackUmamiEvent('project-code-clicked', {
-                        slug: project.slug,
-                        source,
-                        theme: 'minimal',
-                      })
-                    }
                     rel="noreferrer"
                     target="_blank"
                   >

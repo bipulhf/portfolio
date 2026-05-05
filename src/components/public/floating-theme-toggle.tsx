@@ -1,9 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { usePublicTheme } from "~/components/public/public-theme";
-import {
-  getPublicAnalyticsPage,
-  trackUmamiEvent,
-} from "~/lib/analytics/umami";
 import { cx } from "~/components/portfolio/lib/styles";
 
 const THEME_SWITCH_DURATION_MS = 420;
@@ -61,11 +57,6 @@ export function FloatingThemeToggle() {
     }
 
     setIsSwitching(true);
-    trackUmamiEvent("theme-changed", {
-      from: theme,
-      page: getPublicAnalyticsPage(),
-      to: nextTheme,
-    });
     setTheme(nextTheme);
     switchResetTimeout.current = window.setTimeout(() => {
       setIsSwitching(false);

@@ -1,10 +1,5 @@
 import { useEffect, useId, useState } from "react";
 import { PUBLIC_THEME_CONFIG } from "~/components/public/public-theme";
-import {
-  getPublicAnalyticsPage,
-  sanitizeTrackedHref,
-  trackUmamiEvent,
-} from "~/lib/analytics/umami";
 import { usePublicTheme } from "~/components/public/public-theme";
 import { MinimalNav } from "~/components/public/minimal-nav";
 import { ScribbleUnder, Squiggle, Star } from "./doodles";
@@ -56,25 +51,6 @@ function CrayonNav() {
     setMenuOpen(false);
   }
 
-  function trackNavClick(label: string, href: string) {
-    trackUmamiEvent("nav-clicked", {
-      href: sanitizeTrackedHref(href),
-      label,
-      surface: "crayon-nav",
-      theme: "crayon",
-    });
-  }
-
-  function trackNavCtaClick() {
-    trackUmamiEvent("cta-clicked", {
-      href: sanitizeTrackedHref(nav.ctaHref),
-      id: "nav-contact",
-      page: getPublicAnalyticsPage(),
-      surface: "crayon-nav",
-      theme: "crayon",
-    });
-  }
-
   return (
     <nav className="theme-only-crayon sticky top-0 z-50 pt-2 sm:pt-3 md:pt-5">
       <div className={pageContainerClass}>
@@ -112,7 +88,6 @@ function CrayonNav() {
                   )}
                   href={link.href}
                   key={link.href}
-                  onClick={() => trackNavClick(link.label, link.href)}
                 >
                   <span>{link.label}</span>
                   <span className="pointer-events-none absolute inset-x-[0.55rem] bottom-[0.3rem] h-[0.35rem] origin-left scale-x-0 opacity-0 transition-[transform,opacity] duration-300 ease-out-soft group-hover:scale-x-100 group-hover:opacity-100">
@@ -125,7 +100,6 @@ function CrayonNav() {
             <a
               className="nav-items-intro hidden min-h-11 items-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.7))] px-4 py-[0.65rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[3px_3px_0_var(--color-ink)] transition-[transform,box-shadow,background-color] duration-200 ease-out-soft hover:-translate-y-px hover:rotate-[1deg] hover:shadow-[4px_4px_0_var(--color-ink)] xl:inline-flex"
               href={nav.ctaHref}
-              onClick={trackNavCtaClick}
             >
               <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-mint ring-[0.15rem] ring-mint/30" />
               {nav.ctaLabel}
@@ -184,10 +158,7 @@ function CrayonNav() {
                     )}
                     href={link.href}
                     key={link.href}
-                    onClick={() => {
-                      trackNavClick(link.label, link.href);
-                      closeMenu();
-                    }}
+                    onClick={closeMenu}
                   >
                     {link.label}
                   </a>
@@ -197,10 +168,7 @@ function CrayonNav() {
               <a
                 className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-[0.55rem] rounded-full border-2 border-ink bg-[linear-gradient(135deg,rgba(174,228,214,0.86),rgba(255,255,255,0.76))] px-4 py-[0.7rem] font-hand text-[0.98rem] leading-none tracking-[0.02em] text-ink no-underline shadow-[2px_2px_0_var(--color-ink)] transition-[transform,box-shadow] duration-200 ease-out-soft hover:-translate-y-px hover:shadow-[3px_3px_0_var(--color-ink)]"
                 href={nav.ctaHref}
-                onClick={() => {
-                  trackNavCtaClick();
-                  closeMenu();
-                }}
+                onClick={closeMenu}
               >
                 <span className="size-3 shrink-0 rounded-full border-2 border-ink bg-mint ring-[0.15rem] ring-mint/30" />
                 {nav.ctaLabel}
