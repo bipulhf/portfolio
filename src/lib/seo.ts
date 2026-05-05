@@ -9,13 +9,18 @@ type SeoRecord = {
   title: string;
 };
 
-function getSiteUrl(pathname = "/") {
-  const origin =
-    typeof window !== "undefined"
-      ? window.location.origin
-      : process.env.SITE_URL || "http://localhost:3000";
+function getSiteUrl(pathname = "/", origin?: string | null) {
+  const resolvedOrigin =
+    origin ||
+    (typeof window !== "undefined" ? window.location.origin : null) ||
+    process.env.SITE_URL ||
+    "http://localhost:3000";
 
-  return new URL(pathname, origin).toString();
+  return new URL(pathname, resolvedOrigin).toString();
+}
+
+function resolveAbsoluteUrl(urlOrPath: string, origin?: string | null) {
+  return getSiteUrl(urlOrPath, origin);
 }
 
 export function resolveSeoTitle(record: SeoRecord, suffix = "Bipul") {
@@ -45,13 +50,16 @@ export function baseMeta({
   pathname,
   title,
   ogImage,
+  origin,
 }: {
   description: string;
   ogImage?: string | null;
+  origin?: string | null;
   pathname: string;
   title: string;
 }): any {
-  const canonical = getSiteUrl(pathname);
+  const canonical = getSiteUrl(pathname, origin);
+  const absoluteOgImage = ogImage ? resolveAbsoluteUrl(ogImage, origin) : null;
 
   return {
     canonical,
@@ -65,14 +73,14 @@ export function baseMeta({
       { property: "og:url", content: canonical },
       {
         name: "twitter:card",
-        content: ogImage ? "summary_large_image" : "summary",
+        content: absoluteOgImage ? "summary_large_image" : "summary",
       },
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
-      ...(ogImage
+      ...(absoluteOgImage
         ? [
-            { property: "og:image", content: ogImage },
-            { name: "twitter:image", content: ogImage },
+            { property: "og:image", content: absoluteOgImage },
+            { name: "twitter:image", content: absoluteOgImage },
           ]
         : []),
     ],

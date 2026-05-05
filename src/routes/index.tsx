@@ -3,11 +3,22 @@ import { CrayonPendingPage } from "~/components/loaders/crayon-pending";
 import { PortfolioPage } from "~/components/portfolio/portfolio-page";
 import { usePublicThemePageMeta } from "~/components/public/public-theme";
 import { SiteShell } from "~/components/public/site-shell";
+import { getSiteOriginFn } from "~/lib/server-fns/site-url";
 import { getHomeContentFn } from "~/lib/server-fns/content";
 import { baseMeta } from "~/lib/seo";
 
 export const Route = createFileRoute("/")({
-  loader: async () => getHomeContentFn(),
+  loader: async () => {
+    const [content, siteOrigin] = await Promise.all([
+      getHomeContentFn(),
+      getSiteOriginFn(),
+    ]);
+
+    return {
+      ...content,
+      siteOrigin,
+    };
+  },
   pendingComponent: () => (
     <SiteShell>
       <CrayonPendingPage title="Loading home" />
@@ -17,10 +28,12 @@ export const Route = createFileRoute("/")({
     "Cache-Control": "public, max-age=120, stale-while-revalidate=900",
     Vary: "Cookie",
   }),
-  head: () =>
+  head: ({ loaderData }) =>
     baseMeta({
       description:
         "A crayon-styled portfolio for Bipul featuring projects, writing, and experience.",
+      ogImage: "/home-crayon.png",
+      origin: loaderData?.siteOrigin,
       pathname: "/",
       title: "Bipul — Portfolio",
     }),
