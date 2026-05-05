@@ -77,7 +77,7 @@ export function ProjectGrid({
                 : index % 3 === 1
                   ? "reveal-pop"
                   : "reveal-right",
-              "project-card group overflow-hidden rounded-[1.25rem_1.5rem_1.125rem_1.625rem/1.5rem_1.125rem_1.625rem_1.25rem] border-[2.5px] border-ink shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]",
+              "project-card group flex flex-col overflow-hidden rounded-[1.25rem_1.5rem_1.125rem_1.625rem/1.5rem_1.125rem_1.625rem_1.25rem] border-[2.5px] border-ink shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)]",
             )}
             data-reveal-item
             key={project.id}
@@ -100,7 +100,7 @@ export function ProjectGrid({
                 </div>
               )}
             </div>
-            <div className="project-card-body flex h-full flex-col px-5 pb-5 pt-4 sm:px-[1.375rem] sm:pb-[1.375rem] sm:pt-5">
+            <div className="project-card-body flex flex-1 flex-col px-5 pb-5 pt-4 sm:px-[1.375rem] sm:pb-[1.375rem] sm:pt-5">
               <div className="project-card-meta type-meta mb-2 flex flex-wrap items-center gap-2">
                 <span className="inline-flex rounded-full border border-ink/20 bg-white/50 px-2 py-1">
                   {project.featured ? "featured" : "project"}

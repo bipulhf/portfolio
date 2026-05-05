@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Cloud, Flower, Heart, Spiral, Star, Sun } from "../doodles";
 import { SectionHeader } from "../section-header";
 import { SectionShell } from "../section-shell";
@@ -48,7 +49,7 @@ export function Projects({ items }: Readonly<{ items: SerializedProject[] }>) {
         {items.length ? (
           items.map((project, index) => (
             <div
-              className={`${cardRotations[index % cardRotations.length]} ${surfaceCardClass} ${index % 3 === 0 ? "reveal-left" : index % 3 === 1 ? "reveal-pop" : "reveal-right"} group overflow-hidden rounded-[1.25rem_1.5rem_1.125rem_1.625rem/1.5rem_1.125rem_1.625rem_1.25rem] border-[2.5px] border-ink shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)] ${index === 0 ? "md:col-span-2 lg:col-span-4 lg:grid lg:grid-cols-[minmax(16rem,1.05fr)_minmax(18rem,0.95fr)]" : "lg:col-span-2"}`}
+              className={`${cardRotations[index % cardRotations.length]} ${surfaceCardClass} ${index % 3 === 0 ? "reveal-left" : index % 3 === 1 ? "reveal-pop" : "reveal-right"} project-card group flex flex-col overflow-hidden rounded-[1.25rem_1.5rem_1.125rem_1.625rem/1.5rem_1.125rem_1.625rem_1.25rem] border-[2.5px] border-ink shadow-crayon-md hover:-translate-y-[0.3rem] hover:shadow-[7px_9px_0_var(--color-ink)] ${index === 0 ? "md:col-span-2 lg:col-span-4 lg:grid lg:grid-cols-[minmax(16rem,1.05fr)_minmax(18rem,0.95fr)]" : "lg:col-span-2"}`}
               data-reveal-item
               key={project.title}
             >
@@ -68,7 +69,7 @@ export function Projects({ items }: Readonly<{ items: SerializedProject[] }>) {
                 )}
               </div>
               <div
-                className={`flex h-full flex-col px-[1.375rem] pb-[1.375rem] pt-5 ${index === 0 ? "lg:px-7 lg:pb-7 lg:pt-6" : ""}`}
+                className={`flex flex-1 flex-col px-[1.375rem] pb-[1.375rem] pt-5 ${index === 0 ? "lg:px-7 lg:pb-7 lg:pt-6" : ""}`}
               >
                 <h3
                   className={
@@ -94,9 +95,8 @@ export function Projects({ items }: Readonly<{ items: SerializedProject[] }>) {
                     </span>
                   ))}
                 </div>
-                <a
+                <Link
                   className="type-link-hand group relative inline-flex items-center self-start no-underline"
-                  href={`/projects/${project.slug}`}
                   onClick={() =>
                     trackUmamiEvent("project-opened", {
                       slug: project.slug,
@@ -104,10 +104,13 @@ export function Projects({ items }: Readonly<{ items: SerializedProject[] }>) {
                       theme: "crayon",
                     })
                   }
+                  params={{ slug: project.slug }}
+                  preload="intent"
+                  to="/projects/$slug"
                 >
                   Open case study <span className="motion-arrow">→</span>
                   <span className="absolute bottom-[-0.1875rem] left-0 h-[3px] w-full origin-left scale-x-0 rounded-full bg-ink transition-transform duration-300 ease-out-soft group-hover:scale-x-100" />
-                </a>
+                </Link>
               </div>
             </div>
           ))
