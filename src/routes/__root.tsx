@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import appCss from "~/styles/app.css?url";
 import { AppProviders } from "~/components/app/app-providers";
 import { DefaultCatchBoundary } from "~/components/errors/default-catch-boundary";
@@ -91,6 +92,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
           <TanStackRouterDevtools position="bottom-right" />
         ) : null}
         <Analytics />
+        <SpeedInsights />
         <Scripts />
       </body>
     </html>
