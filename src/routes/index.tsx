@@ -15,6 +15,7 @@ export const Route = createFileRoute("/")({
   ),
   headers: () => ({
     "Cache-Control": "public, max-age=120, stale-while-revalidate=900",
+    Vary: "Cookie",
   }),
   head: () =>
     baseMeta({

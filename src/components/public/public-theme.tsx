@@ -7,8 +7,17 @@ import {
   useRef,
   useState,
 } from "react";
+import {
+  DEFAULT_PUBLIC_THEME,
+  isPublicTheme,
+  PUBLIC_THEME_COOKIE_KEY,
+  PUBLIC_THEME_COOKIE_MAX_AGE,
+  PUBLIC_THEME_STORAGE_KEY,
+  themeOnlyClass,
+  type PublicTheme,
+} from "~/lib/public-theme";
 
-export type PublicTheme = "crayon" | "minimal";
+export { themeOnlyClass, type PublicTheme } from "~/lib/public-theme";
 export type PublicPageKey = "home" | "projects" | "blog";
 
 type NavLink = {
@@ -84,8 +93,6 @@ declare global {
   }
 }
 
-export const DEFAULT_PUBLIC_THEME: PublicTheme = "crayon";
-export const PUBLIC_THEME_STORAGE_KEY = "portfolio-public-theme";
 const PUBLIC_THEME_TRANSITION_MS = 420;
 
 export const PUBLIC_THEME_CONFIG: Record<PublicTheme, PublicThemeConfig> = {
@@ -243,8 +250,23 @@ export const PUBLIC_THEME_CONFIG: Record<PublicTheme, PublicThemeConfig> = {
 
 const PublicThemeContext = createContext<PublicThemeContextValue | null>(null);
 
-function isPublicTheme(value: string | null | undefined): value is PublicTheme {
-  return value === "crayon" || value === "minimal";
+function getCookieTheme() {
+  if (typeof document === "undefined") {
+    return undefined;
+  }
+
+  const cookiePrefix = `${PUBLIC_THEME_COOKIE_KEY}=`;
+  const match = document.cookie
+    .split(";")
+    .map((value) => value.trim())
+    .find((value) => value.startsWith(cookiePrefix));
+
+  if (!match) {
+    return undefined;
+  }
+
+  const cookieTheme = decodeURIComponent(match.slice(cookiePrefix.length));
+  return isPublicTheme(cookieTheme) ? cookieTheme : undefined;
 }
 
 function getBrowserTheme() {
@@ -261,6 +283,11 @@ function getBrowserTheme() {
     return fromDom;
   }
 
+  const fromCookie = getCookieTheme();
+  if (fromCookie) {
+    return fromCookie;
+  }
+
   try {
     const fromStorage = window.localStorage.getItem(PUBLIC_THEME_STORAGE_KEY);
     return isPublicTheme(fromStorage) ? fromStorage : DEFAULT_PUBLIC_THEME;
@@ -272,6 +299,16 @@ function getBrowserTheme() {
 function applyThemeToDocument(theme: PublicTheme) {
   document.documentElement.dataset.publicTheme = theme;
   window.__PUBLIC_THEME__ = theme;
+}
+
+function persistTheme(theme: PublicTheme) {
+  try {
+    window.localStorage.setItem(PUBLIC_THEME_STORAGE_KEY, theme);
+  } catch {
+    // Ignore storage failures and keep the live theme in memory.
+  }
+
+  document.cookie = `${PUBLIC_THEME_COOKIE_KEY}=${theme}; Path=/; Max-Age=${PUBLIC_THEME_COOKIE_MAX_AGE}; SameSite=Lax`;
 }
 
 function clearThemeTransitionState() {
@@ -287,34 +324,54 @@ function shouldAnimateThemeTransition() {
 
 export const PUBLIC_THEME_BOOTSTRAP_SCRIPT = `(() => {
   const key = '${PUBLIC_THEME_STORAGE_KEY}';
+  const cookieKey = '${PUBLIC_THEME_COOKIE_KEY}';
   const fallback = '${DEFAULT_PUBLIC_THEME}';
+  const cookiePrefix = cookieKey + '=';
+
+  function readThemeFromCookie() {
+    const match = document.cookie
+      .split(';')
+      .map((value) => value.trim())
+      .find((value) => value.startsWith(cookiePrefix));
+
+    if (!match) {
+      return null;
+    }
+
+    const theme = decodeURIComponent(match.slice(cookiePrefix.length));
+    return theme === 'minimal' || theme === 'crayon' ? theme : null;
+  }
+
   try {
     const stored = window.localStorage.getItem(key);
-    const theme = stored === 'minimal' || stored === 'crayon' ? stored : fallback;
+    const cookieTheme = readThemeFromCookie();
+    const theme =
+      cookieTheme ??
+      (stored === 'minimal' || stored === 'crayon' ? stored : fallback);
     document.documentElement.dataset.publicTheme = theme;
     window.__PUBLIC_THEME__ = theme;
   } catch {
-    document.documentElement.dataset.publicTheme = fallback;
-    window.__PUBLIC_THEME__ = fallback;
+    const theme = readThemeFromCookie() ?? fallback;
+    document.documentElement.dataset.publicTheme = theme;
+    window.__PUBLIC_THEME__ = theme;
   }
 })();`;
 
-export function themeOnlyClass(theme: PublicTheme) {
-  return theme === "crayon" ? "theme-only-crayon" : "theme-only-minimal";
-}
-
 export function PublicThemeProvider({
   children,
+  initialTheme = DEFAULT_PUBLIC_THEME,
 }: Readonly<{
   children: ReactNode;
+  initialTheme?: PublicTheme;
 }>) {
-  const [theme, setThemeState] = useState<PublicTheme>(DEFAULT_PUBLIC_THEME);
+  const [theme, setThemeState] = useState<PublicTheme>(initialTheme);
   const themeTransitionTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     const nextTheme = getBrowserTheme();
     applyThemeToDocument(nextTheme);
     setThemeState(nextTheme);
+    persistTheme(nextTheme);
 
     function handleStorage(event: StorageEvent) {
       if (
@@ -379,23 +436,13 @@ export function PublicThemeProvider({
         }
 
         updateTheme(nextTheme, { animate: true });
-
-        try {
-          window.localStorage.setItem(PUBLIC_THEME_STORAGE_KEY, nextTheme);
-        } catch {
-          // Ignore storage failures and keep the live theme in memory.
-        }
+        persistTheme(nextTheme);
       },
       theme,
       toggleTheme: () => {
         const nextTheme = theme === "crayon" ? "minimal" : "crayon";
         updateTheme(nextTheme, { animate: true });
-
-        try {
-          window.localStorage.setItem(PUBLIC_THEME_STORAGE_KEY, nextTheme);
-        } catch {
-          // Ignore storage failures and keep the live theme in memory.
-        }
+        persistTheme(nextTheme);
       },
     }),
     [theme],

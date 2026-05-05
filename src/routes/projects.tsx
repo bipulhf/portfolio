@@ -23,6 +23,7 @@ export const Route = createFileRoute("/projects")({
   ),
   headers: () => ({
     "Cache-Control": PUBLIC_LIST_CACHE_CONTROL,
+    Vary: "Cookie",
   }),
   head: () =>
     baseMeta({

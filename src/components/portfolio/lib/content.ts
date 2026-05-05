@@ -124,7 +124,7 @@ export const ACHIEVEMENT_ITEMS = [
 ] as const;
 
 export const CONTACT_LINKS = [
-  { label: "✉ Email me", href: "mailto:bipulhf@gmail.com", tone: "yellow" },
+  { label: "Email me", href: "mailto:bipulhf@gmail.com", tone: "yellow" },
   { label: "GitHub", href: "https://github.com/bipulhf", tone: "mint" },
   {
     label: "LinkedIn",

@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Cloud, Flower, Sun } from "~/components/portfolio/doodles";
 import { MinimalBlogGrid } from '~/components/public/minimal-blog-grid'
+import { usePublicTheme } from "~/components/public/public-theme";
 import { trackUmamiEvent } from '~/lib/analytics/umami'
 import { surfaceCardClass } from "~/components/portfolio/lib/styles";
 import type { SerializedBlog } from "~/lib/content/types";
@@ -42,67 +43,76 @@ export function BlogGrid({
   emptyTitle?: string;
   items: SerializedBlog[];
 }>) {
+  const { theme } = usePublicTheme();
+
+  if (theme === "minimal") {
+    return (
+      <MinimalBlogGrid
+        emptyText={emptyText}
+        emptyTitle={emptyTitle}
+        items={items}
+      />
+    );
+  }
+
   return (
-    <>
-      <div
-        className="theme-only-crayon blog-grid grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-        data-reveal-sequence
-      >
-        {items.length ? (
-          items.map((post, index) => (
-            <Link
-              className={`${surfaceCardClass} blog-card ${index % 2 === 0 ? "reveal-left" : "reveal-right"} group overflow-hidden rounded-[1.375rem] border-[2.5px] border-ink text-ink no-underline shadow-crayon-md hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_var(--color-ink)]`}
-              data-reveal-item
-              key={post.id}
-              onClick={() =>
-                trackUmamiEvent("blog-opened", {
-                  slug: post.slug,
-                  source: "blog-index",
-                  theme: "crayon",
-                })
-              }
-              preload="intent"
-              to="/blog/$slug"
-              params={{ slug: post.slug }}
-            >
-              <div
-                className={`${coverTones[index % coverTones.length]} blog-card-cover relative flex min-h-[7rem] items-center justify-center border-b-2 border-ink sm:min-h-[8.125rem]`}
-              >
-                {post.coverImagePath ? (
-                  <img
-                    alt={post.title}
-                    className="motion-cover absolute inset-0 h-full w-full object-cover"
-                    src={post.coverImagePath}
-                  />
-                ) : (
-                  <div className="motion-cover">
-                    <BlogCover index={index} />
-                  </div>
-                )}
-              </div>
-              <div className="blog-card-body flex h-full flex-col px-5 pb-5 pt-4 sm:px-[1.375rem] sm:pb-[1.375rem] sm:pt-[1.125rem]">
-                <div className="blog-card-meta type-meta mb-1.5">
-                  {formatPublishedDate(post.publishedAt)} ·{" "}
-                  {post.readingTimeMinutes} min
-                </div>
-                <h2 className="type-display-card-md mb-2">{post.title}</h2>
-                <p className="type-copy flex-1 text-[0.98rem]">{post.excerpt}</p>
-                <span className="type-link-hand mt-3 inline-flex items-center gap-1.5">
-                  Read article <span className="motion-arrow">→</span>
-                </span>
-              </div>
-            </Link>
-          ))
-        ) : (
-          <div
-            className={`${surfaceCardClass} reveal reveal-soft col-span-full rounded-[1.5rem] border-[2.5px] border-dashed border-ink px-6 py-10 text-center shadow-crayon-md`}
+    <div
+      className="theme-only-crayon blog-grid grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+      data-reveal-sequence
+    >
+      {items.length ? (
+        items.map((post, index) => (
+          <Link
+            className={`${surfaceCardClass} blog-card ${index % 2 === 0 ? "reveal-left" : "reveal-right"} group overflow-hidden rounded-[1.375rem] border-[2.5px] border-ink text-ink no-underline shadow-crayon-md hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_var(--color-ink)]`}
+            data-reveal-item
+            key={post.id}
+            onClick={() =>
+              trackUmamiEvent("blog-opened", {
+                slug: post.slug,
+                source: "blog-index",
+                theme: "crayon",
+              })
+            }
+            preload="intent"
+            to="/blog/$slug"
+            params={{ slug: post.slug }}
           >
-            <h2 className="type-display-card-lg mb-2">{emptyTitle}</h2>
-            <p className="type-copy mx-auto max-w-[60ch]">{emptyText}</p>
-          </div>
-        )}
-      </div>
-      <MinimalBlogGrid emptyText={emptyText} emptyTitle={emptyTitle} items={items} />
-    </>
+            <div
+              className={`${coverTones[index % coverTones.length]} blog-card-cover relative flex min-h-[7rem] items-center justify-center border-b-2 border-ink sm:min-h-[8.125rem]`}
+            >
+              {post.coverImagePath ? (
+                <img
+                  alt={post.title}
+                  className="motion-cover absolute inset-0 h-full w-full object-cover"
+                  src={post.coverImagePath}
+                />
+              ) : (
+                <div className="motion-cover">
+                  <BlogCover index={index} />
+                </div>
+              )}
+            </div>
+            <div className="blog-card-body flex h-full flex-col px-5 pb-5 pt-4 sm:px-[1.375rem] sm:pb-[1.375rem] sm:pt-[1.125rem]">
+              <div className="blog-card-meta type-meta mb-1.5">
+                {formatPublishedDate(post.publishedAt)} ·{" "}
+                {post.readingTimeMinutes} min
+              </div>
+              <h2 className="type-display-card-md mb-2">{post.title}</h2>
+              <p className="type-copy flex-1 text-[0.98rem]">{post.excerpt}</p>
+              <span className="type-link-hand mt-3 inline-flex items-center gap-1.5">
+                Read article <span className="motion-arrow">→</span>
+              </span>
+            </div>
+          </Link>
+        ))
+      ) : (
+        <div
+          className={`${surfaceCardClass} reveal reveal-soft col-span-full rounded-[1.5rem] border-[2.5px] border-dashed border-ink px-6 py-10 text-center shadow-crayon-md`}
+        >
+          <h2 className="type-display-card-lg mb-2">{emptyTitle}</h2>
+          <p className="type-copy mx-auto max-w-[60ch]">{emptyText}</p>
+        </div>
+      )}
+    </div>
   );
 }

@@ -1,16 +1,11 @@
 import { PUBLIC_THEME_CONFIG } from "~/components/public/public-theme";
-import {
-  sanitizeTrackedHref,
-  trackUmamiEvent,
-} from "~/lib/analytics/umami";
+import { sanitizeTrackedHref, trackUmamiEvent } from "~/lib/analytics/umami";
 import { MinimalWindowControls } from "~/components/public/minimal-window-controls";
-import { ACHIEVEMENT_ITEMS } from "~/components/portfolio/lib/content";
 import { pageContainerClass } from "~/components/portfolio/lib/styles";
 
 const heroSignals = [
   ["Role", "Fullstack engineer"],
   ["Base", "Dhaka, Bangladesh"],
-  ["Wins", `${ACHIEVEMENT_ITEMS.length}+ hackathons`],
 ] as const;
 
 export function MinimalHero() {
@@ -21,7 +16,7 @@ export function MinimalHero() {
 
   return (
     <section
-      className="theme-only-minimal pb-4 pt-[6.5rem] md:pb-6 md:pt-[10rem]"
+      className="theme-only-minimal pb-4 pt-[6.5rem] md:pb-6 md:pt-[7.5rem]"
       id="top"
     >
       <div className={pageContainerClass}>

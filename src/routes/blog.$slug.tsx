@@ -16,6 +16,7 @@ export const Route = createFileRoute('/blog/$slug')({
   ),
   headers: () => ({
     'Cache-Control': PUBLIC_DETAIL_CACHE_CONTROL,
+    Vary: 'Cookie',
   }),
   head: ({ loaderData, params }) => {
     const blog = loaderData as SerializedBlog

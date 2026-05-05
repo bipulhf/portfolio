@@ -1,7 +1,11 @@
 import { useEffect } from 'react'
 
-export function useReveal(deps: any[] = []) {
+export function useReveal(enabled: boolean, deps: any[] = []) {
   useEffect(() => {
+    if (!enabled) {
+      return
+    }
+
     const elements = document.querySelectorAll<HTMLElement>('.reveal, .reveal-mask, .reveal-skew, [data-reveal-sequence]')
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
@@ -53,5 +57,5 @@ export function useReveal(deps: any[] = []) {
     elements.forEach((element) => observer.observe(element))
 
     return () => observer.disconnect()
-  }, deps)
+  }, [enabled, ...deps])
 }

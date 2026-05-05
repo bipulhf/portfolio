@@ -16,6 +16,7 @@ export const Route = createFileRoute('/projects/$slug')({
   ),
   headers: () => ({
     'Cache-Control': PUBLIC_DETAIL_CACHE_CONTROL,
+    Vary: 'Cookie',
   }),
   head: ({ loaderData, params }) => {
     const project = loaderData as SerializedProject

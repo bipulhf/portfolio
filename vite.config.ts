@@ -14,9 +14,6 @@ export default defineConfig({
   plugins: [
     tanstackStart({
       pages: [
-        { path: '/', prerender: { crawlLinks: false } },
-        { path: '/projects', prerender: { crawlLinks: false } },
-        { path: '/blog', prerender: { crawlLinks: false } },
         { path: '/robots.txt', prerender: { crawlLinks: false } },
         { path: '/sitemap.xml', prerender: { crawlLinks: false } },
       ],

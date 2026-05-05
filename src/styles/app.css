@@ -926,27 +926,47 @@
   }
 
   @media (max-width: 48rem) {
-    [data-public-theme='minimal'] .minimal-ambient-shape:nth-child(3n) {
+    [data-public-theme='minimal'] .minimal-engineering-backdrop {
+      opacity: 0.32;
+      mask-image: none;
+    }
+
+    [data-public-theme='minimal'] .minimal-engineering-grid {
+      background-size: 4.5rem 4.5rem;
+      mask-image: none;
+      opacity: 0.22;
+    }
+
+    [data-public-theme='minimal'] .minimal-ambient-shape {
+      filter: none;
+    }
+
+    [data-public-theme='minimal'] .minimal-ambient-shape:nth-child(3n),
+    [data-public-theme='minimal'] .minimal-ambient-shape:nth-child(n + 37) {
       display: none;
     }
 
     [data-public-theme='minimal'] .minimal-engineering-fragment.is-terminal {
       top: 28rem;
       left: 1rem;
-      width: min(16rem, 62vw);
-      opacity: 0.44;
+      width: min(14rem, 58vw);
+      opacity: 0.36;
     }
 
     [data-public-theme='minimal'] .minimal-engineering-fragment.is-schema {
-      right: 1rem;
-      bottom: 7rem;
-      width: min(14rem, 56vw);
-      opacity: 0.4;
+      display: none;
     }
 
     [data-public-theme='minimal'] .minimal-engineering-fragment.is-route-map,
     [data-public-theme='minimal'] .minimal-engineering-fragment.is-commit {
       display: none;
+    }
+
+    [data-public-theme='minimal'] .nav-shell-intro,
+    [data-public-theme='minimal'] .minimal-nav-shell,
+    [data-public-theme='minimal'] .public-theme-toggle-dock .public-theme-toggle,
+    [data-public-theme='minimal'] .glass-minimal {
+      backdrop-filter: none;
     }
   }
 

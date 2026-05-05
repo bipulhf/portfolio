@@ -5,6 +5,7 @@ import {
   sanitizeTrackedHref,
   trackUmamiEvent,
 } from "~/lib/analytics/umami";
+import { usePublicTheme } from "~/components/public/public-theme";
 import { MinimalNav } from "~/components/public/minimal-nav";
 import { ScribbleUnder, Squiggle, Star } from "./doodles";
 import { cx, pageContainerClass } from "./lib/styles";
@@ -19,12 +20,9 @@ const navLinkTones = [
 ] as const;
 
 export function Nav() {
-  return (
-    <>
-      <CrayonNav />
-      <MinimalNav />
-    </>
-  );
+  const { theme } = usePublicTheme();
+
+  return theme === "minimal" ? <MinimalNav /> : <CrayonNav />;
 }
 
 function CrayonNav() {

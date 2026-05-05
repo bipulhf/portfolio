@@ -13,11 +13,14 @@ import { AppProviders } from "~/components/app/app-providers";
 import { DefaultCatchBoundary } from "~/components/errors/default-catch-boundary";
 import { NotFound } from "~/components/errors/not-found";
 import {
-  DEFAULT_PUBLIC_THEME,
   PUBLIC_THEME_BOOTSTRAP_SCRIPT,
 } from "~/components/public/public-theme";
+import { getInitialPublicThemeFn } from "~/lib/server-fns/public-theme";
 
 export const Route = createRootRoute({
+  loader: async () => ({
+    initialTheme: await getInitialPublicThemeFn(),
+  }),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -62,14 +65,17 @@ export const Route = createRootRoute({
 });
 
 function RootApp() {
+  const { initialTheme } = Route.useLoaderData();
+
   return (
-    <AppProviders>
+    <AppProviders initialTheme={initialTheme}>
       <Outlet />
     </AppProviders>
   );
 }
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
+  const { initialTheme } = Route.useLoaderData();
   const pathname = useRouterState({
     select: (state) => state.location.pathname,
   });
@@ -81,7 +87,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     umamiWebsiteId.length > 0;
 
   return (
-    <html data-public-theme={DEFAULT_PUBLIC_THEME} lang="en">
+    <html data-public-theme={initialTheme} lang="en">
       <head>
         <script
           dangerouslySetInnerHTML={{ __html: PUBLIC_THEME_BOOTSTRAP_SCRIPT }}
