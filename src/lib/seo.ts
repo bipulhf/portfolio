@@ -1,7 +1,9 @@
+import { getRequestUrl } from "@tanstack/react-start/server";
 import { buildExcerpt, stripHtml } from "./utils/text";
 
 type SeoRecord = {
   bodyHtml?: string | null;
+  coverImagePath?: string | null;
   excerpt?: string | null;
   ogImagePath?: string | null;
   seoDescription?: string | null;
@@ -9,13 +11,29 @@ type SeoRecord = {
   title: string;
 };
 
-function getSiteUrl(pathname = "/", origin?: string | null) {
-  const resolvedOrigin =
-    origin ||
-    (typeof window !== "undefined" ? window.location.origin : null) ||
-    process.env.SITE_URL ||
-    "http://localhost:3000";
+const DEFAULT_OG_IMAGE_PATH = "/home-crayon.png";
 
+function resolveOrigin(origin?: string | null) {
+  if (origin) {
+    return origin;
+  }
+
+  if (typeof window !== "undefined") {
+    return window.location.origin;
+  }
+
+  try {
+    return getRequestUrl({
+      xForwardedHost: true,
+      xForwardedProto: true,
+    }).origin;
+  } catch {
+    return process.env.SITE_URL || "http://localhost:3000";
+  }
+}
+
+function getSiteUrl(pathname = "/", origin?: string | null) {
+  const resolvedOrigin = resolveOrigin(origin);
   return new URL(pathname, resolvedOrigin).toString();
 }
 
@@ -37,12 +55,13 @@ export function resolveSeoDescription(record: SeoRecord) {
 }
 
 export function resolveOgImage(record: SeoRecord) {
-  if (!record.ogImagePath) {
+  const value = record.ogImagePath?.trim() || record.coverImagePath?.trim() || null;
+
+  if (!value) {
     return null;
   }
 
-  const value = record.ogImagePath?.trim() || null;
-  return value ? getSiteUrl(value) : null;
+  return value;
 }
 
 export function baseMeta({
@@ -59,7 +78,10 @@ export function baseMeta({
   title: string;
 }): any {
   const canonical = getSiteUrl(pathname, origin);
-  const absoluteOgImage = ogImage ? resolveAbsoluteUrl(ogImage, origin) : null;
+  const absoluteOgImage = resolveAbsoluteUrl(
+    ogImage || DEFAULT_OG_IMAGE_PATH,
+    origin,
+  );
 
   return {
     canonical,
