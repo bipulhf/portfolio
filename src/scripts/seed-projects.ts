@@ -126,7 +126,7 @@ const seedProjects: ProjectInput[] = [
     liveUrl: "https://thryve-gold.vercel.app/",
     repoUrl:
       "https://github.com/Unayes09/Thryve-Youtubers-Toolkit-SmythOS-HackTheAI-2025",
-    featured: false,
+    featured: true,
     coverImagePath: "",
     ogImagePath: "",
     bodyJson: null,
@@ -272,7 +272,7 @@ const seedProjects: ProjectInput[] = [
     ],
     liveUrl: "",
     repoUrl: "https://github.com/bipulhf/endpt",
-    featured: true,
+    featured: false,
     coverImagePath: "",
     ogImagePath: "",
     bodyJson: null,
