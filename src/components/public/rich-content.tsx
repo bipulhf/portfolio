@@ -3,6 +3,16 @@ import { MinimalRichContentPage } from '~/components/public/minimal-rich-content
 import { usePublicTheme } from '~/components/public/public-theme'
 import { crayonButtonClass, cx, pageContainerClass, surfaceCardClass } from '~/components/portfolio/lib/styles'
 
+type RichContentDetailAction = {
+  href: string
+  label: string
+}
+
+type RichContentDetailFact = {
+  label: string
+  value: string
+}
+
 function formatLongDate(value: string | null) {
   if (!value) {
     return 'Draft'
@@ -21,7 +31,10 @@ export function RichContentPage({
   bodyHtml,
   coverImagePath,
   description,
+  detailActions = [],
+  detailFacts = [],
   kicker,
+  tags = [],
   meta,
   title,
 }: Readonly<{
@@ -30,7 +43,10 @@ export function RichContentPage({
   bodyHtml: string
   coverImagePath?: string | null
   description: string
+  detailActions?: RichContentDetailAction[]
+  detailFacts?: RichContentDetailFact[]
   kicker: string
+  tags?: string[]
   meta: string
   title: string
 }>) {
@@ -44,7 +60,10 @@ export function RichContentPage({
         bodyHtml={bodyHtml}
         coverImagePath={coverImagePath}
         description={description}
+        detailActions={detailActions}
+        detailFacts={detailFacts}
         kicker={kicker}
+        tags={tags}
         meta={meta}
         title={title}
       />

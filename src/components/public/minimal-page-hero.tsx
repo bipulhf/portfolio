@@ -13,7 +13,7 @@ export function MinimalPageHero({
   const config = PUBLIC_THEME_CONFIG.minimal.pages[page]
 
   return (
-    <section className={cx(pageContainerClass, 'theme-only-minimal relative pt-12 md:pt-20 lg:pt-24')} id="top">
+    <section className={cx(pageContainerClass, 'theme-only-minimal relative pt-28 md:pt-32 lg:pt-36')} id="top">
       <div className="coding-border minimal-page-hero-shell page-enter enter-soft motion-delay-2">
         <div className="flex items-center justify-between border-b border-[#3a342e]/8 px-5 py-4 sm:px-6 md:px-7 text-[11px] text-[#3a342e]/46 [font-family:var(--minimal-mono)]">
           <div className="flex items-center gap-3">
