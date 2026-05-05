@@ -11,9 +11,20 @@ import { SiteShell } from "~/components/public/site-shell";
 import { PUBLIC_LIST_CACHE_CONTROL } from "~/lib/http";
 import { baseMeta } from "~/lib/seo";
 import { listPublishedBlogsFn } from "~/lib/server-fns/content";
+import { getSiteOriginFn } from "~/lib/server-fns/site-url";
 
 export const Route = createFileRoute("/blog/")({
-  loader: async () => listPublishedBlogsFn(),
+  loader: async () => {
+    const [posts, siteOrigin] = await Promise.all([
+      listPublishedBlogsFn(),
+      getSiteOriginFn(),
+    ]);
+
+    return {
+      posts,
+      siteOrigin,
+    };
+  },
   pendingComponent: () => (
     <SiteShell>
       <CrayonPendingPage title="Loading blog">
@@ -25,10 +36,11 @@ export const Route = createFileRoute("/blog/")({
     "Cache-Control": PUBLIC_LIST_CACHE_CONTROL,
     Vary: "Cookie",
   }),
-  head: () =>
+  head: ({ loaderData }) =>
     baseMeta({
       description:
         "Writing on building products, frontend craft, and engineering process by Bipul.",
+      origin: loaderData?.siteOrigin,
       pathname: "/blog",
       title: "Blog — Bipul",
     }),
@@ -36,7 +48,7 @@ export const Route = createFileRoute("/blog/")({
 });
 
 function BlogIndexPage() {
-  const posts = Route.useLoaderData();
+  const { posts } = Route.useLoaderData();
   usePublicThemePageMeta("blog");
 
   return (

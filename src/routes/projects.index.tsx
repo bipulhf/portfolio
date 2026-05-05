@@ -11,9 +11,20 @@ import { SiteShell } from "~/components/public/site-shell";
 import { PUBLIC_LIST_CACHE_CONTROL } from "~/lib/http";
 import { baseMeta } from "~/lib/seo";
 import { listPublishedProjectsFn } from "~/lib/server-fns/content";
+import { getSiteOriginFn } from "~/lib/server-fns/site-url";
 
 export const Route = createFileRoute("/projects/")({
-  loader: async () => listPublishedProjectsFn(),
+  loader: async () => {
+    const [projects, siteOrigin] = await Promise.all([
+      listPublishedProjectsFn(),
+      getSiteOriginFn(),
+    ]);
+
+    return {
+      projects,
+      siteOrigin,
+    };
+  },
   pendingComponent: () => (
     <SiteShell>
       <CrayonPendingPage title="Loading projects">
@@ -25,10 +36,11 @@ export const Route = createFileRoute("/projects/")({
     "Cache-Control": PUBLIC_LIST_CACHE_CONTROL,
     Vary: "Cookie",
   }),
-  head: () =>
+  head: ({ loaderData }) =>
     baseMeta({
       description:
         "Case studies, experiments, and shipped product work by Bipul.",
+      origin: loaderData?.siteOrigin,
       pathname: "/projects",
       title: "Projects — Bipul",
     }),
@@ -36,7 +48,7 @@ export const Route = createFileRoute("/projects/")({
 });
 
 function ProjectsIndexPage() {
-  const projects = Route.useLoaderData();
+  const { projects } = Route.useLoaderData();
   usePublicThemePageMeta("projects");
 
   return (

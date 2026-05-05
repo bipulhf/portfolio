@@ -1,4 +1,3 @@
-import { getRequestUrl } from "@tanstack/react-start/server";
 import { buildExcerpt, stripHtml } from "./utils/text";
 
 type SeoRecord = {
@@ -22,14 +21,7 @@ function resolveOrigin(origin?: string | null) {
     return window.location.origin;
   }
 
-  try {
-    return getRequestUrl({
-      xForwardedHost: true,
-      xForwardedProto: true,
-    }).origin;
-  } catch {
-    return process.env.SITE_URL || "http://localhost:3000";
-  }
+  return process.env.SITE_URL || "http://localhost:3000";
 }
 
 function getSiteUrl(pathname = "/", origin?: string | null) {

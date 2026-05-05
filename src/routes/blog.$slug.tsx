@@ -4,11 +4,22 @@ import { blogMeta, RichContentPage } from '~/components/public/rich-content'
 import { SiteShell } from '~/components/public/site-shell'
 import type { SerializedBlog } from '~/lib/content/types'
 import { getPublishedBlogBySlugFn } from '~/lib/server-fns/content'
+import { getSiteOriginFn } from '~/lib/server-fns/site-url'
 import { PUBLIC_DETAIL_CACHE_CONTROL } from '~/lib/http'
 import { baseMeta, blogJsonLd, resolveOgImage, resolveSeoDescription, resolveSeoTitle } from '~/lib/seo'
 
 export const Route = createFileRoute('/blog/$slug')({
-  loader: async ({ params }) => getPublishedBlogBySlugFn({ data: { slug: params.slug } }),
+  loader: async ({ params }) => {
+    const [blog, siteOrigin] = await Promise.all([
+      getPublishedBlogBySlugFn({ data: { slug: params.slug } }),
+      getSiteOriginFn(),
+    ])
+
+    return {
+      blog,
+      siteOrigin,
+    }
+  },
   pendingComponent: () => (
     <SiteShell>
       <CrayonPendingPage title="Loading article" />
@@ -19,13 +30,22 @@ export const Route = createFileRoute('/blog/$slug')({
     Vary: 'Cookie',
   }),
   head: ({ loaderData, params }) => {
-    const blog = loaderData as SerializedBlog
+    if (!loaderData) {
+      return baseMeta({
+        description: 'Writing on building products, frontend craft, and engineering process by Bipul.',
+        pathname: `/blog/${params.slug}`,
+        title: 'Blog — Bipul',
+      })
+    }
+
+    const { blog, siteOrigin } = loaderData
     const title = resolveSeoTitle(blog)
     const description = resolveSeoDescription(blog)
     const ogImage = resolveOgImage(blog)
     const meta = baseMeta({
       description,
       ogImage,
+      origin: siteOrigin,
       pathname: `/blog/${params.slug}`,
       title,
     })
@@ -50,7 +70,7 @@ export const Route = createFileRoute('/blog/$slug')({
 })
 
 function BlogDetailPage() {
-  const blog = Route.useLoaderData() as SerializedBlog
+  const { blog } = Route.useLoaderData()
 
   return (
     <SiteShell>
