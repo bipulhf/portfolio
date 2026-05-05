@@ -2075,7 +2075,8 @@
 
   [data-public-theme='minimal'] .minimal-project-grid {
     display: grid;
-    gap: 1.2rem;
+    gap: 1.25rem;
+    align-content: start;
   }
 
   [data-public-theme='minimal'] .minimal-project-card {
@@ -2126,8 +2127,8 @@
 
   [data-public-theme='minimal'] .minimal-project-card-copy {
     display: grid;
-    gap: 0.85rem;
-    padding: 1.1rem;
+    gap: 0.9rem;
+    padding: 1.15rem;
   }
 
   [data-public-theme='minimal'] .minimal-project-card-meta,
@@ -2237,16 +2238,17 @@
 
   [data-public-theme='minimal'] .minimal-blog-grid {
     display: grid;
-    gap: 1rem;
+    gap: 1.25rem;
+    align-content: start;
   }
 
   [data-public-theme='minimal'] .minimal-blog-card {
     display: grid;
-    gap: 0.65rem;
+    gap: 0.9rem;
     border: 1px solid rgb(22 22 22 / 0.12);
     border-radius: 1rem;
     background: rgb(255 255 255 / 0.48);
-    padding: 1rem 1.1rem;
+    padding: 1.15rem;
     color: var(--color-ink);
     text-decoration: none;
     transition: transform 220ms var(--ease-out-soft);
@@ -2540,7 +2542,7 @@
     }
 
     [data-public-theme='minimal'] .minimal-blog-grid {
-      gap: 1.35rem;
+      gap: 1.25rem;
     }
 
     [data-public-theme='minimal'] .minimal-article-header {
@@ -2944,7 +2946,7 @@
 
   [data-public-theme='minimal'] .minimal-project-grid.is-index .minimal-project-card-copy {
     gap: 0.9rem;
-    padding: 1.1rem 1.15rem 1.2rem;
+    padding: 1.15rem;
   }
 
   [data-public-theme='minimal'] .minimal-project-grid.is-index .minimal-project-card-title {

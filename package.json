@@ -11,7 +11,8 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "admin:bootstrap": "tsx src/scripts/bootstrap-admin.ts",
-    "media:audit:legacy": "tsx src/scripts/audit-legacy-media.ts"
+    "media:audit:legacy": "tsx src/scripts/audit-legacy-media.ts",
+    "content:seed:projects": "tsx src/scripts/seed-projects.ts"
   },
   "dependencies": {
     "@lexical/code": "^0.44.0",
