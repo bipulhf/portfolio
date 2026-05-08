@@ -13,7 +13,7 @@ import { usePublicTheme } from "~/components/public/public-theme";
 export function SiteShell({ children }: Readonly<{ children: ReactNode }>) {
   const { theme } = usePublicTheme();
   const isMinimal = theme === "minimal";
-  useReveal(!isMinimal, [theme]);
+  useReveal(true, [theme]);
 
   return (
     <div className="public-site relative isolate z-[1] min-h-screen overflow-x-clip">

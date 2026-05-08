@@ -95,7 +95,7 @@
     z-index: 0;
   }
 
-  html[data-public-theme-transition='true'] .public-site > :not(.public-theme-toggle-rail) {
+  html[data-public-theme-transition='true'] .public-site > :not(.public-site-theme-layer):not(.minimal-ambient-geometry):not(.minimal-engineering-backdrop):not(.public-theme-toggle-rail) {
     animation: public-theme-soft-enter 420ms var(--ease-out-soft);
   }
 
@@ -1181,66 +1181,6 @@
 
   [data-public-theme='minimal'] .minimal-stack-item--static:hover .minimal-stack-shell::after {
     transform: translate3d(1rem, 1rem, 0) rotate(calc(var(--stack-tilt, 0deg) * -1.2));
-    opacity: 0.42;
-  }
-
-  [data-public-theme='minimal'] .page-enter,
-  [data-public-theme='minimal'] .reveal,
-  [data-public-theme='minimal'] [data-reveal-item],
-  [data-public-theme='minimal'] .reveal-mask,
-  [data-public-theme='minimal'] .reveal-skew {
-    opacity: 1;
-    animation: none;
-    transition: none;
-    translate: 0 0;
-    scale: 1;
-    transform: none;
-    clip-path: inset(0);
-    will-change: auto;
-  }
-
-  [data-public-theme='minimal'] .minimal-home-headline,
-  [data-public-theme='minimal'] .minimal-contact-title,
-  [data-public-theme='minimal'] .minimal-project-story-title,
-  [data-public-theme='minimal'] .minimal-wins-title,
-  [data-public-theme='minimal'] .minimal-project-card-title,
-  [data-public-theme='minimal'] .minimal-blog-card-title,
-  [data-public-theme='minimal'] .minimal-page-hero-title,
-  [data-public-theme='minimal'] .minimal-article-title {
-    opacity: 1;
-    animation: none;
-    transform: none;
-  }
-
-  [data-public-theme='minimal'] .minimal-stack-shell {
-    transform: none;
-    transition: none;
-  }
-
-  [data-public-theme='minimal'] .minimal-stack-shell::before {
-    transform: translate3d(0.55rem, 0.55rem, 0);
-    transition: none;
-  }
-
-  [data-public-theme='minimal'] .minimal-stack-shell::after {
-    transform: translate3d(1rem, 1rem, 0);
-    transition: none;
-  }
-
-  [data-public-theme='minimal'] .minimal-stack-item.in .minimal-stack-shell,
-  [data-public-theme='minimal'] .minimal-stack-item:hover .minimal-stack-shell {
-    transform: none;
-  }
-
-  [data-public-theme='minimal'] .minimal-stack-item.in .minimal-stack-shell::before,
-  [data-public-theme='minimal'] .minimal-stack-item:hover .minimal-stack-shell::before {
-    transform: translate3d(0.55rem, 0.55rem, 0);
-    opacity: 0.72;
-  }
-
-  [data-public-theme='minimal'] .minimal-stack-item.in .minimal-stack-shell::after,
-  [data-public-theme='minimal'] .minimal-stack-item:hover .minimal-stack-shell::after {
-    transform: translate3d(1rem, 1rem, 0);
     opacity: 0.42;
   }
 
