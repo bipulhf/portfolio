@@ -122,6 +122,69 @@ async function ensureUniqueBlogSlug(slug: string, excludeId?: string) {
   }
 }
 
+const projectCardColumns = {
+  id: projects.id,
+  slug: projects.slug,
+  title: projects.title,
+  summary: projects.summary,
+  excerpt: projects.excerpt,
+  coverImagePath: projects.coverImagePath,
+  status: projects.status,
+  publishedAt: projects.publishedAt,
+  seoTitle: projects.seoTitle,
+  seoDescription: projects.seoDescription,
+  ogImagePath: projects.ogImagePath,
+  techStack: projects.techStack,
+  liveUrl: projects.liveUrl,
+  repoUrl: projects.repoUrl,
+  featured: projects.featured,
+  createdAt: projects.createdAt,
+  updatedAt: projects.updatedAt,
+}
+
+const blogCardColumns = {
+  id: blogs.id,
+  slug: blogs.slug,
+  title: blogs.title,
+  excerpt: blogs.excerpt,
+  coverImagePath: blogs.coverImagePath,
+  status: blogs.status,
+  publishedAt: blogs.publishedAt,
+  seoTitle: blogs.seoTitle,
+  seoDescription: blogs.seoDescription,
+  ogImagePath: blogs.ogImagePath,
+  tags: blogs.tags,
+  readingTimeMinutes: blogs.readingTimeMinutes,
+  createdAt: blogs.createdAt,
+  updatedAt: blogs.updatedAt,
+}
+
+type ProjectCardRow = {
+  [K in keyof typeof projectCardColumns]: (typeof projects.$inferSelect)[K]
+}
+
+type BlogCardRow = {
+  [K in keyof typeof blogCardColumns]: (typeof blogs.$inferSelect)[K]
+}
+
+function serializeProjectCard(row: ProjectCardRow) {
+  return {
+    ...row,
+    publishedAt: row.publishedAt?.toISOString() ?? null,
+    createdAt: row.createdAt.toISOString(),
+    updatedAt: row.updatedAt.toISOString(),
+  }
+}
+
+function serializeBlogCard(row: BlogCardRow) {
+  return {
+    ...row,
+    publishedAt: row.publishedAt?.toISOString() ?? null,
+    createdAt: row.createdAt.toISOString(),
+    updatedAt: row.updatedAt.toISOString(),
+  }
+}
+
 function serializeProject(row: typeof projects.$inferSelect) {
   return {
     ...row,
@@ -158,13 +221,13 @@ export async function getHomeContent() {
   try {
     const [publishedProjects, publishedBlogs] = await Promise.all([
       db
-        .select()
+        .select(projectCardColumns)
         .from(projects)
         .where(eq(projects.status, 'published'))
         .orderBy(desc(projects.featured), desc(projects.publishedAt), desc(projects.updatedAt))
         .limit(6),
       db
-        .select()
+        .select(blogCardColumns)
         .from(blogs)
         .where(eq(blogs.status, 'published'))
         .orderBy(desc(blogs.publishedAt), desc(blogs.updatedAt))
@@ -172,8 +235,8 @@ export async function getHomeContent() {
     ])
 
     return {
-      projects: publishedProjects.map(serializeProject),
-      blogs: publishedBlogs.map(serializeBlog),
+      projects: publishedProjects.map(serializeProjectCard),
+      blogs: publishedBlogs.map(serializeBlogCard),
     }
   } catch (error) {
     if (!isPublicContentBootstrapError(error)) {
@@ -191,12 +254,12 @@ export async function getHomeContent() {
 export async function listPublishedProjects() {
   try {
     const rows = await db
-      .select()
+      .select(projectCardColumns)
       .from(projects)
       .where(eq(projects.status, 'published'))
       .orderBy(desc(projects.featured), desc(projects.publishedAt), desc(projects.updatedAt))
 
-    return rows.map(serializeProject)
+    return rows.map(serializeProjectCard)
   } catch (error) {
     if (!isPublicContentBootstrapError(error)) {
       throw error
@@ -210,12 +273,12 @@ export async function listPublishedProjects() {
 export async function listPublishedBlogs() {
   try {
     const rows = await db
-      .select()
+      .select(blogCardColumns)
       .from(blogs)
       .where(eq(blogs.status, 'published'))
       .orderBy(desc(blogs.publishedAt), desc(blogs.updatedAt))
 
-    return rows.map(serializeBlog)
+    return rows.map(serializeBlogCard)
   } catch (error) {
     if (!isPublicContentBootstrapError(error)) {
       throw error

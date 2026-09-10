@@ -1,7 +1,12 @@
 import { notFound } from '@tanstack/react-router'
 import { z } from 'zod'
 import { createServerFn } from '@tanstack/react-start'
-import type { SerializedBlog, SerializedProject } from '~/lib/content/types'
+import type {
+  SerializedBlog,
+  SerializedBlogCard,
+  SerializedProject,
+  SerializedProjectCard,
+} from '~/lib/content/types'
 import {
   getHomeContent,
   getPublishedBlogBySlug,
@@ -13,7 +18,7 @@ import {
 export const getHomeContentFn = createServerFn({
   method: 'GET',
   strict: { output: false },
-}).handler(async (): Promise<{ blogs: SerializedBlog[]; projects: SerializedProject[] }> => {
+}).handler(async (): Promise<{ blogs: SerializedBlogCard[]; projects: SerializedProjectCard[] }> => {
   return getHomeContent()
 })
 
@@ -21,14 +26,14 @@ export const listPublishedProjectsFn = createServerFn({
   method: 'GET',
   strict: { output: false },
 }).handler(
-  async (): Promise<SerializedProject[]> => listPublishedProjects(),
+  async (): Promise<SerializedProjectCard[]> => listPublishedProjects(),
 )
 
 export const listPublishedBlogsFn = createServerFn({
   method: 'GET',
   strict: { output: false },
 }).handler(
-  async (): Promise<SerializedBlog[]> => listPublishedBlogs(),
+  async (): Promise<SerializedBlogCard[]> => listPublishedBlogs(),
 )
 
 export const getPublishedProjectBySlugFn = createServerFn({

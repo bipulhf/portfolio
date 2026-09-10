@@ -2,7 +2,7 @@ import { Cloud, Flower, Sun } from "../doodles";
 import { SectionHeader } from "../section-header";
 import { SectionShell } from "../section-shell";
 import { surfaceCardClass } from "../lib/styles";
-import type { SerializedBlog } from "~/lib/content/types";
+import type { SerializedBlogCard } from "~/lib/content/types";
 
 const coverTones = ["bg-peach", "bg-mint", "bg-sky"] as const;
 
@@ -32,7 +32,7 @@ function formatPublishedDate(value: string | null) {
   }).format(new Date(value));
 }
 
-export function Blog({ items }: Readonly<{ items: SerializedBlog[] }>) {
+export function Blog({ items }: Readonly<{ items: SerializedBlogCard[] }>) {
   return (
     <SectionShell accent="blog" id="blog">
       <SectionHeader

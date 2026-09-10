@@ -10,7 +10,7 @@ import {
 import { MinimalProjectGrid } from '~/components/public/minimal-project-grid'
 import { usePublicTheme } from "~/components/public/public-theme";
 import { cx, surfaceCardClass } from "~/components/portfolio/lib/styles";
-import type { SerializedProject } from "~/lib/content/types";
+import type { SerializedProjectCard } from "~/lib/content/types";
 
 const coverColors = [
   "bg-mint",
@@ -46,7 +46,7 @@ export function ProjectGrid({
 }: Readonly<{
   emptyText?: string;
   emptyTitle?: string;
-  items: SerializedProject[];
+  items: SerializedProjectCard[];
 }>) {
   const { theme } = usePublicTheme();
 

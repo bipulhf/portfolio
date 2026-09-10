@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { cx } from '~/components/portfolio/lib/styles'
-import type { SerializedProject } from '~/lib/content/types'
+import type { SerializedProjectCard } from '~/lib/content/types'
 
 function formatProjectDate(value: string | null) {
   if (!value) {
@@ -21,7 +21,7 @@ export function MinimalProjectGrid({
 }: Readonly<{
   emptyText?: string
   emptyTitle?: string
-  items: SerializedProject[]
+  items: SerializedProjectCard[]
   mode?: 'home' | 'index'
 }>) {
   if (mode === 'home') {

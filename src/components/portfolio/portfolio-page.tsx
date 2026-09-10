@@ -1,5 +1,5 @@
 import { Hero } from './hero'
-import type { SerializedBlog, SerializedProject } from '~/lib/content/types'
+import type { SerializedBlogCard, SerializedProjectCard } from '~/lib/content/types'
 import { SiteShell } from '~/components/public/site-shell'
 import { MinimalHome } from '~/components/public/minimal-home'
 import { MinimalHero } from '~/components/public/minimal-hero'
@@ -15,8 +15,8 @@ export function PortfolioPage({
   blogs,
   projects,
 }: Readonly<{
-  blogs: SerializedBlog[]
-  projects: SerializedProject[]
+  blogs: SerializedBlogCard[]
+  projects: SerializedProjectCard[]
 }>) {
   const { theme } = usePublicTheme()
 

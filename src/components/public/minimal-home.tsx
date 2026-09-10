@@ -2,14 +2,17 @@ import { Link } from "@tanstack/react-router";
 import { CONTACT_LINKS } from "~/components/portfolio/lib/content";
 import { MinimalWindowControls } from "~/components/public/minimal-window-controls";
 import { pageContainerClass } from "~/components/portfolio/lib/styles";
-import type { SerializedBlog, SerializedProject } from "~/lib/content/types";
+import type {
+  SerializedBlogCard,
+  SerializedProjectCard,
+} from "~/lib/content/types";
 
 export function MinimalHome({
   blogs,
   projects,
 }: Readonly<{
-  blogs: SerializedBlog[];
-  projects: SerializedProject[];
+  blogs: SerializedBlogCard[];
+  projects: SerializedProjectCard[];
 }>) {
   const featuredProjects = projects
     .filter((project) => project.featured)

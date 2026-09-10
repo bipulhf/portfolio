@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import type { SerializedBlog } from '~/lib/content/types'
+import type { SerializedBlogCard } from '~/lib/content/types'
 
 function formatBlogDate(value: string | null) {
   if (!value) {
@@ -20,7 +20,7 @@ export function MinimalBlogGrid({
 }: Readonly<{
   emptyText?: string
   emptyTitle?: string
-  items: SerializedBlog[]
+  items: SerializedBlogCard[]
 }>) {
   return (
     <div className="theme-only-minimal minimal-blog-grid" data-reveal-sequence>

@@ -38,3 +38,7 @@ export type SerializedBlog = {
   createdAt: string
   updatedAt: string
 }
+
+export type SerializedProjectCard = Omit<SerializedProject, 'bodyHtml' | 'bodyJson'>
+
+export type SerializedBlogCard = Omit<SerializedBlog, 'bodyHtml' | 'bodyJson'>

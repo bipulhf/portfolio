@@ -3,7 +3,7 @@ import { Cloud, Flower, Sun } from "~/components/portfolio/doodles";
 import { MinimalBlogGrid } from '~/components/public/minimal-blog-grid'
 import { usePublicTheme } from "~/components/public/public-theme";
 import { surfaceCardClass } from "~/components/portfolio/lib/styles";
-import type { SerializedBlog } from "~/lib/content/types";
+import type { SerializedBlogCard } from "~/lib/content/types";
 
 const coverTones = ["bg-peach", "bg-mint", "bg-sky"] as const;
 
@@ -40,7 +40,7 @@ export function BlogGrid({
 }: Readonly<{
   emptyText?: string;
   emptyTitle?: string;
-  items: SerializedBlog[];
+  items: SerializedBlogCard[];
 }>) {
   const { theme } = usePublicTheme();
 

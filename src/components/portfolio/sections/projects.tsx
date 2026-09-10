@@ -3,7 +3,7 @@ import { Cloud, Flower, Heart, Spiral, Star, Sun } from "../doodles";
 import { SectionHeader } from "../section-header";
 import { SectionShell } from "../section-shell";
 import { surfaceCardClass } from "../lib/styles";
-import type { SerializedProject } from "~/lib/content/types";
+import type { SerializedProjectCard } from "~/lib/content/types";
 
 const coverColors = [
   "bg-mint",
@@ -32,7 +32,7 @@ function ProjectCover({ index }: Readonly<{ index: number }>) {
   return covers[index % covers.length];
 }
 
-export function Projects({ items }: Readonly<{ items: SerializedProject[] }>) {
+export function Projects({ items }: Readonly<{ items: SerializedProjectCard[] }>) {
   return (
     <SectionShell accent="projects" id="projects">
       <SectionHeader
