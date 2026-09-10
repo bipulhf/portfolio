@@ -102,7 +102,7 @@ export async function createWorkspaceRenderer(
     new ShadowMaterial({ color: "#334b33", opacity: 0.16 }),
   );
   floor.rotation.x = -Math.PI / 2;
-  floor.position.y = -3.8;
+  floor.position.y = -1.9;
   floor.receiveShadow = true;
   scene.add(floor);
 
@@ -249,8 +249,7 @@ export async function createWorkspaceRenderer(
     const noteProgress = reducedMotion
       ? 0
       : MathUtils.clamp(progress - 3.6, 0, 1.1);
-    const noteCover = world.notes.children[world.notes.children.length - 3];
-    if (noteCover) noteCover.rotation.z = -0.14 - noteProgress * 0.45;
+    world.noteCover.rotation.z = 0.06 + noteProgress * 0.92;
     const angle =
       0.6 +
       yaw +

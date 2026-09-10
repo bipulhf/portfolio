@@ -17,19 +17,25 @@ import {
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 import { WORLD_LOCATIONS } from "./world-locations";
 
-export function createIslandEnvironment() {
+import { createIslandMaterials } from "./island-materials";
+import { createDetailBatches } from "./detail-batches";
+import { addArchitecture } from "./island-architecture";
+import { addIslandLife } from "./island-life";
+import { addPlanting } from "./island-planting";
+import type { Stage } from "./schedule";
+
+export async function createIslandEnvironment(stage: Stage) {
   const root = new Group();
-  const textures: CanvasTexture[] = [];
+  const materials = createIslandMaterials();
+  const textures = materials.textures;
   const box = new BoxGeometry(1, 1, 1);
-  const stone = new MeshStandardMaterial({ color: "#dfd3b9", roughness: 0.88 });
-  const pathMaterial = new MeshStandardMaterial({
-    color: "#e9d9b9",
-    roughness: 0.92,
-  });
-  const ivory = new MeshStandardMaterial({ color: "#f3e7cf", roughness: 0.72 });
-  const dark = new MeshStandardMaterial({ color: "#344b43", roughness: 0.65 });
-  const terra = new MeshStandardMaterial({ color: "#b96143", roughness: 0.65 });
-  const grass = new MeshStandardMaterial({ color: "#a6b58b", roughness: 1 });
+  const stone = materials.stone;
+  const pathMaterial = materials.plaster;
+  const ivory = materials.plaster;
+  const dark = materials.metal;
+  const terra = materials.terra;
+  const grass = materials.lawn;
+  await stage();
 
   function mesh(
     geometry: Mesh["geometry"],
@@ -126,7 +132,7 @@ export function createIslandEnvironment() {
   block([8.0, 0.17, 0.17], [0, 3.45, 2.8], dark, studio);
   block([0.17, 0.17, 5.7], [3.8, 3.45, 0], dark, studio);
   for (const x of [-2.5, 0, 2.5])
-    block([1.7, 1.55, 0.07], [x, 2.0, -2.92], dark, studio);
+    block([1.7, 1.55, 0.07], [x, 2.0, -2.92], materials.glass, studio);
   label(studio, "01 / BIPUL'S STUDIO", [0, 3.5, 2.9], 4.7);
 
   const gallery = building(1);
@@ -208,58 +214,15 @@ export function createIslandEnvironment() {
   block([6.5, 0.2, 3.0], [0, 4.02, -0.85], ivory, post);
   label(post, "06 / SAY HELLO", [0, 3.85, 2.05], 4.2);
 
-  // Instanced trees add a landscape with only two draw calls.
-  const trees: [number, number][] = [
-    [-11, 8],
-    [-11, 4],
-    [-11.5, -1],
-    [-11, -10],
-    [-9, -12],
-    [-6, -13.5],
-    [-3.5, -14],
-    [4, -14],
-    [7, -13],
-    [10, -12],
-    [11, -8.5],
-    [11.3, -2],
-    [11.5, 1],
-    [11, 8],
-    [5, 8],
-    [3, 6.5],
-    [-4, 8.5],
-    [-4, -7.5],
-  ];
-  const trunks = new InstancedMesh(
-    new CylinderGeometry(0.1, 0.14, 1.2, 7),
-    dark,
-    trees.length,
-  );
-  const leaves = new InstancedMesh(
-    new SphereGeometry(1, 10, 8),
-    new MeshStandardMaterial({ color: "#6f936b", roughness: 0.9 }),
-    trees.length * 2,
-  );
-  trees.forEach(([x, z], index) => {
-    const size = 0.8 + (index % 3) * 0.16;
-    dummy.position.set(x, 0.32, z);
-    dummy.scale.set(1, 1, 1);
-    dummy.rotation.set(0, 0, 0);
-    dummy.updateMatrix();
-    trunks.setMatrixAt(index, dummy.matrix);
-    for (let layer = 0; layer < 2; layer++) {
-      dummy.position.set(x + layer * 0.22, 1.25 + layer * 0.63, z);
-      dummy.scale.set(
-        size * (1 - layer * 0.2),
-        size * 0.95,
-        size * (1 - layer * 0.2),
-      );
-      dummy.updateMatrix();
-      leaves.setMatrixAt(index * 2 + layer, dummy.matrix);
-    }
-  });
-  trunks.castShadow = true;
-  leaves.castShadow = true;
-  root.add(trunks, leaves);
+  const details = createDetailBatches(root);
+  await stage();
+  addArchitecture(details, materials);
+  await stage();
+  addIslandLife(details, materials);
+  await stage();
+  addPlanting(details, materials);
+  await stage();
+  details.finish();
 
   // Lamps mark the paths without adding expensive point lights.
   const lampGlow = new MeshBasicMaterial({ color: "#fff0be" });

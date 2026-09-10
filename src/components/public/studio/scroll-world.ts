@@ -91,13 +91,21 @@ export async function createScrollWorld(
     : [{ title: "The next idea", techStack: ["Made by Bipul"], slug: "" }];
   cards.forEach((project, i) => {
     const panel = new Group();
-    panel.position.set((i - 1) * 1.9, 0.9 + (i % 2) * 1.3, -i * 0.7);
-    panel.rotation.set(-0.07, (i - 1) * -0.23, (i - 1) * -0.1);
+    panel.position.set((i - 1) * 1.9, 1.6 + (i % 2) * 0.35, -i * 0.7);
+    panel.rotation.set(0, (i - 1) * -0.23, 0);
     panel.userData.destination = "projects";
     panel.userData.slug = project.slug;
     gallery.add(panel);
     floating.push(panel);
     block(panel, [3.8, 2.65, 0.16], [0, 0, 0], i === 1 ? orange : dark);
+    const standHeight = panel.position.y - 1.4;
+    block(panel, [1.25, 0.14, 0.65], [0, -panel.position.y + 0.13, 0], dark);
+    block(
+      panel,
+      [0.12, standHeight, 0.12],
+      [0, -1.325 - standHeight / 2, 0],
+      dark,
+    );
     const artwork = texture((context) => {
       const background = ["#dce5da", "#f1ddc9", "#dce9ed"][i];
       context.fillStyle = background;
@@ -186,6 +194,8 @@ export async function createScrollWorld(
     );
     const medal = new Mesh(new TorusGeometry(0.57, 0.19, 12, 40), gold);
     medal.position.set((i - 1) * 1.7, height + 0.5, 0);
+    block(wins, [0.12, 0.48, 0.12], [(i - 1) * 1.7, height - 0.11, 0], gold);
+    block(wins, [0.62, 0.09, 0.5], [(i - 1) * 1.7, height - 0.355, 0], dark);
     medal.castShadow = true;
     wins.add(medal);
   }
@@ -193,26 +203,18 @@ export async function createScrollWorld(
   await stage();
   const notes = addChapter("blog");
   block(notes, [3.4, 0.17, 4.1], [0, 0, 0], orange);
+  block(notes, [3.16, 0.2, 3.9], [0.04, 0.16, 0], paper);
   for (let i = 0; i < 7; i++) {
-    const page = block(
-      notes,
-      [3.16, 0.035, 3.9],
-      [0.04, 0.12 + i * 0.1, 0],
-      paper,
-    );
-    page.rotation.y = i * -0.025;
-    const line = block(
-      notes,
-      [1.7, 0.016, 0.04],
-      [-0.25, 0.15 + i * 0.1, -0.9],
-      dark,
-    );
-    line.rotation.y = i * -0.025;
+    block(notes, [3.17, 0.007, 0.012], [0.04, 0.08 + i * 0.025, 1.955], blue);
+    block(notes, [1.8, 0.008, 0.026], [0.15, 0.267, -1.2 + i * 0.25], dark);
   }
-  const cover = block(notes, [3.4, 0.12, 4.1], [0, 0.95, 0], orange);
-  cover.rotation.z = -0.14;
-  block(notes, [1.5, 0.035, 0.09], [-0.35, 1.17, -0.7], paper);
-  block(notes, [0.9, 0.035, 0.09], [-0.65, 1.19, -0.4], paper);
+  const noteCover = new Group();
+  noteCover.position.set(-1.7, 0.29, 0);
+  notes.add(noteCover);
+  block(noteCover, [3.4, 0.09, 4.1], [1.7, 0, 0], orange);
+  block(noteCover, [1.5, 0.012, 0.09], [1.35, 0.051, -0.7], paper);
+  block(noteCover, [0.9, 0.012, 0.09], [1.05, 0.051, -0.4], paper);
+  block(notes, [0.13, 0.012, 0.85], [0.9, 0.267, 1.75], orange);
   notes.rotation.y = -0.25;
 
   await stage();
@@ -243,9 +245,9 @@ export async function createScrollWorld(
   contact.add(ring);
 
   await stage();
-  const island = createIslandEnvironment();
+  const island = await createIslandEnvironment(stage);
   textures.push(...island.textures);
-  const heights = [0, 0, 0.8, 0.45, 0.65, 0.45];
+  const heights = [0, 0, 0.8, 0.45, 0.74, 0.45];
   chapters.forEach((group, index) => {
     const [x, , z] = WORLD_LOCATIONS[index].position;
     group.position.set(x, heights[index], z + (index === 4 ? 0.5 : 0));
@@ -267,6 +269,7 @@ export async function createScrollWorld(
     floating,
     knot,
     notes,
+    noteCover,
     contact,
     workspace: workspace.root,
   };
