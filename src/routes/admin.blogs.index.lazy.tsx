@@ -1,0 +1,77 @@
+import { useQuery } from '@tanstack/react-query'
+import { createLazyFileRoute, Link } from '@tanstack/react-router'
+import { AdminPagePending } from '~/components/admin/admin-page-pending'
+import { AdminShell } from '~/components/admin/admin-shell'
+import {
+  AdminActionLink,
+  AdminCard,
+  AdminEmptyState,
+  AdminSectionHeading,
+  AdminStatusPill,
+} from '~/components/admin/primitives'
+import { listBlogsRequest, queryKeys } from '~/lib/admin-queries'
+
+export const Route = createLazyFileRoute('/admin/blogs/')({
+  pendingComponent: () => (
+    <AdminPagePending subtitle="Loading your drafts and published writing." title="Blog posts" />
+  ),
+  component: AdminBlogsPage,
+})
+
+function AdminBlogsPage() {
+  const blogsQuery = useQuery({
+    queryKey: queryKeys.blogs,
+    queryFn: listBlogsRequest,
+  })
+
+  const blogs = blogsQuery.data ?? []
+
+  return (
+    <AdminShell
+      subtitle="Write, revise, and publish pieces for the public blog."
+      title="Blog posts"
+    >
+      {blogs.length ? (
+        <AdminCard>
+          <AdminSectionHeading
+            action={<AdminActionLink to="/admin/blogs/new">New post</AdminActionLink>}
+            eyebrow="content"
+            title="All posts"
+          />
+          <div className="space-y-3">
+            {blogs.map((blog) => (
+              <Link
+                className="flex flex-col items-start gap-3 rounded-[1.2rem] border border-ink/12 bg-white/60 px-4 py-4 text-ink no-underline transition-colors hover:bg-white sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+                key={blog.id}
+                preload="intent"
+                to="/admin/blogs/$id/edit"
+                params={{ id: blog.id }}
+              >
+                <div className="min-w-0 w-full sm:w-auto">
+                  <div className="font-hand text-[1.25rem] text-ink">{blog.title}</div>
+                  <div className="mt-1 text-sm text-ink-soft">{blog.slug}</div>
+                  <div className="mt-2 line-clamp-2 max-w-3xl text-sm text-ink-soft">
+                    {blog.excerpt}
+                  </div>
+                </div>
+                <div className="flex w-full flex-wrap items-center justify-between gap-3 sm:w-auto sm:justify-start">
+                  <span className="inline-flex rounded-full border border-ink/15 bg-white/70 px-3 py-1 font-hand text-sm text-ink-soft">
+                    {blog.readingTimeMinutes} min
+                  </span>
+                  <AdminStatusPill status={blog.status} />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </AdminCard>
+      ) : (
+        <AdminEmptyState
+          actionLabel="Create your first post"
+          actionTo="/admin/blogs/new"
+          description="Create a post draft here, then publish it when it is ready for the public blog."
+          title="No posts yet"
+        />
+      )}
+    </AdminShell>
+  )
+}

@@ -1,14 +1,3 @@
-import { Outlet, createFileRoute } from '@tanstack/react-router'
-import { AdminAppProviders } from '~/components/app/admin-app-providers'
+import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/admin')({
-  component: AdminLayout,
-})
-
-function AdminLayout() {
-  return (
-    <AdminAppProviders>
-      <Outlet />
-    </AdminAppProviders>
-  )
-}
+export const Route = createFileRoute('/admin')({})
