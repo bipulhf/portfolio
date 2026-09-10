@@ -62,7 +62,7 @@ const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any).lazy(() => import('./routes/admin.lazy').then((d) => d.Route))
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -82,7 +82,7 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
-} as any)
+} as any).lazy(() => import('./routes/admin.index.lazy').then((d) => d.Route))
 const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -107,7 +107,7 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/login',
   path: '/login',
   getParentRoute: () => AdminRoute,
-} as any)
+} as any).lazy(() => import('./routes/admin.login.lazy').then((d) => d.Route))
 const AdminBlogsRoute = AdminBlogsRouteImport.update({
   id: '/blogs',
   path: '/blogs',
@@ -117,12 +117,16 @@ const AdminProjectsIndexRoute = AdminProjectsIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminProjectsRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/admin.projects.index.lazy').then((d) => d.Route),
+)
 const AdminBlogsIndexRoute = AdminBlogsIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminBlogsRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/admin.blogs.index.lazy').then((d) => d.Route),
+)
 const ApiAuthSessionRoute = ApiAuthSessionRouteImport.update({
   id: '/api/auth/session',
   path: '/api/auth/session',
@@ -152,12 +156,16 @@ const AdminProjectsNewRoute = AdminProjectsNewRouteImport.update({
   id: '/new',
   path: '/new',
   getParentRoute: () => AdminProjectsRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/admin.projects.new.lazy').then((d) => d.Route),
+)
 const AdminBlogsNewRoute = AdminBlogsNewRouteImport.update({
   id: '/new',
   path: '/new',
   getParentRoute: () => AdminBlogsRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/admin.blogs.new.lazy').then((d) => d.Route),
+)
 const ApiAdminProjectsIdRoute = ApiAdminProjectsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -172,12 +180,16 @@ const AdminProjectsIdEditRoute = AdminProjectsIdEditRouteImport.update({
   id: '/$id/edit',
   path: '/$id/edit',
   getParentRoute: () => AdminProjectsRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/admin.projects.$id.edit.lazy').then((d) => d.Route),
+)
 const AdminBlogsIdEditRoute = AdminBlogsIdEditRouteImport.update({
   id: '/$id/edit',
   path: '/$id/edit',
   getParentRoute: () => AdminBlogsRoute,
-} as any)
+} as any).lazy(() =>
+  import('./routes/admin.blogs.$id.edit.lazy').then((d) => d.Route),
+)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
