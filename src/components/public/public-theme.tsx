@@ -12,6 +12,7 @@ import {
   isPublicTheme,
   PUBLIC_THEME_COOKIE_KEY,
   PUBLIC_THEME_COOKIE_MAX_AGE,
+  PUBLIC_THEME_FONT_STYLESHEETS,
   PUBLIC_THEME_STORAGE_KEY,
   themeOnlyClass,
   type PublicTheme,
@@ -299,6 +300,22 @@ function getBrowserTheme() {
 function applyThemeToDocument(theme: PublicTheme) {
   document.documentElement.dataset.publicTheme = theme;
   window.__PUBLIC_THEME__ = theme;
+  ensureThemeFontStylesheet(theme);
+}
+
+// The document ships with the fonts for the theme it was rendered in. Switching
+// themes in the browser needs the other family set fetched on the spot.
+function ensureThemeFontStylesheet(theme: PublicTheme) {
+  const href = PUBLIC_THEME_FONT_STYLESHEETS[theme];
+
+  if (document.querySelector(`link[rel="stylesheet"][href="${href}"]`)) {
+    return;
+  }
+
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = href;
+  document.head.appendChild(link);
 }
 
 function persistTheme(theme: PublicTheme) {

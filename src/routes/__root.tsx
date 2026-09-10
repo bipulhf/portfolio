@@ -17,12 +17,38 @@ import {
   PUBLIC_THEME_BOOTSTRAP_SCRIPT,
 } from "~/components/public/public-theme";
 import { getInitialPublicThemeFn } from "~/lib/server-fns/public-theme";
+import {
+  DEFAULT_PUBLIC_THEME,
+  PUBLIC_THEME_FONT_STYLESHEETS,
+  type PublicTheme,
+} from "~/lib/public-theme";
+
+// Only the rendered theme's families are worth blocking the first paint for.
+// Preconnects cover both hosts so a theme switch does not pay for a cold
+// connection.
+function fontLinksFor(theme: PublicTheme) {
+  return [
+    { rel: "preconnect", href: "https://fonts.googleapis.com" },
+    {
+      rel: "preconnect",
+      href: "https://fonts.gstatic.com",
+      crossOrigin: "anonymous" as const,
+    },
+    { rel: "preconnect", href: "https://api.fontshare.com" },
+    {
+      rel: "preconnect",
+      href: "https://cdn.fontshare.com",
+      crossOrigin: "anonymous" as const,
+    },
+    { rel: "stylesheet", href: PUBLIC_THEME_FONT_STYLESHEETS[theme] },
+  ];
+}
 
 export const Route = createRootRoute({
   loader: async () => ({
     initialTheme: await getInitialPublicThemeFn(),
   }),
-  head: () => ({
+  head: ({ loaderData }) => ({
     meta: [
       { charSet: "utf-8" },
       {
@@ -43,20 +69,7 @@ export const Route = createRootRoute({
       { rel: "icon", type: "image/png", href: "/favicon.png" },
       { rel: "shortcut icon", href: "/favicon.png" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      {
-        rel: "preconnect",
-        href: "https://fonts.gstatic.com",
-        crossOrigin: "anonymous",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap",
-      },
-      {
-        rel: "stylesheet",
-        href: "https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=satoshi@400,500,700,900&display=swap",
-      },
+      ...fontLinksFor(loaderData?.initialTheme ?? DEFAULT_PUBLIC_THEME),
     ],
   }),
   errorComponent: DefaultCatchBoundary,
