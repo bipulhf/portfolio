@@ -101,7 +101,7 @@ export const PUBLIC_THEME_CONFIG: Record<PublicTheme, PublicThemeConfig> = {
       "Made with a box of crayons and careful thinking. © YEAR Bipul Hf",
     hero: {
       artAlt: "Portrait of Bipul in a crayon illustration style",
-      artSrc: "/my-image.png",
+      artSrc: "/my-image.webp",
       ctaPrimary: "See selected work →",
       ctaSecondary: "Start a conversation",
       intro: "say hello to",

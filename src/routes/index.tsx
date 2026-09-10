@@ -32,7 +32,7 @@ export const Route = createFileRoute("/")({
     baseMeta({
       description:
         "A crayon-styled portfolio for Bipul featuring projects, writing, and experience.",
-      ogImage: "/home-crayon.png",
+      ogImage: "/home-crayon.jpg",
       origin: loaderData?.siteOrigin,
       pathname: "/",
       title: "Bipul — Portfolio",

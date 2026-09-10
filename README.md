@@ -5,8 +5,8 @@ A brand-first portfolio and CMS built with TanStack Start. The public site prese
 ## Theme Preview
 
 <p align="center">
-  <img src="./public/home-crayon.png" alt="Crayon theme homepage preview" width="48%" />
-  <img src="./public/home-minimal.png" alt="Minimal theme homepage preview" width="48%" />
+  <img src="./public/home-crayon.jpg" alt="Crayon theme homepage preview" width="48%" />
+  <img src="./public/home-minimal.jpg" alt="Minimal theme homepage preview" width="48%" />
 </p>
 
 ## Overview

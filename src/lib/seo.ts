@@ -10,7 +10,7 @@ type SeoRecord = {
   title: string;
 };
 
-const DEFAULT_OG_IMAGE_PATH = "/home-crayon.png";
+const DEFAULT_OG_IMAGE_PATH = "/home-crayon.jpg";
 
 function resolveOrigin(origin?: string | null) {
   if (origin) {

@@ -42,8 +42,11 @@ export function Hero() {
                 <img
                   alt={PUBLIC_THEME_CONFIG.crayon.hero.artAlt}
                   className="block h-full w-full scale-[1.02] object-cover object-center transition-transform duration-700 ease-out-soft hover:scale-[1.045]"
+                  fetchPriority="high"
+                  height={900}
                   loading="eager"
                   src={PUBLIC_THEME_CONFIG.crayon.hero.artSrc}
+                  width={900}
                 />
               </div>
             </div>
