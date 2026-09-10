@@ -45,7 +45,9 @@ export function Hero() {
                   fetchPriority="high"
                   height={900}
                   loading="eager"
+                  sizes="(min-width: 1024px) 26rem, (min-width: 640px) 22rem, 19.5rem"
                   src={PUBLIC_THEME_CONFIG.crayon.hero.artSrc}
+                  srcSet="/my-image-450.webp 450w, /my-image-640.webp 640w, /my-image.webp 900w"
                   width={900}
                 />
               </div>
