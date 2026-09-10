@@ -1,3 +1,4 @@
+import { lazy } from "react";
 import { Hero } from './hero'
 import type { SerializedBlogCard, SerializedProjectCard } from '~/lib/content/types'
 import { SiteShell } from '~/components/public/site-shell'
@@ -11,6 +12,8 @@ import { Contact } from './sections/contact'
 import { Projects } from './sections/projects'
 import { Skills } from './sections/skills'
 
+const StudioHome = lazy(() => import("~/components/public/studio/studio-home"));
+
 export function PortfolioPage({
   blogs,
   projects,
@@ -19,6 +22,8 @@ export function PortfolioPage({
   projects: SerializedProjectCard[]
 }>) {
   const { theme } = usePublicTheme()
+
+  if (theme === 'studio') return <SiteShell><StudioHome blogs={blogs} projects={projects} /></SiteShell>
 
   return (
     <SiteShell>

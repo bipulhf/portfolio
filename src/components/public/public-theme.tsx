@@ -14,6 +14,7 @@ import {
   PUBLIC_THEME_COOKIE_MAX_AGE,
   PUBLIC_THEME_FONT_STYLESHEETS,
   PUBLIC_THEME_STORAGE_KEY,
+  PUBLIC_THEME_OPTIONS,
   themeOnlyClass,
   type PublicTheme,
 } from "~/lib/public-theme";
@@ -96,7 +97,7 @@ declare global {
 
 const PUBLIC_THEME_TRANSITION_MS = 420;
 
-export const PUBLIC_THEME_CONFIG: Record<PublicTheme, PublicThemeConfig> = {
+const BASE_THEME_CONFIG: Record<Exclude<PublicTheme, "studio">, PublicThemeConfig> = {
   crayon: {
     footerText:
       "Made with a box of crayons and careful thinking. © YEAR Bipul Hf",
@@ -249,6 +250,23 @@ export const PUBLIC_THEME_CONFIG: Record<PublicTheme, PublicThemeConfig> = {
   },
 };
 
+export const PUBLIC_THEME_CONFIG: Record<PublicTheme, PublicThemeConfig> = {
+  ...BASE_THEME_CONFIG,
+  studio: {
+    ...BASE_THEME_CONFIG.minimal,
+    footerText: "Designed with depth. Built with care. © YEAR Bipul Hf",
+    meta: {
+      home: { title: "Bipul | Studio 3D", description: "Step inside Bipul's studio. Software engineering, selected projects, and notes on building for the web." },
+      projects: { title: "Selected work | Bipul", description: "Projects and engineering case studies from Bipul's studio." },
+      blog: { title: "Field notes | Bipul", description: "Notes on product engineering, interfaces, and building software by Bipul." },
+    },
+    pages: {
+      projects: { eyebrow: "01 / The collection", title: "Selected work.", description: "Ideas turned into working software. A closer look at the products, decisions, and details.", primaryLabel: "Back to studio", secondaryLabel: "Read field notes" },
+      blog: { eyebrow: "02 / The notebook", title: "Field notes.", description: "What I learn along the way. Thoughts on interfaces, engineering, and making things work.", primaryLabel: "Back to studio", secondaryLabel: "Explore projects" },
+    },
+  },
+};
+
 const PublicThemeContext = createContext<PublicThemeContextValue | null>(null);
 
 function getCookieTheme() {
@@ -343,6 +361,7 @@ export const PUBLIC_THEME_BOOTSTRAP_SCRIPT = `(() => {
   const key = '${PUBLIC_THEME_STORAGE_KEY}';
   const cookieKey = '${PUBLIC_THEME_COOKIE_KEY}';
   const fallback = '${DEFAULT_PUBLIC_THEME}';
+  const themes = ${JSON.stringify(PUBLIC_THEME_OPTIONS.map((option) => option.value))};
   const cookiePrefix = cookieKey + '=';
 
   function readThemeFromCookie() {
@@ -356,7 +375,7 @@ export const PUBLIC_THEME_BOOTSTRAP_SCRIPT = `(() => {
     }
 
     const theme = decodeURIComponent(match.slice(cookiePrefix.length));
-    return theme === 'minimal' || theme === 'crayon' ? theme : null;
+    return themes.includes(theme) ? theme : null;
   }
 
   try {
@@ -364,7 +383,7 @@ export const PUBLIC_THEME_BOOTSTRAP_SCRIPT = `(() => {
     const cookieTheme = readThemeFromCookie();
     const theme =
       cookieTheme ??
-      (stored === 'minimal' || stored === 'crayon' ? stored : fallback);
+      (themes.includes(stored) ? stored : fallback);
     document.documentElement.dataset.publicTheme = theme;
     window.__PUBLIC_THEME__ = theme;
   } catch {
@@ -457,7 +476,8 @@ export function PublicThemeProvider({
       },
       theme,
       toggleTheme: () => {
-        const nextTheme = theme === "crayon" ? "minimal" : "crayon";
+        const index = PUBLIC_THEME_OPTIONS.findIndex((option) => option.value === theme);
+        const nextTheme = PUBLIC_THEME_OPTIONS[(index + 1) % PUBLIC_THEME_OPTIONS.length].value;
         updateTheme(nextTheme, { animate: true });
         persistTheme(nextTheme);
       },

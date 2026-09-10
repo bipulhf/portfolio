@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { lazy, Suspense, type ReactNode } from "react";
 import { RouteProgress } from "~/components/loaders/route-progress";
 import { BackgroundDoodles } from "~/components/portfolio/background-doodles";
 import { Footer } from "~/components/portfolio/footer";
@@ -10,10 +10,16 @@ import { Nav } from "~/components/portfolio/nav";
 import { FloatingThemeToggle } from "~/components/public/floating-theme-toggle";
 import { usePublicTheme } from "~/components/public/public-theme";
 
+const StudioShell = lazy(() => import("./studio/studio-shell"));
+
 export function SiteShell({ children }: Readonly<{ children: ReactNode }>) {
   const { theme } = usePublicTheme();
   const isMinimal = theme === "minimal";
-  useReveal(true, [theme]);
+  useReveal(theme !== "studio", [theme]);
+
+  if (theme === "studio") {
+    return <Suspense fallback={<div role="status" style={{ minHeight: "100vh", padding: "3rem", background: "#f4f1ea", color: "#293936" }}>Opening the studio…</div>}><StudioShell>{children}</StudioShell></Suspense>;
+  }
 
   return (
     <div className="public-site relative isolate z-[1] min-h-screen overflow-x-clip">

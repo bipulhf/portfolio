@@ -1,10 +1,8 @@
+import { PUBLIC_THEME_OPTIONS } from "~/lib/public-theme";
 import { usePublicTheme } from '~/components/public/public-theme'
 import { cx } from '~/components/portfolio/lib/styles'
 
-const options = [
-  { label: 'Crayon', value: 'crayon' },
-  { label: 'Minimal', value: 'minimal' },
-] as const
+const options = PUBLIC_THEME_OPTIONS
 
 export function ThemeToggle({
   className,

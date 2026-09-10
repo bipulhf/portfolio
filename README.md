@@ -1,6 +1,6 @@
 # Bipul Portfolio
 
-A brand-first portfolio and CMS built with TanStack Start. The public site presents projects, writing, experience, and contact details in two switchable public themes, while the admin workspace lets a single owner manage blog posts and project case studies.
+A brand-first portfolio and CMS built with TanStack Start. The public site presents projects, writing, experience, and contact details in three switchable public themes, while the admin workspace lets a single owner manage blog posts and project case studies.
 
 ## Theme Preview
 
@@ -37,7 +37,7 @@ The original handoff/prototype is kept in [`my-portfolio/`](./my-portfolio) for 
 
 ## Features
 
-- Two public presentation modes: crayon and minimal
+- Three public presentation modes: Crayon, Minimal, and Studio 3D
 - Distinctive portfolio landing page with modular section components
 - Admin dashboard for managing projects and blog posts
 - Rich text editing with Lexical for long-form project and blog content
@@ -45,6 +45,27 @@ The original handoff/prototype is kept in [`my-portfolio/`](./my-portfolio) for 
 - Custom-themed image upload workflow backed by UploadThing Cloud
 - Dynamic SEO metadata, JSON-LD, `robots.txt`, and `sitemap.xml`
 - Responsive public site and admin workspace
+
+## Studio 3D
+
+Select **Studio 3D** in the floating theme switcher. The theme covers the homepage, project and blog archives, detail pages, and loading states. Your choice is saved in a cookie and local storage.
+
+The homepage is a connected Three.js island with six permanent locations: the studio, project gallery, curiosity garden, courtyard, reading room, and post office. Paths connect the buildings. Normal browser scrolling moves the camera between them, with a short caption anchored to each landmark and a masked heading entrance on arrival. The bio and achievement details open on request. Project displays open real case studies. Text and links remain accessible HTML.
+
+Choose "Explore the island" to pause the story and visit buildings through the map or labels anchored to their 3D positions. Drag to rotate, use the zoom controls or mouse wheel to get closer, and return to the story at the same scroll position. Chapter links provide direct navigation. Touch scrolling stays available in story mode until "Rotate" is enabled.
+
+Performance choices:
+
+- Studio components and CSS load only when this theme is selected. Three.js is a separate dynamic import used by the homepage.
+- Rendering runs on demand for scrolling, camera interaction, and resizing. A short, time-based interpolation settles scroll transitions, then the animation loop stops. Hidden tabs and offscreen scenes do not render.
+- Pixel ratio is capped at 1.5 on desktop and 1 on touch devices. The world uses frustum culling, shared geometry/materials, and instanced trees, books, and keyboard keys. One cached 1024px shadow map updates when object poses change; a small 128px environment map is generated at startup.
+- Geometry and screen/project textures are generated locally. There are no model downloads or postprocessing passes. Studio reuses Minimal's font families.
+- Leaving the homepage disposes the renderer, geometry, materials, textures, shadows, observers, and input listeners. WebGL failure leaves the content and links usable.
+- Reduced motion uses static chapter compositions, without camera travel, parallax, or object animation. Normal links still work.
+
+The renderer is in `src/components/public/studio/workspace-renderer.ts`, the landmarks in `scroll-world.ts`, the connected terrain and buildings in `island-environment.ts`, and the workstation geometry in `workspace-model.ts`. `world-locations.ts` defines the shared destinations. Theme styles live in `src/styles/studio.css`; the homepage uses `studio-cinematic.css` and `studio-world.css`.
+
+Three.js adds a download and GPU work when Studio 3D is selected. Frame rate depends on the device; the original themes do not load the renderer.
 
 ## Project Structure
 

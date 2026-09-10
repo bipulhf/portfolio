@@ -1,3 +1,4 @@
+import { lazy } from "react";
 import { Link } from "@tanstack/react-router";
 import {
   Cloud,
@@ -39,6 +40,11 @@ function ProjectCover({ index }: Readonly<{ index: number }>) {
   return covers[index % covers.length];
 }
 
+const StudioProjectGrid = lazy(async () => {
+  const module = await import("./studio/studio-grids");
+  return { default: module.StudioProjectGrid };
+});
+
 export function ProjectGrid({
   emptyTitle = "No published projects yet",
   emptyText = "",
@@ -49,6 +55,8 @@ export function ProjectGrid({
   items: SerializedProjectCard[];
 }>) {
   const { theme } = usePublicTheme();
+
+  if (theme === "studio") return <StudioProjectGrid items={items} emptyTitle={emptyTitle} emptyText={emptyText} />;
 
   if (theme === "minimal") {
     return (

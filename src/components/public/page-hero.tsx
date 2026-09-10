@@ -1,9 +1,15 @@
+import { lazy } from "react";
 import type { ReactNode } from 'react'
 import { Link } from '@tanstack/react-router'
 import { ScribbleUnder } from '~/components/portfolio/doodles'
 import { crayonButtonClass, cx, pageContainerClass } from '~/components/portfolio/lib/styles'
 import { PUBLIC_THEME_CONFIG, usePublicTheme } from '~/components/public/public-theme'
 import { MinimalPageHero } from '~/components/public/minimal-page-hero'
+
+const StudioPageHero = lazy(async () => {
+  const module = await import("./studio/studio-pages");
+  return { default: module.StudioPageHero };
+});
 
 export function PageHero({
   actions,
@@ -14,6 +20,8 @@ export function PageHero({
 }>) {
   const { theme } = usePublicTheme()
   const config = PUBLIC_THEME_CONFIG.crayon.pages[page]
+
+  if (theme === "studio") return <StudioPageHero actions={actions} page={page} />;
 
   if (theme === 'minimal') {
     return <MinimalPageHero actions={actions} page={page} />
@@ -63,6 +71,11 @@ export function PageHeroActions({
 }>) {
   const { theme } = usePublicTheme()
   const minimalLabels = PUBLIC_THEME_CONFIG.minimal.pages[page]
+
+  if (theme === "studio") {
+    const labels = PUBLIC_THEME_CONFIG.studio.pages[page];
+    return <><Link className="studio-button" to={primaryTo}>{labels.primaryLabel} ↗</Link>{secondaryTo ? <Link className="studio-text-link" to={secondaryTo}>{labels.secondaryLabel} ↗</Link> : null}</>;
+  }
 
   return (
     <>

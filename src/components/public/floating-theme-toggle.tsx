@@ -1,13 +1,11 @@
+import { PUBLIC_THEME_OPTIONS } from "~/lib/public-theme";
 import { useEffect, useState, useRef } from "react";
 import { usePublicTheme } from "~/components/public/public-theme";
 import { cx } from "~/components/portfolio/lib/styles";
 
 const THEME_SWITCH_DURATION_MS = 420;
 
-const options = [
-  { label: "Crayon", value: "crayon" },
-  { label: "Minimal", value: "minimal" },
-] as const;
+const options = PUBLIC_THEME_OPTIONS;
 
 export function FloatingThemeToggle() {
   const { setTheme, theme } = usePublicTheme();
@@ -79,13 +77,6 @@ export function FloatingThemeToggle() {
           className={cx("public-theme-toggle", isSwitching && "is-switching")}
           role="group"
         >
-          <span
-            aria-hidden="true"
-            className={cx(
-              "public-theme-toggle__thumb",
-              theme === "minimal" && "is-minimal",
-            )}
-          />
           {options.map((option) => {
             const active = theme === option.value;
 

@@ -1,3 +1,4 @@
+import { lazy } from "react";
 import { Link } from '@tanstack/react-router'
 import { MinimalRichContentPage } from '~/components/public/minimal-rich-content'
 import { usePublicTheme } from '~/components/public/public-theme'
@@ -25,6 +26,11 @@ function formatLongDate(value: string | null) {
   }).format(new Date(value))
 }
 
+const StudioRichContentPage = lazy(async () => {
+  const module = await import("./studio/studio-pages");
+  return { default: module.StudioRichContentPage };
+});
+
 export function RichContentPage({
   backLabel,
   backTo,
@@ -51,6 +57,8 @@ export function RichContentPage({
   title: string
 }>) {
   const { theme } = usePublicTheme()
+
+  if (theme === "studio") return <StudioRichContentPage backLabel={backLabel} backTo={backTo} bodyHtml={bodyHtml} coverImagePath={coverImagePath} description={description} detailActions={detailActions} detailFacts={detailFacts} kicker={kicker} tags={tags} meta={meta} title={title} />;
 
   if (theme === 'minimal') {
     return (

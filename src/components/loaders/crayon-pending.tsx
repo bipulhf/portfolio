@@ -1,3 +1,4 @@
+import { usePublicTheme } from "~/components/public/public-theme";
 import { cx, pageContainerClass } from '~/components/portfolio/lib/styles'
 import { MinimalPendingPage } from '~/components/public/minimal-pending'
 
@@ -5,6 +6,9 @@ export function CrayonPendingPage({
   children,
   title = 'Loading',
 }: Readonly<{ children?: React.ReactNode; title?: string }>) {
+  const { theme } = usePublicTheme();
+  if (theme === 'studio') return <div className="studio-container studio-loading" role="status">{title}…</div>;
+
   return (
     <>
       <div className={cx(pageContainerClass, 'theme-only-crayon public-pending-shell py-14 md:py-20')}>

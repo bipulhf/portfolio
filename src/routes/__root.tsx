@@ -9,6 +9,7 @@ import {
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import themeControlsCss from "~/styles/theme-controls.css?url";
 import appCss from "~/styles/app.css?url";
 import { AppProviders } from "~/components/app/app-providers";
 import { DefaultCatchBoundary } from "~/components/errors/default-catch-boundary";
@@ -66,6 +67,7 @@ export const Route = createRootRoute({
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "stylesheet", href: themeControlsCss },
       { rel: "icon", type: "image/png", href: "/favicon.png" },
       { rel: "shortcut icon", href: "/favicon.png" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },

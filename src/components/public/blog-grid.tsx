@@ -1,3 +1,4 @@
+import { lazy } from "react";
 import { Link } from "@tanstack/react-router";
 import { Cloud, Flower, Sun } from "~/components/portfolio/doodles";
 import { MinimalBlogGrid } from '~/components/public/minimal-blog-grid'
@@ -33,6 +34,11 @@ function formatPublishedDate(value: string | null) {
   }).format(new Date(value));
 }
 
+const StudioBlogGrid = lazy(async () => {
+  const module = await import("./studio/studio-grids");
+  return { default: module.StudioBlogGrid };
+});
+
 export function BlogGrid({
   emptyTitle = "No published posts yet",
   emptyText = "",
@@ -43,6 +49,8 @@ export function BlogGrid({
   items: SerializedBlogCard[];
 }>) {
   const { theme } = usePublicTheme();
+
+  if (theme === "studio") return <StudioBlogGrid items={items} emptyTitle={emptyTitle} emptyText={emptyText} />;
 
   if (theme === "minimal") {
     return (
