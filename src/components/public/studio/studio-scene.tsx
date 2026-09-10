@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import type { createWorkspaceRenderer } from "./workspace-renderer";
+import { BuildCancelled, whenIdle } from "./schedule";
 import type { WorkspaceDestination } from "./workspace-model";
 import { WORLD_LOCATIONS } from "./world-locations";
 import type { SerializedProjectCard } from "~/lib/content/types";
@@ -11,9 +12,9 @@ export function StudioScene({
   projects,
 }: Readonly<{ projects: SerializedProjectCard[] }>) {
   const host = useRef<HTMLDivElement>(null);
-  const engine = useRef<ReturnType<typeof createWorkspaceRenderer> | null>(
-    null,
-  );
+  const engine = useRef<Awaited<
+    ReturnType<typeof createWorkspaceRenderer>
+  > | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "unavailable">(
     "loading",
   );
@@ -27,35 +28,44 @@ export function StudioScene({
   useEffect(() => {
     const element = host.current;
     if (!element) return;
-    let cancelled = false;
+    const controller = new AbortController();
     async function start() {
       try {
         const { createWorkspaceRenderer } =
           await import("./workspace-renderer");
-        if (cancelled) return;
-        engine.current = createWorkspaceRenderer(element!, projects, {
-          onSelect: ({ destination, slug }) => {
-            setExploring(false);
-            engine.current?.setExploring(false);
-            if (destination === "projects" && slug)
-              void navigate({ to: "/projects/$slug", params: { slug } });
-            else if (destination === "projects" || destination === "blog")
-              void navigate({ to: `/${destination}` });
-            else void navigate({ to: "/", hash: destination });
+        if (controller.signal.aborted) return;
+        engine.current = await createWorkspaceRenderer(
+          element!,
+          projects,
+          {
+            onSelect: ({ destination, slug }) => {
+              setExploring(false);
+              engine.current?.setExploring(false);
+              if (destination === "projects" && slug)
+                void navigate({ to: "/projects/$slug", params: { slug } });
+              else if (destination === "projects" || destination === "blog")
+                void navigate({ to: `/${destination}` });
+              else void navigate({ to: "/", hash: destination });
+            },
+            onHover: setHovered,
+            onChapter: setChapter,
+            onFocus: setFocusedLocation,
+            onError: () => setStatus("unavailable"),
           },
-          onHover: setHovered,
-          onChapter: setChapter,
-          onFocus: setFocusedLocation,
-          onError: () => setStatus("unavailable"),
-        });
+          controller.signal,
+        );
         setStatus("ready");
-      } catch {
-        if (!cancelled) setStatus("unavailable");
+      } catch (error) {
+        if (error instanceof BuildCancelled || controller.signal.aborted)
+          return;
+        setStatus("unavailable");
       }
     }
-    void start();
+    // Let hydration and the first paint finish before the island is built.
+    const cancelIdle = whenIdle(() => void start());
     return () => {
-      cancelled = true;
+      controller.abort();
+      cancelIdle();
       engine.current?.dispose();
       engine.current = null;
     };

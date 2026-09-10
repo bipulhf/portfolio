@@ -1,4 +1,5 @@
 import { PUBLIC_THEME_OPTIONS } from "~/lib/public-theme";
+import { prefetchStudioScene } from "~/components/public/prefetch-studio";
 import { useEffect, useState, useRef } from "react";
 import { usePublicTheme } from "~/components/public/public-theme";
 import { cx } from "~/components/portfolio/lib/styles";
@@ -89,6 +90,12 @@ export function FloatingThemeToggle() {
                 )}
                 key={option.value}
                 onClick={() => handleThemeChange(option.value)}
+                onFocus={
+                  option.value === "studio" ? prefetchStudioScene : undefined
+                }
+                onPointerEnter={
+                  option.value === "studio" ? prefetchStudioScene : undefined
+                }
                 type="button"
               >
                 {option.label}

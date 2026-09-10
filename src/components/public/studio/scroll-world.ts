@@ -16,9 +16,15 @@ import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.j
 import { createIslandEnvironment } from "./island-environment";
 import { WORLD_LOCATIONS } from "./world-locations";
 import { createWorkspace } from "./workspace-model";
+import type { Stage } from "./schedule";
 import type { SerializedProjectCard } from "~/lib/content/types";
 
-export function createScrollWorld(projects: SerializedProjectCard[]) {
+// Each chapter is built between stage boundaries so no single frame carries the
+// whole island.
+export async function createScrollWorld(
+  projects: SerializedProjectCard[],
+  stage: Stage,
+) {
   const workspace = createWorkspace();
   const textures = workspace.textures;
   const chapters = [workspace.root];
@@ -78,6 +84,7 @@ export function createScrollWorld(projects: SerializedProjectCard[]) {
     return result;
   }
 
+  await stage();
   const gallery = addChapter("projects");
   const cards = projects.length
     ? projects.slice(0, 3)
@@ -148,6 +155,7 @@ export function createScrollWorld(projects: SerializedProjectCard[]) {
     panel.add(face);
   });
 
+  await stage();
   const mind = addChapter("about");
   const knot = new Mesh(new TorusKnotGeometry(1.3, 0.38, 128, 20), orange);
   knot.castShadow = true;
@@ -166,6 +174,7 @@ export function createScrollWorld(projects: SerializedProjectCard[]) {
   plinth.receiveShadow = true;
   mind.add(plinth);
 
+  await stage();
   const wins = addChapter("achievements");
   for (let i = 0; i < 3; i++) {
     const height = [1.15, 2.2, 0.7][i];
@@ -181,6 +190,7 @@ export function createScrollWorld(projects: SerializedProjectCard[]) {
     wins.add(medal);
   }
 
+  await stage();
   const notes = addChapter("blog");
   block(notes, [3.4, 0.17, 4.1], [0, 0, 0], orange);
   for (let i = 0; i < 7; i++) {
@@ -205,6 +215,7 @@ export function createScrollWorld(projects: SerializedProjectCard[]) {
   block(notes, [0.9, 0.035, 0.09], [-0.65, 1.19, -0.4], paper);
   notes.rotation.y = -0.25;
 
+  await stage();
   const contact = addChapter("contact");
   block(contact, [4.4, 2.9, 0.3], [0, 1.2, 0], blue);
   const flapLeft = block(
@@ -231,6 +242,7 @@ export function createScrollWorld(projects: SerializedProjectCard[]) {
   ring.rotation.set(0.7, 0.1, 0.4);
   contact.add(ring);
 
+  await stage();
   const island = createIslandEnvironment();
   textures.push(...island.textures);
   const heights = [0, 0, 0.8, 0.45, 0.65, 0.45];

@@ -22,6 +22,7 @@ import {
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 import { WORLD_LOCATIONS } from "./world-locations";
 import { createScrollWorld } from "./scroll-world";
+import { createStage } from "./schedule";
 import type { WorkspaceDestination } from "./workspace-model";
 import type { SerializedProjectCard } from "~/lib/content/types";
 
@@ -31,7 +32,7 @@ export type WorkspaceSelection = {
   location?: number;
 };
 
-export function createWorkspaceRenderer(
+export async function createWorkspaceRenderer(
   host: HTMLElement,
   projects: SerializedProjectCard[],
   callbacks: {
@@ -41,7 +42,9 @@ export function createWorkspaceRenderer(
     onFocus: (index: number | null) => void;
     onError: () => void;
   },
+  signal?: AbortSignal,
 ) {
+  const stage = createStage(signal);
   const renderer = new WebGLRenderer({
     antialias: true,
     alpha: false,
@@ -102,9 +105,32 @@ export function createWorkspaceRenderer(
   floor.position.y = -3.8;
   floor.receiveShadow = true;
   scene.add(floor);
-  const world = createScrollWorld(projects);
-  world.chapters.forEach((chapter) => scene.add(chapter));
-  scene.add(world.island);
+
+  // Show the lit, empty stage first: this compiles the base shaders and gives
+  // the visitor something to look at while the island is assembled.
+  camera.position.set(20, 16, 20);
+  camera.lookAt(0, 0, 0);
+  camera.updateProjectionMatrix();
+  renderer.setSize(host.clientWidth || 1, host.clientHeight || 1, false);
+  renderer.render(scene, camera);
+
+  let world: Awaited<ReturnType<typeof createScrollWorld>>;
+  try {
+    world = await createScrollWorld(projects, stage);
+    for (const chapter of world.chapters) {
+      scene.add(chapter);
+      await stage();
+    }
+    scene.add(world.island);
+    await stage();
+  } catch (error) {
+    renderer.dispose();
+    renderer.forceContextLoss();
+    canvas.remove();
+    environment.dispose();
+    throw error;
+  }
+
   const cinematic = host.closest<HTMLElement>(".studio-cinematic");
   const sections = Array.from(
     cinematic?.querySelectorAll<HTMLElement>("[data-studio-chapter]") ?? [],
