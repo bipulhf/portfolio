@@ -1,5 +1,7 @@
-export const PUBLIC_LIST_CACHE_CONTROL = 'public, max-age=120, stale-while-revalidate=900'
-export const PUBLIC_DETAIL_CACHE_CONTROL = 'public, max-age=180, stale-while-revalidate=1200'
+export const PUBLIC_LIST_CACHE_CONTROL =
+  'public, max-age=60, s-maxage=600, stale-while-revalidate=86400'
+export const PUBLIC_DETAIL_CACHE_CONTROL =
+  'public, max-age=60, s-maxage=900, stale-while-revalidate=86400'
 export const NO_STORE_CACHE_CONTROL = 'no-store'
 
 export function jsonResponse(data: unknown, init: ResponseInit = {}) {
