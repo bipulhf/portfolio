@@ -165,19 +165,19 @@ export async function createScrollWorld(
 
   await stage();
   const mind = addChapter("about");
-  const knot = new Mesh(new TorusKnotGeometry(1.3, 0.38, 128, 20), orange);
+  const knot = new Mesh(new TorusKnotGeometry(1.3, 0.38, 64, 12), orange);
   knot.castShadow = true;
   knot.receiveShadow = true;
   knot.position.y = 1.6;
   mind.add(knot);
-  const orbit = new Mesh(new TorusGeometry(2.5, 0.028, 8, 100), gold);
+  const orbit = new Mesh(new TorusGeometry(2.5, 0.028, 8, 64), gold);
   orbit.rotation.set(0.8, 0.2, -0.5);
   orbit.position.y = 1.5;
   mind.add(orbit);
   const orbit2 = orbit.clone();
   orbit2.rotation.set(-0.7, 1.1, 0.2);
   mind.add(orbit2);
-  const plinth = new Mesh(new CylinderGeometry(1.4, 1.5, 0.25, 48), dark);
+  const plinth = new Mesh(new CylinderGeometry(1.4, 1.5, 0.25, 24), dark);
   plinth.position.y = -0.65;
   plinth.receiveShadow = true;
   mind.add(plinth);
@@ -192,7 +192,7 @@ export async function createScrollWorld(
       [(i - 1) * 1.7, height / 2 - 0.4, 0],
       i === 1 ? orange : blue,
     );
-    const medal = new Mesh(new TorusGeometry(0.57, 0.19, 12, 40), gold);
+    const medal = new Mesh(new TorusGeometry(0.57, 0.19, 8, 24), gold);
     medal.position.set((i - 1) * 1.7, height + 0.5, 0);
     block(wins, [0.12, 0.48, 0.12], [(i - 1) * 1.7, height - 0.11, 0], gold);
     block(wins, [0.62, 0.09, 0.5], [(i - 1) * 1.7, height - 0.355, 0], dark);
@@ -234,12 +234,12 @@ export async function createScrollWorld(
     paper,
   );
   flapRight.rotation.z = 0.5;
-  const seal = new Mesh(new CylinderGeometry(0.43, 0.43, 0.14, 32), orange);
+  const seal = new Mesh(new CylinderGeometry(0.43, 0.43, 0.14, 16), orange);
   seal.rotation.x = Math.PI / 2;
   seal.position.set(0, 1.12, 0.26);
   contact.add(seal);
   contact.rotation.set(-0.15, -0.25, -0.14);
-  const ring = new Mesh(new TorusGeometry(2.65, 0.035, 8, 80), orange);
+  const ring = new Mesh(new TorusGeometry(2.65, 0.035, 8, 48), orange);
   ring.position.y = 1.2;
   ring.rotation.set(0.7, 0.1, 0.4);
   contact.add(ring);

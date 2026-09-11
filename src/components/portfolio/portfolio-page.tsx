@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { Hero } from './hero'
 import type { SerializedBlogCard, SerializedProjectCard } from '~/lib/content/types'
 import { SiteShell } from '~/components/public/site-shell'
@@ -23,7 +23,29 @@ export function PortfolioPage({
 }>) {
   const { theme } = usePublicTheme()
 
-  if (theme === 'studio') return <SiteShell><StudioHome blogs={blogs} projects={projects} /></SiteShell>
+  if (theme === 'studio') {
+    return (
+      <SiteShell>
+        <Suspense
+          fallback={
+            <div
+              role="status"
+              style={{
+                minHeight: "100vh",
+                padding: "3rem",
+                background: "#f4f1ea",
+                color: "#293936",
+              }}
+            >
+              Opening the studio…
+            </div>
+          }
+        >
+          <StudioHome blogs={blogs} projects={projects} />
+        </Suspense>
+      </SiteShell>
+    )
+  }
 
   return (
     <SiteShell>

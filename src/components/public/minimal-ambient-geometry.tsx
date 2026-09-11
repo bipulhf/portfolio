@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import { useEffect, useState } from 'react'
 
 type ShapeKind = 'rectangle' | 'triangle' | 'hexagon'
 type ShapeVariant = 'filled' | 'outline'
@@ -71,6 +72,9 @@ const PALETTES: ShapePalette[] = [
   },
 ]
 
+const DESKTOP_SHAPE_COUNT = 36
+const MOBILE_SHAPE_COUNT = 18
+
 function seededUnit(index: number, salt: number) {
   const value = Math.sin(index * 12.9898 + salt * 78.233) * 43758.5453
   return value - Math.floor(value)
@@ -132,7 +136,8 @@ function buildAmbientShapes(count: number): AmbientShape[] {
   })
 }
 
-const SHAPES: AmbientShape[] = buildAmbientShapes(132)
+const DESKTOP_SHAPES = buildAmbientShapes(DESKTOP_SHAPE_COUNT)
+const MOBILE_SHAPES = DESKTOP_SHAPES.slice(0, MOBILE_SHAPE_COUNT)
 
 function ShapeIcon({ type }: Readonly<{ type: ShapeKind }>) {
   if (type === 'triangle') {
@@ -158,10 +163,39 @@ function ShapeIcon({ type }: Readonly<{ type: ShapeKind }>) {
   )
 }
 
+function useAmbientShapeBudget() {
+  const [shapes, setShapes] = useState(DESKTOP_SHAPES)
+
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 48rem)')
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+    function sync() {
+      if (reduceMotion.matches) {
+        setShapes(MOBILE_SHAPES)
+        return
+      }
+      setShapes(query.matches ? MOBILE_SHAPES : DESKTOP_SHAPES)
+    }
+
+    sync()
+    query.addEventListener('change', sync)
+    reduceMotion.addEventListener('change', sync)
+    return () => {
+      query.removeEventListener('change', sync)
+      reduceMotion.removeEventListener('change', sync)
+    }
+  }, [])
+
+  return shapes
+}
+
 export function MinimalAmbientGeometry() {
+  const shapes = useAmbientShapeBudget()
+
   return (
     <div aria-hidden="true" className="minimal-ambient-geometry">
-      {SHAPES.map((shape, index) => {
+      {shapes.map((shape, index) => {
         const style = {
           '--shape-delay': shape.delay,
           '--shape-drift-x': shape.driftX,

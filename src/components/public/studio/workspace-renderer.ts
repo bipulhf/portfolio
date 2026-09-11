@@ -45,16 +45,14 @@ export async function createWorkspaceRenderer(
   signal?: AbortSignal,
 ) {
   const stage = createStage(signal);
+  const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
   const renderer = new WebGLRenderer({
-    antialias: true,
+    antialias: !coarsePointer,
     alpha: false,
     powerPreference: "low-power",
   });
   renderer.setPixelRatio(
-    Math.min(
-      window.devicePixelRatio || 1,
-      window.matchMedia("(pointer: coarse)").matches ? 1 : 1.5,
-    ),
+    Math.min(window.devicePixelRatio || 1, coarsePointer ? 1 : 1.25),
   );
   renderer.toneMapping = ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.0;
@@ -84,7 +82,7 @@ export async function createWorkspaceRenderer(
   const sun = new DirectionalLight("#fff0db", 2.4);
   sun.position.set(-10, 24, 12);
   sun.castShadow = true;
-  sun.shadow.mapSize.set(1024, 1024);
+  sun.shadow.mapSize.set(coarsePointer ? 512 : 768, coarsePointer ? 512 : 768);
   Object.assign(sun.shadow.camera, {
     left: -22,
     right: 22,
@@ -177,6 +175,11 @@ export async function createWorkspaceRenderer(
   const last = new Vector2();
   let dragging = false;
   let pointerActive = false;
+  let lastFilmProgress = Number.NaN;
+  let lastCaptionKey = "";
+  const lastLabelTransforms = labels.map(() => "");
+  const lastLabelVisibility = labels.map(() => "");
+  const lastLabelActive = labels.map(() => "");
 
   function requestRender() {
     if (frame || disposed || !visible || document.hidden) return;
@@ -207,11 +210,26 @@ export async function createWorkspaceRenderer(
     const progress = progressAt(scroll);
     const displayProgress = reducedMotion ? Math.round(progress) : progress;
     const active = Math.round(progress);
-    sections.forEach((section, index) => {
-      section.dataset.active = String(index === active);
-      section.inert = index !== active;
-    });
     if (active !== previousChapter && !exploring) {
+      if (previousChapter >= 0) {
+        const previous = sections[previousChapter];
+        if (previous) {
+          previous.dataset.active = "false";
+          previous.inert = true;
+        }
+      }
+      const current = sections[active];
+      if (current) {
+        current.dataset.active = "true";
+        current.inert = false;
+      }
+      previousChapter = active;
+      callbacks.onChapter(active);
+    } else if (previousChapter < 0) {
+      sections.forEach((section, index) => {
+        section.dataset.active = String(index === active);
+        section.inert = index !== active;
+      });
       previousChapter = active;
       callbacks.onChapter(active);
     }
@@ -283,8 +301,8 @@ export async function createWorkspaceRenderer(
       labelPoint
         .set(position[0], labelHeights[index], position[2])
         .project(camera);
-      const x = (labelPoint.x * 0.5 + 0.5) * viewportWidth;
-      const y = (-labelPoint.y * 0.5 + 0.5) * viewportHeight;
+      const x = Math.round((labelPoint.x * 0.5 + 0.5) * viewportWidth);
+      const y = Math.round((-labelPoint.y * 0.5 + 0.5) * viewportHeight);
       // Keep pins clear of the reading column, navigation, and camera controls.
       const leftEdge = mobile ? 28 : exploring ? 375 : 80;
       const topEdge = mobile ? (exploring ? viewportHeight * 0.53 : 95) : 105;
@@ -298,11 +316,23 @@ export async function createWorkspaceRenderer(
         x < viewportWidth - 70 &&
         y > topEdge &&
         y < bottomEdge;
-      label.style.visibility = shown ? "visible" : "hidden";
-      label.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      label.dataset.active = String(
+      const visibility = shown ? "visible" : "hidden";
+      const transform = `translate3d(${x}px, ${y}px, 0)`;
+      const activeState = String(
         exploring ? focusedLocation === index : active === index,
       );
+      if (lastLabelVisibility[index] !== visibility) {
+        label.style.visibility = visibility;
+        lastLabelVisibility[index] = visibility;
+      }
+      if (shown && lastLabelTransforms[index] !== transform) {
+        label.style.transform = transform;
+        lastLabelTransforms[index] = transform;
+      }
+      if (lastLabelActive[index] !== activeState) {
+        label.dataset.active = activeState;
+        lastLabelActive[index] = activeState;
+      }
     });
     if (
       scroll !== lastShadowScroll &&
@@ -311,10 +341,13 @@ export async function createWorkspaceRenderer(
       renderer.shadowMap.needsUpdate = true;
       lastShadowScroll = scroll;
     }
-    cinematic?.style.setProperty(
-      "--film-progress",
-      String(MathUtils.clamp(scroll / Math.max(1, anchors[5] ?? 1), 0, 1)),
+    const filmProgress = String(
+      MathUtils.clamp(scroll / Math.max(1, anchors[5] ?? 1), 0, 1),
     );
+    if (cinematic && lastFilmProgress !== Number(filmProgress)) {
+      cinematic.style.setProperty("--film-progress", filmProgress);
+      lastFilmProgress = Number(filmProgress);
+    }
     if (!exploring) {
       const position = WORLD_LOCATIONS[active].position;
       labelPoint.set(position[0], 0.4, position[2]).project(camera);
@@ -337,14 +370,18 @@ export async function createWorkspaceRenderer(
             125,
             Math.max(125, viewportHeight - cardHeight - 100),
           );
-      const section = sections[active];
-      if (section) {
-        section.style.setProperty("--caption-x", `${x}px`);
-        section.style.setProperty("--caption-y", `${y}px`);
-        const dx = anchorX - x - cardWidth;
-        const dy = anchorY - y;
-        section.style.setProperty("--tether-length", `${Math.hypot(dx, dy)}px`);
-        section.style.setProperty("--tether-angle", `${Math.atan2(dy, dx)}rad`);
+      const dx = anchorX - x - cardWidth;
+      const dy = anchorY - y;
+      const captionKey = `${active}:${Math.round(x)}:${Math.round(y)}:${Math.round(Math.hypot(dx, dy))}`;
+      if (captionKey !== lastCaptionKey) {
+        const section = sections[active];
+        if (section) {
+          section.style.setProperty("--caption-x", `${x}px`);
+          section.style.setProperty("--caption-y", `${y}px`);
+          section.style.setProperty("--tether-length", `${Math.hypot(dx, dy)}px`);
+          section.style.setProperty("--tether-angle", `${Math.atan2(dy, dx)}rad`);
+        }
+        lastCaptionKey = captionKey;
       }
     }
     try {

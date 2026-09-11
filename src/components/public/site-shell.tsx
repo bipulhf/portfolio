@@ -1,4 +1,4 @@
-import { lazy, Suspense, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, type ReactNode } from "react";
 import { RouteProgress } from "~/components/loaders/route-progress";
 import { BackgroundDoodles } from "~/components/portfolio/background-doodles";
 import { Footer } from "~/components/portfolio/footer";
@@ -16,6 +16,21 @@ export function SiteShell({ children }: Readonly<{ children: ReactNode }>) {
   const { theme } = usePublicTheme();
   const isMinimal = theme === "minimal";
   useReveal(theme !== "studio", [theme]);
+
+  useEffect(() => {
+    function syncHidden() {
+      document.documentElement.dataset.pageHidden = document.hidden
+        ? "true"
+        : "false";
+    }
+
+    syncHidden();
+    document.addEventListener("visibilitychange", syncHidden);
+    return () => {
+      document.removeEventListener("visibilitychange", syncHidden);
+      delete document.documentElement.dataset.pageHidden;
+    };
+  }, []);
 
   if (theme === "studio") {
     return <Suspense fallback={<div role="status" style={{ minHeight: "100vh", padding: "3rem", background: "#f4f1ea", color: "#293936" }}>Opening the studio…</div>}><StudioShell>{children}</StudioShell></Suspense>;

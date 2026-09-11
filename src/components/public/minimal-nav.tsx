@@ -2,6 +2,7 @@ import { type MouseEvent, useEffect, useId, useState } from "react";
 import { PUBLIC_THEME_CONFIG } from "~/components/public/public-theme";
 import { MinimalWindowControls } from "~/components/public/minimal-window-controls";
 import { cx, pageContainerClass } from "~/components/portfolio/lib/styles";
+import { rafThrottle } from "~/lib/raf-throttle";
 
 function isHomeAnchorLink(href: string) {
   return href.startsWith("/#");
@@ -14,9 +15,10 @@ export function MinimalNav() {
   const nav = PUBLIC_THEME_CONFIG.minimal.nav;
 
   useEffect(() => {
-    function handleScroll() {
-      setIsScrolled(window.scrollY > 20);
-    }
+    const handleScroll = rafThrottle(() => {
+      const next = window.scrollY > 20;
+      setIsScrolled((current) => (current === next ? current : next));
+    });
 
     function handleEscape(event: KeyboardEvent) {
       if (event.key === "Escape") {
@@ -28,6 +30,7 @@ export function MinimalNav() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("keydown", handleEscape);
     return () => {
+      handleScroll.cancel();
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("keydown", handleEscape);
     };

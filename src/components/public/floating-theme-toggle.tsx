@@ -3,6 +3,7 @@ import { prefetchStudioScene } from "~/components/public/prefetch-studio";
 import { useEffect, useState, useRef } from "react";
 import { usePublicTheme } from "~/components/public/public-theme";
 import { cx } from "~/components/portfolio/lib/styles";
+import { rafThrottle } from "~/lib/raf-throttle";
 
 const THEME_SWITCH_DURATION_MS = 420;
 
@@ -16,26 +17,26 @@ export function FloatingThemeToggle() {
   const switchResetTimeout = useRef<number | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = rafThrottle(() => {
       const currentScrollY = window.scrollY;
+      let nextVisible = true;
 
       // Only apply hide/show logic on mobile
       if (window.innerWidth < 768) {
-        if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-          setIsVisible(false);
-        } else {
-          setIsVisible(true);
-        }
-      } else {
-        // Always visible on desktop
-        setIsVisible(true);
+        nextVisible = !(
+          currentScrollY > lastScrollY.current && currentScrollY > 100
+        );
       }
 
       lastScrollY.current = currentScrollY;
-    };
+      setIsVisible((current) => (current === nextVisible ? current : nextVisible));
+    });
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      handleScroll.cancel();
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
