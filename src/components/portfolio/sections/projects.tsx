@@ -59,6 +59,8 @@ export function Projects({ items }: Readonly<{ items: SerializedProjectCard[] }>
                   <img
                     alt={project.title}
                     className="motion-cover absolute inset-0 h-full w-full object-cover"
+                    decoding="async"
+                    loading="lazy"
                     src={project.coverImagePath}
                   />
                 ) : (

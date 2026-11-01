@@ -69,6 +69,8 @@ export default function StudioHome({
 
   const sceneRef = useRef<StudioSceneHandle>(null);
   const audioRef = useRef<StudioAudioDirector | null>(null);
+  const tourProgressBarRef = useRef<HTMLSpanElement>(null);
+  const tourProgressRatioRef = useRef(0);
   const silentProgressRef = useRef<{ key: string; ratio: number }>({
     key: "",
     ratio: 0,
@@ -78,7 +80,6 @@ export default function StudioHome({
   const [mode, setMode] = useState<"tour" | "explore">("tour");
   const [tourIndex, setTourIndex] = useState(0);
   const [tourPlaying, setTourPlaying] = useState(true);
-  const [tourProgress, setTourProgress] = useState(0);
   const [activeSection, setActiveSection] = useState<StudioSectionId | null>(
     null,
   );
@@ -88,6 +89,15 @@ export default function StudioHome({
   const [audioMuted, setAudioMuted] = useState(false);
   const [audioBlocked, setAudioBlocked] = useState(false);
   const [audioSpeaking, setAudioSpeaking] = useState(false);
+
+  const syncTourProgressBar = useCallback((stopIdx: number, ratio: number) => {
+    tourProgressRatioRef.current = ratio;
+    const bar = tourProgressBarRef.current;
+    if (bar) {
+      const clamped = Math.max(0, Math.min(1, (stopIdx + ratio) / TOUR_STOPS.length));
+      bar.style.transform = `scaleX(${clamped.toFixed(4)})`;
+    }
+  }, []);
 
   // Connect to singleton campsite soundtrack + voiceover director (StrictMode & HMR safe)
   useEffect(() => {
@@ -159,10 +169,10 @@ export default function StudioHome({
     audioRef.current?.setMode("explore");
     setMode("explore");
     setTourPlaying(false);
-    setTourProgress(0);
+    syncTourProgressBar(0, 0);
     setActiveSection(null);
     setSelectedSlug(null);
-  }, []);
+  }, [syncTourProgressBar]);
 
   const selectTourStop = useCallback(
     (nextIdx: number) => {
@@ -170,7 +180,7 @@ export default function StudioHome({
       const stop = TOUR_STOPS[clamped];
       silentProgressRef.current = { key: "", ratio: 0 };
       setTourIndex(clamped);
-      setTourProgress(0);
+      syncTourProgressBar(clamped, 0);
       if (stop && audioRef.current) {
         audioRef.current.syncTourNarration({
           active: sceneStatus === "ready" && mode === "tour",
@@ -182,7 +192,7 @@ export default function StudioHome({
         });
       }
     },
-    [sceneStatus, mode, tourPlaying],
+    [sceneStatus, mode, tourPlaying, syncTourProgressBar],
   );
 
   const replayTour = useCallback(() => {
@@ -191,7 +201,7 @@ export default function StudioHome({
     setActiveSection(null);
     setSelectedSlug(null);
     setTourIndex(0);
-    setTourProgress(0);
+    syncTourProgressBar(0, 0);
     setTourPlaying(true);
     setMode("tour");
     if (audioRef.current && first) {
@@ -205,7 +215,7 @@ export default function StudioHome({
         fallbackText: first.narration,
       });
     }
-  }, [sceneStatus]);
+  }, [sceneStatus, syncTourProgressBar]);
 
   // Automatic 3D tour progression timer (locked to voiceover audio duration when sound is live)
   useEffect(() => {
@@ -274,13 +284,13 @@ export default function StudioHome({
         silentProgressRef.current = { key: stopKey, ratio };
       }
 
-      setTourProgress(ratio);
+      syncTourProgressBar(tourIndex, ratio);
 
       if (ratio >= 1) {
         silentProgressRef.current = { key: "", ratio: 0 };
         if (tourIndex < TOUR_STOPS.length - 1) {
+          syncTourProgressBar(tourIndex + 1, 0);
           setTourIndex((idx) => idx + 1);
-          setTourProgress(0);
         } else {
           finishTour();
         }
@@ -299,6 +309,7 @@ export default function StudioHome({
     audioMuted,
     audioBlocked,
     finishTour,
+    syncTourProgressBar,
   ]);
 
   // Keyboard navigation for tour & inspector drawer
@@ -526,8 +537,9 @@ export default function StudioHome({
         >
           <div className="studio-tour-card__progress" aria-hidden="true">
             <span
+              ref={tourProgressBarRef}
               style={{
-                transform: `scaleX(${((tourIndex + tourProgress) / TOUR_STOPS.length).toFixed(4)})`,
+                transform: `scaleX(${((tourIndex + tourProgressRatioRef.current) / TOUR_STOPS.length).toFixed(4)})`,
               }}
             />
           </div>

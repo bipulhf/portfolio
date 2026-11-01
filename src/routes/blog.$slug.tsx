@@ -4,7 +4,7 @@ import { blogMeta, RichContentPage } from '~/components/public/rich-content'
 import { SiteShell } from '~/components/public/site-shell'
 import type { SerializedBlog } from '~/lib/content/types'
 import { getPublishedBlogBySlugFn } from '~/lib/server-fns/content'
-import { getSiteOriginFn } from '~/lib/server-fns/site-url'
+import { resolveSiteOrigin } from '~/lib/server-fns/site-url'
 import { PUBLIC_DETAIL_CACHE_CONTROL } from '~/lib/http'
 import { baseMeta, blogJsonLd, resolveOgImage, resolveSeoDescription, resolveSeoTitle } from '~/lib/seo'
 
@@ -12,7 +12,7 @@ export const Route = createFileRoute('/blog/$slug')({
   loader: async ({ params }) => {
     const [blog, siteOrigin] = await Promise.all([
       getPublishedBlogBySlugFn({ data: { slug: params.slug } }),
-      getSiteOriginFn(),
+      resolveSiteOrigin(),
     ])
 
     return {

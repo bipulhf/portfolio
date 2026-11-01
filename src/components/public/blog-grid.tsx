@@ -84,6 +84,8 @@ export function BlogGrid({
                 <img
                   alt={post.title}
                   className="motion-cover absolute inset-0 h-full w-full object-cover"
+                  decoding="async"
+                  loading="lazy"
                   src={post.coverImagePath}
                 />
               ) : (

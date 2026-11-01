@@ -62,7 +62,7 @@ export async function createWorkspaceRenderer(
     powerPreference: "high-performance",
   });
   renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio || 1, coarsePointer ? 1.5 : 2),
+    Math.min(window.devicePixelRatio || 1, coarsePointer ? 1.25 : 1.5),
   );
   renderer.toneMapping = ACESFilmicToneMapping;
   renderer.toneMappingExposure = 0.96;
@@ -108,7 +108,7 @@ export async function createWorkspaceRenderer(
   const sun = new DirectionalLight("#fff0cf", 2.45);
   sun.position.set(14, 22, -18);
   sun.castShadow = true;
-  const shadowRes = coarsePointer ? 1024 : 2048;
+  const shadowRes = coarsePointer ? 1024 : 1536;
   sun.shadow.mapSize.set(shadowRes, shadowRes);
   Object.assign(sun.shadow.camera, {
     left: -13.5,
@@ -219,6 +219,8 @@ export async function createWorkspaceRenderer(
   let lastPinchDist = 0;
   let pointerDownActive = false;
   let dragging = false;
+  let hoverDirty = false;
+  let lastHoverPickAt = 0;
 
   function shortestAngleDelta(from: number, to: number) {
     const diff = ((to - from + Math.PI) % (Math.PI * 2)) - Math.PI;
@@ -237,6 +239,17 @@ export async function createWorkspaceRenderer(
     const dt = Math.min(350, Math.max(8, now - lastTime));
     lastTime = now;
     const t = now * 0.001;
+
+    if (hoverDirty && !dragging && now - lastHoverPickAt >= 45) {
+      hoverDirty = false;
+      lastHoverPickAt = now;
+      const nextHover = pick(pointerLastPos.x, pointerLastPos.y)?.section ?? null;
+      if (hoveredSection !== nextHover) {
+        hoveredSection = nextHover;
+        canvas.style.cursor = nextHover ? "pointer" : "grab";
+        callbacks.onHover(nextHover);
+      }
+    }
 
     const goalAzimuth = baseAzimuth + userYaw;
     const goalElevation = MathUtils.clamp(
@@ -487,8 +500,9 @@ export async function createWorkspaceRenderer(
     }
 
     pointerLastPos.set(event.clientX, event.clientY);
-    if (!dragging) {
-      updateHover(pick(event.clientX, event.clientY)?.section ?? null);
+    if (!dragging && !coarsePointer) {
+      hoverDirty = true;
+      scheduleFrame();
     }
   }
 

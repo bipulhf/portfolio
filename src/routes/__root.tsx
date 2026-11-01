@@ -20,6 +20,7 @@ import {
 import { getInitialPublicThemeFn } from "~/lib/server-fns/public-theme";
 import {
   DEFAULT_PUBLIC_THEME,
+  isPublicTheme,
   PUBLIC_THEME_FONT_STYLESHEETS,
   type PublicTheme,
 } from "~/lib/public-theme";
@@ -46,9 +47,23 @@ function fontLinksFor(theme: PublicTheme) {
 }
 
 export const Route = createRootRoute({
-  loader: async () => ({
-    initialTheme: await getInitialPublicThemeFn(),
-  }),
+  staleTime: Infinity,
+  loader: async () => {
+    if (typeof window !== "undefined") {
+      const fromWindow = window.__PUBLIC_THEME__;
+      const fromDom = document.documentElement.dataset.publicTheme;
+      const clientTheme = isPublicTheme(fromWindow)
+        ? fromWindow
+        : isPublicTheme(fromDom)
+          ? fromDom
+          : DEFAULT_PUBLIC_THEME;
+      return { initialTheme: clientTheme };
+    }
+
+    return {
+      initialTheme: await getInitialPublicThemeFn(),
+    };
+  },
   head: ({ loaderData }) => ({
     meta: [
       { charSet: "utf-8" },

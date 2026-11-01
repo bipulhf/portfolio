@@ -96,6 +96,9 @@ export class StudioAudioDirector {
 
   private emitState() {
     if (this.destroyed) return;
+    if (this.attached && !this.muted && !this.blocked) {
+      this.ensureFadeLoop();
+    }
     const snap = this.getSnapshot();
     this.listeners.forEach((fn) => {
       try {
@@ -353,6 +356,15 @@ export class StudioAudioDirector {
     if (this.ambienceEl) {
       this.ambienceEl.volume = Math.max(0, Math.min(1, this.currentAmbienceVol));
     }
+
+    if (
+      this.currentMusicVol === targets.music &&
+      this.currentAmbienceVol === targets.ambience &&
+      this.fadeTimer
+    ) {
+      window.clearInterval(this.fadeTimer);
+      this.fadeTimer = 0;
+    }
   }
 
   private async tryStartBackground(): Promise<boolean> {
@@ -522,7 +534,10 @@ export class StudioAudioDirector {
   }
 
   setMode(mode: "tour" | "explore") {
-    this.mode = mode;
+    if (this.mode !== mode) {
+      this.mode = mode;
+      this.ensureFadeLoop();
+    }
     if (mode === "explore") {
       if (this.desiredNarration) {
         this.desiredNarration = { ...this.desiredNarration, active: false };
@@ -966,6 +981,7 @@ export class StudioAudioDirector {
       this.musicEl?.pause();
       this.ambienceEl?.pause();
     } else if (this.backgroundStarted && !this.muted && !this.blocked) {
+      this.ensureFadeLoop();
       void this.musicEl?.play().catch(() => {});
       void this.ambienceEl?.play().catch(() => {});
     }

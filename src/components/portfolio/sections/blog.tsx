@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { Cloud, Flower, Sun } from "../doodles";
 import { SectionHeader } from "../section-header";
 import { SectionShell } from "../section-shell";
@@ -47,11 +48,13 @@ export function Blog({ items }: Readonly<{ items: SerializedBlogCard[] }>) {
       >
         {items.length ? (
           items.map((post, index) => (
-            <a
+            <Link
               className={`${surfaceCardClass} ${index % 2 === 0 ? "reveal-left" : "reveal-right"} group overflow-hidden rounded-[1.375rem] border-[2.5px] border-ink text-ink no-underline shadow-crayon-md hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_var(--color-ink)] ${index === 0 ? "md:col-span-2 lg:col-span-4 lg:grid lg:grid-cols-[minmax(16rem,0.92fr)_minmax(18rem,1.08fr)]" : "lg:col-span-2"}`}
               data-reveal-item
-              href={`/blog/${post.slug}`}
               key={post.title}
+              params={{ slug: post.slug }}
+              preload="intent"
+              to="/blog/$slug"
             >
               <div
                 className={`${coverTones[index % coverTones.length]} relative flex min-h-[8.125rem] items-center justify-center border-b-2 border-ink ${index === 0 ? "min-h-48 lg:min-h-full lg:border-b-0 lg:border-r-2" : ""}`}
@@ -60,6 +63,8 @@ export function Blog({ items }: Readonly<{ items: SerializedBlogCard[] }>) {
                   <img
                     alt={post.title}
                     className="motion-cover absolute inset-0 h-full w-full object-cover"
+                    decoding="async"
+                    loading="lazy"
                     src={post.coverImagePath}
                   />
                 ) : (
@@ -93,7 +98,7 @@ export function Blog({ items }: Readonly<{ items: SerializedBlogCard[] }>) {
                   Read article <span className="motion-arrow">→</span>
                 </span>
               </div>
-            </a>
+            </Link>
           ))
         ) : (
           <div

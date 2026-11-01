@@ -4,7 +4,7 @@ import { RichContentPage, projectMeta } from '~/components/public/rich-content'
 import { SiteShell } from '~/components/public/site-shell'
 import type { SerializedProject } from '~/lib/content/types'
 import { getPublishedProjectBySlugFn } from '~/lib/server-fns/content'
-import { getSiteOriginFn } from '~/lib/server-fns/site-url'
+import { resolveSiteOrigin } from '~/lib/server-fns/site-url'
 import { PUBLIC_DETAIL_CACHE_CONTROL } from '~/lib/http'
 import { baseMeta, projectJsonLd, resolveOgImage, resolveSeoDescription, resolveSeoTitle } from '~/lib/seo'
 
@@ -24,7 +24,7 @@ export const Route = createFileRoute('/projects/$slug')({
   loader: async ({ params }) => {
     const [project, siteOrigin] = await Promise.all([
       getPublishedProjectBySlugFn({ data: { slug: params.slug } }),
-      getSiteOriginFn(),
+      resolveSiteOrigin(),
     ])
 
     return {

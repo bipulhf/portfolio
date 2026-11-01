@@ -1,4 +1,4 @@
-import type { CSSProperties, SVGProps } from 'react'
+import type { CSSProperties } from 'react'
 
 type BaseProps = {
   className?: string
@@ -305,10 +305,6 @@ export function CornerBurst({
   )
 }
 
-function AnimatedCircle(props: SVGProps<SVGCircleElement>) {
-  return <circle {...props} />
-}
-
 export function HeroBackdrop({ className, style }: BaseProps) {
   return (
     <svg
@@ -397,36 +393,10 @@ export function HeroBackdrop({ className, style }: BaseProps) {
         />
       </g>
       <g opacity="0.55">
-        <AnimatedCircle cx="320" cy="110" fill="#e8b25a" r="2">
-          <animate attributeName="opacity" dur="3.6s" repeatCount="indefinite" values="0.2;1;0.2" />
-        </AnimatedCircle>
-        <AnimatedCircle cx="760" cy="160" fill="#7eb1d6" r="1.8">
-          <animate
-            attributeName="opacity"
-            begin="-1s"
-            dur="4.4s"
-            repeatCount="indefinite"
-            values="0.2;1;0.2"
-          />
-        </AnimatedCircle>
-        <AnimatedCircle cx="1080" cy="260" fill="#f7a3a8" r="2">
-          <animate
-            attributeName="opacity"
-            begin="-2s"
-            dur="5.2s"
-            repeatCount="indefinite"
-            values="0.2;1;0.2"
-          />
-        </AnimatedCircle>
-        <AnimatedCircle cx="460" cy="220" fill="#7fb8a0" r="1.6">
-          <animate
-            attributeName="opacity"
-            begin="-0.8s"
-            dur="4s"
-            repeatCount="indefinite"
-            values="0.2;1;0.2"
-          />
-        </AnimatedCircle>
+        <circle cx="320" cy="110" fill="#e8b25a" opacity="0.72" r="2" />
+        <circle cx="760" cy="160" fill="#7eb1d6" opacity="0.68" r="1.8" />
+        <circle cx="1080" cy="260" fill="#f7a3a8" opacity="0.72" r="2" />
+        <circle cx="460" cy="220" fill="#7fb8a0" opacity="0.68" r="1.6" />
       </g>
       <g opacity="0.35">
         <path

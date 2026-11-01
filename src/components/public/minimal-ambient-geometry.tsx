@@ -72,8 +72,8 @@ const PALETTES: ShapePalette[] = [
   },
 ]
 
-const DESKTOP_SHAPE_COUNT = 36
-const MOBILE_SHAPE_COUNT = 18
+const DESKTOP_SHAPE_COUNT = 14
+const MOBILE_SHAPE_COUNT = 8
 
 function seededUnit(index: number, salt: number) {
   const value = Math.sin(index * 12.9898 + salt * 78.233) * 43758.5453

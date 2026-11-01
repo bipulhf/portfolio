@@ -213,118 +213,184 @@ function isPublicContentBootstrapError(error: unknown) {
   )
 }
 
+const PUBLIC_CACHE_FRESH_MS = 30_000
+const PUBLIC_CACHE_STALE_MS = 300_000
+
+type CacheEntry<T> = {
+  expiresAt: number
+  staleUntil: number
+  value: T
+}
+
+const publicContentCache = new Map<string, CacheEntry<unknown>>()
+const inflightPublicQueries = new Map<string, Promise<unknown>>()
+
+export function invalidatePublicContentCache() {
+  publicContentCache.clear()
+}
+
+async function cachedPublicQuery<T>(key: string, fetcher: () => Promise<T>): Promise<T> {
+  const now = Date.now()
+  const hit = publicContentCache.get(key) as CacheEntry<T> | undefined
+
+  if (hit && now < hit.expiresAt) {
+    return hit.value
+  }
+
+  const refresh = () => {
+    const existing = inflightPublicQueries.get(key) as Promise<T> | undefined
+    if (existing) {
+      return existing
+    }
+
+    const pending = fetcher()
+      .then((value) => {
+        const settledAt = Date.now()
+        publicContentCache.set(key, {
+          value,
+          expiresAt: settledAt + PUBLIC_CACHE_FRESH_MS,
+          staleUntil: settledAt + PUBLIC_CACHE_STALE_MS,
+        })
+        return value
+      })
+      .finally(() => {
+        inflightPublicQueries.delete(key)
+      })
+
+    inflightPublicQueries.set(key, pending)
+    return pending
+  }
+
+  if (hit && now < hit.staleUntil) {
+    void refresh().catch(() => {})
+    return hit.value
+  }
+
+  return refresh()
+}
+
 function warnPublicQueryFallback(scope: string, error: unknown) {
   console.warn(`[content] ${scope} fell back to empty content during build/runtime bootstrap.`, error)
 }
 
 export async function getHomeContent() {
-  try {
-    const [publishedProjects, publishedBlogs] = await Promise.all([
-      db
+  return cachedPublicQuery('home', async () => {
+    try {
+      const [publishedProjects, publishedBlogs] = await Promise.all([
+        db
+          .select(projectCardColumns)
+          .from(projects)
+          .where(eq(projects.status, 'published'))
+          .orderBy(desc(projects.featured), desc(projects.publishedAt), desc(projects.updatedAt))
+          .limit(6),
+        db
+          .select(blogCardColumns)
+          .from(blogs)
+          .where(eq(blogs.status, 'published'))
+          .orderBy(desc(blogs.publishedAt), desc(blogs.updatedAt))
+          .limit(3),
+      ])
+
+      return {
+        projects: publishedProjects.map(serializeProjectCard),
+        blogs: publishedBlogs.map(serializeBlogCard),
+      }
+    } catch (error) {
+      if (!isPublicContentBootstrapError(error)) {
+        throw error
+      }
+
+      warnPublicQueryFallback('getHomeContent', error)
+      return {
+        projects: [],
+        blogs: [],
+      }
+    }
+  })
+}
+
+export async function listPublishedProjects() {
+  return cachedPublicQuery('projects:list', async () => {
+    try {
+      const rows = await db
         .select(projectCardColumns)
         .from(projects)
         .where(eq(projects.status, 'published'))
         .orderBy(desc(projects.featured), desc(projects.publishedAt), desc(projects.updatedAt))
-        .limit(6),
-      db
+
+      return rows.map(serializeProjectCard)
+    } catch (error) {
+      if (!isPublicContentBootstrapError(error)) {
+        throw error
+      }
+
+      warnPublicQueryFallback('listPublishedProjects', error)
+      return []
+    }
+  })
+}
+
+export async function listPublishedBlogs() {
+  return cachedPublicQuery('blogs:list', async () => {
+    try {
+      const rows = await db
         .select(blogCardColumns)
         .from(blogs)
         .where(eq(blogs.status, 'published'))
         .orderBy(desc(blogs.publishedAt), desc(blogs.updatedAt))
-        .limit(3),
-    ])
 
-    return {
-      projects: publishedProjects.map(serializeProjectCard),
-      blogs: publishedBlogs.map(serializeBlogCard),
+      return rows.map(serializeBlogCard)
+    } catch (error) {
+      if (!isPublicContentBootstrapError(error)) {
+        throw error
+      }
+
+      warnPublicQueryFallback('listPublishedBlogs', error)
+      return []
     }
-  } catch (error) {
-    if (!isPublicContentBootstrapError(error)) {
-      throw error
-    }
-
-    warnPublicQueryFallback('getHomeContent', error)
-    return {
-      projects: [],
-      blogs: [],
-    }
-  }
-}
-
-export async function listPublishedProjects() {
-  try {
-    const rows = await db
-      .select(projectCardColumns)
-      .from(projects)
-      .where(eq(projects.status, 'published'))
-      .orderBy(desc(projects.featured), desc(projects.publishedAt), desc(projects.updatedAt))
-
-    return rows.map(serializeProjectCard)
-  } catch (error) {
-    if (!isPublicContentBootstrapError(error)) {
-      throw error
-    }
-
-    warnPublicQueryFallback('listPublishedProjects', error)
-    return []
-  }
-}
-
-export async function listPublishedBlogs() {
-  try {
-    const rows = await db
-      .select(blogCardColumns)
-      .from(blogs)
-      .where(eq(blogs.status, 'published'))
-      .orderBy(desc(blogs.publishedAt), desc(blogs.updatedAt))
-
-    return rows.map(serializeBlogCard)
-  } catch (error) {
-    if (!isPublicContentBootstrapError(error)) {
-      throw error
-    }
-
-    warnPublicQueryFallback('listPublishedBlogs', error)
-    return []
-  }
+  })
 }
 
 export async function getPublishedProjectBySlug(slug: string) {
-  try {
-    const [row] = await db
-      .select()
-      .from(projects)
-      .where(and(eq(projects.slug, slug), eq(projects.status, 'published')))
-      .limit(1)
+  return cachedPublicQuery(`projects:slug:${slug}`, async () => {
+    try {
+      const [row] = await db
+        .select()
+        .from(projects)
+        .where(and(eq(projects.slug, slug), eq(projects.status, 'published')))
+        .limit(1)
 
-    return row ? serializeProject(row) : null
-  } catch (error) {
-    if (!isPublicContentBootstrapError(error)) {
-      throw error
+      return row ? serializeProject(row) : null
+    } catch (error) {
+      if (!isPublicContentBootstrapError(error)) {
+        throw error
+      }
+
+      warnPublicQueryFallback('getPublishedProjectBySlug', error)
+      return null
     }
-
-    warnPublicQueryFallback('getPublishedProjectBySlug', error)
-    return null
-  }
+  })
 }
 
 export async function getPublishedBlogBySlug(slug: string) {
-  try {
-    const [row] = await db
-      .select()
-      .from(blogs)
-      .where(and(eq(blogs.slug, slug), eq(blogs.status, 'published')))
-      .limit(1)
+  return cachedPublicQuery(`blogs:slug:${slug}`, async () => {
+    try {
+      const [row] = await db
+        .select()
+        .from(blogs)
+        .where(and(eq(blogs.slug, slug), eq(blogs.status, 'published')))
+        .limit(1)
 
-    return row ? serializeBlog(row) : null
-  } catch (error) {
-    if (!isPublicContentBootstrapError(error)) {
-      throw error
+      return row ? serializeBlog(row) : null
+    } catch (error) {
+      if (!isPublicContentBootstrapError(error)) {
+        throw error
+      }
+
+      warnPublicQueryFallback('getPublishedBlogBySlug', error)
+      return null
     }
-
-    warnPublicQueryFallback('getPublishedBlogBySlug', error)
-    return null
-  }
+  })
 }
 
 export async function listAdminProjects() {
@@ -352,6 +418,7 @@ export async function createProject(input: ProjectInput) {
   await ensureUniqueProjectSlug(values.slug)
 
   const [row] = await db.insert(projects).values(values).returning()
+  invalidatePublicContentCache()
   return serializeProject(row)
 }
 
@@ -381,6 +448,7 @@ export async function updateProject(id: string, input: ProjectInput) {
   }
 
   await cleanupRemovedUploadThingFiles(previousFileKeys, nextFileKeys)
+  invalidatePublicContentCache()
 
   return serializeProject(row)
 }
@@ -394,6 +462,7 @@ export async function deleteProject(id: string) {
 
   await db.delete(projects).where(eq(projects.id, id))
   await cleanupUnreferencedUploadThingFiles(collectUploadThingFileKeys(existing))
+  invalidatePublicContentCache()
 }
 
 export async function createBlog(input: BlogInput) {
@@ -401,6 +470,7 @@ export async function createBlog(input: BlogInput) {
   await ensureUniqueBlogSlug(values.slug)
 
   const [row] = await db.insert(blogs).values(values).returning()
+  invalidatePublicContentCache()
   return serializeBlog(row)
 }
 
@@ -430,6 +500,7 @@ export async function updateBlog(id: string, input: BlogInput) {
   }
 
   await cleanupRemovedUploadThingFiles(previousFileKeys, nextFileKeys)
+  invalidatePublicContentCache()
 
   return serializeBlog(row)
 }
@@ -443,28 +514,31 @@ export async function deleteBlog(id: string) {
 
   await db.delete(blogs).where(eq(blogs.id, id))
   await cleanupUnreferencedUploadThingFiles(collectUploadThingFileKeys(existing))
+  invalidatePublicContentCache()
 }
 
 export async function getPublishedSlugs() {
-  try {
-    const [projectRows, blogRows] = await Promise.all([
-      db.select({ slug: projects.slug }).from(projects).where(eq(projects.status, 'published')),
-      db.select({ slug: blogs.slug }).from(blogs).where(eq(blogs.status, 'published')),
-    ])
+  return cachedPublicQuery('slugs:published', async () => {
+    try {
+      const [projectRows, blogRows] = await Promise.all([
+        db.select({ slug: projects.slug }).from(projects).where(eq(projects.status, 'published')),
+        db.select({ slug: blogs.slug }).from(blogs).where(eq(blogs.status, 'published')),
+      ])
 
-    return {
-      projects: projectRows.map((row) => row.slug),
-      blogs: blogRows.map((row) => row.slug),
-    }
-  } catch (error) {
-    if (!isPublicContentBootstrapError(error)) {
-      throw error
-    }
+      return {
+        projects: projectRows.map((row) => row.slug),
+        blogs: blogRows.map((row) => row.slug),
+      }
+    } catch (error) {
+      if (!isPublicContentBootstrapError(error)) {
+        throw error
+      }
 
-    warnPublicQueryFallback('getPublishedSlugs', error)
-    return {
-      projects: [],
-      blogs: [],
+      warnPublicQueryFallback('getPublishedSlugs', error)
+      return {
+        projects: [],
+        blogs: [],
+      }
     }
-  }
+  })
 }

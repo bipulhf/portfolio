@@ -447,8 +447,6 @@ export function PublicThemeProvider({
     }
 
     if (shouldAnimate) {
-      clearThemeTransitionState();
-      void document.documentElement.offsetWidth;
       document.documentElement.dataset.publicThemeTransition = "true";
     } else {
       clearThemeTransitionState();

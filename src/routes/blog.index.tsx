@@ -11,13 +11,13 @@ import { SiteShell } from "~/components/public/site-shell";
 import { PUBLIC_LIST_CACHE_CONTROL } from "~/lib/http";
 import { baseMeta } from "~/lib/seo";
 import { listPublishedBlogsFn } from "~/lib/server-fns/content";
-import { getSiteOriginFn } from "~/lib/server-fns/site-url";
+import { resolveSiteOrigin } from "~/lib/server-fns/site-url";
 
 export const Route = createFileRoute("/blog/")({
   loader: async () => {
     const [posts, siteOrigin] = await Promise.all([
       listPublishedBlogsFn(),
-      getSiteOriginFn(),
+      resolveSiteOrigin(),
     ]);
 
     return {

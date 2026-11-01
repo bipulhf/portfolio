@@ -7,6 +7,8 @@ export function getRouter() {
   return createRouter({
     routeTree,
     defaultPreload: 'intent',
+    defaultStaleTime: 60_000,
+    defaultPreloadStaleTime: 120_000,
     defaultPendingMs: 180,
     defaultPendingMinMs: 260,
     defaultErrorComponent: DefaultCatchBoundary,

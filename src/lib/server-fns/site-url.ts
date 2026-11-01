@@ -13,3 +13,11 @@ export const getSiteOriginFn = createServerFn({
     return process.env.SITE_URL || "http://localhost:3000";
   }
 });
+
+export function resolveSiteOrigin(): Promise<string> | string {
+  if (typeof window !== "undefined") {
+    return window.location.origin;
+  }
+
+  return getSiteOriginFn();
+}
