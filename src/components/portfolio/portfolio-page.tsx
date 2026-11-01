@@ -31,13 +31,13 @@ export function PortfolioPage({
             <div
               role="status"
               style={{
-                minHeight: "100vh",
+                minHeight: "100dvh",
                 padding: "3rem",
-                background: "#f4f1ea",
-                color: "#293936",
+                background: "#d6d3eb",
+                color: "#1f2438",
               }}
             >
-              Opening the studio…
+              Pitching the 3D basecamp…
             </div>
           }
         >

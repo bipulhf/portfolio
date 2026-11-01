@@ -33,7 +33,7 @@ export function SiteShell({ children }: Readonly<{ children: ReactNode }>) {
   }, []);
 
   if (theme === "studio") {
-    return <Suspense fallback={<div role="status" style={{ minHeight: "100vh", padding: "3rem", background: "#f4f1ea", color: "#293936" }}>Opening the studio…</div>}><StudioShell>{children}</StudioShell></Suspense>;
+    return <Suspense fallback={<div role="status" style={{ minHeight: "100dvh", padding: "3rem", background: "#d6d3eb", color: "#1f2438" }}>Pitching the 3D basecamp…</div>}><StudioShell>{children}</StudioShell></Suspense>;
   }
 
   return (

@@ -1,10 +1,11 @@
 .studio-site {
-  --studio-paper: #f4f1ea;
-  --studio-ink: #293936;
-  --studio-muted: #62675f;
-  --studio-orange: #b94320;
+  --studio-paper: #eeecf8;
+  --studio-ink: #1f2438;
+  --studio-muted: #565d75;
+  --studio-orange: #d4512b;
+  --studio-gold: #f4b518;
   --color-paper: var(--studio-paper);
-  --color-paper-shadow: #e8e3d8;
+  --color-paper-shadow: #dedbf0;
   --color-ink: var(--studio-ink);
   --color-ink-soft: var(--studio-muted);
   --font-body: "Satoshi", sans-serif;
@@ -431,21 +432,23 @@
   align-items: center;
 }
 .studio-site .public-theme-toggle-dock .public-theme-toggle {
-  background: #faf7f0;
-  backdrop-filter: none;
-  border-color: #cec6b8;
+  background: rgba(252, 250, 255, 0.92);
+  backdrop-filter: blur(14px);
+  border-color: rgba(255, 255, 255, 0.9);
   box-shadow:
-    0 4px 0 #d6cebf,
-    0 10px 25px #29393615;
+    0 3px 0 rgba(154, 148, 200, 0.35),
+    0 12px 28px rgba(42, 38, 84, 0.14);
 }
 .studio-site .public-theme-toggle .public-theme-toggle__button {
   font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.8rem;
+  color: #4f5670;
 }
 .studio-site .public-theme-toggle .public-theme-toggle__button.is-active {
   background: var(--studio-ink);
-  color: #fff6e7;
-  box-shadow: 0 2px 0 #14231f;
+  color: #fff8ea;
+  box-shadow: 0 2px 0 #101320;
 }
 .studio-loading,
 .studio-empty {
