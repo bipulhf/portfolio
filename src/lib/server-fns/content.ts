@@ -40,7 +40,7 @@ export const getPublishedProjectBySlugFn = createServerFn({
   method: 'GET',
   strict: { output: false },
 })
-  .inputValidator((data: { slug: string }) => z.object({ slug: z.string().min(1) }).parse(data))
+  .validator((data: { slug: string }) => z.object({ slug: z.string().min(1) }).parse(data))
   .handler(async ({ data }): Promise<SerializedProject> => {
     const project = await getPublishedProjectBySlug(data.slug)
 
@@ -55,7 +55,7 @@ export const getPublishedBlogBySlugFn = createServerFn({
   method: 'GET',
   strict: { output: false },
 })
-  .inputValidator((data: { slug: string }) => z.object({ slug: z.string().min(1) }).parse(data))
+  .validator((data: { slug: string }) => z.object({ slug: z.string().min(1) }).parse(data))
   .handler(async ({ data }): Promise<SerializedBlog> => {
     const blog = await getPublishedBlogBySlug(data.slug)
 

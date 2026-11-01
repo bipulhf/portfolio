@@ -9,53 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
-import { Route as ProjectsRouteImport } from './routes/projects'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
-import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as BlogRouteImport } from './routes/blog'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
-import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
-import { Route as ApiUploadthingRouteImport } from './routes/api/uploadthing'
-import { Route as AdminProjectsRouteImport } from './routes/admin.projects'
-import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminBlogsRouteImport } from './routes/admin.blogs'
-import { Route as AdminProjectsIndexRouteImport } from './routes/admin.projects.index'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminProjectsRouteImport } from './routes/admin.projects'
+import { Route as ApiUploadthingRouteImport } from './routes/api/uploadthing'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
+import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 import { Route as AdminBlogsIndexRouteImport } from './routes/admin.blogs.index'
-import { Route as ApiAuthSessionRouteImport } from './routes/api/auth/session'
-import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
-import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
-import { Route as ApiAdminProjectsRouteImport } from './routes/api/admin/projects'
-import { Route as ApiAdminBlogsRouteImport } from './routes/api/admin/blogs'
-import { Route as AdminProjectsNewRouteImport } from './routes/admin.projects.new'
 import { Route as AdminBlogsNewRouteImport } from './routes/admin.blogs.new'
-import { Route as ApiAdminProjectsIdRouteImport } from './routes/api/admin/projects.$id'
-import { Route as ApiAdminBlogsIdRouteImport } from './routes/api/admin/blogs.$id'
-import { Route as AdminProjectsIdEditRouteImport } from './routes/admin.projects.$id.edit'
+import { Route as AdminProjectsIndexRouteImport } from './routes/admin.projects.index'
+import { Route as AdminProjectsNewRouteImport } from './routes/admin.projects.new'
+import { Route as ApiAdminBlogsRouteImport } from './routes/api/admin/blogs'
+import { Route as ApiAdminProjectsRouteImport } from './routes/api/admin/projects'
+import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
+import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
+import { Route as ApiAuthSessionRouteImport } from './routes/api/auth/session'
 import { Route as AdminBlogsIdEditRouteImport } from './routes/admin.blogs.$id.edit'
+import { Route as AdminProjectsIdEditRouteImport } from './routes/admin.projects.$id.edit'
+import { Route as ApiAdminBlogsIdRouteImport } from './routes/api/admin/blogs.$id'
+import { Route as ApiAdminProjectsIdRouteImport } from './routes/api/admin/projects.$id'
 
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
-  id: '/robots.txt',
-  path: '/robots.txt',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProjectsRoute = ProjectsRouteImport.update({
-  id: '/projects',
-  path: '/projects',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -63,44 +48,34 @@ const AdminRoute = AdminRouteImport.update({
   path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/admin.lazy').then((d) => d.Route))
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => ProjectsRoute,
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const BlogIndexRoute = BlogIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => BlogRoute,
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any).lazy(() => import('./routes/admin.index.lazy').then((d) => d.Route))
-const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => ProjectsRoute,
-} as any)
-const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogRoute,
-} as any)
-const ApiUploadthingRoute = ApiUploadthingRouteImport.update({
-  id: '/api/uploadthing',
-  path: '/api/uploadthing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminProjectsRoute = AdminProjectsRouteImport.update({
-  id: '/projects',
-  path: '/projects',
+const AdminBlogsRoute = AdminBlogsRouteImport.update({
+  id: '/blogs',
+  path: '/blogs',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
@@ -108,56 +83,42 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AdminRoute,
 } as any).lazy(() => import('./routes/admin.login.lazy').then((d) => d.Route))
-const AdminBlogsRoute = AdminBlogsRouteImport.update({
-  id: '/blogs',
-  path: '/blogs',
+const AdminProjectsRoute = AdminProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminProjectsIndexRoute = AdminProjectsIndexRouteImport.update({
+const ApiUploadthingRoute = ApiUploadthingRouteImport.update({
+  id: '/api/uploadthing',
+  path: '/api/uploadthing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AdminProjectsRoute,
-} as any).lazy(() =>
-  import('./routes/admin.projects.index.lazy').then((d) => d.Route),
-)
+  getParentRoute: () => BlogRoute,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProjectsRoute,
+} as any)
+const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ProjectsRoute,
+} as any)
 const AdminBlogsIndexRoute = AdminBlogsIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminBlogsRoute,
 } as any).lazy(() =>
   import('./routes/admin.blogs.index.lazy').then((d) => d.Route),
-)
-const ApiAuthSessionRoute = ApiAuthSessionRouteImport.update({
-  id: '/api/auth/session',
-  path: '/api/auth/session',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAuthLogoutRoute = ApiAuthLogoutRouteImport.update({
-  id: '/api/auth/logout',
-  path: '/api/auth/logout',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
-  id: '/api/auth/login',
-  path: '/api/auth/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminProjectsRoute = ApiAdminProjectsRouteImport.update({
-  id: '/api/admin/projects',
-  path: '/api/admin/projects',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminBlogsRoute = ApiAdminBlogsRouteImport.update({
-  id: '/api/admin/blogs',
-  path: '/api/admin/blogs',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminProjectsNewRoute = AdminProjectsNewRouteImport.update({
-  id: '/new',
-  path: '/new',
-  getParentRoute: () => AdminProjectsRoute,
-} as any).lazy(() =>
-  import('./routes/admin.projects.new.lazy').then((d) => d.Route),
 )
 const AdminBlogsNewRoute = AdminBlogsNewRouteImport.update({
   id: '/new',
@@ -166,23 +127,45 @@ const AdminBlogsNewRoute = AdminBlogsNewRouteImport.update({
 } as any).lazy(() =>
   import('./routes/admin.blogs.new.lazy').then((d) => d.Route),
 )
-const ApiAdminProjectsIdRoute = ApiAdminProjectsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => ApiAdminProjectsRoute,
-} as any)
-const ApiAdminBlogsIdRoute = ApiAdminBlogsIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
-  getParentRoute: () => ApiAdminBlogsRoute,
-} as any)
-const AdminProjectsIdEditRoute = AdminProjectsIdEditRouteImport.update({
-  id: '/$id/edit',
-  path: '/$id/edit',
+const AdminProjectsIndexRoute = AdminProjectsIndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => AdminProjectsRoute,
 } as any).lazy(() =>
-  import('./routes/admin.projects.$id.edit.lazy').then((d) => d.Route),
+  import('./routes/admin.projects.index.lazy').then((d) => d.Route),
 )
+const AdminProjectsNewRoute = AdminProjectsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminProjectsRoute,
+} as any).lazy(() =>
+  import('./routes/admin.projects.new.lazy').then((d) => d.Route),
+)
+const ApiAdminBlogsRoute = ApiAdminBlogsRouteImport.update({
+  id: '/api/admin/blogs',
+  path: '/api/admin/blogs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminProjectsRoute = ApiAdminProjectsRouteImport.update({
+  id: '/api/admin/projects',
+  path: '/api/admin/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
+  id: '/api/auth/login',
+  path: '/api/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthLogoutRoute = ApiAuthLogoutRouteImport.update({
+  id: '/api/auth/logout',
+  path: '/api/auth/logout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthSessionRoute = ApiAuthSessionRouteImport.update({
+  id: '/api/auth/session',
+  path: '/api/auth/session',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminBlogsIdEditRoute = AdminBlogsIdEditRouteImport.update({
   id: '/$id/edit',
   path: '/$id/edit',
@@ -190,6 +173,23 @@ const AdminBlogsIdEditRoute = AdminBlogsIdEditRouteImport.update({
 } as any).lazy(() =>
   import('./routes/admin.blogs.$id.edit.lazy').then((d) => d.Route),
 )
+const AdminProjectsIdEditRoute = AdminProjectsIdEditRouteImport.update({
+  id: '/$id/edit',
+  path: '/$id/edit',
+  getParentRoute: () => AdminProjectsRoute,
+} as any).lazy(() =>
+  import('./routes/admin.projects.$id.edit.lazy').then((d) => d.Route),
+)
+const ApiAdminBlogsIdRoute = ApiAdminBlogsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiAdminBlogsRoute,
+} as any)
+const ApiAdminProjectsIdRoute = ApiAdminProjectsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiAdminProjectsRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -382,32 +382,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/robots.txt': {
-      id: '/robots.txt'
-      path: '/robots.txt'
-      fullPath: '/robots.txt'
-      preLoaderRoute: typeof RobotsDottxtRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/projects': {
-      id: '/projects'
-      path: '/projects'
-      fullPath: '/projects'
-      preLoaderRoute: typeof ProjectsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -417,67 +396,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/projects/': {
-      id: '/projects/'
-      path: '/'
-      fullPath: '/projects/'
-      preLoaderRoute: typeof ProjectsIndexRouteImport
-      parentRoute: typeof ProjectsRoute
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/blog/': {
-      id: '/blog/'
-      path: '/'
-      fullPath: '/blog/'
-      preLoaderRoute: typeof BlogIndexRouteImport
-      parentRoute: typeof BlogRoute
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/': {
       id: '/admin/'
       path: '/'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/projects/$slug': {
-      id: '/projects/$slug'
-      path: '/$slug'
-      fullPath: '/projects/$slug'
-      preLoaderRoute: typeof ProjectsSlugRouteImport
-      parentRoute: typeof ProjectsRoute
-    }
-    '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof BlogRoute
-    }
-    '/api/uploadthing': {
-      id: '/api/uploadthing'
-      path: '/api/uploadthing'
-      fullPath: '/api/uploadthing'
-      preLoaderRoute: typeof ApiUploadthingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/projects': {
-      id: '/admin/projects'
-      path: '/projects'
-      fullPath: '/admin/projects'
-      preLoaderRoute: typeof AdminProjectsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/login': {
-      id: '/admin/login'
-      path: '/login'
-      fullPath: '/admin/login'
-      preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/blogs': {
@@ -487,12 +438,54 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBlogsRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/projects/': {
-      id: '/admin/projects/'
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/projects': {
+      id: '/admin/projects'
+      path: '/projects'
+      fullPath: '/admin/projects'
+      preLoaderRoute: typeof AdminProjectsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/api/uploadthing': {
+      id: '/api/uploadthing'
+      path: '/api/uploadthing'
+      fullPath: '/api/uploadthing'
+      preLoaderRoute: typeof ApiUploadthingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/': {
+      id: '/blog/'
       path: '/'
-      fullPath: '/admin/projects/'
-      preLoaderRoute: typeof AdminProjectsIndexRouteImport
-      parentRoute: typeof AdminProjectsRoute
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/projects/': {
+      id: '/projects/'
+      path: '/'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
+      parentRoute: typeof ProjectsRoute
+    }
+    '/projects/$slug': {
+      id: '/projects/$slug'
+      path: '/$slug'
+      fullPath: '/projects/$slug'
+      preLoaderRoute: typeof ProjectsSlugRouteImport
+      parentRoute: typeof ProjectsRoute
     }
     '/admin/blogs/': {
       id: '/admin/blogs/'
@@ -501,25 +494,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminBlogsIndexRouteImport
       parentRoute: typeof AdminBlogsRoute
     }
-    '/api/auth/session': {
-      id: '/api/auth/session'
-      path: '/api/auth/session'
-      fullPath: '/api/auth/session'
-      preLoaderRoute: typeof ApiAuthSessionRouteImport
-      parentRoute: typeof rootRouteImport
+    '/admin/blogs/new': {
+      id: '/admin/blogs/new'
+      path: '/new'
+      fullPath: '/admin/blogs/new'
+      preLoaderRoute: typeof AdminBlogsNewRouteImport
+      parentRoute: typeof AdminBlogsRoute
     }
-    '/api/auth/logout': {
-      id: '/api/auth/logout'
-      path: '/api/auth/logout'
-      fullPath: '/api/auth/logout'
-      preLoaderRoute: typeof ApiAuthLogoutRouteImport
-      parentRoute: typeof rootRouteImport
+    '/admin/projects/': {
+      id: '/admin/projects/'
+      path: '/'
+      fullPath: '/admin/projects/'
+      preLoaderRoute: typeof AdminProjectsIndexRouteImport
+      parentRoute: typeof AdminProjectsRoute
     }
-    '/api/auth/login': {
-      id: '/api/auth/login'
-      path: '/api/auth/login'
-      fullPath: '/api/auth/login'
-      preLoaderRoute: typeof ApiAuthLoginRouteImport
+    '/admin/projects/new': {
+      id: '/admin/projects/new'
+      path: '/new'
+      fullPath: '/admin/projects/new'
+      preLoaderRoute: typeof AdminProjectsNewRouteImport
+      parentRoute: typeof AdminProjectsRoute
+    }
+    '/api/admin/blogs': {
+      id: '/api/admin/blogs'
+      path: '/api/admin/blogs'
+      fullPath: '/api/admin/blogs'
+      preLoaderRoute: typeof ApiAdminBlogsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/admin/projects': {
@@ -529,40 +529,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/admin/blogs': {
-      id: '/api/admin/blogs'
-      path: '/api/admin/blogs'
-      fullPath: '/api/admin/blogs'
-      preLoaderRoute: typeof ApiAdminBlogsRouteImport
+    '/api/auth/login': {
+      id: '/api/auth/login'
+      path: '/api/auth/login'
+      fullPath: '/api/auth/login'
+      preLoaderRoute: typeof ApiAuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/projects/new': {
-      id: '/admin/projects/new'
-      path: '/new'
-      fullPath: '/admin/projects/new'
-      preLoaderRoute: typeof AdminProjectsNewRouteImport
-      parentRoute: typeof AdminProjectsRoute
+    '/api/auth/logout': {
+      id: '/api/auth/logout'
+      path: '/api/auth/logout'
+      fullPath: '/api/auth/logout'
+      preLoaderRoute: typeof ApiAuthLogoutRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/admin/blogs/new': {
-      id: '/admin/blogs/new'
-      path: '/new'
-      fullPath: '/admin/blogs/new'
-      preLoaderRoute: typeof AdminBlogsNewRouteImport
+    '/api/auth/session': {
+      id: '/api/auth/session'
+      path: '/api/auth/session'
+      fullPath: '/api/auth/session'
+      preLoaderRoute: typeof ApiAuthSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/blogs/$id/edit': {
+      id: '/admin/blogs/$id/edit'
+      path: '/$id/edit'
+      fullPath: '/admin/blogs/$id/edit'
+      preLoaderRoute: typeof AdminBlogsIdEditRouteImport
       parentRoute: typeof AdminBlogsRoute
-    }
-    '/api/admin/projects/$id': {
-      id: '/api/admin/projects/$id'
-      path: '/$id'
-      fullPath: '/api/admin/projects/$id'
-      preLoaderRoute: typeof ApiAdminProjectsIdRouteImport
-      parentRoute: typeof ApiAdminProjectsRoute
-    }
-    '/api/admin/blogs/$id': {
-      id: '/api/admin/blogs/$id'
-      path: '/$id'
-      fullPath: '/api/admin/blogs/$id'
-      preLoaderRoute: typeof ApiAdminBlogsIdRouteImport
-      parentRoute: typeof ApiAdminBlogsRoute
     }
     '/admin/projects/$id/edit': {
       id: '/admin/projects/$id/edit'
@@ -571,12 +564,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminProjectsIdEditRouteImport
       parentRoute: typeof AdminProjectsRoute
     }
-    '/admin/blogs/$id/edit': {
-      id: '/admin/blogs/$id/edit'
-      path: '/$id/edit'
-      fullPath: '/admin/blogs/$id/edit'
-      preLoaderRoute: typeof AdminBlogsIdEditRouteImport
-      parentRoute: typeof AdminBlogsRoute
+    '/api/admin/blogs/$id': {
+      id: '/api/admin/blogs/$id'
+      path: '/$id'
+      fullPath: '/api/admin/blogs/$id'
+      preLoaderRoute: typeof ApiAdminBlogsIdRouteImport
+      parentRoute: typeof ApiAdminBlogsRoute
+    }
+    '/api/admin/projects/$id': {
+      id: '/api/admin/projects/$id'
+      path: '/$id'
+      fullPath: '/api/admin/projects/$id'
+      preLoaderRoute: typeof ApiAdminProjectsIdRouteImport
+      parentRoute: typeof ApiAdminProjectsRoute
     }
   }
 }
