@@ -25,6 +25,10 @@ import type { SerializedProjectCard } from "~/lib/content/types";
 import { buildDioramaCamp, type DioramaAnimatedHandles } from "./diorama-camp";
 import { createDioramaMaterials } from "./diorama-materials";
 import { buildDioramaNature } from "./diorama-nature";
+import {
+  buildDioramaSkyTech,
+  type SkyTechAnimatedHandles,
+} from "./diorama-sky-tech";
 import { createStage } from "./schedule";
 import {
   DIORAMA_ZONES,
@@ -144,6 +148,7 @@ export async function createWorkspaceRenderer(
 
   const materials = createDioramaMaterials();
   let animated: DioramaAnimatedHandles;
+  let skyTechAnimated: SkyTechAnimatedHandles;
   let interactiveRoot: Object3D;
 
   try {
@@ -155,6 +160,10 @@ export async function createWorkspaceRenderer(
     interactiveRoot = camp.root;
     animated = camp.animated;
     scene.add(camp.root);
+    await stage();
+    const skyTech = buildDioramaSkyTech(materials);
+    skyTechAnimated = skyTech.animated;
+    scene.add(skyTech.root);
     renderer.shadowMap.needsUpdate = true;
     await stage();
   } catch (error) {
@@ -286,6 +295,8 @@ export async function createWorkspaceRenderer(
           bz + Math.cos(t * 0.9 + phase) * 0.24,
         );
       });
+
+      skyTechAnimated.update(t);
     }
 
     const radius = 30;

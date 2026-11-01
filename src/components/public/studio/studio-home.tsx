@@ -20,7 +20,10 @@ import {
   PauseIcon,
   PlayIcon,
   ReplayIcon,
+  VolumeOffIcon,
+  VolumeOnIcon,
 } from "./studio-icons";
+import { StudioAudioDirector } from "./studio-audio";
 import {
   StudioScene,
   type SceneStatus,
@@ -62,6 +65,9 @@ export default function StudioHome({
   }, [projects]);
 
   const sceneRef = useRef<StudioSceneHandle>(null);
+  const audioRef = useRef<StudioAudioDirector | null>(null);
+  const prevStopKeyRef = useRef<string>("");
+
   const [sceneStatus, setSceneStatus] = useState<SceneStatus>("loading");
   const [mode, setMode] = useState<"tour" | "explore">("tour");
   const [tourIndex, setTourIndex] = useState(0);
@@ -73,6 +79,123 @@ export default function StudioHome({
   const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
   const [hoveredSection, setHoveredSection] =
     useState<StudioSectionId | null>(null);
+  const [audioMuted, setAudioMuted] = useState(false);
+  const [audioBlocked, setAudioBlocked] = useState(false);
+  const [audioSpeaking, setAudioSpeaking] = useState(false);
+
+  // Initialize generative campsite soundtrack + voiceover director
+  useEffect(() => {
+    const director = new StudioAudioDirector({
+      onStateChange: (next) => {
+        setAudioMuted(next.muted);
+        setAudioBlocked(next.blocked);
+        setAudioSpeaking(next.speaking);
+      },
+    });
+    audioRef.current = director;
+    void director.unlockAndStart();
+
+    return () => {
+      director.dispose();
+      audioRef.current = null;
+    };
+  }, []);
+
+  // Sync audio director mix mode (tour vs explore)
+  useEffect(() => {
+    audioRef.current?.setMode(mode);
+    if (mode !== "tour") {
+      prevStopKeyRef.current = "";
+    }
+  }, [mode]);
+
+  // Trigger voiceover narration & harmonic transition shimmer for each tour stop
+  useEffect(() => {
+    const director = audioRef.current;
+    if (!director || sceneStatus !== "ready" || mode !== "tour") return;
+
+    const stop = TOUR_STOPS[tourIndex];
+    if (!stop) return;
+
+    if (audioMuted) {
+      director.stopNarration();
+      prevStopKeyRef.current = "";
+      return;
+    }
+
+    const stopKey = `${tourIndex}:${stop.id}`;
+    if (tourPlaying) {
+      if (prevStopKeyRef.current !== stopKey) {
+        prevStopKeyRef.current = stopKey;
+        if (tourIndex > 0) {
+          director.playTransitionSwell(tourIndex);
+        }
+        void director.playNarration(stop.audioSrc, stop.narration);
+      } else {
+        void director.resumeNarration().then((resumed) => {
+          if (!resumed) {
+            void director.playNarration(stop.audioSrc, stop.narration);
+          }
+        });
+      }
+    } else {
+      director.pauseNarration();
+    }
+  }, [sceneStatus, mode, tourIndex, tourPlaying, audioMuted]);
+
+  // Unlock audio automatically on first tap/keypress if browser blocked un-interacted reload
+  useEffect(() => {
+    if (!audioBlocked || audioMuted) return;
+
+    function handleFirstGesture() {
+      const director = audioRef.current;
+      if (!director) return;
+      void director.unlockAndStart().then((ok) => {
+        if (ok && mode === "tour" && tourPlaying) {
+          const stop = TOUR_STOPS[tourIndex];
+          if (stop) {
+            prevStopKeyRef.current = `${tourIndex}:${stop.id}`;
+            void director.playNarration(stop.audioSrc, stop.narration);
+          }
+        }
+      });
+    }
+
+    window.addEventListener("pointerdown", handleFirstGesture, { once: true });
+    window.addEventListener("keydown", handleFirstGesture, { once: true });
+    return () => {
+      window.removeEventListener("pointerdown", handleFirstGesture);
+      window.removeEventListener("keydown", handleFirstGesture);
+    };
+  }, [audioBlocked, audioMuted, mode, tourPlaying, tourIndex]);
+
+  const toggleSound = useCallback(() => {
+    const director = audioRef.current;
+    if (!director) return;
+
+    if (audioBlocked && !audioMuted) {
+      void director.unlockAndStart().then((ok) => {
+        if (ok && mode === "tour" && tourPlaying) {
+          const stop = TOUR_STOPS[tourIndex];
+          if (stop) {
+            prevStopKeyRef.current = `${tourIndex}:${stop.id}`;
+            void director.playNarration(stop.audioSrc, stop.narration);
+          }
+        }
+      });
+      return;
+    }
+
+    const nextMuted = !audioMuted;
+    director.setMuted(nextMuted);
+    if (!nextMuted && mode === "tour" && tourPlaying) {
+      const stop = TOUR_STOPS[tourIndex];
+      if (stop) {
+        prevStopKeyRef.current = `${tourIndex}:${stop.id}`;
+        void director.playNarration(stop.audioSrc, stop.narration);
+      }
+    }
+  }, [audioBlocked, audioMuted, mode, tourPlaying, tourIndex]);
 
   // Respect direct hash deep links (e.g. /#about from subpage nav)
   useEffect(() => {
@@ -110,20 +233,37 @@ export default function StudioHome({
     setMode("tour");
   }, []);
 
-  // Automatic 3D tour progression timer once WebGL scene is ready
+  // Automatic 3D tour progression timer (synced to voiceover narration when sound is active)
   useEffect(() => {
     if (mode !== "tour" || !tourPlaying || sceneStatus !== "ready") return;
 
-    const duration = TOUR_STOPS[tourIndex]?.durationMs ?? 4400;
+    const stop = TOUR_STOPS[tourIndex];
+    const soundActive = !audioMuted && !audioBlocked;
+    const baseDuration = soundActive
+      ? (stop?.narrationDurationMs ?? 12500)
+      : (stop?.durationMs ?? 4500);
+
     let rafId = 0;
     let previous = performance.now();
-    let accumulated = tourProgress * duration;
+    let accumulated = tourProgress * baseDuration;
 
     function step(now: number) {
       const delta = document.hidden ? 0 : Math.max(0, now - previous);
       previous = now;
       accumulated += delta;
-      const ratio = Math.min(1, accumulated / duration);
+
+      let effectiveDuration = baseDuration;
+      let elapsed = accumulated;
+
+      if (soundActive && stop) {
+        const clip = audioRef.current?.getNarrationProgress();
+        if (clip && clip.src?.endsWith(stop.audioSrc)) {
+          effectiveDuration = (clip.duration + 0.85) * 1000;
+          elapsed = Math.max(accumulated, clip.currentTime * 1000);
+        }
+      }
+
+      const ratio = Math.min(1, elapsed / effectiveDuration);
       setTourProgress(ratio);
 
       if (ratio >= 1) {
@@ -140,7 +280,15 @@ export default function StudioHome({
 
     rafId = window.requestAnimationFrame(step);
     return () => window.cancelAnimationFrame(rafId);
-  }, [mode, tourPlaying, tourIndex, sceneStatus, finishTour]);
+  }, [
+    mode,
+    tourPlaying,
+    tourIndex,
+    sceneStatus,
+    audioMuted,
+    audioBlocked,
+    finishTour,
+  ]);
 
   // Keyboard navigation for tour & inspector drawer
   useEffect(() => {
@@ -169,6 +317,7 @@ export default function StudioHome({
   }, [mode, tourIndex, activeSection, finishTour]);
 
   const handleSceneSelect = useCallback((selection: DioramaSelection) => {
+    audioRef.current?.playSelectChime();
     setMode("explore");
     setTourPlaying(false);
     setActiveSection(selection.section);
@@ -182,6 +331,7 @@ export default function StudioHome({
   }, [mode, tourPlaying]);
 
   const openSection = useCallback((section: StudioSectionId | null) => {
+    audioRef.current?.playSelectChime();
     setMode("explore");
     setTourPlaying(false);
     setActiveSection(section);
@@ -285,6 +435,38 @@ export default function StudioHome({
         </nav>
 
         <div className="studio-hud-actions">
+          <button
+            type="button"
+            className={`studio-hud-sound${!audioMuted && !audioBlocked ? " is-live" : ""}${audioBlocked && !audioMuted ? " is-blocked" : ""}`}
+            onClick={toggleSound}
+            aria-pressed={!audioMuted && !audioBlocked}
+            aria-label={
+              audioMuted
+                ? "Unmute campsite music and narration"
+                : audioBlocked
+                  ? "Enable campsite music and narration"
+                  : "Mute campsite music and narration"
+            }
+            title={
+              audioMuted
+                ? "Unmute music & narration"
+                : audioBlocked
+                  ? "Tap to enable music & narration"
+                  : "Sound & narration on"
+            }
+          >
+            {audioMuted || audioBlocked ? (
+              <VolumeOffIcon width={15} height={15} />
+            ) : (
+              <VolumeOnIcon width={15} height={15} />
+            )}
+            <span className="studio-eq-bars" aria-hidden="true">
+              <i />
+              <i />
+              <i />
+            </span>
+          </button>
+
           {mode === "tour" ? (
             <button
               type="button"
@@ -340,9 +522,28 @@ export default function StudioHome({
           </div>
 
           <div className="studio-tour-card__meta">
-            <span className="studio-badge-pill">
-              Guided Tour · {currentTourStop.step} / 0{TOUR_STOPS.length}
-            </span>
+            <div className="studio-tour-card__badges">
+              <span className="studio-badge-pill">
+                Guided Tour · {currentTourStop.step} / 0{TOUR_STOPS.length}
+              </span>
+              {audioBlocked && !audioMuted ? (
+                <button
+                  type="button"
+                  className="studio-voice-chip is-prompt"
+                  onClick={toggleSound}
+                >
+                  <VolumeOnIcon width={12} height={12} />
+                  <span>Tap for sound</span>
+                </button>
+              ) : !audioMuted ? (
+                <span
+                  className={`studio-voice-chip${audioSpeaking ? " is-speaking" : ""}`}
+                >
+                  <VolumeOnIcon width={12} height={12} />
+                  <span>{audioSpeaking ? "Voice & Music" : "Camp Music"}</span>
+                </span>
+              ) : null}
+            </div>
             <div className="studio-tour-dots" role="tablist" aria-label="Tour stops">
               {TOUR_STOPS.map((stop, idx) => (
                 <button
