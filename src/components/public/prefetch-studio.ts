@@ -1,11 +1,14 @@
-// The studio theme pulls in three.js and the island scene. Warming that chunk
-// on hover means the switch does not start with a cold download.
+// The studio theme pulls in StudioHome, three.js, and the island diorama.
+// Warming both chunks on hover/focus means switching starts immediately.
 let started = false;
 
 export function prefetchStudioScene() {
   if (started) return;
   started = true;
-  void import("./studio/workspace-renderer").catch(() => {
+  void Promise.all([
+    import("./studio/studio-home"),
+    import("./studio/workspace-renderer"),
+  ]).catch(() => {
     started = false;
   });
 }

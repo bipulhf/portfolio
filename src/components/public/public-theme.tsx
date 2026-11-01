@@ -18,6 +18,7 @@ import {
   themeOnlyClass,
   type PublicTheme,
 } from "~/lib/public-theme";
+import { primeStudioAudioFromGesture } from "~/components/public/studio/studio-audio";
 
 export { themeOnlyClass, type PublicTheme } from "~/lib/public-theme";
 export type PublicPageKey = "home" | "projects" | "blog";
@@ -471,6 +472,9 @@ export function PublicThemeProvider({
           return;
         }
 
+        if (nextTheme === "studio") {
+          primeStudioAudioFromGesture();
+        }
         updateTheme(nextTheme, { animate: true });
         persistTheme(nextTheme);
       },
@@ -478,6 +482,9 @@ export function PublicThemeProvider({
       toggleTheme: () => {
         const index = PUBLIC_THEME_OPTIONS.findIndex((option) => option.value === theme);
         const nextTheme = PUBLIC_THEME_OPTIONS[(index + 1) % PUBLIC_THEME_OPTIONS.length].value;
+        if (nextTheme === "studio") {
+          primeStudioAudioFromGesture();
+        }
         updateTheme(nextTheme, { animate: true });
         persistTheme(nextTheme);
       },

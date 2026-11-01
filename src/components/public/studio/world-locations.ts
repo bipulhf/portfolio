@@ -151,7 +151,7 @@ export const TOUR_STOPS: ReadonlyArray<TourStop> = [
       "Hey there, welcome to my basecamp! I'm Bipul, a software engineer based in Dhaka, Bangladesh. Settle in by the fire for a quick guided tour of my story, my toolkit, and what I love building.",
     audioSrc: "/audio/tour/stop-01.mp3",
     highlightSection: "about",
-    durationMs: 4400,
+    durationMs: 7400,
     narrationDurationMs: 14550,
     camera: {
       target: [-0.15, 1.62, -0.15],
@@ -171,7 +171,7 @@ export const TOUR_STOPS: ReadonlyArray<TourStop> = [
       "I build full-stack web software at Infancy I.T., backed by a computer science degree from Shahjalal University of Science and Technology. Day to day, I ship products with TypeScript, React, TanStack, Node.js, and Spring Boot — always aiming for calm, dependable engineering.",
     audioSrc: "/audio/tour/stop-02.mp3",
     highlightSection: "skills",
-    durationMs: 4700,
+    durationMs: 7600,
     narrationDurationMs: 20550,
     camera: {
       target: [-1.45, 1.15, 0.15],
@@ -191,7 +191,7 @@ export const TOUR_STOPS: ReadonlyArray<TourStop> = [
       "Over by the camp easels, you'll find my favorite shipped builds — including System Visualizer for interactive distributed systems, Endpoint, a fast native desktop API client, and custom document tooling.",
     audioSrc: "/audio/tour/stop-03.mp3",
     highlightSection: "projects",
-    durationMs: 4700,
+    durationMs: 7400,
     narrationDurationMs: 14650,
     camera: {
       target: [3.1, 1.1, 0.85],
@@ -211,7 +211,7 @@ export const TOUR_STOPS: ReadonlyArray<TourStop> = [
       "Around the campfire sit memories from six live hackathons — highlighted by two championship trophies at Leading University and the Oxfam Climate Action Hackathon, plus a runner-up finish at Hack The AI.",
     audioSrc: "/audio/tour/stop-04.mp3",
     highlightSection: "achievements",
-    durationMs: 4600,
+    durationMs: 7200,
     narrationDurationMs: 14100,
     camera: {
       target: [-1.25, 0.85, 3.15],
@@ -231,7 +231,7 @@ export const TOUR_STOPS: ReadonlyArray<TourStop> = [
       "And right up front are my engineering field notes and trail mailbox. The guided tour wraps up here — now the full 3D camp is yours to orbit, click around, or drop me a hello anytime!",
     audioSrc: "/audio/tour/stop-05.mp3",
     highlightSection: "contact",
-    durationMs: 4400,
+    durationMs: 7000,
     narrationDurationMs: 11900,
     camera: {
       target: [2.35, 0.82, 4.2],
